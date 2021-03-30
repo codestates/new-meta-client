@@ -9,9 +9,9 @@ function App() {
           <div>
             <img src={svg} alt=""></img>
           </div>
-          &nbsp;&nbsp;retrievo
+          &nbsp;&nbsp;new Meta
         </div>
-        <div className="title">Jungle Char E</div>
+        <div className="title">뉴 메타</div>
         <div className="button">
           <div>Login</div>
           <div>Sign Up</div>
@@ -19,8 +19,8 @@ function App() {
       </div>
 
       <div className="Content">
-        <div>안녕하세요</div>
-        <div>사용자 분석</div>
+        <div>new META 에 오신걸 환영합니다!</div>
+        <div>Coming soom ...</div>
       </div>
       <div></div>
     </div>
