@@ -1,7 +1,7 @@
 ---
 name: Task Card
 about: 태스크 카드 템플릿 입니다!
-title: "[Task] 작업 내용 - E : "
+title: "[ Task ] : 작업 내용 - E : "
 labels: ''
 assignees: ''
 

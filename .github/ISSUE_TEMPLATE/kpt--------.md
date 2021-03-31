@@ -1,7 +1,7 @@
 ---
 name: KPT 회고 이슈카드
 about: KPT 회고 이슈카드
-title: N 주차 KRT 회고카드
+title: "[ KRT ] : N 주차 KRT 회고카드"
 labels: ''
 assignees: ''
 
