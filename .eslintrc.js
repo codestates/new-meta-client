@@ -30,6 +30,7 @@ module.exports = {
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
     "react/prop-types": 0,
+    "react/self-closing-comp": 0,
     indent: ["error", 2],
     // quotes: ["error", "double"],
     // semi: ["error", "always"],
