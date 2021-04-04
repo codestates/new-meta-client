@@ -1,3 +1,5 @@
+import React from "react";
+import logo from "./logo.svg";
 import "./App.css";
 import svg from "./branding.svg";
 
@@ -9,9 +11,9 @@ function App() {
           <div>
             <img src={svg} alt=""></img>
           </div>
-          &nbsp;&nbsp;new Meta
+          &nbsp;&nbsp;new-meta
         </div>
-        <div className="title">뉴 메타</div>
+        <div className="title">new-meta</div>
         <div className="button">
           <div>Login</div>
           <div>Sign Up</div>
