@@ -1,5 +1,3 @@
-import React from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import svg from "./branding.svg";
 
@@ -21,8 +19,8 @@ function App() {
       </div>
 
       <div className="Content">
-        <div>안녕하세요</div>
-        <div>사용자 분석</div>
+        <div>new META 에 오신걸 환영합니다!</div>
+        <div>Coming soom ...</div>
       </div>
       <div></div>
     </div>

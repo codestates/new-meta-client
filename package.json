@@ -15,11 +15,23 @@
     "typescript": "^4.1.2",
     "web-vitals": "^1.0.1"
   },
+  "config": {
+    "BUCKETNAME": "new-meta.ga"
+  },
   "scripts": {
+    "sass": "node-sass -wr --source-map true src/styles/main.scss src/style.css",
+    "node-sass": "node-sass",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "mkbucket": "aws s3 mb s3://$npm_package_config_BUCKETNAME",
+    "rmbucket": "aws s3 rb s3://$npm_package_config_BUCKETNAME",
+    "lsbucket": "aws s3 ls",
+    "uploadObj": "aws s3 sync ./build s3://$npm_package_config_BUCKETNAME",
+    "lsObj": "aws s3 ls s3://$npm_package_config_BUCKETNAME",
+    "rmObj": "aws s3 rm s3://$npm_package_config_BUCKETNAME",
+    "update": "npm run build && npm run uploadObj"
   },
   "eslintConfig": {
     "extends": [
@@ -53,6 +65,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "eslint-plugin-react": "^7.23.1",
     "eslint-plugin-react-hooks": "^4.2.0",
+    "node-sass": "^5.0.0",
     "prettier": "^2.2.1"
   }
 }
