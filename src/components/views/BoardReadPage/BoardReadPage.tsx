@@ -2,8 +2,8 @@ import React, { ReactElement } from "react";
 
 // interface Props {}
 
-function PlayersDataPage(): ReactElement {
+function BoardReadPage(): ReactElement {
   return <div></div>;
 }
 
-export default PlayersDataPage;
+export default BoardReadPage;
