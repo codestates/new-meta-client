@@ -1,6 +1,6 @@
 import React, { ReactElement } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "../App.css";
+
 import Nav from "./views/Nav/Nav";
 import LandingPage from "./views/LandingPage/LandingPage";
 import PlayersSearchPage from "./views/PlayersSearchPage/PlayersSearchPage";
@@ -16,39 +16,41 @@ function App(): ReactElement {
   return (
     <Router>
       <Nav />
-      <Switch>
-        <Route exact path="/">
-          <LandingPage />
-        </Route>
+      <div className="contents">
+        <Switch>
+          <Route exact path="/">
+            <LandingPage />
+          </Route>
 
-        <Route exact path="/players">
-          <PlayersSearchPage />
-        </Route>
+          <Route exact path="/players">
+            <PlayersSearchPage />
+          </Route>
 
-        <Route exact path="/login">
-          <LoginPage />
-        </Route>
+          <Route exact path="/login">
+            <LoginPage />
+          </Route>
 
-        <Route exact path="/register">
-          <RegisterPage />
-        </Route>
+          <Route exact path="/register">
+            <RegisterPage />
+          </Route>
 
-        <Route exact path="/mypage">
-          <MyPage />
-        </Route>
+          <Route exact path="/mypage">
+            <MyPage />
+          </Route>
 
-        <Route exact path="/board">
-          <BoardPage />
-        </Route>
+          <Route exact path="/board">
+            <BoardPage />
+          </Route>
 
-        <Route exact path="/board/read">
-          <BoardReadPage />
-        </Route>
+          <Route exact path="/board/read">
+            <BoardReadPage />
+          </Route>
 
-        <Route exact path="/board/write">
-          <BoardWritePage />
-        </Route>
-      </Switch>
+          <Route exact path="/board/write">
+            <BoardWritePage />
+          </Route>
+        </Switch>
+      </div>
       <Footer />
     </Router>
   );

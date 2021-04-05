@@ -1,3 +1,22 @@
+.nav {
+  @include flexbox(between);
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #5A5B62;
+  flex: 0 0 40px;
+
+  .logo {
+    @include flexbox(start);
+    img {
+      height: 24px;
+      width: auto;
+    }
+  }
+
+  button {
+    flex: 0 1 auto;
+  }
+}
+
 // .gnb {
 //   position: relative;
 //   border-bottom: 1px solid $border;
@@ -97,3 +116,4 @@
 //     }
 //   }
 // }
+
