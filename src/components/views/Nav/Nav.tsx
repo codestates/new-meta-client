@@ -3,7 +3,7 @@ import React, { ReactElement } from "react";
 // interface Props {}
 
 function Nav(): ReactElement {
-  return <div></div>;
+  return <div>Nav</div>;
 }
 
 export default Nav;
