@@ -1,0 +1,38 @@
+.landing {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .landing-img-wrapper {
+    width: 100%;
+    height: 800px;
+    position: relative;
+    & > * {
+      @include pos-center;
+    }
+  }
+
+  .landing-img {
+    width: 90%;
+    height: 800px;
+    opacity: 60%;
+    object-fit: cover;
+  }
+
+  .landing-text {
+    width: 100%;
+    text-align: center;
+
+    .landing-title {
+      font-size: 4rem;
+      padding-bottom: 1.5rem;
+    }
+
+    .landing-discription {
+      font-size: 1rem;
+    }
+  }
+}
+
+
