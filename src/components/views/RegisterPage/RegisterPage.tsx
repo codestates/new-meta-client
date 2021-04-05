@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react";
+import { withRouter } from "react-router-dom";
 
 // interface Props {}
 
 function RegisterPage(): ReactElement {
-  return <div></div>;
+  return <div>RegisterPage</div>;
 }
 
-export default RegisterPage;
+export default withRouter(RegisterPage);

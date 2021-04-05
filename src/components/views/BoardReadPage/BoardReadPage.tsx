@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react";
+import { withRouter } from "react-router-dom";
 
 // interface Props {}
 
 function BoardReadPage(): ReactElement {
-  return <div></div>;
+  return <div>BoardReadPage</div>;
 }
 
-export default BoardReadPage;
+export default withRouter(BoardReadPage);

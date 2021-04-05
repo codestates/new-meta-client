@@ -1,30 +1,56 @@
 import React, { ReactElement } from "react";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import "../App.css";
-import svg from "../branding.svg";
+import Nav from "./views/Nav/Nav";
+import LandingPage from "./views/LandingPage/LandingPage";
+import PlayersSearchPage from "./views/PlayersSearchPage/PlayersSearchPage";
+import LoginPage from "./views/LoginPage/LoginPage";
+import RegisterPage from "./views/RegisterPage/RegisterPage";
+import MyPage from "./views/MyPage/MyPage";
+import BoardPage from "./views/BoardPage/BoardPage";
+import BoardReadPage from "./views/BoardReadPage/BoardReadPage";
+import BoardWritePage from "./views/BoardWritePage/BoardWritePage";
+import Footer from "./views/Footer/Footer";
 
 function App(): ReactElement {
   return (
-    <div className="App">
-      <div className="Header">
-        <div className="logo">
-          <div>
-            <img src={svg} alt=""></img>
-          </div>
-          &nbsp;&nbsp;new-meta
-        </div>
-        <div className="title">new-meta</div>
-        <div className="button">
-          <div>Login</div>
-          <div>Sign Up</div>
-        </div>
-      </div>
+    <Router>
+      <Nav />
+      <Switch>
+        <Route exact path="/">
+          <LandingPage />
+        </Route>
 
-      <div className="Content">
-        <div>new META 에 오신걸 환영합니다!</div>
-        <div>Coming soon ...</div>
-      </div>
-      <div></div>
-    </div>
+        <Route exact path="/players">
+          <PlayersSearchPage />
+        </Route>
+
+        <Route exact path="/login">
+          <LoginPage />
+        </Route>
+
+        <Route exact path="/register">
+          <RegisterPage />
+        </Route>
+
+        <Route exact path="/mypage">
+          <MyPage />
+        </Route>
+
+        <Route exact path="/board">
+          <BoardPage />
+        </Route>
+
+        <Route exact path="/board/read">
+          <BoardReadPage />
+        </Route>
+
+        <Route exact path="/board/write">
+          <BoardWritePage />
+        </Route>
+      </Switch>
+      <Footer />
+    </Router>
   );
 }
 

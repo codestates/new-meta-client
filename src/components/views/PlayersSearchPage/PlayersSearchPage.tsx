@@ -1,9 +1,10 @@
 import React, { ReactElement } from "react";
+import { withRouter } from "react-router-dom";
 
 // interface Props {}
 
 function PlayersSearchPage(): ReactElement {
-  return <div></div>;
+  return <div>PlayersSearchPage</div>;
 }
 
-export default PlayersSearchPage;
+export default withRouter(PlayersSearchPage);
