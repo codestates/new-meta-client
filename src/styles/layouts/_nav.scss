@@ -1,7 +1,7 @@
 .nav {
   @include flexbox(between);
   padding: 1rem 2rem;
-  border-bottom: 1px solid #5A5B62;
+  // border-bottom: 1px solid #5A5B62;
   flex: 0 0 40px;
 
   .logo {
