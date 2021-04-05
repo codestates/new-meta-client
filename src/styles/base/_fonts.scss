@@ -1,11 +1,105 @@
-// @font-face {
-//   font-family: 'tomorrow';
-//   src: url('./assets/fonts/tomorrow.eot');
-//   src: url('./assets/fonts/tomorrow.eot#iefix') format('embedded-opentype'),
-//     url('./assets/fonts/tomorrow.ttf') format('truetype'),
-//     url('./assets/fonts/tomorrow.woff') format('woff'),
-//     url('./assets/fonts/tomorrow.svg#tomorrow') format('svg');
-//   font-weight: normal;
-//   font-style: normal;
-//   font-display: block;
-// }
+@font-face {
+  font-family: 'new-meta';
+  src:  url('assets/fonts/new-meta.eot?ckdrud');
+  src:  url('assets/fonts/new-meta.eot?ckdrud#iefix') format('embedded-opentype'),
+    url('assets/fonts/new-meta.ttf?ckdrud') format('truetype'),
+    url('assets/fonts/new-meta.woff?ckdrud') format('woff'),
+    url('assets/fonts/new-meta.svg?ckdrud#new-meta') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  color: #E2E4E9;
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'new-meta' !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-arrow-left-circle:before {
+  content: "\e900";
+}
+.icon-arrow-right-circle:before {
+  content: "\e901";
+}
+.icon-check-circle:before {
+  content: "\e903";
+}
+.icon-file:before {
+  content: "\e904";
+}
+.icon-search:before {
+  content: "\e905";
+}
+.icon-trash-2:before {
+  content: "\e906";
+}
+.icon-user:before {
+  content: "\e907";
+}
+.icon-user-minus:before {
+  content: "\e908";
+}
+.icon-user-plus:before {
+  content: "\e909";
+}
+.icon-x-circle:before {
+  content: "\e90a";
+}
+.icon-home:before {
+  content: "\e902";
+}
+.icon-cog:before {
+  content: "\e994";
+}
+.icon-pie-chart:before {
+  content: "\e99a";
+}
+.icon-stats-dots:before {
+  content: "\e99b";
+}
+.icon-sphere:before {
+  content: "\e9c9";
+}
+.icon-bookmark:before {
+  content: "\e9d2";
+}
+.icon-star-empty:before {
+  content: "\e9d7";
+}
+.icon-star-full:before {
+  content: "\e9d9";
+}
+.icon-heart:before {
+  content: "\e9da";
+}
+.icon-plus:before {
+  content: "\ea0a";
+}
+.icon-minus:before {
+  content: "\ea0b";
+}
+.icon-cross:before {
+  content: "\ea0f";
+}
+.icon-checkmark:before {
+  content: "\ea10";
+}
+.icon-google:before {
+  content: "\ea88";
+}
+.icon-facebook:before {
+  content: "\ea90";
+}
+.icon-github:before {
+  content: "\eab0";
+}
