@@ -1,7 +1,8 @@
-import "./App.css";
-import svg from "./branding.svg";
+import React, { ReactElement } from "react";
+import "../App.css";
+import svg from "../branding.svg";
 
-function App() {
+function App(): ReactElement {
   return (
     <div className="App">
       <div className="Header">
@@ -20,7 +21,7 @@ function App() {
 
       <div className="Content">
         <div>new META 에 오신걸 환영합니다!</div>
-        <div>Coming soom ...</div>
+        <div>Coming soon ...</div>
       </div>
       <div></div>
     </div>
