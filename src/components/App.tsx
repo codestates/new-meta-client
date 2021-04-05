@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "../App.css";
 import Nav from "./views/Nav/Nav";
 import LandingPage from "./views/LandingPage/LandingPage";
 import PlayersSearchPage from "./views/PlayersSearchPage/PlayersSearchPage";
