@@ -12,6 +12,16 @@
 @import './mixins/positions';
 @import './mixins/flexbox';
 
+#root {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.contents {
+  flex: 1;
+}
+
 @import './modules/tags';
 @import './modules/avatars';
 @import './modules/star-ratings';
@@ -19,10 +29,10 @@
 @import './modules/buttons';
 @import './modules/forms';
 @import './modules/pagination';
-@import './modules/icons';
 
 @import './components/gnb-nav';
 @import './components/gnb-icon-buttons';
 
 @import './layouts/grids';
-@import './layouts/gnb';
+@import './layouts/nav';
+@import './layouts/footer';
