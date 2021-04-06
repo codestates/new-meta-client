@@ -63,7 +63,7 @@
   background-color: $background;
   padding: 2rem;
   border-radius: 12px;
-  height: 500px;
+  height: max-content;
 }
 
 .recommend {
@@ -89,8 +89,8 @@
   cursor: pointer;
   transform-style: preserve-3d;
   margin: 1rem;
-  width: 200px;
-  height: 300px;
+  width: 400px;
+  height: 236px;
   perspective: 500px;
   transition: 0.5s;
 
@@ -110,15 +110,50 @@
   .front {
     z-index: 1;
     img {
-      width: 200px;
-      height: 300px;
+      width: 400px;
       object-fit: cover;
-      // opacity: 70%;
     }
   }
 
   .back {
-    background-color: #7044ed;
+    background-color: $green;
     transform: rotateY(180deg);
+
+    .text-box {
+      text-align: center;
+      height: 200px;
+      .name {
+        font-size: 24px;
+      }
+
+      .blurb {
+        padding: 1rem;
+        height: 50px;
+        overflow: hidden;
+      }
+
+      .info {
+        display: flex;
+        justify-content: center;
+      }
+
+      .diff i {
+        font-size: 1rem;
+      }
+
+      .styles {
+        display: flex;
+        justify-content: center;
+
+        & > * {
+          padding: 0 1rem;
+        }
+      }
+
+      i {
+        margin-top: 1rem;
+        font-size: 2rem;
+      }
+    }
   }
 }
