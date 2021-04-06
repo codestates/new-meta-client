@@ -5,6 +5,7 @@
   font-weight: 400;
   border-radius: 4px;
   height: 35px;
+  cursor: pointer;
 
   &:disabled {
     cursor: not-allowed;
@@ -18,6 +19,10 @@
   color: $gray;
   background-color: $jade;
   transition: background-color 200ms ease-in-out;
+
+  &:focus {
+    outline: none;
+  }
 
   &:not(:disabled):hover {
     background-color: $jade-dark;
