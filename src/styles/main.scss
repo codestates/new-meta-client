@@ -1,16 +1,16 @@
-@import './constants/colors';
-@import './constants/typography';
-@import './constants/breakpoints';
+@import "./constants/colors";
+@import "./constants/typography";
+@import "./constants/breakpoints";
 
-@import './base/fonts';
-@import './base/normalize';
-// @import './base/reset';
-@import './base/globals';
+@import "./base/fonts";
+@import "./base/normalize";
+// @import "./base/reset";
+@import "./base/globals";
 
-@import './mixins/text-style';
-@import './mixins/responsive';
-@import './mixins/positions';
-@import './mixins/flexbox';
+@import "./mixins/text-style";
+@import "./mixins/responsive";
+@import "./mixins/positions";
+@import "./mixins/flexbox";
 
 #root {
   height: 100vh;
@@ -22,19 +22,18 @@
   flex: 1;
 }
 
-@import './modules/tags';
-@import './modules/avatars';
-@import './modules/star-ratings';
-@import './modules/prices';
-@import './modules/buttons';
-@import './modules/forms';
-@import './modules/pagination';
+@import "./modules/tags";
+@import "./modules/avatars";
+@import "./modules/star-ratings";
+@import "./modules/buttons";
+@import "./modules/forms";
+@import "./modules/pagination";
 
-@import './components/gnb-nav';
-@import './components/gnb-icon-buttons';
+@import "./components/gnb-nav";
+@import "./components/gnb-icon-buttons";
 
-@import './layouts/grids';
-@import './layouts/nav';
-@import './layouts/footer';
+@import "./layouts/grids";
+@import "./layouts/nav";
+@import "./layouts/footer";
 
-@import './pages/landing-page';
+@import "./pages/landing-page";
