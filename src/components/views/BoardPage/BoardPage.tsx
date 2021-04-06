@@ -1,11 +1,22 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
+import axios from "axios";
 import { withRouter, Link } from "react-router-dom";
 import ChampionCard from "./sections/ChampionCard";
+import API from "../../../api";
 
 // interface Props {}
 
 function BoardPage(): ReactElement {
+  const [Champions, setChampions] = useState([]);
+  useEffect(() => {
+    const run = async () => {
+      const result = await axios.get(API.allChampionInfo);
+      setChampions(Object.values(result.data.data));
+    };
+    run();
+  }, []);
+
   return (
     <div className="board-page">
       <div className="search-bar">
@@ -14,19 +25,10 @@ function BoardPage(): ReactElement {
       </div>
       <div className="title">챔피언 별</div>
       <div className="champions">
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
-        <ChampionCard />
+        {Champions.map((el, idx) => {
+          // eslint-disable-next-line react/no-array-index-key
+          return <ChampionCard key={idx} data={el} />;
+        })}
       </div>
       <div className="title">
         사용자 추천 메타
