@@ -1,11 +1,21 @@
-import React, { ReactElement } from "react";
+
+import React, { ReactElement, useState } from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
+import LoginPage from "../LoginPage/LoginPage";
 
-// interface Props {}
+// interface Props {
+// }
 
 function Nav(props: any): ReactElement {
-  const logoClickHandler = () => {
+  const [IsModalOpen, setIsModalOpen] = useState(false);
+  const openModal = (): void => {
+    setIsModalOpen(true);
+  };
+  const closeModal = (): void => {
+    setIsModalOpen(false);
+  };
+  const logoClickHandler = (): void => {
     props.history.push("/");
   };
 
@@ -22,9 +32,16 @@ function Nav(props: any): ReactElement {
       >
         <img className="logo-img" src={logo} alt="" />
       </div>
-      <button className="btn-primary nav-btn" type="button">
-        Login
-      </button>
+      <div className="btn-login">
+        <button
+          type="button"
+          className="btn-primary nav-btn"
+          onClick={openModal}
+        >
+          Login
+        </button>
+        <LoginPage IsModalOpen={IsModalOpen} closeModal={closeModal} />
+      </div>
     </div>
   );
 }
