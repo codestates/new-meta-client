@@ -1,38 +1,76 @@
+.landing > * {
+  margin-bottom: 100px;
+}
+
 .landing {
-  height: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+
+  &:not(:last-child) {
+    margin-bottom: 100px;
+  }
 
   .landing-img-wrapper {
+    // &:last-child {
+    //   margin-bottom: 0;
+    // }
+
     width: 100%;
     height: 800px;
     position: relative;
     & > * {
       @include pos-center;
     }
-  }
 
-  .landing-img {
-    width: 90%;
-    height: 800px;
-    opacity: 60%;
-    object-fit: cover;
-  }
-
-  .landing-text {
-    width: 100%;
-    text-align: center;
-
-    .landing-title {
-      font-size: 4rem;
-      padding-bottom: 1.5rem;
+    .landing-img {
+      width: 100%;
+      height: 800px;
+      opacity: 60%;
+      object-fit: cover;
     }
 
-    .landing-discription {
-      font-size: 1rem;
+    .landing-text {
+      width: 100%;
+      text-align: center;
+
+      .landing-title {
+        font-size: 4rem;
+        padding-bottom: 1.5rem;
+      }
+
+      .landing-discription {
+        font-size: 1rem;
+      }
+    }
+  }
+
+  .landing-img-side {
+    // &:last-child {
+    //   margin-bottom: 0;
+    // }
+
+    display: flex;
+
+    .landing-img {
+      height: 400px;
+      object-fit: cover;
+      flex: 1;
+      width: 50vw;
+    }
+
+    .landing-text {
+      flex: 1;
+      text-align: center;
+      margin: auto;
+
+      &-title {
+        font-size: 2rem;
+      }
+
+      &-discription {
+        padding: 1rem;
+        font-size: 1rem;
+      }
     }
   }
 }
-
-

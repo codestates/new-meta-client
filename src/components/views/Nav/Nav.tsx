@@ -1,10 +1,13 @@
+
 import React, { ReactElement, useState } from "react";
+import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
 import LoginPage from "../LoginPage/LoginPage";
+
 // interface Props {
 // }
 
-function Nav(): ReactElement {
+function Nav(props: any): ReactElement {
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const openModal = (): void => {
     setIsModalOpen(true);
@@ -12,10 +15,21 @@ function Nav(): ReactElement {
   const closeModal = (): void => {
     setIsModalOpen(false);
   };
+  const logoClickHandler = (): void => {
+    props.history.push("/");
+  };
 
   return (
     <div className="nav">
-      <div className="logo">
+      <div
+        className="logo"
+        onClick={logoClickHandler}
+        onKeyDown={() => {
+          return null;
+        }}
+        role="button"
+        tabIndex={0}
+      >
         <img className="logo-img" src={logo} alt="" />
       </div>
       <div className="btn-login">
@@ -32,4 +46,4 @@ function Nav(): ReactElement {
   );
 }
 
-export default Nav;
+export default withRouter(Nav);
