@@ -46,8 +46,11 @@ function RegisterModal({ closeModal }: Props): ReactElement {
               closeModal();
             }}
           >
-            Sign Up
+            <span>Sign Up</span>
           </button>
+          <i className="icon-google"></i>
+          <i className="icon-facebook"></i>
+          <i className="icon-github"></i>
         </div>
       </form>
     </div>
