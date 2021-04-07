@@ -96,9 +96,9 @@
 
       &:hover {
         cursor: pointer;
-        background: $jade-light;
+        background: $jade;
         color: $secondary;
-        box-shadow: 0 0 5px $jade-light, 0 0 25px $jade-light, 0 0 50px $jade-light;
+        box-shadow: 0 0 5px $jade-light, 0 0 25px $jade-light; // 0 0 50px $jade-light;
       }
     }
 
