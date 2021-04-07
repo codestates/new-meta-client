@@ -11,9 +11,11 @@ function Nav(props: any): ReactElement {
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
 
   const openModal = (): void => {
+    document.body.style.overflow = "hidden";
     setIsModalOpen(true);
   };
   const closeModal = (): void => {
+    document.body.style.overflow = "auto";
     setIsModalOpen(false);
   };
   const handleIsRegisterModal = (): void => {
