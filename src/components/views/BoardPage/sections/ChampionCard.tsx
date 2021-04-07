@@ -1,11 +1,26 @@
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
+import axios from "axios";
 import tempImage from "../../../../assets/image/loading-screen-assets.png";
+import API from "../../../../api";
 
-// interface Props {
+interface Props {
+  data: any;
+}
 
-// }
+export default function ChampionCard(props: Props): ReactElement {
+  const { data } = props;
+  const [SplashImage, setSplashImage] = useState("");
+  const { blurb, info, name, tags, title } = data;
 
-export default function ChampionCard(): ReactElement {
+  useEffect(() => {
+    const run = async () => {
+      const result: any = await axios
+        .get(`${API.championSplash}${data.id}_0.jpg`)
+        .then((res) => res.config.url);
+      setSplashImage(result);
+    };
+    run();
+  }, [data.id]);
   return (
     <div className="champion-card">
       <div
@@ -18,7 +33,7 @@ export default function ChampionCard(): ReactElement {
         }}
         aria-hidden="true"
       >
-        <img src={tempImage} alt=""></img>
+        <img src={SplashImage} alt=""></img>
       </div>
       <div
         className="card-side back"
@@ -28,8 +43,25 @@ export default function ChampionCard(): ReactElement {
         }}
         aria-hidden="true"
       >
-        안녕하세요
-        <a href="/board/read">자세히 보러 가기</a>
+        <div className="text-box">
+          <div className="name">
+            {name} &lt;{title}&gt;
+          </div>
+          <div className="info">
+            <div>attack : {info.attack}</div>
+            <div>defense : {info.defense}</div>
+            <div>magic : {info.magic}</div>
+          </div>
+          <div className="diff">난이도 : {info.difficulty}</div>
+          <div className="styles">
+            type :
+            {tags.map((el: string) => (
+              <div>{el}</div>
+            ))}
+          </div>
+          <div className="blurb">{blurb} </div>
+          <i className="icon-arrow-right-circle"></i>
+        </div>
       </div>
     </div>
   );
