@@ -20,7 +20,7 @@
   }
 }
 
-.login-box {
+.modal-box {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -95,6 +95,7 @@
       letter-spacing: 1px;
 
       &:hover {
+        cursor: pointer;
         background: $jade-light;
         color: $secondary;
         box-shadow: 0 0 5px $jade-light, 0 0 25px $jade-light, 0 0 50px $jade-light;
@@ -108,9 +109,29 @@
       letter-spacing: 30px;
 
       &:hover {
+        cursor: pointer;
         transition: 1s;
         color: $jade-light;
         text-shadow: 0 0 5px $jade-light, 0 0 25px $jade-light, 0 0 50px $jade-light;
+      }
+    }
+  }
+
+  .text-wrapper {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    .register-text {
+      color: $primary;
+      text-decoration: none;
+      font-size: 13px;
+
+      &:hover {
+        transition: 1s;
+        color: $secondary;
+        text-shadow: 0 0 10px $secondary;
+        cursor: pointer;
       }
     }
   }
