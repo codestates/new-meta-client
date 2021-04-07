@@ -50,13 +50,6 @@ function LoginPage(props: Props): ReactElement {
                   <i className="icon-github"></i>
                 </div>
               </form>
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
-              <br />
               <div className="text-wrapper">
                 <span
                   className="register-text"

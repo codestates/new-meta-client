@@ -20,17 +20,18 @@
   }
 
   .nav-btn {
-    padding: 7px 19px;
+    padding: 6px 19px;
     flex: 0 1 auto;
     position: absolute;
     right: 90px;
-    top: 16%;
+    top: 20%;
     background-color: transparent;
-    color: $jade-light;
+    color: $jade;
     border: none;
     border-radius: 5px;
     transition: 1s;
     letter-spacing: 1px;
+    font-size: 16px;
     font-weight: 400;
 
     &:hover {

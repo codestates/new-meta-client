@@ -12,7 +12,6 @@ function RegisterModal({ closeModal }: Props): ReactElement {
       </button>
       <br />
       <h2>Register</h2>
-      <br />
       <form>
         <div className="user-box register-email">
           <input className="input-email" placeholder="Email" type="email" />
