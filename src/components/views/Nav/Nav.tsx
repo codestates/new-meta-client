@@ -39,7 +39,7 @@ function Nav(props: any): ReactElement {
       <div className="btn-login">
         <button
           type="button"
-          className="btn-primary nav-btn"
+          className="nav-btn"
           onClick={() => {
             openModal();
             setIsRegisterModal(false);

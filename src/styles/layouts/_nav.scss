@@ -1,10 +1,17 @@
 .nav {
   @include flexbox(between);
-  padding: 1rem 2rem;
+  padding: 0.7rem 2rem;
   // border-bottom: 1px solid #5A5B62;
-  flex: 0 0 40px;
+  // flex: 0 0 27px;
+  position: fixed;
+  height: 27px;
+  z-index: 100;
+  width: 100%;
+  background-color: rgba($color: $background, $alpha: 0.75);
+  backdrop-filter: saturate(100%) blur(2px);
 
   .logo {
+    cursor: pointer;
     @include flexbox(start);
     img {
       height: 24px;
@@ -12,8 +19,26 @@
     }
   }
 
-  button {
+  .nav-btn {
+    padding: 7px 19px;
     flex: 0 1 auto;
+    position: absolute;
+    right: 90px;
+    top: 16%;
+    background-color: transparent;
+    color: $jade-light;
+    border: none;
+    border-radius: 5px;
+    transition: 1s;
+    letter-spacing: 1px;
+    font-weight: 400;
+
+    &:hover {
+      cursor: pointer;
+      background: $jade;
+      color: $secondary;
+      box-shadow: 0 0 5px $jade-light, 0 0 25px $jade-light; // 0 0 50px $jade-light;
+    }
   }
 }
 
@@ -116,4 +141,3 @@
 //     }
 //   }
 // }
-
