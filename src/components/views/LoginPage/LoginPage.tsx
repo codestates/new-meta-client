@@ -17,9 +17,6 @@ function LoginPage(props: Props): ReactElement {
     handleIsRegisterModal,
   } = props;
 
-  console.log("IsModalOpen", IsModalOpen);
-  console.log("IsRegisterModal", IsRegisterModal);
-
   return (
     <>
       {IsModalOpen ? (
@@ -66,7 +63,7 @@ function LoginPage(props: Props): ReactElement {
                   onClick={handleIsRegisterModal}
                   aria-hidden="true"
                 >
-                  Sign Up Here
+                  Sign Up Here !
                 </span>
               </div>
             </div>
