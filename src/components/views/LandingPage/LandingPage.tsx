@@ -5,10 +5,12 @@ import minimap from "../../../assets/image/lol-minimap.png";
 import freljord from "../../../assets/image/freljord.jpeg";
 import demacia from "../../../assets/image/demacia.jpeg";
 // import arena from "../../../assets/image/arena.jpeg";
+import { addFooter } from "../../utils/displayfooter";
 
 // interface Props {}
 
 function LandingPage(): ReactElement {
+  addFooter();
   return (
     <div className="landing">
       <div className="landing-img-wrapper">

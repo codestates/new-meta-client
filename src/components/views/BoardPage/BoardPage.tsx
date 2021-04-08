@@ -4,12 +4,14 @@ import axios from "axios";
 import { withRouter, Link } from "react-router-dom";
 import ChampionCard from "./sections/ChampionCard";
 import API from "../../../api";
+import { removeFooter } from "../../utils/displayfooter";
 
 // interface Props {}
 
 function BoardPage(): ReactElement {
   const [Champions, setChampions] = useState([]);
   useEffect(() => {
+    removeFooter();
     const run = async () => {
       const result = await axios.get(API.allChampionInfo);
       setChampions(Object.values(result.data.data));
