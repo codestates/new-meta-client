@@ -47,7 +47,7 @@ function Nav(props: any): ReactElement {
             setIsRegisterModal(false);
           }}
         >
-          Login
+          <span>Login</span>
         </button>
         <LoginPage
           IsModalOpen={IsModalOpen}
