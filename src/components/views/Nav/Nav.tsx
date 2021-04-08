@@ -1,4 +1,3 @@
-
 import React, { ReactElement, useState } from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
@@ -9,11 +8,18 @@ import LoginPage from "../LoginPage/LoginPage";
 
 function Nav(props: any): ReactElement {
   const [IsModalOpen, setIsModalOpen] = useState(false);
+  const [IsRegisterModal, setIsRegisterModal] = useState(false);
+
   const openModal = (): void => {
+    document.body.style.overflow = "hidden";
     setIsModalOpen(true);
   };
   const closeModal = (): void => {
+    document.body.style.overflow = "auto";
     setIsModalOpen(false);
+  };
+  const handleIsRegisterModal = (): void => {
+    setIsRegisterModal(true);
   };
   const logoClickHandler = (): void => {
     props.history.push("/");
@@ -35,12 +41,20 @@ function Nav(props: any): ReactElement {
       <div className="btn-login">
         <button
           type="button"
-          className="btn-primary nav-btn"
-          onClick={openModal}
+          className="nav-btn"
+          onClick={() => {
+            openModal();
+            setIsRegisterModal(false);
+          }}
         >
-          Login
+          <span>Login</span>
         </button>
-        <LoginPage IsModalOpen={IsModalOpen} closeModal={closeModal} />
+        <LoginPage
+          IsModalOpen={IsModalOpen}
+          closeModal={closeModal}
+          IsRegisterModal={IsRegisterModal}
+          handleIsRegisterModal={handleIsRegisterModal}
+        />
       </div>
     </div>
   );

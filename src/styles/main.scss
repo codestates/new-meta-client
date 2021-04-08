@@ -20,6 +20,7 @@
 
 .contents {
   flex: 1;
+  margin-top: 50px;
 }
 
 @import "./modules/tags";
@@ -41,3 +42,4 @@
 @import "./pages/board-page";
 @import "./pages/board-read-page";
 @import "./pages/board-write-page";
+@import "./pages/players-search-page";
