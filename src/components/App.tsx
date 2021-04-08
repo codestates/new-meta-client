@@ -5,7 +5,6 @@ import Nav from "./views/Nav/Nav";
 import LandingPage from "./views/LandingPage/LandingPage";
 import PlayersSearchPage from "./views/PlayersSearchPage/PlayersSearchPage";
 import LoginPage from "./views/LoginPage/LoginPage";
-import RegisterPage from "./views/RegisterPage/RegisterPage";
 import MyPage from "./views/MyPage/MyPage";
 import BoardPage from "./views/BoardPage/BoardPage";
 import BoardReadPage from "./views/BoardReadPage/BoardReadPage";
@@ -18,37 +17,13 @@ function App(): ReactElement {
       <Nav />
       <div className="contents">
         <Switch>
-          <Route exact path="/">
-            <LandingPage />
-          </Route>
-
-          <Route exact path="/players">
-            <PlayersSearchPage />
-          </Route>
-
-          <Route exact path="/login">
-            <LoginPage />
-          </Route>
-
-          <Route exact path="/register">
-            <RegisterPage />
-          </Route>
-
-          <Route exact path="/mypage">
-            <MyPage />
-          </Route>
-
-          <Route exact path="/board">
-            <BoardPage />
-          </Route>
-
-          <Route exact path="/board/read">
-            <BoardReadPage />
-          </Route>
-
-          <Route exact path="/board/write">
-            <BoardWritePage />
-          </Route>
+          <Route exact path="/" component={LandingPage} />
+          <Route exact path="/players" component={PlayersSearchPage} />
+          <Route exact path="/login" component={LoginPage} />
+          <Route exact path="/mypage" component={MyPage} />
+          <Route exact path="/board" component={BoardPage} />
+          <Route exact path="/board/read" component={BoardReadPage} />
+          <Route exact path="/board/write" component={BoardWritePage} />
         </Switch>
       </div>
       <Footer />
