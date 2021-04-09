@@ -10,12 +10,12 @@ function BoardWritePage(): ReactElement {
 
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const writeBox = useRef<HTMLDivElement>(null);
-  const { current } = writeBox;
 
   const clickIndex = (index: number): void => {
-    current?.children[CurrentIndex - 1].classList.remove("is-active");
+    const { current } = writeBox;
+    current?.children[CurrentIndex].classList.remove("is-active");
     setCurrentIndex(index);
-    current?.children[index - 1].classList.add("is-active");
+    current?.children[index].classList.add("is-active");
   };
 
   return (
@@ -25,35 +25,35 @@ function BoardWritePage(): ReactElement {
       </div>
       <div className="index-box">
         <div
-          onClick={() => clickIndex(1)}
+          onClick={() => clickIndex(0)}
           aria-hidden="true"
           className="index-item"
         >
           Pick
         </div>
         <div
-          onClick={() => clickIndex(2)}
+          onClick={() => clickIndex(1)}
           aria-hidden="true"
           className="index-item"
         >
           Title
         </div>
         <div
-          onClick={() => clickIndex(3)}
+          onClick={() => clickIndex(2)}
           aria-hidden="true"
           className="index-item"
         >
           Skill
         </div>
         <div
-          onClick={() => clickIndex(4)}
+          onClick={() => clickIndex(3)}
           aria-hidden="true"
           className="index-item"
         >
           Tips
         </div>
         <div
-          onClick={() => clickIndex(5)}
+          onClick={() => clickIndex(4)}
           aria-hidden="true"
           className="index-item"
         >
@@ -61,12 +61,11 @@ function BoardWritePage(): ReactElement {
         </div>
       </div>
       <div ref={writeBox} className="write-box">
-        <div className="page page-1">챔피언 선택하기</div>
-        <div className="page page-2">제목 및 간단한 소개</div>
-        <div className="page page-3">스킬 공략</div>
-        <div className="page page-4">팁s</div>
-        <div className="page page-5">기타 등등</div>
-        {/* <div className="page page-test is-active">테스트 페이지</div> */}
+        <div className="page page-0 is-active">챔피언 선택하기</div>
+        <div className="page page-1">제목 및 간단한 소개</div>
+        <div className="page page-2">스킬 공략</div>
+        <div className="page page-3">팁s</div>
+        <div className="page page-4">기타 등등</div>
       </div>
     </div>
   );
