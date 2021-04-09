@@ -35,7 +35,7 @@ function LoginPage(props: Props): ReactElement {
     setPassword(event.currentTarget.value);
   };
 
-  const onSubmitHandler = (event: { preventDefault: () => void }) => {
+  const loginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
     const body = {
@@ -90,7 +90,7 @@ function LoginPage(props: Props): ReactElement {
                   />
                 </div>
                 <div className="btn-wrapper">
-                  <button type="submit" onClick={onSubmitHandler}>
+                  <button type="submit" onClick={loginHandler}>
                     Login
                   </button>
                   <i className="icon-google"></i>
