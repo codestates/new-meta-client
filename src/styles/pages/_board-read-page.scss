@@ -1,2 +1,177 @@
 .board-read-page {
+  .champion-title-image {
+    position: relative;
+    padding-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: blur();
+    width: 100%;
+    .blur-img {
+      width: 100%;
+      position: absolute;
+      filter: blur(6px);
+      opacity: 0.15;
+      z-index: -9999;
+    }
+
+    .image-wrapper {
+      margin-top: 2rem;
+      height: 600px;
+      img {
+        height: inherit;
+      }
+    }
+
+    i {
+      position: absolute;
+      padding: 2rem;
+      cursor: pointer;
+      font-size: 2rem;
+      text-align: center;
+    }
+    .icon-left {
+      left: 5%;
+    }
+
+    .icon-right {
+      right: 5%;
+    }
+  }
+
+  .champion-introduce {
+    width: 100%;
+    padding-bottom: 4rem;
+
+    .title {
+      text-align: center;
+      font-size: 8rem;
+    }
+
+    .title-en {
+      margin-top: -1rem;
+      text-align: center;
+      font-size: 3rem;
+    }
+  }
+
+  .champion-contents {
+    position: relative;
+    margin: 1rem 2rem 6rem 4rem;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $border;
+
+    .white-space {
+      flex: 0 0 100px;
+    }
+
+    .box-label {
+      margin-top: -1rem;
+      font-size: 1.4rem;
+      background-color: $background;
+      padding: 0 1rem;
+    }
+
+    .story-title {
+      padding: 2em 0 1rem 0;
+      font-size: 1.2rem;
+    }
+
+    .story {
+      display: flex;
+      font-weight: lighter;
+      padding-bottom: 3rem;
+      width: 100%;
+      border-bottom: 1px solid $border;
+
+      .story-text {
+        flex: 1;
+      }
+    }
+
+    .skills {
+      padding: 3rem 0 9rem 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      border-bottom: 1px solid $border;
+
+      img {
+        transition: 0.7s;
+        cursor: pointer;
+        &:hover {
+          transform: scale(1.4);
+        }
+        margin-bottom: 2rem;
+      }
+
+      .skill-description {
+        padding-top: 2.5rem;
+        font-weight: lighter;
+        position: absolute;
+        text-align: center;
+        left: 0;
+        right: 0;
+        display: none;
+
+        .skill-name {
+          font-size: 1.4rem;
+          font-weight: 700;
+          padding-bottom: 1rem;
+        }
+
+        .skill-explanation {
+        }
+      }
+
+      .view-skill-text {
+        display: block;
+        padding: 0 100px;
+      }
+    }
+
+    .tips {
+      padding: 3rem 0;
+      display: flex;
+      width: 100%;
+      // background-color: violet;
+      .play-tips,
+      .enemy-tips {
+        flex: 1;
+      }
+      .play-tips-title,
+      .enemy-tips-title {
+        text-align: center;
+        font-size: 1.4rem;
+        padding-bottom: 1rem;
+        background-color: $border;
+        padding: 1rem;
+        width: max-content;
+      }
+
+      .tip-box {
+        padding: 1.5rem;
+        margin: 1rem;
+        margin-top: -1.4rem;
+        border: 1px solid $border;
+        width: 100vw/2;
+
+        .tip {
+          padding: 1rem 0;
+          margin: 1rem;
+          font-weight: lighter;
+          .numbering {
+            margin: 0 1rem 1rem 1rem;
+            float: left;
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+  }
 }

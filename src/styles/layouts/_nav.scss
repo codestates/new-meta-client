@@ -14,6 +14,7 @@
     cursor: pointer;
     @include flexbox(start);
     img {
+      cursor: pointer;
       height: 24px;
       width: auto;
     }

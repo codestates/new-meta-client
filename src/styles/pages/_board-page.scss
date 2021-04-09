@@ -86,7 +86,6 @@
 }
 
 .champion-card {
-  cursor: pointer;
   transform-style: preserve-3d;
   margin: 1rem;
   width: 400px;
@@ -108,6 +107,7 @@
   }
 
   .front {
+    cursor: pointer;
     z-index: 1;
     img {
       width: 400px;
@@ -150,10 +150,23 @@
         }
       }
 
-      i {
-        margin-top: 1rem;
-        font-size: 2rem;
+      .page-into-btn {
+        padding-top: 12px;
+        i {
+          cursor: pointer;
+          font-size: 24px;
+        }
       }
     }
+  }
+}
+
+.back-btn {
+  position: fixed;
+  left: 90%;
+
+  i {
+    cursor: pointer;
+    font-size: 20px;
   }
 }
