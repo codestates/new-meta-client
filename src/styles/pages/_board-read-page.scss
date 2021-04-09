@@ -1,5 +1,6 @@
 .board-read-page {
   .champion-title-image {
+    position: relative;
     padding-bottom: 2rem;
     display: flex;
     justify-content: center;
@@ -16,19 +17,25 @@
 
     .image-wrapper {
       margin-top: 2rem;
-      position: relative;
-
+      height: 600px;
       img {
-        z-index: -1;
-        position: relative;
-        height: 600px;
+        height: inherit;
       }
     }
 
     i {
+      position: absolute;
+      padding: 2rem;
       cursor: pointer;
       font-size: 2rem;
-      padding: 2rem;
+      text-align: center;
+    }
+    .icon-left {
+      left: 5%;
+    }
+
+    .icon-right {
+      right: 5%;
     }
   }
 

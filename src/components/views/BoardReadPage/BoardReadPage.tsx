@@ -90,8 +90,6 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
         []
       );
 
-      console.log(temp);
-
       const skins = await Promise.all(
         skinNumberList.map((el: number) => {
           return axios.get(
@@ -131,7 +129,7 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
             <i
               onClick={previousSlide}
               aria-hidden="true"
-              className="icon-arrow-left-circle"
+              className="icon-arrow-left-circle icon-left"
             ></i>
             <div className="image-wrapper">
               <img src={Skins[CurrentIndex]} alt=""></img>
@@ -139,7 +137,7 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
             <i
               onClick={nextSlide}
               aria-hidden="true"
-              className="icon-arrow-right-circle"
+              className="icon-arrow-right-circle icon-right"
             ></i>
           </div>
           <div className="champion-introduce">
