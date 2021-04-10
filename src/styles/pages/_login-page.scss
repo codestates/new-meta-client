@@ -33,61 +33,83 @@
   border-radius: 10px;
 
   h2 {
-    margin-bottom: 30px;
     color: $secondary;
     text-align: center;
     font-weight: 300;
     letter-spacing: 2px;
   }
 
-  .user-box {
-    position: relative;
+  form {
+    margin: 20px 0;
 
-    input {
-      width: 100%;
-      padding: 10px 0;
-      font-size: 14px;
-      color: $primary;
-      margin-bottom: 30px;
-      border: none;
-      border-bottom: 1px solid $primary;
-      outline: none;
-      background: transparent;
+    .user-box {
+      position: relative;
 
-      &:focus {
-        top: -20px;
-        left: 0;
-        color: $primary;
+      input {
+        width: 100%;
+        padding: 10px 0;
         font-size: 14px;
-        border-bottom: 1px solid $jade-light;
-        transition: 1.3s;
-        box-shadow: 0px 5.5px 5px -6px $jade-light;
+        color: $primary;
+        margin-top: 20px;
+        border: none;
+        border-bottom: 1px solid $primary;
+        outline: none;
+        background: transparent;
+        position: relative;
+
+        &:focus {
+          color: $primary;
+          font-size: 14px;
+          border-bottom: 1px solid $jade-light;
+          transition: 1.3s;
+          box-shadow: 0px 5px 5px -6px $jade-light;
+        }
+
+        &.valid-fail {
+          color: $primary;
+          font-size: 14px;
+          border-bottom: 1px solid palevioletred;
+          transition: 1s;
+          box-shadow: 0px 4.5px 5px -6px palevioletred;
+        }
+      }
+
+      :-webkit-autofill,
+      :-webkit-autofill:hover,
+      :-webkit-autofill:focus,
+      :-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-transition: background-color 9999s ease-out;
+        -webkit-box-shadow: 0 0 0px 1000px $background inset !important;
+        -webkit-text-fill-color: $primary !important;
       }
     }
-    :-webkit-autofill,
-    :-webkit-autofill:hover,
-    :-webkit-autofill:focus,
-    :-webkit-autofill:active {
-      transition: background-color 5000s ease-in-out 0s;
-      -webkit-transition: background-color 9999s ease-out;
-      -webkit-box-shadow: 0 0 0px 1000px $background inset !important;
-      -webkit-text-fill-color: $primary !important;
+
+    .valid-check-text {
+      font-size: 0.7rem;
+      padding-top: 6px;
+      color: $border;
+      display: none;
     }
-  }
-  .icon-check-circle {
-    color: green;
-    position: absolute;
-    top: 12%;
-    left: 92%;
-    font-size: 1.3rem;
-  }
-  .icon-x-circle {
-    color: red;
-    position: absolute;
-    top: 12%;
-    left: 92%;
-    font-size: 1.3rem;
-    display: none;
+    .icon-check-circle {
+      color: $jade;
+      position: absolute;
+      top: 48%;
+      left: 93%;
+      font-size: 1.3rem;
+      display: none;
+    }
+    .icon-x-circle {
+      color: palevioletred;
+      position: absolute;
+      top: 39%;
+      left: 93%;
+      font-size: 1.3rem;
+      display: none;
+    }
+    .icon-x-circle.password {
+      top: 32%;
+    }
   }
 
   .btn-close {
@@ -96,6 +118,7 @@
     color: $secondary;
     border: none;
     outline: none;
+    cursor: pointer;
 
     i {
       font-size: 13px;
@@ -104,6 +127,8 @@
   }
 
   .btn-wrapper {
+    margin: 55px 0;
+
     button {
       position: relative;
       float: right;
@@ -114,7 +139,7 @@
       outline: none;
       font-size: 16px;
       transition: 1s;
-      margin-top: 30px;
+      //margin-top: 30px;
       background-color: transparent;
       letter-spacing: 1px;
 
@@ -127,7 +152,7 @@
     }
 
     i {
-      margin-top: 37px;
+      margin-top: 10px;
       float: left;
       font-size: 25px;
       letter-spacing: 30px;
@@ -145,7 +170,7 @@
     display: flex;
     justify-content: center;
     text-align: center;
-    margin-top: 110px;
+    margin-top: 130px;
 
     .register-text {
       color: $primary;
