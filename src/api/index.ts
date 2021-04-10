@@ -1,5 +1,11 @@
 // "editor.wordWrapColumn": 200,
 const API = {
+  user_login_test: "http://localhost:4000/users/login",
+  user_logout_test: "http://localhost:4000/users/logout",
+  user_register_test: "http://localhost:4000/users",
+  user_profile_test: "http://localhost:4000/users/me",
+  user_update_test: "http://localhost:4000/users/me",
+  user_delete_test: "http://localhost:4000/users/me",
   allChampionInfo:
     "http://ddragon.leagueoflegends.com/cdn/11.7.1/data/ko_KR/champion.json",
   championInfo:
