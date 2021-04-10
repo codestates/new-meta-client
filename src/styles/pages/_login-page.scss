@@ -61,9 +61,33 @@
         font-size: 14px;
         border-bottom: 1px solid $jade-light;
         transition: 1.3s;
-        box-shadow: 0px 4px 5px -6px $jade-light;
+        box-shadow: 0px 5.5px 5px -6px $jade-light;
       }
     }
+    :-webkit-autofill,
+    :-webkit-autofill:hover,
+    :-webkit-autofill:focus,
+    :-webkit-autofill:active {
+      transition: background-color 5000s ease-in-out 0s;
+      -webkit-transition: background-color 9999s ease-out;
+      -webkit-box-shadow: 0 0 0px 1000px $background inset !important;
+      -webkit-text-fill-color: $primary !important;
+    }
+  }
+  .icon-check-circle {
+    color: green;
+    position: absolute;
+    top: 12%;
+    left: 92%;
+    font-size: 1.3rem;
+  }
+  .icon-x-circle {
+    color: red;
+    position: absolute;
+    top: 12%;
+    left: 92%;
+    font-size: 1.3rem;
+    display: none;
   }
 
   .btn-close {
