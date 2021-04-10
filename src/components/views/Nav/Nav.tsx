@@ -28,7 +28,7 @@ function Nav(props: any): ReactElement {
   const isRegisterModalHandler = (): void => {
     setIsRegisterModal(true);
   };
-  const logoClickHandler = (): void => {
+  const toMainHandler = (): void => {
     props.history.push("/");
   };
 
@@ -36,7 +36,7 @@ function Nav(props: any): ReactElement {
     <div className="nav">
       <div
         className="logo"
-        onClick={logoClickHandler}
+        onClick={toMainHandler}
         onKeyDown={() => {
           return null;
         }}
@@ -70,7 +70,10 @@ function Nav(props: any): ReactElement {
           <button
             type="button"
             className="nav-btn logout"
-            onClick={logoutHandler}
+            onClick={() => {
+              logoutHandler();
+              toMainHandler();
+            }}
           >
             <span>Logout</span>
           </button>
