@@ -1,0 +1,94 @@
+.loading-background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.7);
+    animation: fadein 1s forwards;
+
+    .loading-container {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        top: calc(50% - 50px);
+
+        .loading-text {
+            position: absolute;
+            text-align: center;
+            color: $primary;
+            font-size: 0.9rem;
+        }
+
+        .demo {
+            width: 100px;
+            height: 102px;
+            border-radius: 100%;
+            position: absolute;
+            -webkit-animation: spin 3s infinite linear;
+            animation: spin 4s infinite linear;
+
+            .circle {
+                width: 100%;
+                height: 100%;
+                position: absolute;
+
+                .inner {
+                    width: 100%;
+                    height: 100%;
+                    border-radius: 100%;
+                    border: 5px solid rgba($jade-light, 0.3);
+                    border-right: none;
+                    border-top: none;
+                    backgroudn-clip: padding;
+                    box-shadow: inset 0px 0px 10px rgba($jade-dark, 0.1);
+                }
+            }
+        }
+    }
+}
+@-webkit-keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes spin {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.circle:nth-of-type(0) {
+    transform: rotate(0deg);
+}
+.circle:nth-of-type(0) .inner {
+    -webkit-animation: spin 2s infinite linear;
+    animation: spin 1.5s infinite linear;
+}
+
+.circle:nth-of-type(1) {
+    transform: rotate(70deg);
+}
+.circle:nth-of-type(1) .inner {
+    -webkit-animation: spin 1s infinite linear;
+    animation: spin 1.5s infinite linear;
+}
+
+.circle:nth-of-type(2) {
+    transform: rotate(140deg);
+}
+.circle:nth-of-type(2) .inner {
+    -webkit-animation: spin 1.5s infinite linear;
+    animation: spin 1.5s infinite linear;
+}

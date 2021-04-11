@@ -21,20 +21,22 @@
   }
 
   .nav-btn {
-    padding: 6px 19px;
+    padding: 6.2px 0px;
     flex: 0 1 auto;
     position: absolute;
     right: 90px;
     top: 20%;
     background-color: transparent;
     border: none;
-    border-radius: 5px;
+    border-radius: 4px;
     transition: 1s;
     letter-spacing: 1px;
 
     span {
       font-size: 16px;
       font-weight: 400;
+      padding: 6.2px 20px;
+      border-radius: 5px;
       background: linear-gradient(to right, $jade-light, $jade-dark);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
@@ -50,10 +52,47 @@
       cursor: pointer;
       background: $jade;
       color: $secondary;
-      box-shadow: 0 0 5px $jade, 0 0 25px $jade; // 0 0 50px $jade-light;
+      box-shadow: 0 0 5px $jade, 0 0 25px $jade; //, 0 0 50px $jade-light;
+    }
+
+    &.logout span {
+      padding: 6.2px 14px;
     }
   }
 }
+
+// .nav-btn {
+//   font-size: 17px;
+//   padding: 6px 19px;
+//   position: absolute;
+//   right: 90px;
+//   top: 20%;
+//   background: transparent;
+//   font-weight: 500;
+//   letter-spacing: 1px;
+//   background: linear-gradient(300deg, $jade-light, $jade-dark);
+//   -webkit-background-clip: text;
+//   -webkit-text-fill-color: transparent;
+
+//   &:hover {
+//     cursor: pointer;
+//     background: linear-gradient(90deg, $jade-dark, $jade-light, $jade-dark);
+//     background-repeat: no-repeat;
+//     background-size: 80%;
+//     animation: animate 1.8s linear infinite;
+//     -webkit-background-clip: text;
+//     -webkit-text-fill-color: transparent;
+//   }
+// }
+
+// @keyframes animate {
+//   0% {
+//     background-position: -500%;
+//   }
+//   100% {
+//     background-position: 500%;
+//   }
+// }
 
 // .gnb {
 //   position: relative;
