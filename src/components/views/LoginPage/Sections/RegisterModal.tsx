@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import axios from "axios";
 import API from "../../../../api";
+import Popup from "../../../utils/Popup";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_RE = /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi;
@@ -17,6 +18,11 @@ function RegisterModal({ closeModal }: Props): ReactElement {
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
+  const [IsPopupOpen, setIsPopupOpen] = useState(false);
+
+  const closePopup = () => {
+    setIsPopupOpen(false);
+  };
 
   const validationSuccess = (type: string): void => {
     const successIcon = document.querySelector<HTMLElement>(
@@ -122,90 +128,106 @@ function RegisterModal({ closeModal }: Props): ReactElement {
         .post(API.user_register_test, body, { withCredentials: true })
         .then((res) => {
           if (res.data.user) {
-            //! 가입 성공
-            // console.log("success", res.data.user);
-            closeModal();
+            //! 가입 성공  // => 팝업  // 성공여부 내려주기
+            console.log("success", res.data.user);
+            setIsPopupOpen(true);
+            // closeModal();
           } else {
-            //! 가입 실패
-            // console.log("fail", res);
+            //! 가입 실패 => 팝업
+            console.log("fail", res);
+            setIsPopupOpen(true);
           }
         });
     } else {
-      alert("모든 항목을 올바르게 입력해주세요");
+      //! => 팝업
+      console.log("popup");
+      setIsPopupOpen(true);
+
+      // alert("모든 항목을 올바르게 입력해주세요");
     }
   };
 
   return (
-    <div className="modal-box">
-      <button className="btn-close" type="button" onClick={closeModal}>
-        <i className="icon-cross" />
-      </button>
-      <br />
-      <h2>Sign Up</h2>
-      <form>
-        <div className="user-box register-email">
-          <input
-            className="input-email"
-            placeholder="Email"
-            type="email"
-            onChange={onEmailHandler}
-          />
-          <i className="icon-check-circle email" />
-          <i className="icon-x-circle email" />
-          <div className="valid-check-text email">
-            유효하지 않은 이메일 형식입니다.
-          </div>
-        </div>
-        <div className="user-box register-username">
-          <input
-            className="input-username"
-            placeholder="User Name"
-            type="text"
-            onChange={onUsernameHandler}
-          />
-          <i className="icon-check-circle username" />
-          <i className="icon-x-circle username" />
-          <div className="valid-check-text username">
-            유저네임은 한글, 알파벳 또는 숫자로 구성되어야 합니다.
-          </div>
-        </div>
-        <div className="user-box register-password">
-          <input
-            className="input-password"
-            placeholder="Password"
-            type="password"
-            onChange={onPasswordHandler}
-          />
-          <i className="icon-check-circle password" />
-          <i className="icon-x-circle password" />
-          <div className="valid-check-text password">
-            알파벳 대소문자, 숫자, 특수문자를 1개 이상 포함하여 8자리 이상의
-            비밀번호를 작성하세요.
-          </div>
-        </div>
-        <div className="user-box register-confirm-password">
-          <input
-            className="input-confirm-password"
-            placeholder="Confirm Password"
-            type="password"
-            onChange={onConfirmPasswordHandler}
-          />
-          <i className="icon-check-circle confirm-password" />
-          <i className="icon-x-circle confirm-password" />
-          <div className="valid-check-text confirm-password">
-            패스워드가 일치하지 않습니다.
-          </div>
-        </div>
-        <div className="btn-wrapper">
-          <button type="submit" onClick={onSubmitHandler}>
-            <span>Sign Up</span>
+    <>
+      {!IsPopupOpen ? (
+        <div className="modal-box">
+          <button className="btn-close" type="button" onClick={closeModal}>
+            <i className="icon-cross" />
           </button>
-          <i className="icon-google" />
-          <i className="icon-facebook" />
-          <i className="icon-github" />
+          <br />
+          <h2>Sign Up</h2>
+          <form>
+            <div className="user-box register-email">
+              <input
+                className="input-email"
+                placeholder="Email"
+                type="email"
+                onChange={onEmailHandler}
+              />
+              <i className="icon-check-circle email" />
+              <i className="icon-x-circle email" />
+              <div className="valid-check-text email">
+                유효하지 않은 이메일 형식입니다.
+              </div>
+            </div>
+            <div className="user-box register-username">
+              <input
+                className="input-username"
+                placeholder="User Name"
+                type="text"
+                onChange={onUsernameHandler}
+              />
+              <i className="icon-check-circle username" />
+              <i className="icon-x-circle username" />
+              <div className="valid-check-text username">
+                유저네임은 한글, 알파벳 또는 숫자로 구성되어야 합니다.
+              </div>
+            </div>
+            <div className="user-box register-password">
+              <input
+                className="input-password"
+                placeholder="Password"
+                type="password"
+                onChange={onPasswordHandler}
+              />
+              <i className="icon-check-circle password" />
+              <i className="icon-x-circle password" />
+              <div className="valid-check-text password">
+                알파벳 대소문자, 숫자, 특수문자를 1개 이상 포함하여 8자리 이상의
+                비밀번호를 작성하세요.
+              </div>
+            </div>
+            <div className="user-box register-confirm-password">
+              <input
+                className="input-confirm-password"
+                placeholder="Confirm Password"
+                type="password"
+                onChange={onConfirmPasswordHandler}
+              />
+              <i className="icon-check-circle confirm-password" />
+              <i className="icon-x-circle confirm-password" />
+              <div className="valid-check-text confirm-password">
+                패스워드가 일치하지 않습니다.
+              </div>
+            </div>
+            <div className="btn-wrapper">
+              <button type="submit" onClick={onSubmitHandler}>
+                <span>Sign Up</span>
+              </button>
+              <i className="icon-google" />
+              <i className="icon-facebook" />
+              <i className="icon-github" />
+            </div>
+          </form>
         </div>
-      </form>
-    </div>
+      ) : (
+        <Popup
+          closePopup={closePopup}
+          closeModal={closeModal}
+          IsPopupOpen={IsPopupOpen}
+        />
+      )}
+    </>
   );
 }
 
