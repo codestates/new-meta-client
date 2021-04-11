@@ -1,0 +1,171 @@
+.popup-background {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.3);
+    animation: fadein 1s forwards;
+
+    @keyframes fadein {
+        from {
+            opacity: 0;
+        }
+        to {
+            opacity: 1;
+        }
+    }
+
+    .popup-box {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 300px;
+        padding: 40px;
+        transform: translate(-50%, -50%);
+        background: rgba($primary, $alpha: 0.1);
+        // border: 0.5px solid rgba($primary, $alpha: 0.2);
+        box-sizing: border-box;
+        box-shadow: 5px 30px 25px rgba(0, 0, 0, 0.5);
+        border-radius: 15px;
+
+        color: $primary;
+        text-align: center;
+        font-weight: 300;
+        font-size: 0.95rem;
+
+        .result-message {
+            animation: pop 1s ease-out;
+            margin: 9px 0;
+        }
+
+        @keyframes pop {
+            0% {
+                /* initial */
+                opacity: 0;
+                transform: translateY(-80px);
+            }
+            70% {
+                transform: translateY(10px);
+            }
+            90% {
+                transform: translateY(-3px);
+            }
+            100% {
+                /* final */
+                opacity: 1;
+                transform: translate(0); /* 가운데 */
+            }
+        }
+
+        .btn-wrapper.popup {
+            margin-top: 40px;
+
+            button {
+                padding: 4px 15px;
+                //color: $jade;
+                border: none;
+                border-radius: 5px;
+                outline: none;
+                font-size: 0.7rem;
+                transition: 1s;
+                //background-color: transparent;
+                letter-spacing: 1px;
+                background: $jade;
+                color: $secondary;
+                box-shadow: 0 0 5px $jade, 0 0 25px $jade; // 0 0 50px $jade-light;
+
+                &:hover {
+                    cursor: pointer;
+                    // background: $jade;
+                    // color: $secondary;
+                    // box-shadow: 0 0 5px $jade-light, 0 0 25px $jade-light; // 0 0 50px $jade-light;
+                }
+            }
+        }
+    }
+}
+
+$circle-length: 151px;
+$check-length: 36px;
+
+@keyframes scaleAnimation {
+    0% {
+        opacity: 0;
+        transform: scale(1.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes drawCircle {
+    0% {
+        stroke-dashoffset: $circle-length;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes drawCheck {
+    0% {
+        stroke-dashoffset: $check-length;
+    }
+    100% {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fadeOut {
+    0% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+#successAnimationCircle {
+    stroke-dasharray: $circle-length $circle-length;
+    stroke: $jade;
+}
+
+#successAnimationCheck {
+    stroke-dasharray: $check-length $check-length;
+    stroke: $jade;
+}
+
+#successAnimationResult {
+    fill: $jade;
+    opacity: 0;
+}
+
+#successAnimation.animated {
+    animation: 1s ease-out 0s 1 both scaleAnimation;
+
+    #successAnimationCircle {
+        animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCircle, 0.3s linear 0.9s 1 both fadeOut;
+    }
+
+    #successAnimationCheck {
+        animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCheck, 0.3s linear 0.9s 1 both fadeOut;
+    }
+
+    #successAnimationResult {
+        animation: 0.3s linear 0.9s both fadeIn;
+    }
+}
