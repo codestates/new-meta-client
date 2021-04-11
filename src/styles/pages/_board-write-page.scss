@@ -29,6 +29,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+    transition: 2s;
 
     .index-item {
       width: 100%;
@@ -49,6 +50,12 @@
         opacity: 1;
         color: $jade-dark;
       }
+    }
+    .selected {
+      cursor: pointer;
+      font-weight: bold;
+      opacity: 1;
+      color: $jade-dark;
     }
   }
 
@@ -90,18 +97,185 @@
       left: 0;
     }
 
-    .page {
+    .write-page {
       width: 100%;
-      height: 100%;
+      height: inherit;
       display: none;
-      justify-content: center;
-      align-items: center;
-      font-size: 10rem;
     }
 
     .is-active {
       display: flex;
       animation: 1.5s fadeIn;
+    }
+
+    .page-0 {
+      // display: flex;
+      align-items: center;
+      flex-direction: column;
+      padding-top: 2rem;
+      justify-content: start;
+      height: calc(80vh - 60px);
+
+      .search-bar {
+        margin-bottom: 1.5rem;
+      }
+
+      .champions-pick {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        overflow: scroll;
+
+        .champions-pick-square {
+          width: 60px;
+          img {
+            width: inherit;
+          }
+          transition: 0.5s;
+
+          &:hover {
+            cursor: pointer;
+            transform: scale(1.5);
+          }
+        }
+      }
+    }
+    .page-1 {
+      // display: flex;
+      flex-direction: row;
+      justify-content: center;
+      align-items: center;
+
+      .current-champion-img {
+        padding-left: 2rem;
+        flex: 0 1 320px;
+
+        img {
+          max-width: 320px;
+        }
+      }
+
+      .title-input-form {
+        height: 100%;
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding-right: 4rem;
+
+        .post-title,
+        .post-subtitle {
+          width: 90%;
+        }
+
+        p {
+          text-align: center;
+          width: 100%;
+          font-weight: lighter;
+          font-size: 2rem;
+        }
+        input {
+          color: $primary;
+          width: 100%;
+          padding: 12px 24px;
+          background-color: $block;
+          border: none;
+        }
+      }
+    }
+    .page-2 {
+      padding: 1rem;
+      // display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-around;
+      position: relative;
+
+      textarea {
+        color: $primary;
+        margin-left: 2rem;
+        border: none;
+        background-color: $block;
+        width: 100%;
+        height: 100%;
+        resize: none;
+      }
+
+      & > * {
+        width: 90%;
+        display: flex;
+      }
+
+      & > *:first-child {
+        color: $jade;
+        font-weight: 500;
+        font-size: 2rem;
+        margin-bottom: -3rem;
+      }
+
+      .skill-name {
+        font-weight: lighter;
+        width: 70px;
+        word-break: keep-all;
+        text-align: center;
+        margin: auto;
+        margin-right: 1rem;
+      }
+    }
+    .page-3 {
+      // display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .title {
+        color: $jade-dark;
+        padding-bottom: 2rem;
+        font-size: 1.5rem;
+      }
+
+      .label {
+        // margin-bottom: -6px;
+        font-size: 2rem;
+        z-index: 3;
+      }
+
+      textarea {
+        border: none;
+        background-color: $block;
+        color: $primary;
+        resize: none;
+        width: 90%;
+        height: 200px;
+        margin: 2rem;
+      }
+    }
+    .page-4 {
+      // display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+
+      .title {
+        color: $jade-dark;
+        padding-bottom: 2rem;
+        font-size: 2rem;
+      }
+
+      textarea {
+        border: none;
+        background-color: $block;
+        color: $primary;
+        resize: none;
+        width: 90%;
+        height: 200px;
+        margin: 2rem;
+      }
     }
   }
 }
