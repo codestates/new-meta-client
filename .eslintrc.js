@@ -13,8 +13,8 @@ module.exports = {
     "prettier",
     "airbnb",
     "airbnb/hooks",
-    //"prettier/react",
-    //"prettier/@typescript-eslint",
+    // "prettier/react",
+    // "prettier/@typescript-eslint",
     "plugin:prettier/recommended",
   ],
   parser: "@typescript-eslint/parser",
@@ -55,6 +55,6 @@ module.exports = {
     "max-classes-per-file": "off",
     "no-use-before-define": "off",
     "react-hooks/rules-of-hooks": "warn",
-    //"@typescript-eslint/no-use-before-define": ["error"],
+    // "@typescript-eslint/no-use-before-define": ["error"],
   },
 };
