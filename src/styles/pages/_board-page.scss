@@ -19,19 +19,125 @@
 .board-page {
   display: flex;
   flex-direction: column;
-  margin: 0 1rem 1rem 1rem;
-  padding: 1rem;
   height: 1000px;
-  border-radius: 12px;
-  background-color: $block;
-
-  & > * {
-    margin-bottom: 1rem;
-  }
 
   .title {
-    @include text-style(24);
-    color: $primary;
+    padding-left: 1rem;
+    width: 100%;
+    display: inline-flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    font-weight: lighter;
+
+    .page-section {
+      border-left: 1px solid $border;
+      cursor: pointer;
+      min-width: 120px;
+      margin: 1rem;
+      padding-left: 1rem;
+      transition: 0.5s;
+      &:hover {
+        color: $jade;
+      }
+    }
+
+    .selected {
+      color: $jade;
+    }
+  }
+
+  .filter-list {
+    margin-top: 1rem;
+    margin-right: 6rem;
+    font-weight: lighter;
+    margin-bottom: -0.5rem;
+
+    display: flex;
+    justify-content: flex-end;
+
+    .prefix {
+      font-size: 14px;
+      color: $primary;
+    }
+
+    .filter-items-T,
+    .filter-items-D {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 14px;
+
+      & > * {
+        padding-left: 8px;
+      }
+    }
+
+    .filter-items-T {
+      color: $purple-light;
+      padding: 0 1rem;
+    }
+
+    .filter-items-D {
+      color: $red;
+    }
+  }
+}
+
+.search-bar-wrapper {
+  width: 100%;
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  font-weight: lighter;
+
+  .tags {
+  }
+
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+
+    // &:hover .dropdown-contents {
+    //   display: block;
+    // }
+
+    .dropdown-contents {
+      display: none;
+      margin-top: 0.4rem;
+      text-align: left;
+      position: absolute;
+      background-color: $block;
+      min-width: 120px;
+      padding: 5px;
+      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+      z-index: 9;
+
+      & > * {
+        color: $primary;
+        padding: 8px;
+        text-decoration: none;
+        display: block;
+        cursor: pointer;
+        transition: 1s;
+
+        &:hover {
+          color: $jade;
+        }
+      }
+    }
+  }
+  .reset-btn {
+    cursor: pointer;
+    transition: 1s;
+    opacity: 0.4;
+
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }
 
@@ -41,7 +147,7 @@
   width: 200px;
   border-radius: 12px;
   padding: 8px 12px;
-  background-color: $background;
+  background-color: $block;
 
   input {
     background-color: transparent;
@@ -60,114 +166,55 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  overflow: scroll;
-  background-color: $background;
-  padding: 2rem;
-  border-radius: 12px;
-  height: max-content;
-}
-
-.recommend {
-  background-color: $background;
   padding: 1rem;
   border-radius: 12px;
-  height: 360px;
-}
-
-.rotate {
-  animation: rotate-ani 1s;
-  animation-fill-mode: forwards;
-  animation-direction: alternate;
-}
-
-.rotate-again {
-  animation: rotate-ani-again 1s;
-  animation-fill-mode: forwards;
-  animation-direction: alternate;
+  height: 2000px;
 }
 
 .champion-card {
-  transform-style: preserve-3d;
-  margin: 1rem;
-  width: 400px;
-  height: 236px;
-  perspective: 500px;
-  transition: 0.5s;
-
-  .card-side {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: relative;
+  cursor: pointer;
+  width: 150px;
+  height: 272.72px;
+  overflow: hidden;
+  img {
     position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 12px;
-    backface-visibility: hidden;
+    width: inherit;
+    height: inherit;
   }
 
-  .front {
-    cursor: pointer;
-    z-index: 1;
-    img {
-      width: 400px;
-      object-fit: cover;
+  transition: 1s;
+
+  &:hover {
+    z-index: 3;
+    transform: scale(1.1);
+
+    .card-info {
+      transform: translateY(0px);
     }
   }
 
-  .back {
-    background-color: $purple;
-    transform: rotateY(180deg);
+  .card-info {
+    transform: translateY(272.72px);
+    color: $primary;
+    font-weight: 300;
+    font-size: 0.9rem;
+    position: absolute;
+    transition: 0.5s;
+    background: linear-gradient(transparent, 60%, $background);
+    width: inherit;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
 
-    .text-box {
-      text-align: center;
-      height: 200px;
-      .name {
-        font-size: 24px;
-      }
-
-      .blurb {
-        padding: 1rem;
-        height: 50px;
-        overflow: hidden;
-      }
-
-      .info {
-        display: flex;
-        justify-content: center;
-      }
-
-      .diff i {
-        font-size: 1rem;
-      }
-
-      .styles {
-        display: flex;
-        justify-content: center;
-
-        & > * {
-          padding: 0 1rem;
-        }
-      }
-
-      .page-into-btn {
-        padding-top: 12px;
-        i {
-          cursor: pointer;
-          font-size: 24px;
-        }
-      }
+    & > *:first-child {
+      font-size: 1.2rem;
     }
-  }
-}
 
-.back-btn {
-  position: fixed;
-  left: 90%;
-
-  i {
-    cursor: pointer;
-    font-size: 20px;
+    & > * {
+      padding-bottom: 0.5rem;
+    }
   }
 }
