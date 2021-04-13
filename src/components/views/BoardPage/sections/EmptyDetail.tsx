@@ -1,0 +1,18 @@
+import React, { ReactElement } from "react";
+import demacia from "../../../../assets/image/demacia3.jpeg";
+
+function EmptyDetail(): ReactElement {
+  return (
+    <>
+      <div className="text-box">
+        <div className="text-box-title">Click Post</div>
+        <div className="text-box-description">
+          Check out other people&apos;s New Meta.
+        </div>
+      </div>
+      <img src={demacia} alt=""></img>
+    </>
+  );
+}
+
+export default EmptyDetail;
