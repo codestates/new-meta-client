@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
@@ -13,16 +14,29 @@ function BoardDetail(props: Props): ReactElement {
   const [content, setcontent] = useState<any[]>([]);
   const [CurrentIndex, setCurrentIndex] = useState(0);
 
-  const clickLeftIcon = () => {
-    if (CurrentIndex !== 0) {
-      setCurrentIndex(CurrentIndex - 1);
-    }
+  const clickLeftIcon = (e: React.MouseEvent) => {
+    const partList = e.currentTarget.parentElement?.parentElement?.children[1];
+    // setCurrentIndex(CurrentIndex - 1);
   };
 
-  const clickRightIcon = () => {
-    if (CurrentIndex !== 3) {
-      setCurrentIndex(CurrentIndex + 1);
-    }
+  const clickRightIcon = (e: React.MouseEvent) => {
+    const partList = e.currentTarget.parentElement?.parentElement?.children[1];
+    console.log(CurrentIndex);
+    console.log(partList);
+    console.log(partList?.children[CurrentIndex]);
+    console.log(partList?.children[CurrentIndex + 1]);
+
+    // partList?.children[CurrentIndex].classList.add("display-none");
+    // setTimeout(() => {
+    //   partList?.children[CurrentIndex].classList.remove("is-out");
+    // }, 1000);
+
+    // partList?.children[CurrentIndex + 1].classList.add("is-in");
+    // setTimeout(() => {
+    //   partList?.children[CurrentIndex + 1].classList.remove("is-in");
+    // }, 1000);
+
+    // setCurrentIndex(CurrentIndex + 1);
   };
 
   useEffect(() => {
@@ -32,38 +46,46 @@ function BoardDetail(props: Props): ReactElement {
       );
       const info = champInfo.data.data[data.champion];
 
-      console.log(info, data);
-
-      const c = [
-        <div className="part1">
+      const contentsArr = [
+        <div className="part part1">
           <div className="contents-title">{data.title}</div>
           <div className="contents-description">{data.description}</div>
         </div>,
-        <div className="part2">
+        <div className="part part2">
           <div className="contents-skill">
             {info.spells.map((el: any, idx: number) => {
               return (
-                <>
+                <div className="skill-group" key={idx}>
                   <img
                     src={`${API.championSpell}/${el.image.full}`}
                     alt=""
                   ></img>
                   <div>{data.skills[idx]}</div>
-                </>
+                </div>
               );
               //
             })}
           </div>
         </div>,
-        <div className="part3">
+        <div className="part part3">
+          <div className="label">플레이 할 때</div>
           <div className="play">{data.play[0]}</div>
+          <div className="label">상대 할 때</div>
           <div className="enemy">{data.play[1]}</div>
         </div>,
-        <div className="part4">
+        <div className="part part4">
+          <div className="label">꿀 팁</div>
           <div className="etc">{data.etc}</div>
+          <div className="button-group">
+            <i className="icon-user"></i>
+            {data.author}
+            <i className="icon-star-full"></i>
+            <i className="icon-star-empty"></i>
+            <i className="icon-file"></i>
+          </div>
         </div>,
       ];
-      setcontent(c);
+      setcontent(contentsArr);
     };
     run();
   }, []);
@@ -72,18 +94,25 @@ function BoardDetail(props: Props): ReactElement {
     <>
       <div className="icon-box">
         <i
-          onClick={clickLeftIcon}
+          onClick={(e) => clickLeftIcon(e)}
           aria-hidden
           className="icon-arrow-left-circle view-left"
         ></i>
         <i
-          onClick={clickRightIcon}
+          onClick={(e) => clickRightIcon(e)}
           aria-hidden
           className="icon-arrow-right-circle view-right"
         ></i>
       </div>
       <div className="text-box">
-        {content.length > 0 && content[CurrentIndex]}
+        {content.length > 0 && (
+          // <>{content[0]}</>
+          <>
+            {content.map((el) => {
+              return el;
+            })}
+          </>
+        )}
       </div>
       <img
         className="detail-img"
