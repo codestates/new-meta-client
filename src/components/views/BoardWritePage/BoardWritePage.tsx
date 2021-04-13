@@ -26,6 +26,56 @@ function BoardWritePage(): ReactElement {
   const writeBox = useRef<HTMLDivElement>(null);
   const indexBox = useRef<HTMLDivElement>(null);
 
+  const titleTag = useRef<HTMLInputElement>(null);
+  const descriptionTag = useRef<HTMLInputElement>(null);
+  const skillTagQ = useRef<HTMLTextAreaElement>(null);
+  const skillTagW = useRef<HTMLTextAreaElement>(null);
+  const skillTagE = useRef<HTMLTextAreaElement>(null);
+  const skillTagR = useRef<HTMLTextAreaElement>(null);
+
+  const playTag = useRef<HTMLTextAreaElement>(null);
+  const enemyTag = useRef<HTMLTextAreaElement>(null);
+  const etcTag = useRef<HTMLTextAreaElement>(null);
+
+  // {
+  //   champion: "Bard",
+  //   author: "osunguk",
+  //   createdAt: "2020.04.01 18:35",
+  //   updatedAt: "2020.04.05 20:11",
+  //   title: "바드 1000판 노하우 공개",
+  //   description: "감전 바드로 원딜보다 딜 많이 하는 방법",
+  //   skills: [
+  //     "평 Q 로 감전을 바로 터트린다",
+  //     "유지력싸움, 이속증가",
+  //     "단축키 사용으로 빠르게 탄다",
+  //     "전령을 무효화할 수 있는 유일한 스킬",
+  //   ],
+  //   play: [
+  //     "e 라는 아주 좋은 생존기가 있기 때문에 신출귀몰하며 로밍으로 게임을 푼다",
+  //     "미니언 뒤에 있으면 속박을 조심하고, 차원문은 위험해보이면 타지 않는다",
+  //   ],
+  //   etc: "로밍 갔을 때 원딜보고 항상 죽지말라고 말해두자",
+  // },
+
+  const postData = {
+    champion: CurrentChampion,
+    author: "osunguk", // todo : user 데이터로 바꾸기
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    title: titleTag.current?.value,
+    description: descriptionTag.current?.value,
+    skills: [
+      skillTagQ.current?.value,
+      skillTagW.current?.value,
+      skillTagE.current?.value,
+      skillTagR.current?.value,
+    ],
+    play: [playTag.current?.value, enemyTag.current?.value],
+    etc: etcTag.current?.value,
+  };
+
+  console.log(postData);
+
   useEffect(() => {
     const run = async () => {
       const result = await axios.get(API.allChampionInfo);
@@ -38,6 +88,11 @@ function BoardWritePage(): ReactElement {
     run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const clickPost = () => {
+    // todo : 서버에 게시물 등록 요청
+    // axios
+  };
 
   const clickIndex = (index: number, e: MouseEvent): void => {
     // console.log("test");
@@ -154,11 +209,11 @@ function BoardWritePage(): ReactElement {
           <div className="title-input-form">
             <div className="post-title">
               <p>title</p>
-              <input type="text"></input>
+              <input ref={titleTag} type="text"></input>
             </div>
             <div className="post-subtitle">
               <p>description</p>
-              <input type="text"></input>
+              <input ref={descriptionTag} type="text"></input>
             </div>
           </div>
         </div>
@@ -174,7 +229,7 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea></textarea>
+            <textarea ref={skillTagQ}></textarea>
           </div>
           <div className="skill-w">
             {SkillImages.length > 0 && (
@@ -186,7 +241,7 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea></textarea>
+            <textarea ref={skillTagW}></textarea>
           </div>
           <div className="skill-e">
             {SkillImages.length > 0 && (
@@ -198,7 +253,7 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea></textarea>
+            <textarea ref={skillTagE}></textarea>
           </div>
           <div className="skill-r">
             {SkillImages.length > 0 && (
@@ -210,19 +265,22 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea></textarea>
+            <textarea ref={skillTagR}></textarea>
           </div>
         </div>
         <div className="write-page page-3">
           <div className="title">Tip`s</div>
           <div className="label">플레이할 때</div>
-          <textarea className="play-tips"></textarea>
+          <textarea ref={playTag} className="play-tips"></textarea>
           <div className="label">상대 할 때</div>
-          <textarea className="enemy-tips"></textarea>
+          <textarea ref={enemyTag} className="enemy-tips"></textarea>
         </div>
         <div className="write-page page-4">
           <div className="title">.etc</div>
-          <textarea className="another-tips"></textarea>
+          <textarea ref={etcTag} className="another-tips"></textarea>
+          <button onClick={clickPost} className="post-btn" type="button">
+            Post
+          </button>
         </div>
       </div>
     </div>
