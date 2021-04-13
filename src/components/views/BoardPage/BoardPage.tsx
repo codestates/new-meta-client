@@ -4,7 +4,7 @@ import axios from "axios";
 import { withRouter, Link } from "react-router-dom";
 
 import ChampionCardList from "./sections/ChampionCardList";
-import BoardWrite from "./sections/BoardWrite";
+import BoardShow from "./sections/BoardShow";
 import API from "../../../api";
 import { removeFooter } from "../../utils/displayfooter";
 
@@ -70,7 +70,7 @@ function BoardPage(): ReactElement {
         </div>
       </div>
       {CurrentPage === 0 && <ChampionCardList Champions={Champions} />}
-      {CurrentPage === 1 && <BoardWrite />}
+      {CurrentPage === 1 && <BoardShow />}
     </div>
   );
 }

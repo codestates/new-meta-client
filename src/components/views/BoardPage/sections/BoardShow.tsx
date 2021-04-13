@@ -1,13 +1,7 @@
 import React, { ReactElement, useState } from "react";
+import { withRouter } from "react-router-dom";
 import EmptyDetail from "./EmptyDetail";
 import BoardDetail from "./BoardDetail";
-import soldier from "../../../../assets/image/soldier.jpeg";
-import demacia from "../../../../assets/image/demacia3.jpeg";
-import splash from "../../../../assets/image/splash-assets.png";
-import challenger from "../../../../assets/image/emblem/Emblem_Challenger.png";
-// interface Props {
-
-// }
 
 const tempData = [
   {
@@ -31,8 +25,13 @@ const tempData = [
   },
 ];
 
-function BoardWrite(): ReactElement {
+function BoardShow(props: any): ReactElement {
   const [CurrentBoard, setCurrentBoard] = useState(tempData[0]);
+  const [BoardList, setBoardList] = useState([]); // todo : 서버에서 데이터 받아와야한다
+
+  const clickWriteBtn = () => {
+    props.history.push("/board/write");
+  };
 
   return (
     <div className="user-board">
@@ -40,6 +39,15 @@ function BoardWrite(): ReactElement {
         {CurrentBoard ? <BoardDetail data={CurrentBoard} /> : <EmptyDetail />}
       </div>
       <div className="list-view">
+        <div className="btn-wrapper">
+          <button
+            onClick={clickWriteBtn}
+            className="creat-meta-btn"
+            type="button"
+          >
+            create meta
+          </button>
+        </div>
         <div className="label">Recent</div>
         <div className="content-list">
           <div className="content"></div>
@@ -71,4 +79,4 @@ function BoardWrite(): ReactElement {
   );
 }
 
-export default BoardWrite;
+export default withRouter(BoardShow);
