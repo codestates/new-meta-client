@@ -2,6 +2,7 @@ import React, { ReactElement, useState } from "react";
 import { withRouter } from "react-router-dom";
 import EmptyDetail from "./EmptyDetail";
 import BoardDetail from "./BoardDetail";
+import BoardSmall from "./BoardSmall";
 
 const tempData = [
   {
@@ -26,7 +27,7 @@ const tempData = [
 ];
 
 function BoardShow(props: any): ReactElement {
-  const [CurrentBoard, setCurrentBoard] = useState(tempData[0]);
+  const [CurrentBoard, setCurrentBoard] = useState({});
   const [BoardList, setBoardList] = useState([]); // todo : 서버에서 데이터 받아와야한다
 
   const clickWriteBtn = () => {
@@ -36,7 +37,11 @@ function BoardShow(props: any): ReactElement {
   return (
     <div className="user-board">
       <div className="detail-view">
-        {CurrentBoard ? <BoardDetail data={CurrentBoard} /> : <EmptyDetail />}
+        {Object.keys(CurrentBoard).length > 0 ? (
+          <BoardDetail data={CurrentBoard} />
+        ) : (
+          <EmptyDetail />
+        )}
       </div>
       <div className="list-view">
         <div className="btn-wrapper">
@@ -50,10 +55,7 @@ function BoardShow(props: any): ReactElement {
         </div>
         <div className="label">Recent</div>
         <div className="content-list">
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
+          <BoardSmall data={tempData[0]} setCurrentBoard={setCurrentBoard} />
         </div>
         <div className="label">Popular</div>
         <div className="content-list">
