@@ -24,6 +24,25 @@ const tempData = [
     ],
     etc: "로밍 갔을 때 원딜보고 항상 죽지말라고 말해두자",
   },
+  {
+    champion: "Ahri",
+    author: "osunguk",
+    createdAt: "2020.04.01 18:35",
+    updatedAt: "2020.04.05 20:11",
+    title: "안녕하세요 아립니다",
+    description: "궁만 있으면 누구든지 원콤",
+    skills: [
+      "돌아오는 Q 를 신경쓴다",
+      "미니언 먹을 때 편하다",
+      "최대한 기다리다가 써야 적중률이 높아진다",
+      "도주기로만 쓰면 안된다",
+    ],
+    play: [
+      "궁의 빠른 속도로 합류와 어그로 핑퐁이 중요",
+      "매혹만 신경써서 피하면 딜로스가 많이 생긴다",
+    ],
+    etc: "미니언 푸쉬가 느리기 때문에 라인을 빠르게 민다는 마인드",
+  },
 ];
 
 function BoardShow(props: any): ReactElement {
@@ -55,7 +74,9 @@ function BoardShow(props: any): ReactElement {
         </div>
         <div className="label">Recent</div>
         <div className="content-list">
-          <BoardSmall data={tempData[0]} setCurrentBoard={setCurrentBoard} />
+          {tempData.map((el) => {
+            return <BoardSmall data={el} setCurrentBoard={setCurrentBoard} />;
+          })}
         </div>
         <div className="label">Popular</div>
         <div className="content-list">
