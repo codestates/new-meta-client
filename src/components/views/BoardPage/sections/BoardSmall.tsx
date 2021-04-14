@@ -32,42 +32,22 @@ interface Props {
 
 function BoardSmall(props: Props): ReactElement {
   const { data, setCurrentBoard } = props;
-  console.log(props);
 
   const section1 = useRef<HTMLDivElement>(null);
   const section2 = useRef<HTMLDivElement>(null);
 
   return (
     <div
-      onClick={() => setCurrentBoard(data)}
+      onClick={() => {
+        setCurrentBoard(data);
+      }}
       onMouseEnter={() => {
-        console.log(section1.current);
         section1.current?.classList.remove("mouse-over");
         section2.current?.classList.add("mouse-over");
-
-        // const style = section1.current?.style;
-        // if (style) {
-        //   style.display = "none";
-        // }
-
-        // section2.current?.classList.remove("display-none");
-        // const style2 = section2.current?.style;
-        // if (style2) {
-        //   style2.display = "block";
-        // }
       }}
       onMouseLeave={() => {
         section1.current?.classList.add("mouse-over");
         section2.current?.classList.remove("mouse-over");
-        // const style = section1.current?.style;
-        // if (style) {
-        //   style.display = "block";
-        // }
-
-        // const style2 = section2.current?.style;
-        // if (style2) {
-        //   style2.display = "none";
-        // }
       }}
       aria-hidden
       className="board-small"
