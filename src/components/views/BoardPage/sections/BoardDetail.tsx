@@ -1,8 +1,9 @@
+/* eslint-disable consistent-return */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
 import axios from "axios";
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import API from "../../../../api";
 
 interface Props {
@@ -14,29 +15,53 @@ function BoardDetail(props: Props): ReactElement {
   const [content, setcontent] = useState<any[]>([]);
   const [CurrentIndex, setCurrentIndex] = useState(0);
 
-  const clickLeftIcon = (e: React.MouseEvent) => {
-    const partList = e.currentTarget.parentElement?.parentElement?.children[1];
-    // setCurrentIndex(CurrentIndex - 1);
+  const textTag = useRef<HTMLDivElement>(null);
+  const partTag = useRef<HTMLDivElement>(null);
+
+  const clickLeftIcon = () => {
+    if (CurrentIndex === 0) {
+      return null;
+    }
+    textTag.current?.children[CurrentIndex].classList.remove("is-active");
+    textTag.current?.children[CurrentIndex - 1].classList.add("is-active");
+    const data = document.querySelector(".text-box");
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+    let textBoxWidth: string = "0px";
+    if (data) {
+      textBoxWidth = window.getComputedStyle(data).width;
+      console.log(window.getComputedStyle(data).width);
+    }
+    const tt = textTag.current?.style;
+    const pt = partTag.current?.style;
+    if (tt && pt) {
+      const calcWidth =
+        Number(textBoxWidth.split("px")[0]) * (CurrentIndex - 1);
+      tt.transform = `translateX(-${calcWidth}px)`;
+    }
+    setCurrentIndex(CurrentIndex - 1);
   };
 
-  const clickRightIcon = (e: React.MouseEvent) => {
-    const partList = e.currentTarget.parentElement?.parentElement?.children[1];
-    console.log(CurrentIndex);
-    console.log(partList);
-    console.log(partList?.children[CurrentIndex]);
-    console.log(partList?.children[CurrentIndex + 1]);
-
-    // partList?.children[CurrentIndex].classList.add("display-none");
-    // setTimeout(() => {
-    //   partList?.children[CurrentIndex].classList.remove("is-out");
-    // }, 1000);
-
-    // partList?.children[CurrentIndex + 1].classList.add("is-in");
-    // setTimeout(() => {
-    //   partList?.children[CurrentIndex + 1].classList.remove("is-in");
-    // }, 1000);
-
-    // setCurrentIndex(CurrentIndex + 1);
+  const clickRightIcon = () => {
+    if (CurrentIndex === 3) {
+      return null;
+    }
+    textTag.current?.children[CurrentIndex].classList.remove("is-active");
+    textTag.current?.children[CurrentIndex + 1].classList.add("is-active");
+    const data = document.querySelector(".text-box");
+    // eslint-disable-next-line @typescript-eslint/no-inferrable-types
+    let textBoxWidth: string = "0px";
+    if (data) {
+      textBoxWidth = window.getComputedStyle(data).width;
+      console.log(window.getComputedStyle(data).width);
+    }
+    const tt = textTag.current?.style;
+    const pt = partTag.current?.style;
+    if (tt && pt) {
+      const calcWidth =
+        Number(textBoxWidth.split("px")[0]) * (CurrentIndex + 1);
+      tt.transform = `translateX(-${calcWidth}px)`;
+    }
+    setCurrentIndex(CurrentIndex + 1);
   };
 
   useEffect(() => {
@@ -47,7 +72,7 @@ function BoardDetail(props: Props): ReactElement {
       const info = champInfo.data.data[data.champion];
 
       const contentsArr = [
-        <div className="part part1">
+        <div ref={partTag} className="part part1 is-active">
           <div className="contents-title">{data.title}</div>
           <div className="contents-description">{data.description}</div>
         </div>,
@@ -94,17 +119,17 @@ function BoardDetail(props: Props): ReactElement {
     <>
       <div className="icon-box">
         <i
-          onClick={(e) => clickLeftIcon(e)}
+          onClick={clickLeftIcon}
           aria-hidden
           className="icon-arrow-left-circle view-left"
         ></i>
         <i
-          onClick={(e) => clickRightIcon(e)}
+          onClick={clickRightIcon}
           aria-hidden
           className="icon-arrow-right-circle view-right"
         ></i>
       </div>
-      <div className="text-box">
+      <div ref={textTag} className="text-box">
         {content.length > 0 && (
           // <>{content[0]}</>
           <>

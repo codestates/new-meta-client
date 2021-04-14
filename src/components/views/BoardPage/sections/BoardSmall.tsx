@@ -41,28 +41,33 @@ function BoardSmall(props: Props): ReactElement {
     <div
       onClick={() => setCurrentBoard(data)}
       onMouseEnter={() => {
-        // console.log(section1.current);
-        const style = section1.current?.style;
-        if (style) {
-          style.display = "none";
-        }
+        console.log(section1.current);
+        section1.current?.classList.remove("mouse-over");
+        section2.current?.classList.add("mouse-over");
 
-        section2.current?.classList.remove("display-none");
-        const style2 = section2.current?.style;
-        if (style2) {
-          style2.display = "block";
-        }
+        // const style = section1.current?.style;
+        // if (style) {
+        //   style.display = "none";
+        // }
+
+        // section2.current?.classList.remove("display-none");
+        // const style2 = section2.current?.style;
+        // if (style2) {
+        //   style2.display = "block";
+        // }
       }}
       onMouseLeave={() => {
-        const style = section1.current?.style;
-        if (style) {
-          style.display = "block";
-        }
+        section1.current?.classList.add("mouse-over");
+        section2.current?.classList.remove("mouse-over");
+        // const style = section1.current?.style;
+        // if (style) {
+        //   style.display = "block";
+        // }
 
-        const style2 = section2.current?.style;
-        if (style2) {
-          style2.display = "none";
-        }
+        // const style2 = section2.current?.style;
+        // if (style2) {
+        //   style2.display = "none";
+        // }
       }}
       aria-hidden
       className="board-small"
@@ -72,7 +77,7 @@ function BoardSmall(props: Props): ReactElement {
         <div>{data.champion}</div>
         <div>{data.author}</div>
       </div>
-      <div ref={section2} className="simple-text2 display-none">
+      <div ref={section2} className="simple-text2">
         <div>{data.title}</div>
         <div>{data.description}</div>
       </div>
