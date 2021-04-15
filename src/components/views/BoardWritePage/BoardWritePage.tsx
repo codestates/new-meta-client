@@ -18,13 +18,40 @@ const patchVersion = "11.7.1";
 
 function BoardWritePage(): ReactElement {
   removeFooter();
-
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const [Champions, setChampions] = useState<string[]>([]);
   const [CurrentChampion, setCurrentChampion] = useState<string>("");
   const [SkillImages, setSkillImages] = useState<string[]>([]);
   const writeBox = useRef<HTMLDivElement>(null);
   const indexBox = useRef<HTMLDivElement>(null);
+
+  const titleTag = useRef<HTMLInputElement>(null);
+  const descriptionTag = useRef<HTMLInputElement>(null);
+  const skillTagQ = useRef<HTMLTextAreaElement>(null);
+  const skillTagW = useRef<HTMLTextAreaElement>(null);
+  const skillTagE = useRef<HTMLTextAreaElement>(null);
+  const skillTagR = useRef<HTMLTextAreaElement>(null);
+
+  const playTag = useRef<HTMLTextAreaElement>(null);
+  const enemyTag = useRef<HTMLTextAreaElement>(null);
+  const etcTag = useRef<HTMLTextAreaElement>(null);
+
+  const postData = {
+    champion: CurrentChampion,
+    author: "osunguk", // todo : user 데이터로 바꾸기
+    createdAt: Date.now(),
+    updatedAt: Date.now(),
+    title: titleTag.current?.value,
+    description: descriptionTag.current?.value,
+    skills: [
+      skillTagQ.current?.value,
+      skillTagW.current?.value,
+      skillTagE.current?.value,
+      skillTagR.current?.value,
+    ],
+    play: [playTag.current?.value, enemyTag.current?.value],
+    etc: etcTag.current?.value,
+  };
 
   useEffect(() => {
     const run = async () => {
@@ -38,6 +65,11 @@ function BoardWritePage(): ReactElement {
     run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
+  const clickPost = () => {
+    // todo : 서버에 게시물 등록 요청
+    // axios
+  };
 
   const clickIndex = (index: number, e: MouseEvent): void => {
     // console.log("test");
@@ -63,6 +95,19 @@ function BoardWritePage(): ReactElement {
     indexBoxDiv?.children[0].classList.remove("selected");
     indexBoxDiv?.children[1].classList.add("selected");
   };
+
+  if (!CurrentChampion) {
+    // console.log("챔피언 미선택");
+    indexBox.current?.children[1].classList.add("display-none");
+    indexBox.current?.children[2].classList.add("display-none");
+    indexBox.current?.children[3].classList.add("display-none");
+    indexBox.current?.children[4].classList.add("display-none");
+  } else {
+    indexBox.current?.children[1].classList.remove("display-none");
+    indexBox.current?.children[2].classList.remove("display-none");
+    indexBox.current?.children[3].classList.remove("display-none");
+    indexBox.current?.children[4].classList.remove("display-none");
+  }
 
   return (
     <div className="board-write-page">
@@ -146,19 +191,21 @@ function BoardWritePage(): ReactElement {
 
         <div className="write-page page-1">
           <div className="current-champion-img">
-            <img
-              alt=""
-              src={`${API.championLoading}/${CurrentChampion}_0.jpg`}
-            ></img>
+            {CurrentChampion && (
+              <img
+                alt=""
+                src={`${API.championLoading}/${CurrentChampion}_0.jpg`}
+              ></img>
+            )}
           </div>
           <div className="title-input-form">
             <div className="post-title">
               <p>title</p>
-              <input type="text"></input>
+              <input ref={titleTag} type="text"></input>
             </div>
             <div className="post-subtitle">
               <p>description</p>
-              <input type="text"></input>
+              <input ref={descriptionTag} type="text"></input>
             </div>
           </div>
         </div>
@@ -174,7 +221,7 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea></textarea>
+            <textarea ref={skillTagQ}></textarea>
           </div>
           <div className="skill-w">
             {SkillImages.length > 0 && (
@@ -186,7 +233,7 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea></textarea>
+            <textarea ref={skillTagW}></textarea>
           </div>
           <div className="skill-e">
             {SkillImages.length > 0 && (
@@ -198,7 +245,7 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea></textarea>
+            <textarea ref={skillTagE}></textarea>
           </div>
           <div className="skill-r">
             {SkillImages.length > 0 && (
@@ -210,19 +257,22 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea></textarea>
+            <textarea ref={skillTagR}></textarea>
           </div>
         </div>
         <div className="write-page page-3">
           <div className="title">Tip`s</div>
           <div className="label">플레이할 때</div>
-          <textarea className="play-tips"></textarea>
+          <textarea ref={playTag} className="play-tips"></textarea>
           <div className="label">상대 할 때</div>
-          <textarea className="enemy-tips"></textarea>
+          <textarea ref={enemyTag} className="enemy-tips"></textarea>
         </div>
         <div className="write-page page-4">
           <div className="title">.etc</div>
-          <textarea className="another-tips"></textarea>
+          <textarea ref={etcTag} className="another-tips"></textarea>
+          <button onClick={clickPost} className="post-btn" type="button">
+            Post
+          </button>
         </div>
       </div>
     </div>
