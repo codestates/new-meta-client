@@ -53,8 +53,6 @@ function BoardWritePage(): ReactElement {
     etc: etcTag.current?.value,
   };
 
-  console.log(postData);
-
   useEffect(() => {
     const run = async () => {
       const result = await axios.get(API.allChampionInfo);
@@ -97,6 +95,19 @@ function BoardWritePage(): ReactElement {
     indexBoxDiv?.children[0].classList.remove("selected");
     indexBoxDiv?.children[1].classList.add("selected");
   };
+
+  if (!CurrentChampion) {
+    // console.log("챔피언 미선택");
+    indexBox.current?.children[1].classList.add("display-none");
+    indexBox.current?.children[2].classList.add("display-none");
+    indexBox.current?.children[3].classList.add("display-none");
+    indexBox.current?.children[4].classList.add("display-none");
+  } else {
+    indexBox.current?.children[1].classList.remove("display-none");
+    indexBox.current?.children[2].classList.remove("display-none");
+    indexBox.current?.children[3].classList.remove("display-none");
+    indexBox.current?.children[4].classList.remove("display-none");
+  }
 
   return (
     <div className="board-write-page">
@@ -180,10 +191,12 @@ function BoardWritePage(): ReactElement {
 
         <div className="write-page page-1">
           <div className="current-champion-img">
-            <img
-              alt=""
-              src={`${API.championLoading}/${CurrentChampion}_0.jpg`}
-            ></img>
+            {CurrentChampion && (
+              <img
+                alt=""
+                src={`${API.championLoading}/${CurrentChampion}_0.jpg`}
+              ></img>
+            )}
           </div>
           <div className="title-input-form">
             <div className="post-title">
