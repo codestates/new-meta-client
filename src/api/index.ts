@@ -1,11 +1,21 @@
-// "editor.wordWrapColumn": 200,
+import dotenv from "dotenv";
+
+dotenv.config();
+
+let domain: string | undefined;
+if (process.env.NODE_ENV === "development") {
+  domain = process.env.REACT_APP_LOCAL_SERVER_DOMAIN;
+} else {
+  domain = process.env.REACT_APP_EC2_SERVER_DOMAIN;
+}
+
 const API = {
-  user_login_test: "http://localhost:4000/users/login",
-  user_logout_test: "http://localhost:4000/users/logout",
-  user_register_test: "http://localhost:4000/users",
-  user_profile_test: "http://localhost:4000/users/me",
-  user_update_test: "http://localhost:4000/users/me",
-  user_delete_test: "http://localhost:4000/users/me",
+  user_login_test: `${domain}/users/login`,
+  user_logout_test: `${domain}/users/logout`,
+  user_register_test: `${domain}/users`,
+  user_profile_test: `${domain}/users/me`,
+  user_update_test: `${domain}/users/me`,
+  user_delete_test: `${domain}/users/me`,
   allChampionInfo:
     "http://ddragon.leagueoflegends.com/cdn/11.7.1/data/ko_KR/champion.json",
   championInfo:
