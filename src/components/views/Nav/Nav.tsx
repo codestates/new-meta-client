@@ -33,53 +33,57 @@ function Nav(props: any): ReactElement {
   };
 
   return (
-    <div className="nav">
-      <div
-        className="logo"
-        onClick={toMainHandler}
-        onKeyDown={() => {
-          return null;
-        }}
-        role="button"
-        tabIndex={0}
-      >
-        <img className="logo-img" src={logo} alt="" />
+    <>
+      <div className="nav">
+        <div
+          className="logo"
+          onClick={toMainHandler}
+          onKeyDown={() => {
+            return null;
+          }}
+          role="button"
+          tabIndex={0}
+        >
+          <img className="logo-img" src={logo} alt="" />
+        </div>
+        {!AccessToken ? (
+          <div className="btn-wrapper">
+            <button
+              type="button"
+              className="nav-btn login"
+              onClick={() => {
+                openModal();
+                setIsRegisterModal(false);
+              }}
+            >
+              <span>Login</span>
+            </button>
+          </div>
+        ) : (
+          <div className="btn-wrapper">
+            <button
+              type="button"
+              className="nav-btn logout"
+              onClick={() => {
+                logoutHandler();
+                toMainHandler();
+              }}
+            >
+              <span>Logout</span>
+            </button>
+          </div>
+        )}
       </div>
-      {!AccessToken ? (
-        <div className="btn-wrapper">
-          <button
-            type="button"
-            className="nav-btn login"
-            onClick={() => {
-              openModal();
-              setIsRegisterModal(false);
-            }}
-          >
-            <span>Login</span>
-          </button>
-          <LoginPage
-            IsModalOpen={IsModalOpen}
-            closeModal={closeModal}
-            IsRegisterModal={IsRegisterModal}
-            isRegisterModalHandler={isRegisterModalHandler}
-            accessTokenHandler={accessTokenHandler}
-          />
-        </div>
-      ) : (
-        <div className="btn-wrapper">
-          <button
-            type="button"
-            className="nav-btn logout"
-            onClick={() => {
-              logoutHandler();
-              toMainHandler();
-            }}
-          >
-            <span>Logout</span>
-          </button>
-        </div>
-      )}
-    </div>
+
+      {IsModalOpen ? (
+        <LoginPage
+          closeModal={closeModal}
+          IsRegisterModal={IsRegisterModal}
+          isRegisterModalHandler={isRegisterModalHandler}
+          accessTokenHandler={accessTokenHandler}
+        />
+      ) : null}
+    </>
   );
 }
 
