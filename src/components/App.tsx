@@ -10,6 +10,7 @@ import BoardPage from "./views/BoardPage/BoardPage";
 import BoardReadPage from "./views/BoardReadPage/BoardReadPage";
 import BoardWritePage from "./views/BoardWritePage/BoardWritePage";
 import Footer from "./views/Footer/Footer";
+import NotFoundPage from "./views/NotFoundPage/NotFoundPage";
 import Loading from "./utils/Loading";
 
 function App(): ReactElement {
@@ -26,6 +27,7 @@ function App(): ReactElement {
           <Route exact path="/board/read" component={BoardReadPage} />
           <Route exact path="/board/write" component={BoardWritePage} />
           <Route exact path="/loading" component={Loading} />
+          <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
       <Footer />
