@@ -11,6 +11,8 @@ import BoardReadPage from "./views/BoardReadPage/BoardReadPage";
 import BoardWritePage from "./views/BoardWritePage/BoardWritePage";
 import Footer from "./views/Footer/Footer";
 import Loading from "./utils/Loading";
+import Popup from "./utils/Popup";
+import Toast from "./utils/Toast";
 
 function App(): ReactElement {
   return (
@@ -26,6 +28,8 @@ function App(): ReactElement {
           <Route exact path="/board/read" component={BoardReadPage} />
           <Route exact path="/board/write" component={BoardWritePage} />
           <Route exact path="/loading" component={Loading} />
+          <Route exact path="/popup" component={Popup} />
+          <Route exact path="/toast" component={Toast} />
         </Switch>
       </div>
       <Footer />
