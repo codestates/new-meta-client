@@ -21,6 +21,7 @@ let pageNum = 0;
 function Minimap(): ReactElement {
   useEffect(() => {
     const section = document.querySelectorAll("section");
+    const li = document.querySelectorAll("li");
 
     const scrollHandler = () => {
       const scroll = window.scrollY;
@@ -74,14 +75,14 @@ function Minimap(): ReactElement {
     };
 
     const pageChangeFunc = () => {
-      const li = document.querySelectorAll("li");
-
-      for (let i = 0; i < totalNum; i += 1) {
-        section[i].classList.remove("active");
-        li[i].classList.remove("active");
+      if (section && li) {
+        for (let i = 0; i < totalNum; i += 1) {
+          section[i].classList.remove("active");
+          li[i].classList.remove("active");
+        }
+        section[pageNum].classList.add("active");
+        li[pageNum].classList.add("active");
       }
-      section[pageNum].classList.add("active");
-      li[pageNum].classList.add("active");
     };
 
     window.addEventListener("scroll", scrollHandler);
