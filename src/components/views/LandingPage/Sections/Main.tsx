@@ -19,7 +19,7 @@ function Main(props: any): ReactElement {
 
   return (
     <>
-      <canvas ref={canvasRef} width="1920" height="1080" {...props} />
+      {/* <canvas ref={canvasRef} width="1920" height="1080" {...props} /> */}
       <div className="landing-img-wrapper">
         <img className="landing-img" src={ionia} alt=""></img>
         <div className="landing-text">
