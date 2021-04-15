@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement, useEffect } from "react";
 
 import minimap from "../../../../assets/image/minimap/minimap.png";
 import iconTop from "../../../../assets/image/minimap/icon-top.png";
@@ -17,6 +17,9 @@ const totalNum = 5;
 let pageNum = 0;
 let section: NodeListOf<HTMLElement>;
 let li: NodeListOf<HTMLElement>;
+let imageWrappers: NodeListOf<HTMLDivElement>;
+let ActiveImageWrapper: HTMLDivElement | null;
+let pointWrapper: HTMLDivElement | null;
 
 function Minimap(): ReactElement {
   useEffect(() => {
@@ -25,15 +28,9 @@ function Minimap(): ReactElement {
 
     const scrollHandler = () => {
       const scroll = window.scrollY;
-      const imageWrappers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
-        ".image-wrapper"
-      );
-      const ActiveImageWrapper: HTMLDivElement | null = document.querySelector(
-        ".active .image-wrapper"
-      );
-      const pointWrapper: HTMLDivElement | null = document.querySelector(
-        ".pointWrap"
-      );
+      imageWrappers = document.querySelectorAll(".image-wrapper");
+      ActiveImageWrapper = document.querySelector(".active .image-wrapper");
+      pointWrapper = document.querySelector(".pointWrap");
       if (section[0].offsetTop <= scroll && section[4].offsetTop >= scroll) {
         if (ActiveImageWrapper && pointWrapper) {
           for (let i = 0; i < imageWrappers.length; i += 1) {
@@ -44,16 +41,10 @@ function Minimap(): ReactElement {
           pointWrapper.style.position = "fixed";
         }
       } else {
-        const imageWrappers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
-          ".image-wrapper"
-        );
-        const pointWrapper: HTMLDivElement | null = document.querySelector(
-          ".pointWrap"
-        );
-        if (imageWrappers && pointWrapper) {
-          for (let i = 0; i < imageWrappers.length; i += 1) {
-            imageWrappers[i].style.position = "absolute";
-          }
+        for (let i = 0; i < imageWrappers.length; i += 1) {
+          imageWrappers[i].style.position = "absolute";
+        }
+        if (pointWrapper) {
           pointWrapper.style.position = "absolute";
         }
       }
