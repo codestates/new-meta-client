@@ -1,5 +1,5 @@
+/* eslint-disable no-undef */
 import React, { ReactElement, useEffect, useRef } from "react";
-import { withRouter } from "react-router-dom";
 
 import minimap from "../../../../assets/image/minimap/minimap.png";
 import iconTop from "../../../../assets/image/minimap/icon-top.png";
@@ -13,19 +13,18 @@ import laneMid from "../../../../assets/image/minimap/lane-mid.png";
 import laneBottom from "../../../../assets/image/minimap/lane-bottom.png";
 import laneSupport from "../../../../assets/image/minimap/lane-support.png";
 
-// interface Props {}
-
 const totalNum = 5;
 let pageNum = 0;
+let section: NodeListOf<HTMLElement>;
+let li: NodeListOf<HTMLElement>;
 
 function Minimap(): ReactElement {
   useEffect(() => {
-    const section = document.querySelectorAll("section");
-    const li = document.querySelectorAll("li");
+    section = document.querySelectorAll("section");
+    li = document.querySelectorAll("li");
 
     const scrollHandler = () => {
       const scroll = window.scrollY;
-      // eslint-disable-next-line no-undef
       const imageWrappers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
         ".image-wrapper"
       );
@@ -45,7 +44,6 @@ function Minimap(): ReactElement {
           pointWrapper.style.position = "fixed";
         }
       } else {
-        // eslint-disable-next-line no-undef
         const imageWrappers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
           ".image-wrapper"
         );
@@ -88,7 +86,6 @@ function Minimap(): ReactElement {
     window.addEventListener("scroll", scrollHandler);
   }, []);
 
-  const section = document.querySelectorAll("section");
   const onClickHandler = (idx: number) => {
     if (section) {
       section[pageNum].classList.remove("active");
