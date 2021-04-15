@@ -74,3 +74,187 @@
     }
   }
 }
+
+// .sections .minimap {
+//   position: relative;
+//   display: flex;
+// }
+
+section.section-minimap {
+  position: relative;
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  align-items: center;
+}
+
+.innerWrap {
+  visibility: hidden;
+  opacity: 0;
+}
+.active .innerWrap {
+  transition: opacity 1s ease-in-out;
+  position: relative;
+  padding: 30px 30px 30px 70px;
+  width: 50%;
+  z-index: 5;
+  left: 10%;
+  visibility: visible;
+  opacity: 1;
+}
+
+.image-wrapper {
+  width: 50vw;
+  height: 100%;
+  position: relative;
+
+  .minimap {
+    // position: fixed;
+    width: 0%;
+    top: 60%;
+    left: 70%;
+    z-index: -1;
+  }
+
+  .lane {
+    position: fixed;
+    width: 100%;
+    visibility: hidden;
+    opacity: 0;
+    width: 0%;
+    // z-index: 5;
+  }
+
+  .icon {
+    width: 100%;
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+.active .image-wrapper {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
+
+  .minimap {
+    position: fixed;
+    width: 100%;
+    top: 60%;
+    left: 70%;
+    transform: translate(-50%, -50%);
+    // z-index: -1;
+  }
+
+  .lane {
+    transition: opacity 1s ease-in-out;
+    position: fixed;
+    width: 100%;
+    top: 60%;
+    left: 70%;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    visibility: visible; /* 확실하게 */
+    z-index: 5;
+  }
+
+  .icon {
+    transition: opacity 3s ease-in-out;
+    position: fixed;
+    width: 100%;
+    top: 60%;
+    left: 70%;
+    opacity: 1;
+    transform: translate(-50%, -50%);
+    visibility: visible;
+    z-index: 5;
+  }
+}
+
+.pointWrap {
+  position: fixed;
+  left: 3vw;
+  top: 40%;
+  z-index: 100;
+
+  li {
+    list-style: none;
+    width: 12px;
+    height: 12px;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: $primary;
+    border-radius: 50%;
+    transition: background 0.3s ease-out;
+
+    &.active {
+      background-color: $jade-light;
+    }
+  }
+}
+
+// h1 {
+//   font-weight: 300;
+//   font-size: 60px;
+//   line-height: 1.2;
+//   margin-bottom: 15px;
+// }
+
+// .showcase {
+//   // height: 100vh;
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   text-align: center;
+//   color: #fff;
+//   // padding: 0 20px;
+//   position: relative;
+// }
+
+// .video-container {
+//   top: 0;
+//   left: 0;
+//   width: 100%;
+//   height: 100%;
+//   overflow: hidden;
+//   position: absolute;
+//   // background: var($primary) url("./https://traversymedia.com/downloads/cover.jpg") no-repeat center center/cover;
+// }
+
+// .video-container video {
+//   opacity: 0.5;
+//   min-width: 100%;
+//   min-height: 100%;
+//   position: absolute;
+//   top: 50%;
+//   left: 50%;
+//   transform: translate(-50%, -50%);
+//   object-fit: cover;
+//   z-index: -1;
+// }
+
+// .video-container:after {
+//   content: "";
+//   z-index: -1;
+//   height: 100%;
+//   width: 100%;
+//   top: 0;
+//   left: 0;
+//   background: rgba(0, 0, 0, 0.5);
+//   position: absolute;
+// }
+
+.btn {
+  display: inline-block;
+  padding: 10px 30px;
+  background: var(--primary-color);
+  color: #fff;
+  border-radius: 5px;
+  border: solid #fff 1px;
+  margin-top: 25px;
+  opacity: 0.7;
+}
