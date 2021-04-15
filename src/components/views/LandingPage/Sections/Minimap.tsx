@@ -90,13 +90,15 @@ function Minimap(): ReactElement {
 
   const section = document.querySelectorAll("section");
   const onClickHandler = (idx: number) => {
-    section[pageNum].classList.remove("active");
-    section[idx].classList.add("active");
-    window.scrollTo({
-      top: section[idx].offsetTop,
-      behavior: "smooth",
-    });
-    pageNum = idx;
+    if (section) {
+      section[pageNum].classList.remove("active");
+      section[idx].classList.add("active");
+      window.scrollTo({
+        top: section[idx].offsetTop,
+        behavior: "smooth",
+      });
+      pageNum = idx;
+    }
   };
 
   return (
