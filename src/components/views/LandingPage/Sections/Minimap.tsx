@@ -20,18 +20,51 @@ let pageNum = 0;
 
 function Minimap(): ReactElement {
   useEffect(() => {
+    const section = document.querySelectorAll("section");
+
     const scrollHandler = () => {
       const scroll = window.scrollY;
-      console.log("PageNum", pageNum, scroll);
+      // eslint-disable-next-line no-undef
+      const imageWrappers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
+        ".image-wrapper"
+      );
+      const ActiveImageWrapper: HTMLDivElement | null = document.querySelector(
+        ".active .image-wrapper"
+      );
+      const pointWrapper: HTMLDivElement | null = document.querySelector(
+        ".pointWrap"
+      );
+      if (section[0].offsetTop <= scroll && section[4].offsetTop >= scroll) {
+        if (ActiveImageWrapper && pointWrapper) {
+          for (let i = 0; i < imageWrappers.length; i += 1) {
+            imageWrappers[i].style.position = "fixed";
+            imageWrappers[i].style.opacity = "0";
+          }
+          ActiveImageWrapper.style.opacity = "1";
+          pointWrapper.style.position = "fixed";
+        }
+      } else {
+        // eslint-disable-next-line no-undef
+        const imageWrappers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
+          ".image-wrapper"
+        );
+        const pointWrapper: HTMLDivElement | null = document.querySelector(
+          ".pointWrap"
+        );
+        if (imageWrappers && pointWrapper) {
+          for (let i = 0; i < imageWrappers.length; i += 1) {
+            imageWrappers[i].style.position = "absolute";
+          }
+          pointWrapper.style.position = "absolute";
+        }
+      }
       for (let i = 0; i < totalNum; i += 1) {
         if (
-          scroll >
-            document.querySelectorAll("section")[i].offsetTop -
-              window.outerHeight / 1.5 &&
+          scroll > section[i].offsetTop - window.outerHeight / 1.5 &&
           scroll <
-            document.querySelectorAll("section")[i].offsetTop -
+            section[i].offsetTop -
               window.outerHeight / 1.5 +
-              document.querySelectorAll("section")[i].offsetHeight
+              section[i].offsetHeight
         ) {
           pageNum = i;
           break;
@@ -41,22 +74,25 @@ function Minimap(): ReactElement {
     };
 
     const pageChangeFunc = () => {
+      const li = document.querySelectorAll("li");
+
       for (let i = 0; i < totalNum; i += 1) {
-        document.querySelectorAll("section")[i].classList.remove("active");
-        document.querySelectorAll("li")[i].classList.remove("active");
+        section[i].classList.remove("active");
+        li[i].classList.remove("active");
       }
-      document.querySelectorAll("section")[pageNum].classList.add("active");
-      document.querySelectorAll("li")[pageNum].classList.add("active");
+      section[pageNum].classList.add("active");
+      li[pageNum].classList.add("active");
     };
 
     window.addEventListener("scroll", scrollHandler);
   }, []);
 
+  const section = document.querySelectorAll("section");
   const onClickHandler = (idx: number) => {
-    document.querySelectorAll("section")[pageNum].classList.remove("active");
-    document.querySelectorAll("section")[idx].classList.add("active");
+    section[pageNum].classList.remove("active");
+    section[idx].classList.add("active");
     window.scrollTo({
-      top: document.querySelectorAll("section")[idx].offsetTop,
+      top: section[idx].offsetTop,
       behavior: "smooth",
     });
     pageNum = idx;
@@ -64,102 +100,99 @@ function Minimap(): ReactElement {
 
   return (
     <div className="sections minimap">
-      <ul className="pointWrap">
-        <li
-          onClick={() => {
-            onClickHandler(0);
-          }}
-          aria-hidden="true"
-        />
-        <li
-          onClick={() => {
-            onClickHandler(1);
-          }}
-          aria-hidden="true"
-        />
-        <li
-          onClick={() => {
-            onClickHandler(2);
-          }}
-          aria-hidden="true"
-        />
-        <li
-          onClick={() => {
-            onClickHandler(3);
-          }}
-          aria-hidden="true"
-        />
-        <li
-          onClick={() => {
-            onClickHandler(4);
-          }}
-          aria-hidden="true"
-        />
-      </ul>
+      <section className="section-minimap 0">
+        <div className="pointWrap">
+          <li
+            onClick={() => {
+              onClickHandler(0);
+            }}
+            aria-hidden="true"
+          />
+          <li
+            onClick={() => {
+              onClickHandler(1);
+            }}
+            aria-hidden="true"
+          />
+          <li
+            onClick={() => {
+              onClickHandler(2);
+            }}
+            aria-hidden="true"
+          />
+          <li
+            onClick={() => {
+              onClickHandler(3);
+            }}
+            aria-hidden="true"
+          />
+          <li
+            onClick={() => {
+              onClickHandler(4);
+            }}
+            aria-hidden="true"
+          />
+        </div>
+        <div className="innerWrap">
+          <h2>top</h2>
+          <p>description</p>
+        </div>
+        <div className="image-wrapper top">
+          <img className="landing-img minimap" src={minimap} alt="minimap" />
+          <img src={laneTop} className="lane" alt="top" />
+          <img src={iconTop} className="icon" alt="top" />
+        </div>
+      </section>
 
-      <div className="section-wrapper">
-        <section className="section-minimap 1">
-          <div className="innerWrap">
-            <h2>top</h2>
-            <p>description</p>
-          </div>
-          <div className="image-wrapper top">
-            <img className="landing-img minimap" src={minimap} alt="minimap" />
-            <img src={laneTop} className="lane" alt="top" />
-            <img src={iconTop} className="icon" alt="top" />
-          </div>
-        </section>
+      <section className="section-minimap 1">
+        <div className="innerWrap">
+          <h2>jungle</h2>
+          <p>description</p>
+        </div>
+        <div className="image-wrapper jungle">
+          <img className="landing-img minimap" src={minimap} alt="minimap" />
+          <img src={laneJungle} className="lane" alt="jungle" />
+          <img src={iconJungle} className="icon" alt="jungle" />
+        </div>
+      </section>
 
-        <section className="section-minimap 2">
-          <div className="innerWrap">
-            <h2>jungle</h2>
-            <p>description</p>
-          </div>
-          <div className="image-wrapper jungle">
-            <img className="landing-img minimap" src={minimap} alt="minimap" />
-            <img src={laneJungle} className="lane" alt="jungle" />
-            <img src={iconJungle} className="icon" alt="jungle" />
-          </div>
-        </section>
+      <section className="section-minimap 2">
+        <div className="innerWrap">
+          <h2>mid</h2>
+          <p>description</p>
+        </div>
+        <div className="image-wrapper mid">
+          <img className="landing-img minimap" src={minimap} alt="minimap" />
+          <img src={laneMid} className="lane" alt="mid" />
+          <img src={iconMid} className="icon" alt="mid" />
+        </div>
+      </section>
 
-        <section className="section-minimap 3">
-          <div className="innerWrap">
-            <h2>mid</h2>
-            <p>description</p>
-          </div>
-          <div className="image-wrapper mid">
-            <img className="landing-img minimap" src={minimap} alt="minimap" />
-            <img src={laneMid} className="lane" alt="mid" />
-            <img src={iconMid} className="icon" alt="mid" />
-          </div>
-        </section>
+      <section className="section-minimap 3">
+        <div className="innerWrap">
+          <h2>bottom</h2>
+          <p>description</p>
+        </div>
+        <div className="image-wrapper bottom">
+          <img className="landing-img minimap" src={minimap} alt="minimap" />
+          <img src={laneBottom} className="lane" alt="bottom" />
+          <img src={iconBottom} className="icon" alt="bottom" />
+        </div>
+      </section>
 
-        <section className="section-minimap 4">
-          <div className="innerWrap">
-            <h2>bottom</h2>
-            <p>description</p>
-          </div>
-          <div className="image-wrapper bottom">
-            <img className="landing-img minimap" src={minimap} alt="minimap" />
-            <img src={laneBottom} className="lane" alt="bottom" />
-            <img src={iconBottom} className="icon" alt="bottom" />
-          </div>
-        </section>
-
-        <section className="section-minimap 5">
-          <div className="innerWrap">
-            <h2>support</h2>
-            <p>description</p>
-          </div>
-          <div className="image-wrapper support">
-            <img className="landing-img minimap" src={minimap} alt="minimap" />
-            <img src={laneSupport} className="lane" alt="support" />
-            <img src={iconSupport} className="icon" alt="support" />
-          </div>
-        </section>
-      </div>
+      <section className="section-minimap 4">
+        <div className="innerWrap">
+          <h2>support</h2>
+          <p>description</p>
+        </div>
+        <div className="image-wrapper support">
+          <img className="landing-img minimap" src={minimap} alt="minimap" />
+          <img src={laneSupport} className="lane" alt="support" />
+          <img src={iconSupport} className="icon" alt="support" />
+        </div>
+      </section>
     </div>
   );
 }
 
-export default withRouter(Minimap);
+export default Minimap;

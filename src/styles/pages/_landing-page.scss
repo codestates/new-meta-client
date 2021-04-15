@@ -75,17 +75,40 @@
   }
 }
 
-// .sections .minimap {
-//   position: relative;
-//   display: flex;
-// }
+.sections .minimap {
+  position: relative;
+  display: flex;
+}
 
 section.section-minimap {
   position: relative;
   height: 100vh;
-  width: 100vw;
+  // width: 100vw;
   display: flex;
   align-items: center;
+
+  .pointWrap {
+    position: absolute;
+    left: 5%;
+    top: 40%;
+    z-index: 100;
+
+    li {
+      list-style: none;
+      width: 1rem;
+      height: 1rem;
+      margin-top: 20px;
+      cursor: pointer;
+      background-color: $border;
+      border-radius: 50%;
+      transition: background 0.3s ease-out;
+
+      &.active {
+        background-color: $jade;
+        box-shadow: 0 0 5px $jade, 0 0 25px $jade;
+      }
+    }
+  }
 }
 
 .innerWrap {
@@ -104,16 +127,19 @@ section.section-minimap {
 }
 
 .image-wrapper {
-  width: 50vw;
+  width: 100%;
   height: 100%;
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 40%;
+  transform: translate(-50%, -50%);
 
   .minimap {
-    // position: fixed;
-    width: 0%;
+    position: fixed;
+    width: 100%;
     top: 60%;
     left: 70%;
-    z-index: -1;
+    transform: translate(-50%, -50%);
   }
 
   .lane {
@@ -136,7 +162,7 @@ section.section-minimap {
 .active .image-wrapper {
   width: 100%;
   height: 100%;
-  position: fixed;
+  position: absolute;
   top: 50%;
   left: 40%;
   transform: translate(-50%, -50%);
@@ -147,7 +173,6 @@ section.section-minimap {
     top: 60%;
     left: 70%;
     transform: translate(-50%, -50%);
-    // z-index: -1;
   }
 
   .lane {
@@ -158,12 +183,12 @@ section.section-minimap {
     left: 70%;
     opacity: 1;
     transform: translate(-50%, -50%);
-    visibility: visible; /* 확실하게 */
+    visibility: visible;
     z-index: 5;
   }
 
   .icon {
-    transition: opacity 3s ease-in-out;
+    transition: opacity 2.7s ease-in-out;
     position: fixed;
     width: 100%;
     top: 60%;
@@ -172,28 +197,6 @@ section.section-minimap {
     transform: translate(-50%, -50%);
     visibility: visible;
     z-index: 5;
-  }
-}
-
-.pointWrap {
-  position: fixed;
-  left: 3vw;
-  top: 40%;
-  z-index: 100;
-
-  li {
-    list-style: none;
-    width: 12px;
-    height: 12px;
-    margin-top: 15px;
-    cursor: pointer;
-    background-color: $primary;
-    border-radius: 50%;
-    transition: background 0.3s ease-out;
-
-    &.active {
-      background-color: $jade-light;
-    }
   }
 }
 
