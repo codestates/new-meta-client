@@ -131,7 +131,7 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
               aria-hidden="true"
               className="icon-arrow-left-circle icon-left"
             ></i>
-            <div className="image-wrapper">
+            <div className="champion-image-wrapper">
               <img src={Skins[CurrentIndex]} alt=""></img>
             </div>
             <i
