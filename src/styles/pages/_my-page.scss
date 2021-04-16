@@ -1,0 +1,258 @@
+.my-page-background-img {
+  z-index: -2;
+  position: absolute;
+  border: none;
+  height: calc(100% - 50px);
+  & > img {
+    height: 100%;
+    opacity: 0.3;
+    object-fit: cover;
+  }
+}
+
+.my-page-background-blur {
+  position: absolute;
+  border: none;
+  height: calc(100% - 50px);
+  width: 100%;
+  z-index: -1;
+  background: linear-gradient(transparent, $background, $background);
+}
+
+.my-page {
+  padding-top: 3rem;
+  font-weight: lighter;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+
+  .label {
+    font-weight: 300;
+  }
+
+  .num {
+    font-weight: bolder;
+  }
+
+  .box-label {
+    font-weight: bold;
+    color: $purple;
+    margin-top: -2rem;
+    font-size: 1.4rem;
+    background-color: $background;
+    padding: 0 1rem;
+    width: max-content;
+  }
+
+  & > * {
+    padding: 1rem;
+    border: 1px solid $border;
+    margin: 1rem;
+    width: 50%;
+    border-radius: 4px;
+  }
+
+  & > .user-title {
+    border: none;
+    display: flex;
+    justify-content: space-between;
+
+    & > *:first-child {
+      font-size: 3rem;
+    }
+
+    // & > *:last-child {
+    //   height: max-content;
+    //   margin-top: auto;
+    //   background-color: transparent;
+    //   border: none;
+    //   color: $jade;
+    //   cursor: pointer;
+
+    //   &:hover {
+    //     text-decoration: underline;
+    //   }
+    // }
+  }
+
+  & > .user-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+
+    & > * {
+      margin-bottom: 1rem;
+    }
+
+    .user-email {
+      font-size: 1.2rem;
+    }
+
+    .numbers {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+
+      .post-num,
+      .follower-num,
+      .followee-num {
+        flex: 1 1 auto;
+        text-align: center;
+
+        & > *:last-child {
+          margin-top: 4px;
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+
+  & > .user-posts {
+    & > * {
+      margin-bottom: 1rem;
+    }
+
+    .post {
+      .label {
+        margin-bottom: 1rem;
+        padding-left: 8px;
+        border-left: 1px solid $border;
+      }
+
+      .post-list {
+        display: flex;
+        width: 100%;
+        height: max-content;
+        .post-item {
+          margin-right: 1rem;
+          width: 100px;
+          height: 100px;
+          background-color: $block;
+        }
+      }
+    }
+  }
+
+  & > .user-follow {
+    & > * {
+      margin-bottom: 1rem;
+    }
+
+    .label {
+      margin-bottom: 1rem;
+      padding-left: 8px;
+      border-left: 1px solid $border;
+    }
+
+    .follow-item {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      padding-bottom: 4px;
+
+      .nickname {
+        padding-right: 8px;
+      }
+
+      .email {
+        font-size: 0.8rem;
+        opacity: 0.7;
+      }
+
+      .unfollow {
+        cursor: pointer;
+        padding-left: 80px;
+        color: $red;
+        font-size: 0.7rem;
+        opacity: 0.8;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .following {
+        cursor: pointer;
+        padding-left: 80px;
+        color: $jade;
+        font-size: 0.7rem;
+        opacity: 0.8;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  & > .user-search-history {
+    & > * {
+      margin-bottom: 1rem;
+    }
+    margin-bottom: 1rem;
+
+    .label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-left: 1px solid $border;
+      .left {
+        padding-left: 8px;
+      }
+      .right {
+        color: $red;
+        cursor: pointer;
+        opacity: 0.8;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+
+    .search-item {
+      display: flex;
+      padding-bottom: 4px;
+      justify-content: center;
+      opacity: 0.8;
+    }
+  }
+
+  & > .user-etc {
+    & > * {
+      margin-bottom: 1rem;
+    }
+
+    .label {
+      margin-bottom: 1rem;
+      padding-left: 8px;
+      border-left: 1px solid $border;
+    }
+
+    .button-group {
+      display: flex;
+      justify-content: space-evenly;
+
+      button {
+        font-weight: lighter;
+        background-color: transparent;
+        border-radius: 4px;
+        border: none;
+        border-left: 1px solid $jade;
+        padding: 4px 12px;
+        color: $primary;
+        transition: 1s;
+        cursor: pointer;
+      }
+
+      .leave {
+        color: $red;
+        border-left: 1px solid $primary;
+      }
+    }
+  }
+}
