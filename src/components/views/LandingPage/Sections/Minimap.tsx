@@ -20,63 +20,75 @@ let li: NodeListOf<HTMLElement>;
 let imageWrappers: NodeListOf<HTMLDivElement>;
 let ActiveImageWrapper: HTMLDivElement | null;
 let pointWrapper: HTMLDivElement | null;
+let sections: NodeListOf<HTMLElement>;
 
 function Minimap(): ReactElement {
   useEffect(() => {
-    section = document.querySelectorAll("section");
+    section = document.querySelectorAll(".section-minimap");
     li = document.querySelectorAll("li");
+    sections = document.querySelectorAll(".sections");
 
     const scrollHandler = () => {
       const scroll = window.scrollY;
       imageWrappers = document.querySelectorAll(".image-wrapper");
       ActiveImageWrapper = document.querySelector(".active .image-wrapper");
       pointWrapper = document.querySelector(".pointWrap");
+      const prevHeight = sections[0].offsetHeight;
 
-      if (section[0].offsetTop <= scroll && section[4].offsetTop >= scroll) {
-        if (ActiveImageWrapper && pointWrapper) {
-          for (let i = 0; i < imageWrappers.length; i += 1) {
-            imageWrappers[i].style.position = "fixed";
-            imageWrappers[i].style.opacity = "0";
+      const pageChangeFunc = () => {
+        if (section && li) {
+          for (let i = 0; i < totalNum; i += 1) {
+            section[i].classList.remove("active");
+            li[i].classList.remove("active");
           }
-          ActiveImageWrapper.style.opacity = "1";
-          pointWrapper.style.opacity = "1";
-          pointWrapper.style.position = "fixed";
+          section[pageNum].classList.add("active");
+          li[pageNum].classList.add("active");
         }
-      } else {
-        for (let i = 0; i < imageWrappers.length; i += 1) {
-          imageWrappers[i].style.position = "absolute";
-        }
-        if (pointWrapper) {
-          pointWrapper.style.opacity = "0";
-          pointWrapper.style.position = "absolute";
-        }
-      }
-      for (let i = 0; i < totalNum; i += 1) {
-        if (
-          scroll > section[i].offsetTop - window.outerHeight / 1.5 &&
-          scroll <
-            section[i].offsetTop -
-              window.outerHeight / 1.5 +
-              section[i].offsetHeight
-        ) {
-          pageNum = i;
-          break;
-        }
-      }
-      pageChangeFunc();
-    };
+      };
 
-    const pageChangeFunc = () => {
-      if (section && li) {
+      if (
+        prevHeight - window.innerHeight / 1.7 < scroll &&
+        prevHeight + sections[1].offsetHeight > scroll
+      ) {
+        if (section[0].offsetTop <= scroll && section[4].offsetTop >= scroll) {
+          if (ActiveImageWrapper && pointWrapper) {
+            for (let i = 0; i < imageWrappers.length; i += 1) {
+              imageWrappers[i].style.position = "fixed";
+              imageWrappers[i].style.opacity = "0";
+            }
+            ActiveImageWrapper.style.opacity = "1";
+            pointWrapper.style.opacity = "1";
+            pointWrapper.style.position = "fixed";
+          }
+        } else {
+          for (let i = 0; i < imageWrappers.length; i += 1) {
+            imageWrappers[i].style.position = "absolute";
+          }
+          if (pointWrapper) {
+            pointWrapper.style.opacity = "0";
+            pointWrapper.style.position = "absolute";
+          }
+        }
+        for (let i = 0; i < totalNum; i += 1) {
+          if (
+            scroll > section[i].offsetTop - window.innerHeight / 1.7 &&
+            scroll <
+              section[i].offsetTop -
+                window.innerHeight / 1.7 +
+                section[i].offsetHeight
+          ) {
+            pageNum = i;
+            break;
+          }
+        }
+        pageChangeFunc();
+      } else {
         for (let i = 0; i < totalNum; i += 1) {
           section[i].classList.remove("active");
           li[i].classList.remove("active");
         }
-        section[pageNum].classList.add("active");
-        li[pageNum].classList.add("active");
       }
     };
-
     window.addEventListener("scroll", scrollHandler);
   }, []);
 
@@ -86,7 +98,6 @@ function Minimap(): ReactElement {
       section[idx].classList.add("active");
       window.scrollTo({
         top: section[idx].offsetTop,
-        behavior: "smooth",
       });
       pageNum = idx;
     }
@@ -220,10 +231,10 @@ function Minimap(): ReactElement {
             description
             <br />
             description
-            <br />
-            <br />
-            <br />
           </p>
+          <br />
+          <br />
+          <br />
         </div>
         <div className="image-wrapper support">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
