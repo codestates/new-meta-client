@@ -25,10 +25,10 @@ function BoardPage(): ReactElement {
   const pageSection = useRef<HTMLDivElement>(null);
   useEffect(() => {
     removeFooter();
-    const cache = localStorage.getItem("Champions");
+    const cache = sessionStorage.getItem("Champions");
     const run = async () => {
       const result = await axios.get(API.allChampionInfo);
-      localStorage.setItem(
+      sessionStorage.setItem(
         "Champions",
         JSON.stringify(Object.values(result.data.data))
       );
