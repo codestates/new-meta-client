@@ -26,17 +26,19 @@ function Services(): ReactElement {
         }
       };
 
-      if (prevHeight - pageHeight / 1.7 > scroll) {
+      if (prevHeight - pageHeight / 1.28 > scroll) {
+        // 첫번째 섹션 나타나는 지점
         for (let i = 0; i < sideTotalNum; i += 1) {
           sectionSide[i].classList.remove("ani");
         }
       } else {
+        // 두번째 섹션 부터
         for (let i = 0; i < sideTotalNum; i += 1) {
           if (
-            scroll > sectionSide[i].offsetTop - pageHeight / 1.7 &&
+            scroll > sectionSide[i].offsetTop - pageHeight / 1.28 &&
             scroll <
               sectionSide[i].offsetTop -
-                pageHeight / 1.7 +
+                pageHeight / 1.28 +
                 prevHeight +
                 sectionSide[i].offsetHeight
           ) {
