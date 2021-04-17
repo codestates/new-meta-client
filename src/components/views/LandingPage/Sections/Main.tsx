@@ -34,7 +34,7 @@ function Main(): ReactElement {
           Welcome to <span ref={titleRef}></span>
         </div>
         <div className="landing-description">검색하고 비교하고 분석하세요</div>
-        <a href="players" className="btn">
+        <a href="players" className="landing-btn">
           Try now!
         </a>
       </div>
