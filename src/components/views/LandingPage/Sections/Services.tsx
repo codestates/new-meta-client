@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import freljord from "../../../../assets/image/freljord.jpeg";
 import demacia from "../../../../assets/image/demacia.jpeg";
 
-// interface Props {}
-
 const sideTotalNum = 3;
 let sidePageNum = 0;
 let sectionSide: NodeListOf<HTMLElement>;
 let sections: NodeListOf<HTMLElement>;
+let pageHeight: number;
+let prevHeight: number;
 
 function Services(): ReactElement {
   useEffect(() => {
@@ -18,9 +18,8 @@ function Services(): ReactElement {
 
     const sideScrollHandler = () => {
       const scroll = window.scrollY;
-      const pageHeight = window.innerHeight * 0.7;
-      const prevHeight = sections[0].offsetHeight + sections[1].offsetHeight;
-
+      pageHeight = window.innerHeight * 0.7;
+      prevHeight = sections[0].offsetHeight + sections[1].offsetHeight;
       const sidePageChangeFunc = () => {
         if (sectionSide) {
           sectionSide[sidePageNum].classList.add("ani");
@@ -50,6 +49,10 @@ function Services(): ReactElement {
     };
 
     window.addEventListener("scroll", sideScrollHandler);
+    window.addEventListener("resize", () => {
+      pageHeight = window.innerHeight * 0.7;
+      prevHeight = sections[0].offsetHeight + sections[1].offsetHeight;
+    });
   }, []);
 
   return (

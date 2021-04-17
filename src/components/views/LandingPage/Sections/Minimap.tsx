@@ -21,6 +21,8 @@ let imageWrappers: NodeListOf<HTMLDivElement>;
 let ActiveImageWrapper: HTMLDivElement | null;
 let pointWrapper: HTMLDivElement | null;
 let sections: NodeListOf<HTMLElement>;
+let minimapPrevHeight: number;
+let minimapPageHeight: number;
 
 function Minimap(): ReactElement {
   useEffect(() => {
@@ -33,7 +35,8 @@ function Minimap(): ReactElement {
       imageWrappers = document.querySelectorAll(".image-wrapper");
       ActiveImageWrapper = document.querySelector(".active .image-wrapper");
       pointWrapper = document.querySelector(".pointWrap");
-      const prevHeight = sections[0].offsetHeight;
+      minimapPrevHeight = sections[0].offsetHeight;
+      minimapPageHeight = window.innerHeight;
 
       const pageChangeFunc = () => {
         if (section && li) {
@@ -47,8 +50,8 @@ function Minimap(): ReactElement {
       };
 
       if (
-        prevHeight - window.innerHeight / 1.7 < scroll &&
-        prevHeight + sections[1].offsetHeight > scroll
+        minimapPrevHeight - window.innerHeight / 1.7 < scroll &&
+        minimapPrevHeight + sections[1].offsetHeight > scroll
       ) {
         if (
           section[0].offsetTop <= Math.ceil(scroll) &&
@@ -93,6 +96,10 @@ function Minimap(): ReactElement {
       }
     };
     window.addEventListener("scroll", scrollHandler);
+    window.addEventListener("resize", () => {
+      minimapPrevHeight = sections[0].offsetHeight;
+      minimapPageHeight = window.innerHeight;
+    });
   }, []);
 
   const onClickHandler = (idx: number) => {
