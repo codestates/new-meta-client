@@ -21,7 +21,6 @@
     .landing-title {
       font-size: 4rem;
       padding-bottom: 1.5rem;
-      animation: moveDown-main 1s ease-out;
     }
 
     .landing-description {
@@ -478,16 +477,5 @@
     font-size: 0.95rem !important;
     font-weight: 300;
     margin-bottom: 20px;
-  }
-}
-
-@keyframes moveDown-main {
-  0% {
-    opacity: 0;
-    transform: translateY(-30%);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0);
   }
 }
