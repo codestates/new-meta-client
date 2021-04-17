@@ -21,11 +21,55 @@
     .landing-title {
       font-size: 4rem;
       padding-bottom: 1.5rem;
+
+      .typed-cursor {
+        color: $jade-dark;
+      }
     }
 
     .landing-description {
       font-size: 1rem;
     }
+
+    .landing-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 30px;
+      color: $secondary;
+      border-radius: 5px;
+      outline: none;
+      font-size: 16px;
+      transition: 1s;
+      background-color: $jade-dark;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+        background: $jade;
+        color: $secondary;
+        box-shadow: 0 0 5px $jade-light, 0 0 25px $jade-light; //, 0 0 50px $jade;
+      }
+    }
+
+    // .landing-btn {
+    //   display: inline-block;
+    //   margin-top: 30px;
+    //   padding: 10px 30px;
+    //   font-size: 16px;
+    //   background: transparent;
+    //   color: $jade;
+    //   border-radius: 5px;
+    //   border: solid $jade 1px;
+    //   text-decoration: none;
+    //   transition: 1s;
+
+    //   &:hover {
+    //     cursor: pointer;
+    //     background: $jade;
+    //     color: $secondary;
+    //     box-shadow: 0 0 5px $jade, 0 0 25px $jade; //, 0 0 50px $jade;
+    //   }
+    // }
   }
 
   .sections.main {
@@ -93,7 +137,7 @@
         transition: background 0.3s ease-out;
 
         &.active {
-          background-color: $jade;
+          background-color: $jade-light;
           box-shadow: 0 0 5px $jade, 0 0 25px $jade;
         }
       }
@@ -397,17 +441,6 @@
       }
     }
   }
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 30px;
-  background: var(--primary-color);
-  color: #fff;
-  border-radius: 5px;
-  border: solid #fff 1px;
-  margin-top: 25px;
-  opacity: 0.7;
 }
 
 @media screen and (max-width: $md-breakpoint) {
