@@ -1,15 +1,13 @@
 .landing > * {
-  margin-bottom: 100px;
+  &:not(:last-child) {
+    margin-bottom: 100px;
+  }
 }
 
 .landing {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-
-  &:not(:last-child) {
-    margin-bottom: 100px;
-  }
 
   .landing-text.main {
     width: 100%;
@@ -229,12 +227,12 @@
 
     .clip-3 {
       position: absolute;
-      top: 25%;
+      top: 30%;
       left: 0;
       background: rgba($jade-light, $alpha: 0.7);
       width: 100%;
       height: 70%;
-      clip-path: polygon(0 0, 100% 60%, 100% 100%, 0 100%);
+      clip-path: polygon(0 0, 100% 65%, 100% 100%, 0 100%);
       z-index: -1;
     }
 
@@ -346,7 +344,7 @@
           width: 47%;
           position: absolute;
           left: 22%;
-          top: 20%;
+          top: 28%;
           transform: translate(-50%, -50%);
         }
       }
@@ -448,12 +446,13 @@
 
       .text-wrapper {
         position: relative !important;
-        top: 34% !important;
+        top: 30% !important;
         left: 50% !important;
         transform: translate(-50%, -50%);
         text-align: center;
         padding: 0 !important;
         width: 80% !important;
+        height: 180px !important;
 
         button {
           left: 50% !important;
