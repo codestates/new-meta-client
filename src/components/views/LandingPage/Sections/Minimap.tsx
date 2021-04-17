@@ -50,8 +50,8 @@ function Minimap(): ReactElement {
       };
 
       if (
-        minimapPrevHeight - window.innerHeight / 1.7 < scroll &&
-        minimapPrevHeight + sections[1].offsetHeight > scroll
+        minimapPrevHeight - window.innerHeight / 1.5 <= Math.ceil(scroll) &&
+        minimapPrevHeight + sections[1].offsetHeight >= Math.ceil(scroll)
       ) {
         if (
           section[0].offsetTop <= Math.ceil(scroll) &&
@@ -77,10 +77,11 @@ function Minimap(): ReactElement {
         }
         for (let i = 0; i < totalNum; i += 1) {
           if (
-            scroll >= section[i].offsetTop - window.innerHeight / 1.7 &&
-            scroll <=
+            Math.ceil(scroll) >=
+              section[i].offsetTop - window.innerHeight / 1.5 &&
+            Math.ceil(scroll) <=
               section[i].offsetTop -
-                window.innerHeight / 1.7 +
+                window.innerHeight / 1.5 +
                 section[i].offsetHeight
           ) {
             pageNum = i;
