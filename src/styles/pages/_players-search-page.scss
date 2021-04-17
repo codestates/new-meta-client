@@ -1,33 +1,131 @@
 .players-search-page {
   width: 100%;
   height: 100%;
+  position: relative;
 
   & > .players-search-bar {
     display: flex;
     flex-direction: column;
-    width: max-content;
+    justify-content: center;
+    align-items: center;
+    align-self: center;
+
+    & > .match-search-bar {
+    }
 
     & > .tabs {
       display: flex;
+      font-size: small;
+      color: $secondary;
+      height: 50px;
 
       & > * {
-        width: 80px;
+        width: 100px;
+        position: float;
+        border-style: none;
+        cursor: pointer;
+      }
+      & > .solo-tab {
+        background-color: $jade-light;
+      }
+
+      & > .duo-tab {
+        background-color: $secondary;
+      }
+
+      & > .players-input {
+        background-color: $primary;
+        height: 2rem;
+        font-size: $font-size-12;
       }
     }
 
     & > .solo-wrap,
     .duo-wrap {
       & > .players-input {
-        width: 400px;
-        background-color: $border;
-        border: none;
+        max-width: 500px;
+        border-style: none;
+
+        // background-color: $secondary;
+      }
+      & > .search-btn {
+        background-color: $jade;
+        border-style: none;
       }
     }
 
-    & > .solo-wrap {
+    & > .duo-wrap {
     }
   }
 
   & > .user-data-view {
+    display: flex;
+    flex-direction: column;
+    position: relative;
+
+    & > .summonerInfo {
+      display: flex;
+      margin-top: 30px;
+      width: 100%;
+
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      .summoner-name {
+        font-size: $font-size-24;
+      }
+
+      .summoner-lank-info {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        font-size: $font-size-14;
+        margin: 5px;
+
+        .summoner-tier {
+          text-align: center;
+          margin: 3px;
+        }
+      }
+
+      .summoner-tags {
+        display: flex;
+        justify-content: center;
+
+        .tag {
+          border-radius: 10px;
+          border-color: $purple-light;
+          background-color: $purple-light;
+          margin: 10px;
+          width: fit-content;
+          padding: 7px;
+          font-size: $font-size-12;
+          text-align: center;
+        }
+      }
+    }
+
+    & > .summoner-graph {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      width: 100%;
+
+      .graph-section {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap;
+        .graph {
+          flex: 0 0 400px;
+          margin: 20px;
+          padding: 20px;
+          background: #2b2d3e;
+          border-radius: 20px;
+          box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08);
+        }
+      }
+    }
   }
 }
