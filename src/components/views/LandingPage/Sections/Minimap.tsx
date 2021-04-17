@@ -50,7 +50,10 @@ function Minimap(): ReactElement {
         prevHeight - window.innerHeight / 1.7 < scroll &&
         prevHeight + sections[1].offsetHeight > scroll
       ) {
-        if (section[0].offsetTop <= scroll && section[4].offsetTop >= scroll) {
+        if (
+          section[0].offsetTop <= Math.ceil(scroll) &&
+          Math.ceil(section[4].offsetTop) >= Math.ceil(scroll)
+        ) {
           if (ActiveImageWrapper && pointWrapper) {
             for (let i = 0; i < imageWrappers.length; i += 1) {
               imageWrappers[i].style.position = "fixed";
@@ -71,8 +74,8 @@ function Minimap(): ReactElement {
         }
         for (let i = 0; i < totalNum; i += 1) {
           if (
-            scroll > section[i].offsetTop - window.innerHeight / 1.7 &&
-            scroll <
+            scroll >= section[i].offsetTop - window.innerHeight / 1.7 &&
+            scroll <=
               section[i].offsetTop -
                 window.innerHeight / 1.7 +
                 section[i].offsetHeight
