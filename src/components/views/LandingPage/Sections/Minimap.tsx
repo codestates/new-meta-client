@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { ReactElement, useEffect, useRef } from "react";
+import React, { ReactElement, useEffect } from "react";
 
 import minimap from "../../../../assets/image/minimap/minimap.png";
 import iconTop from "../../../../assets/image/minimap/icon-top.png";
@@ -17,73 +17,90 @@ const totalNum = 5;
 let pageNum = 0;
 let section: NodeListOf<HTMLElement>;
 let li: NodeListOf<HTMLElement>;
+let imageWrappers: NodeListOf<HTMLDivElement>;
+let ActiveImageWrapper: HTMLDivElement | null;
+let pointWrapper: HTMLDivElement | null;
+let sections: NodeListOf<HTMLElement>;
+let minimapPrevHeight: number;
+let minimapPageHeight: number;
 
 function Minimap(): ReactElement {
   useEffect(() => {
-    section = document.querySelectorAll("section");
+    section = document.querySelectorAll(".section-minimap");
     li = document.querySelectorAll("li");
+    sections = document.querySelectorAll(".sections");
 
     const scrollHandler = () => {
       const scroll = window.scrollY;
-      const imageWrappers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
-        ".image-wrapper"
-      );
-      const ActiveImageWrapper: HTMLDivElement | null = document.querySelector(
-        ".active .image-wrapper"
-      );
-      const pointWrapper: HTMLDivElement | null = document.querySelector(
-        ".pointWrap"
-      );
-      if (section[0].offsetTop <= scroll && section[4].offsetTop >= scroll) {
-        if (ActiveImageWrapper && pointWrapper) {
-          for (let i = 0; i < imageWrappers.length; i += 1) {
-            imageWrappers[i].style.position = "fixed";
-            imageWrappers[i].style.opacity = "0";
+      imageWrappers = document.querySelectorAll(".image-wrapper");
+      ActiveImageWrapper = document.querySelector(".active .image-wrapper");
+      pointWrapper = document.querySelector(".pointWrap");
+      minimapPrevHeight = sections[0].offsetHeight;
+      minimapPageHeight = window.innerHeight;
+
+      const pageChangeFunc = () => {
+        if (section && li) {
+          for (let i = 0; i < totalNum; i += 1) {
+            section[i].classList.remove("active");
+            li[i].classList.remove("active");
           }
-          ActiveImageWrapper.style.opacity = "1";
-          pointWrapper.style.position = "fixed";
+          section[pageNum].classList.add("active");
+          li[pageNum].classList.add("active");
         }
-      } else {
-        const imageWrappers: NodeListOf<HTMLDivElement> = document.querySelectorAll(
-          ".image-wrapper"
-        );
-        const pointWrapper: HTMLDivElement | null = document.querySelector(
-          ".pointWrap"
-        );
-        if (imageWrappers && pointWrapper) {
+      };
+
+      if (
+        minimapPrevHeight - window.innerHeight / 1.5 <= Math.ceil(scroll) &&
+        minimapPrevHeight + sections[1].offsetHeight >= Math.ceil(scroll)
+      ) {
+        if (
+          section[0].offsetTop <= Math.ceil(scroll) &&
+          Math.ceil(section[4].offsetTop) >= Math.ceil(scroll)
+        ) {
+          if (ActiveImageWrapper && pointWrapper) {
+            for (let i = 0; i < imageWrappers.length; i += 1) {
+              imageWrappers[i].style.position = "fixed";
+              imageWrappers[i].style.opacity = "0";
+            }
+            ActiveImageWrapper.style.opacity = "1";
+            pointWrapper.style.opacity = "1";
+            pointWrapper.style.position = "fixed";
+          }
+        } else {
           for (let i = 0; i < imageWrappers.length; i += 1) {
             imageWrappers[i].style.position = "absolute";
           }
-          pointWrapper.style.position = "absolute";
+          if (pointWrapper) {
+            pointWrapper.style.opacity = "0";
+            pointWrapper.style.position = "absolute";
+          }
         }
-      }
-      for (let i = 0; i < totalNum; i += 1) {
-        if (
-          scroll > section[i].offsetTop - window.outerHeight / 1.5 &&
-          scroll <
-            section[i].offsetTop -
-              window.outerHeight / 1.5 +
-              section[i].offsetHeight
-        ) {
-          pageNum = i;
-          break;
+        for (let i = 0; i < totalNum; i += 1) {
+          if (
+            Math.ceil(scroll) >=
+              section[i].offsetTop - window.innerHeight / 1.5 &&
+            Math.ceil(scroll) <=
+              section[i].offsetTop -
+                window.innerHeight / 1.5 +
+                section[i].offsetHeight
+          ) {
+            pageNum = i;
+            break;
+          }
         }
-      }
-      pageChangeFunc();
-    };
-
-    const pageChangeFunc = () => {
-      if (section && li) {
+        pageChangeFunc();
+      } else {
         for (let i = 0; i < totalNum; i += 1) {
           section[i].classList.remove("active");
           li[i].classList.remove("active");
         }
-        section[pageNum].classList.add("active");
-        li[pageNum].classList.add("active");
       }
     };
-
     window.addEventListener("scroll", scrollHandler);
+    window.addEventListener("resize", () => {
+      minimapPrevHeight = sections[0].offsetHeight;
+      minimapPageHeight = window.innerHeight;
+    });
   }, []);
 
   const onClickHandler = (idx: number) => {
@@ -92,7 +109,6 @@ function Minimap(): ReactElement {
       section[idx].classList.add("active");
       window.scrollTo({
         top: section[idx].offsetTop,
-        behavior: "smooth",
       });
       pageNum = idx;
     }
@@ -134,8 +150,19 @@ function Minimap(): ReactElement {
           />
         </div>
         <div className="innerWrap">
+          <br />
+          <br />
+          <br />
           <h2>top</h2>
-          <p>description</p>
+          <p>
+            description
+            <br />
+            description
+            <br />
+            description
+            <br />
+            description
+          </p>
         </div>
         <div className="image-wrapper top">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -147,7 +174,15 @@ function Minimap(): ReactElement {
       <section className="section-minimap 1">
         <div className="innerWrap">
           <h2>jungle</h2>
-          <p>description</p>
+          <p>
+            description
+            <br />
+            description
+            <br />
+            description
+            <br />
+            description
+          </p>
         </div>
         <div className="image-wrapper jungle">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -159,7 +194,15 @@ function Minimap(): ReactElement {
       <section className="section-minimap 2">
         <div className="innerWrap">
           <h2>mid</h2>
-          <p>description</p>
+          <p>
+            description
+            <br />
+            description
+            <br />
+            description
+            <br />
+            description
+          </p>
         </div>
         <div className="image-wrapper mid">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -171,7 +214,15 @@ function Minimap(): ReactElement {
       <section className="section-minimap 3">
         <div className="innerWrap">
           <h2>bottom</h2>
-          <p>description</p>
+          <p>
+            description
+            <br />
+            description
+            <br />
+            description
+            <br />
+            description
+          </p>
         </div>
         <div className="image-wrapper bottom">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -183,7 +234,18 @@ function Minimap(): ReactElement {
       <section className="section-minimap 4">
         <div className="innerWrap">
           <h2>support</h2>
-          <p>description</p>
+          <p>
+            description
+            <br />
+            description
+            <br />
+            description
+            <br />
+            description
+          </p>
+          <br />
+          <br />
+          <br />
         </div>
         <div className="image-wrapper support">
           <img className="landing-img minimap" src={minimap} alt="minimap" />

@@ -1,38 +1,44 @@
 import React, { ReactElement, useRef, useEffect } from "react";
+import Typed from "typed.js";
 import ionia from "../../../../assets/image/ionia.jpeg";
-// interface Props {}
+import Canvas from "./Canvas";
 
-function Main(props: any): ReactElement {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
+function Main(): ReactElement {
+  const titleRef = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    let context: CanvasRenderingContext2D | null;
+    const title: HTMLSpanElement | null = titleRef.current;
+    const options = {
+      strings: ["New-Meta"],
+      typeSpeed: 120,
+      startDelay: 0,
+      backSpeed: 80,
+      backDelay: 800,
+      loop: true,
+    };
+    const typed = new Typed(title!, options);
 
-    //
-
-    if (canvas) {
-      context = canvas.getContext("2d");
-      //
-    }
+    return () => {
+      typed.destroy();
+    };
   }, []);
 
   return (
-    <>
-      {/* <canvas ref={canvasRef} width="1920" height="1080" {...props} /> */}
+    <div className="sections main">
       <div className="landing-img-wrapper">
-        <img className="landing-img" src={ionia} alt=""></img>
-        <div className="landing-text">
-          <div className="landing-title">Welcome to New-Meta</div>
-          <div className="landing-discription">
-            검색하고 비교하고 분석하세요
-          </div>
-          <a href="players" className="btn">
-            Try now!
-          </a>
-        </div>
+        <Canvas />
+        <img className="landing-img" src={ionia} alt="" />
       </div>
-    </>
+      <div className="landing-text main">
+        <div className="landing-title">
+          Welcome to <span ref={titleRef}></span>
+        </div>
+        <div className="landing-description">검색하고 비교하고 분석하세요</div>
+        <a href="players" className="landing-btn">
+          Try now!
+        </a>
+      </div>
+    </div>
   );
 }
 
