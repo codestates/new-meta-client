@@ -16,7 +16,7 @@ const API = {
   user_profile_test: `${domain}/users/me`,
   user_update_test: `${domain}/users/me`,
   user_delete_test: `${domain}/users/me`,
-  summonerInfo: `${domain}summoners/summonerInfo`,
+  summonerInfo: `${domain}/summoners/summonerInfo`,
 
   allChampionInfo:
     "http://ddragon.leagueoflegends.com/cdn/11.8.1/data/ko_KR/champion.json",
