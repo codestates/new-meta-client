@@ -10,13 +10,32 @@
   background-color: rgba($color: $background, $alpha: 0.75);
   backdrop-filter: saturate(100%) blur(2px);
 
-  .logo {
-    cursor: pointer;
+  & > .logo {
     @include flexbox(start);
     img {
       cursor: pointer;
       height: 24px;
       width: auto;
+    }
+
+    .page {
+      cursor: pointer;
+    }
+  }
+
+  .trans-page {
+    padding-left: 3rem;
+    font-weight: lighter;
+    font-size: 0.9rem;
+    display: flex;
+    justify-content: space-between;
+    width: 130px;
+
+    .page {
+      transition: 0.7s;
+      &:hover {
+        color: $jade;
+      }
     }
   }
 

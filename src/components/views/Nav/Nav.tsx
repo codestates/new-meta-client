@@ -1,5 +1,6 @@
+/* eslint-disable no-restricted-globals */
 import React, { ReactElement, useState } from "react";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
 import LoginPage from "../LoginPage/LoginPage";
 
@@ -35,16 +36,34 @@ function Nav(props: any): ReactElement {
   return (
     <>
       <div className="nav">
-        <div
-          className="logo"
-          onClick={toMainHandler}
-          onKeyDown={() => {
-            return null;
-          }}
-          role="button"
-          tabIndex={0}
-        >
-          <img className="logo-img" src={logo} alt="" />
+        <div className="logo">
+          <img
+            onClick={toMainHandler}
+            aria-hidden
+            className="logo-img"
+            src={logo}
+            alt=""
+          />
+          <div className="trans-page">
+            <div
+              aria-hidden
+              onClick={() => {
+                props.history.push("/players");
+              }}
+              className="page"
+            >
+              Player
+            </div>
+            <div
+              aria-hidden
+              onClick={() => {
+                props.history.push("/board");
+              }}
+              className="page"
+            >
+              Champ
+            </div>
+          </div>
         </div>
         {!AccessToken ? (
           <div className="btn-wrapper">
