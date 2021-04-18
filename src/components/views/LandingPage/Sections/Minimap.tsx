@@ -1,5 +1,5 @@
 /* eslint-disable no-undef */
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useRef } from "react";
 
 import minimap from "../../../../assets/image/minimap/minimap.png";
 import iconTop from "../../../../assets/image/minimap/icon-top.png";
@@ -21,12 +21,13 @@ let imageWrappers: NodeListOf<HTMLDivElement>;
 let activeImageWrapper: HTMLDivElement | null;
 let innerWraps: NodeListOf<HTMLDivElement>;
 let activeInnerWrap: HTMLDivElement | null;
-let pointWrapper: HTMLDivElement | null;
 let sections: NodeListOf<HTMLElement>;
 let minimapPrevHeight: number;
 let minimapPageHeight: number;
 
 function Minimap(): ReactElement {
+  const pointWrapperRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
     section = document.querySelectorAll(".section-minimap");
     li = document.querySelectorAll("li");
@@ -34,11 +35,11 @@ function Minimap(): ReactElement {
 
     const scrollHandler = () => {
       const scroll = window.scrollY;
+      const pointWrapper = pointWrapperRef.current;
       imageWrappers = document.querySelectorAll(".image-wrapper");
       activeImageWrapper = document.querySelector(".active .image-wrapper");
       innerWraps = document.querySelectorAll(".innerWrap");
       activeInnerWrap = document.querySelector(".active .innerWrap");
-      pointWrapper = document.querySelector(".pointWrap");
       minimapPrevHeight = sections[0].offsetHeight;
       minimapPageHeight = window.innerHeight;
 
@@ -128,7 +129,7 @@ function Minimap(): ReactElement {
   return (
     <div className="sections minimap">
       <section className="section-minimap 0">
-        <div className="pointWrap">
+        <div className="pointWrap" ref={pointWrapperRef}>
           <li
             onClick={() => {
               onClickHandler(0);
