@@ -38,7 +38,7 @@ function Minimap(): ReactElement {
       activeImageWrapper = document.querySelector(".active .image-wrapper");
       innerWraps = document.querySelectorAll(".innerWrap");
       activeInnerWrap = document.querySelector(".active .innerWrap");
-      // pointWrapper = document.querySelector(".pointWrap");
+      pointWrapper = document.querySelector(".pointWrap");
       minimapPrevHeight = sections[0].offsetHeight;
       minimapPageHeight = window.innerHeight;
 
@@ -104,6 +104,7 @@ function Minimap(): ReactElement {
       minimapPrevHeight = sections[0].offsetHeight;
       minimapPageHeight = window.innerHeight;
     });
+
     return () => {
       window.removeEventListener("scroll", scrollHandler);
       window.removeEventListener("resize", () => {

@@ -55,6 +55,14 @@ function Services(): ReactElement {
       pageHeight = window.innerHeight * 0.7;
       prevHeight = sections[0].offsetHeight + sections[1].offsetHeight;
     });
+
+    return () => {
+      window.removeEventListener("scroll", sideScrollHandler);
+      window.removeEventListener("resize", () => {
+        pageHeight = window.innerHeight * 0.7;
+        prevHeight = sections[0].offsetHeight + sections[1].offsetHeight;
+      });
+    };
   }, []);
 
   return (

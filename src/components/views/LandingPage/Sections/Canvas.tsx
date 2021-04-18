@@ -134,6 +134,14 @@ function Canvas(props: any): ReactElement {
 
     loop();
     setInterval(loop, 1000 / 60);
+
+    return () => {
+      if (canvas) {
+        canvas.removeEventListener("mousemove", onMouseHandlaer);
+      }
+      window.removeEventListener("resize", onResizeHandler);
+      window.cancelAnimationFrame = onRequestFrame;
+    };
   }, []);
 
   return <canvas ref={canvasRef} width="1920" height="1080" {...props} />;
