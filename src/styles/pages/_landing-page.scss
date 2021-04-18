@@ -145,14 +145,11 @@
   }
 
   .innerWrap {
-    transition: opacity 1s ease-in-out;
-    visibility: hidden;
-    opacity: 0;
     position: absolute;
   }
   .active .innerWrap {
     transition: opacity 1s ease-in-out;
-    position: absolute;
+    position: fixed;
     padding: 30px 30px 30px 70px;
     width: 50%;
     top: 35%;
@@ -198,7 +195,6 @@
       width: 100%;
       visibility: hidden;
       opacity: 0;
-      width: 0%;
     }
 
     .icon {
@@ -239,7 +235,7 @@
     }
 
     .icon {
-      transition: opacity 1s ease-in-out;
+      transition: opacity 1.3s ease-in-out;
       position: fixed;
       width: 100%;
       top: 60%;
