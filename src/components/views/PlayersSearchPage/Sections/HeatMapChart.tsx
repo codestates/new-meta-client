@@ -1,5 +1,13 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
+import React, {
+  ReactElement,
+  useEffect,
+  useRef,
+  useState,
+  ReactComponentElement,
+} from "react";
+import axios from "axios";
 import Chart from "react-apexcharts";
+import API from "../../../../api";
 
 interface Props {
   userData: PlayerMatchInfo[];
@@ -15,9 +23,39 @@ interface PlayerMatchInfo {
     assists: number;
   };
 }
+interface ChampionEl {
+  id: string;
+  key: string;
+}
 
 function HeatMapChart(props: Props): ReactElement {
   const { userData } = props;
+  const [Champions, setChampions] = useState<any>([]);
+  useEffect(() => {
+    const cache = sessionStorage.getItem("Champions");
+    const run = async () => {
+      const result = await axios.get(API.allChampionInfo);
+      sessionStorage.setItem(
+        "Champions",
+        JSON.stringify(Object.values(result.data.data))
+      );
+      setChampions(Object.values(result.data.data));
+    };
+    if (!cache) {
+      run();
+    } else {
+      setChampions(JSON.parse(cache));
+    }
+  }, []);
+
+  function getChampionName(key: number) {
+    /* 챔피언 ID로 영문 이름 얻기  */
+    const champion = Champions.filter((el: ChampionEl) => {
+      return Number(el.key) === key;
+    });
+
+    return champion[0].id;
+  }
 
   const data = {
     series: [
@@ -106,9 +144,10 @@ function HeatMapChart(props: Props): ReactElement {
           },
           {
             x: "",
-            y:
+            y: (
               (userData[10].stats.kills + userData[10].stats.assists) /
-              userData[10].stats.deaths,
+              userData[10].stats.deaths
+            ).toFixed(2),
           },
           {
             x: "",
@@ -186,12 +225,17 @@ function HeatMapChart(props: Props): ReactElement {
         ],
       },
     ],
+
     options: {
-      tooltip: { enabled: false },
+      tooltip: {
+        enabled: false,
+      },
       chart: {
+        background: "#2B2D3E",
         toolbar: {
           show: false,
         },
+        height: "600",
       },
       dataLabels: {
         enabled: true,
@@ -210,6 +254,9 @@ function HeatMapChart(props: Props): ReactElement {
         labels: {
           colors: "#f7f8fa",
           useSeriesColors: false,
+          style: {
+            align: "bottom",
+          },
         },
       },
       responsive: [
@@ -222,6 +269,7 @@ function HeatMapChart(props: Props): ReactElement {
       plotOptions: {
         heatmap: {
           max: Infinity,
+
           min: 0,
           radius: 0,
           useFillColorAsStroke: true,
@@ -271,8 +319,8 @@ function HeatMapChart(props: Props): ReactElement {
         type="heatmap"
         options={data.options}
         series={data.series}
-        height={250}
-        width={350}
+        width={400}
+        height={300}
       />
     </>
   );

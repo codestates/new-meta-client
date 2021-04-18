@@ -63,6 +63,115 @@
     flex-direction: column;
     position: relative;
 
+    & > .duo-search-result {
+      margin-top: 100px;
+      display: flex;
+      & > .duo-match-thumbnail {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+        flex-wrap: wrap;
+        width: 100%;
+        & > .match-success-point {
+          margin: 30px;
+          text-align: center;
+          display: flex;
+          flex-wrap: wrap;
+        }
+        & > .two-summoner-info {
+          display: flex;
+          flex-direction: row;
+          flex-wrap: wrap;
+          & > .summonerInfo {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            .summoner-name {
+              font-size: $font-size-24;
+            }
+
+            .summoner-lank-info {
+              display: flex;
+              flex-direction: column;
+              align-content: center;
+              font-size: $font-size-14;
+              margin: 5px;
+
+              .summoner-tier {
+                text-align: center;
+                margin: 3px;
+              }
+
+              .summoner-tags {
+                display: flex;
+                justify-content: center;
+                .tag.active {
+                  display: inline-block;
+                  position: relative;
+                  border-radius: 10px;
+                  border-color: $purple-light;
+                  background-color: $purple-light;
+                  margin: 10px;
+                  width: fit-content;
+                  padding: 7px;
+                  font-size: $font-size-12;
+                  text-align: center;
+                }
+
+                .tag.active:after {
+                  display: inline;
+                  position: absolute;
+                  top: 0px;
+                  left: 0;
+                  opacity: 0;
+                  width: 100px;
+                  padding: 10px;
+                  border: 1px solid #212121;
+                  background-color: $secondary;
+
+                  color: #212121;
+                  pointer-events: none;
+                  transition: opacity 250ms, top 250ms;
+                  content: attr(data-ballon);
+                  align-content: center;
+                  font-size: 1em;
+                  align-items: center;
+                }
+
+                .tag.active:hover {
+                  z-index: 100;
+                  background-color: $jade-dark;
+                  border-radius: none;
+                }
+
+                .tag:hover::after {
+                  opacity: 1;
+                  height: auto;
+                  width: max-content;
+                  font-family: "Noto-Sans KR";
+
+                  border-radius: 10px;
+                  font-size: 0.8rem;
+                  align-self: center;
+                }
+
+                .tag:hover::after {
+                  top: 30px;
+                }
+                // .tag {
+                //   display: none;
+                // }
+              }
+            }
+          }
+        }
+      }
+    }
+
     & > .summonerInfo {
       display: flex;
       margin-top: 30px;
@@ -91,8 +200,9 @@
       .summoner-tags {
         display: flex;
         justify-content: center;
-
-        .tag {
+        .tag.active {
+          display: inline-block;
+          position: relative;
           border-radius: 10px;
           border-color: $purple-light;
           background-color: $purple-light;
@@ -102,6 +212,50 @@
           font-size: $font-size-12;
           text-align: center;
         }
+
+        .tag.active:after {
+          display: inline;
+          position: absolute;
+          top: 0px;
+          left: 0;
+          opacity: 0;
+          width: 100px;
+          padding: 10px;
+          border: 1px solid #212121;
+          background-color: $secondary;
+
+          color: #212121;
+          pointer-events: none;
+          transition: opacity 250ms, top 250ms;
+          content: attr(data-ballon);
+          align-content: center;
+          font-size: 1em;
+          align-items: center;
+        }
+
+        .tag.active:hover {
+          z-index: 100;
+          background-color: $jade-dark;
+          border-radius: none;
+        }
+
+        .tag:hover::after {
+          opacity: 1;
+          height: auto;
+          width: max-content;
+          font-family: "Noto-Sans KR";
+
+          border-radius: 10px;
+          font-size: 0.8rem;
+          align-self: center;
+        }
+
+        .tag:hover::after {
+          top: 30px;
+        }
+        // .tag {
+        //   display: none;
+        // }
       }
     }
 
