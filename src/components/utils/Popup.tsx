@@ -50,7 +50,7 @@ function Popup({ closeModal, closePopup, IsPopupOpen }: Props): ReactElement {
                 className="close-btn"
                 onClick={() => {
                   closePopup();
-                  //! 가입 성공시에만 closeModal();
+                  closeModal();
                 }}
                 type="button"
               >
