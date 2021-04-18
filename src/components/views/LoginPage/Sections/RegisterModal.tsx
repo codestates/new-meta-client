@@ -3,6 +3,7 @@ import { withRouter, RouteComponentProps } from "react-router-dom";
 import axios from "axios";
 import API from "../../../../api";
 import Popup from "../../../utils/Popup";
+import Toast from "../../../utils/Toast";
 
 // eslint-disable-next-line no-useless-escape
 const EMAIL_RE = /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi;
@@ -11,9 +12,15 @@ const PASSWORD_RE = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g;
 
 interface Props extends RouteComponentProps {
   closeModal: () => void;
+  ToastMessage: { success: string; fail: string };
+  setToastMessage: (ToastMessage: { success: string; fail: string }) => void;
 }
 
-function RegisterModal({ closeModal }: Props): ReactElement {
+function RegisterModal({
+  closeModal,
+  ToastMessage,
+  setToastMessage,
+}: Props): ReactElement {
   const [Email, setEmail] = useState("");
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
@@ -72,7 +79,6 @@ function RegisterModal({ closeModal }: Props): ReactElement {
 
   const onEmailHandler = (event: { currentTarget: { value: string } }) => {
     setEmail(event.currentTarget.value);
-
     const regex = new RegExp(EMAIL_RE, "i");
     if (regex.test(event.currentTarget.value)) {
       validationSuccess("email");
@@ -83,7 +89,6 @@ function RegisterModal({ closeModal }: Props): ReactElement {
 
   const onUsernameHandler = (event: { currentTarget: { value: string } }) => {
     setUsername(event.currentTarget.value);
-
     const regex = new RegExp(USERNAME_RE, "i");
     if (regex.test(event.currentTarget.value)) {
       validationSuccess("username");
@@ -94,7 +99,6 @@ function RegisterModal({ closeModal }: Props): ReactElement {
 
   const onPasswordHandler = (event: { currentTarget: { value: string } }) => {
     setPassword(event.currentTarget.value);
-
     const regex = new RegExp(PASSWORD_RE, "i");
     if (regex.test(event.currentTarget.value)) {
       validationSuccess("password");
@@ -107,7 +111,6 @@ function RegisterModal({ closeModal }: Props): ReactElement {
     currentTarget: { value: string };
   }) => {
     setConfirmPassword(event.currentTarget.value);
-
     if (event.currentTarget.value === Password) {
       validationSuccess("confirm-password");
     } else {
@@ -115,40 +118,46 @@ function RegisterModal({ closeModal }: Props): ReactElement {
     }
   };
 
-  const onSubmitHandler = () => {
+  const onSubmitHandler = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
     if (Email && Username && Password && ConfirmPassword) {
       const body = {
         email: Email,
         nickname: Username,
         password: Password,
       };
-
-      //! 요청 보내고 서버 응답 결과에 따라 분기하기
       axios
         .post(API.user_register_test, body, { withCredentials: true })
         .then((res) => {
           if (res.data.user) {
-            //! 가입 성공  // => 팝업  // 성공여부 내려주기
+            //! 가입 성공 => 팝업
             console.log("success", res.data.user);
             setIsPopupOpen(true);
-            // closeModal();
           } else {
-            //! 가입 실패 => 팝업
+            //! 가입 실패 => 토스트
             console.log("fail", res);
-            setIsPopupOpen(true);
+            setToastMessage({ success: "", fail: "가입에 실패했습니다." });
           }
         });
     } else {
-      //! => 팝업
-      console.log("popup");
-      setIsPopupOpen(true);
-
-      // alert("모든 항목을 올바르게 입력해주세요");
+      //! 빈칸 => 토스트
+      setToastMessage({
+        success: "",
+        fail: "모든 항목을 올바르게 입력해주세요",
+      });
+      console.log(ToastMessage);
     }
   };
 
   return (
     <>
+      {ToastMessage.fail ? (
+        <Toast
+          ToastMessage={ToastMessage}
+          setToastMessage={setToastMessage}
+          closeModal={closeModal}
+        />
+      ) : null}
       {!IsPopupOpen ? (
         <div className="modal-box">
           <button className="btn-close" type="button" onClick={closeModal}>
