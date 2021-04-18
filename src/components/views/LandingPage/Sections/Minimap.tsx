@@ -18,7 +18,9 @@ let pageNum = 0;
 let section: NodeListOf<HTMLElement>;
 let li: NodeListOf<HTMLElement>;
 let imageWrappers: NodeListOf<HTMLDivElement>;
-let ActiveImageWrapper: HTMLDivElement | null;
+let activeImageWrapper: HTMLDivElement | null;
+let innerWraps: NodeListOf<HTMLDivElement>;
+let activeInnerWrap: HTMLDivElement | null;
 let pointWrapper: HTMLDivElement | null;
 let sections: NodeListOf<HTMLElement>;
 let minimapPrevHeight: number;
@@ -33,7 +35,9 @@ function Minimap(): ReactElement {
     const scrollHandler = () => {
       const scroll = window.scrollY;
       imageWrappers = document.querySelectorAll(".image-wrapper");
-      ActiveImageWrapper = document.querySelector(".active .image-wrapper");
+      activeImageWrapper = document.querySelector(".active .image-wrapper");
+      innerWraps = document.querySelectorAll(".innerWrap");
+      activeInnerWrap = document.querySelector(".active .innerWrap");
       pointWrapper = document.querySelector(".pointWrap");
       minimapPrevHeight = sections[0].offsetHeight;
       minimapPageHeight = window.innerHeight;
@@ -50,51 +54,45 @@ function Minimap(): ReactElement {
       };
 
       if (
-        minimapPrevHeight - window.innerHeight / 1.5 <= Math.ceil(scroll) &&
-        minimapPrevHeight + sections[1].offsetHeight >= Math.ceil(scroll)
+        section[0].offsetTop <= Math.ceil(scroll) &&
+        Math.ceil(section[4].offsetTop) >= Math.ceil(scroll)
       ) {
-        if (
-          section[0].offsetTop <= Math.ceil(scroll) &&
-          Math.ceil(section[4].offsetTop) >= Math.ceil(scroll)
-        ) {
-          if (ActiveImageWrapper && pointWrapper) {
-            for (let i = 0; i < imageWrappers.length; i += 1) {
-              imageWrappers[i].style.position = "fixed";
-              imageWrappers[i].style.opacity = "0";
-            }
-            ActiveImageWrapper.style.opacity = "1";
-            pointWrapper.style.opacity = "1";
-            pointWrapper.style.position = "fixed";
+        if (activeImageWrapper && pointWrapper && activeInnerWrap) {
+          for (let i = 0; i < totalNum; i += 1) {
+            imageWrappers[i].style.position = "fixed";
+            imageWrappers[i].style.opacity = "0";
+            innerWraps[i].style.position = "fixed";
+            innerWraps[i].style.opacity = "0";
           }
-        } else {
-          for (let i = 0; i < imageWrappers.length; i += 1) {
-            imageWrappers[i].style.position = "absolute";
-          }
-          if (pointWrapper) {
-            pointWrapper.style.opacity = "0";
-            pointWrapper.style.position = "absolute";
-          }
+          activeImageWrapper.style.opacity = "1";
+          activeInnerWrap.style.opacity = "1";
+          pointWrapper.style.opacity = "1";
+          pointWrapper.style.position = "fixed";
         }
-        for (let i = 0; i < totalNum; i += 1) {
-          if (
-            Math.ceil(scroll) >=
-              section[i].offsetTop - window.innerHeight / 1.5 &&
-            Math.ceil(scroll) <=
-              section[i].offsetTop -
-                window.innerHeight / 1.5 +
-                section[i].offsetHeight
-          ) {
-            pageNum = i;
-            break;
-          }
-        }
-        pageChangeFunc();
       } else {
         for (let i = 0; i < totalNum; i += 1) {
-          section[i].classList.remove("active");
-          li[i].classList.remove("active");
+          imageWrappers[i].style.position = "absolute";
+          innerWraps[i].style.position = "absolute";
+        }
+        if (pointWrapper) {
+          pointWrapper.style.opacity = "0";
+          pointWrapper.style.position = "absolute";
         }
       }
+      for (let i = 0; i < totalNum; i += 1) {
+        if (
+          Math.ceil(scroll) >=
+            section[i].offsetTop - window.innerHeight / 1.5 &&
+          Math.ceil(scroll) <=
+            section[i].offsetTop -
+              window.innerHeight / 1.5 +
+              section[i].offsetHeight
+        ) {
+          pageNum = i;
+          break;
+        }
+      }
+      pageChangeFunc();
     };
     window.addEventListener("scroll", scrollHandler);
     window.addEventListener("resize", () => {
@@ -150,9 +148,6 @@ function Minimap(): ReactElement {
           />
         </div>
         <div className="innerWrap">
-          <br />
-          <br />
-          <br />
           <h2>top</h2>
           <p>
             description
@@ -243,9 +238,6 @@ function Minimap(): ReactElement {
             <br />
             description
           </p>
-          <br />
-          <br />
-          <br />
         </div>
         <div className="image-wrapper support">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
