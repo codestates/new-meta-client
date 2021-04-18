@@ -3,6 +3,7 @@ import React, { ReactElement } from "react";
 interface Props {
   closeModal: () => void;
   setIsPopupOpen: (boolean: boolean) => void;
+  setIsRegisterModal: (boolean: boolean) => void;
   IsPopupOpen: boolean;
 }
 
@@ -10,6 +11,7 @@ function Popup({
   closeModal,
   setIsPopupOpen,
   IsPopupOpen,
+  setIsRegisterModal,
 }: Props): ReactElement {
   return (
     <>
@@ -54,7 +56,8 @@ function Popup({
                 className="close-btn"
                 onClick={() => {
                   setIsPopupOpen(false);
-                  closeModal();
+                  setIsRegisterModal(false);
+                  // closeModal();
                 }}
                 type="button"
               >

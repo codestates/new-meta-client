@@ -9,9 +9,12 @@ import API from "../../../api";
 const LOGIN = gql`
   mutation Login($email: String!, $password: String!) {
     login(email: $email, password: $password) {
-      id
-      nickname
-      email
+      accessToken
+      user {
+        id
+        nickname
+        email
+      }
     }
   }
 `;
@@ -30,6 +33,8 @@ function LoginPage(props: Props): ReactElement {
     setIsRegisterModal,
     setAccessToken,
   } = props;
+
+  // console.log(Document.cookie);
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
@@ -53,7 +58,8 @@ function LoginPage(props: Props): ReactElement {
         variables: { email: Email, password: Password },
       })
         .then((res) => {
-          console.log("로그인 성공", res);
+          console.log("로그인 성공", res.data.login.accessToken);
+          localStorage.setItem("accessToken", res.data.login.accessToken);
           setToastMessage({ success: "로그인 성공!", fail: "" });
         })
         .catch((err) => {
