@@ -14,10 +14,12 @@ import NotFoundPage from "./views/NotFoundPage/NotFoundPage";
 import Loading from "./utils/Loading";
 import Popup from "./utils/Popup";
 import Toast from "./utils/Toast";
+import ScrollToTop from "./utils/ScrollToTop";
 
 function App(): ReactElement {
   return (
     <Router>
+      <ScrollToTop />
       <Nav />
       <div className="contents">
         <Switch>
