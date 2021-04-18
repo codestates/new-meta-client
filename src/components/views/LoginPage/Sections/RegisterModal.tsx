@@ -1,6 +1,7 @@
 import React, { ReactElement, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import axios from "axios";
+import { gql, useMutation } from "@apollo/client";
 import API from "../../../../api";
 import Popup from "../../../utils/Popup";
 import Toast from "../../../utils/Toast";
@@ -9,6 +10,16 @@ import Toast from "../../../utils/Toast";
 const EMAIL_RE = /\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b/gi;
 const USERNAME_RE = /^[가-힣|a-z|A-Z|0-9|]+$/;
 const PASSWORD_RE = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g;
+
+const REGISTER = gql`
+  mutation Register($data: RegisterInput!) {
+    register(data: $data) {
+      id
+      nickname
+      email
+    }
+  }
+`;
 
 interface Props extends RouteComponentProps {
   closeModal: () => void;
@@ -28,6 +39,8 @@ function RegisterModal({
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [IsPopupOpen, setIsPopupOpen] = useState(false);
+
+  const [registerGraghpl, { data }] = useMutation(REGISTER);
 
   const validationSuccess = (type: string): void => {
     const successIcon = document.querySelector<HTMLElement>(
@@ -124,19 +137,38 @@ function RegisterModal({
         nickname: Username,
         password: Password,
       };
-      axios
-        .post(API.user_register_test, body, { withCredentials: true })
+
+      registerGraghpl({
+        variables: {
+          data: {
+            email: Email,
+            nickname: Username,
+            password: Password,
+          },
+        },
+      })
         .then((res) => {
-          if (res.data.user) {
-            //! 가입 성공 => 팝업
-            console.log("success", res.data.user);
-            setIsPopupOpen(true);
-          } else {
-            //! 가입 실패 => 토스트
-            console.log("fail", res);
-            setToastMessage({ success: "", fail: "가입에 실패했습니다." });
-          }
+          console.log("success:", res);
+          // console.log("success", res.data.user);
+          setIsPopupOpen(true);
+        })
+        .catch((err) => {
+          console.log("error:", err);
+          setToastMessage({ success: "", fail: "가입에 실패했습니다." });
         });
+      // axios
+      //   .post(API.user_register_test, body, { withCredentials: true })
+      //   .then((res) => {
+      //     if (res.data.user) {
+      //       //! 가입 성공 => 팝업
+      //       console.log("success", res.data.user);
+      //       setIsPopupOpen(true);
+      //     } else {
+      //       //! 가입 실패 => 토스트
+      //       console.log("fail", res);
+      //       setToastMessage({ success: "", fail: "가입에 실패했습니다." });
+      //     }
+      //   });
     } else {
       //! 빈칸 => 토스트
       setToastMessage({
@@ -240,6 +272,7 @@ function RegisterModal({
         <Popup
           setIsPopupOpen={setIsPopupOpen}
           closeModal={closeModal}
+          setIsRegisterModal={setIsRegisterModal}
           IsPopupOpen={IsPopupOpen}
         />
       )}

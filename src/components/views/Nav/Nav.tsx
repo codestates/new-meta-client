@@ -1,5 +1,6 @@
 /* eslint-disable no-restricted-globals */
-import React, { ReactElement, useState } from "react";
+import { useQuery } from "@apollo/client";
+import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
 import LoginPage from "../LoginPage/LoginPage";
@@ -11,6 +12,13 @@ function Nav(props: any): ReactElement {
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
   const [AccessToken, setAccessToken] = useState("");
+
+  useEffect(() => {
+    const token = localStorage.getItem("accessToken");
+    if (token) {
+      setAccessToken(token);
+    }
+  }, [AccessToken]);
 
   const openModal = (): void => {
     document.body.style.overflow = "hidden";
