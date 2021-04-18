@@ -10,24 +10,42 @@ function Toast({ ToastMessage, setToastMessage }: Props): ReactElement {
     setToastMessage({});
   };
 
+  if (ToastMessage.success || ToastMessage.fail) {
+    setTimeout(() => {
+      setToastMessage({});
+    }, 5000);
+  }
+
   return (
-    <div className="toast-wrapper">
-      {ToastMessage.success ? (
-        <div className="toast toast-success">
-          <span className="toast-msg">{ToastMessage.success}</span>
-          <span className="toast-close-icon">
-            <i className="icon-cross" onClick={closeToast} aria-hidden="true" />
-          </span>
+    <>
+      {ToastMessage.success || ToastMessage.fail ? (
+        <div className="toast-wrapper">
+          {ToastMessage.success ? (
+            <div className="toast toast-success">
+              <span className="toast-msg">{ToastMessage.success}</span>
+              <span className="toast-close-icon">
+                <i
+                  className="icon-cross"
+                  onClick={closeToast}
+                  aria-hidden="true"
+                />
+              </span>
+            </div>
+          ) : (
+            <div className="toast toast-error">
+              <span className="toast-msg">{ToastMessage.fail}</span>
+              <span className="toast-close-icon">
+                <i
+                  className="icon-cross"
+                  onClick={closeToast}
+                  aria-hidden="true"
+                />
+              </span>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="toast toast-error">
-          <span className="toast-msg">{ToastMessage.fail}</span>
-          <span className="toast-close-icon">
-            <i className="icon-cross" onClick={closeToast} aria-hidden="true" />
-          </span>
-        </div>
-      )}
-    </div>
+      ) : null}
+    </>
   );
 }
 
