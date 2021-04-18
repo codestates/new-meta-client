@@ -1,5 +1,4 @@
-import React, { ReactElement, useEffect, useRef, useState } from "react";
-import { withRouter } from "react-router-dom";
+import React, { ReactElement } from "react";
 import Chart from "react-apexcharts";
 
 interface Props {
@@ -26,16 +25,17 @@ function LaneInfoChart(props: Props): ReactElement {
     ],
 
     chart: {
-      width: 200,
-      height: 500,
       type: "pie",
     },
 
     options: {
       labels: ["TOP", "JUNGLE", "MID", "ADC", "SUPPORT"],
-      colors: ["#0EC7B5", "#7044ed", "#00b6a4", "#21efdb", "#815de6"],
+      colors: ["#ffb822", "#249EFA", "#1dc9b7", "#fd397a", "#5578eb"],
       stroke: {
         show: false,
+      },
+      chart: {
+        background: "transparent",
       },
       plotOptions: {
         pie: {
@@ -45,6 +45,14 @@ function LaneInfoChart(props: Props): ReactElement {
       legend: {
         labels: {
           colors: "#f7f8fa",
+        },
+      },
+      tooltip: {
+        enabled: true,
+        style: {
+          fontSize: "12px",
+          fontColor: "black",
+          fontFamily: "Noto-Sans KR",
         },
       },
 
@@ -62,7 +70,8 @@ function LaneInfoChart(props: Props): ReactElement {
         options={data.options}
         series={data.series}
         type="pie"
-        width={400}
+        width={350}
+        height={300}
       />
     </>
   );
