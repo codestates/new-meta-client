@@ -14,22 +14,20 @@ interface Props extends RouteComponentProps {
   closeModal: () => void;
   ToastMessage: { success: string; fail: string };
   setToastMessage: (ToastMessage: { success: string; fail: string }) => void;
+  setIsRegisterModal: (boolean: boolean) => void;
 }
 
 function RegisterModal({
   closeModal,
   ToastMessage,
   setToastMessage,
+  setIsRegisterModal,
 }: Props): ReactElement {
   const [Email, setEmail] = useState("");
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [IsPopupOpen, setIsPopupOpen] = useState(false);
-
-  const closePopup = () => {
-    setIsPopupOpen(false);
-  };
 
   const validationSuccess = (type: string): void => {
     const successIcon = document.querySelector<HTMLElement>(
@@ -160,6 +158,15 @@ function RegisterModal({
       ) : null}
       {!IsPopupOpen ? (
         <div className="modal-box">
+          <button
+            className="btn-back"
+            type="button"
+            onClick={() => {
+              setIsRegisterModal(false);
+            }}
+          >
+            <i className="icon-arrow-left-circle" />
+          </button>
           <button className="btn-close" type="button" onClick={closeModal}>
             <i className="icon-cross" />
           </button>
@@ -231,7 +238,7 @@ function RegisterModal({
         </div>
       ) : (
         <Popup
-          closePopup={closePopup}
+          setIsPopupOpen={setIsPopupOpen}
           closeModal={closeModal}
           IsPopupOpen={IsPopupOpen}
         />

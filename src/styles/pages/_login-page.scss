@@ -112,10 +112,22 @@
     }
   }
 
+  .btn-back {
+    float: left;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    top: 10%;
+    i {
+      font-size: 21px;
+      color: $jade;
+    }
+  }
+
   .btn-close {
     float: right;
     background-color: transparent;
-    color: $secondary;
     border: none;
     outline: none;
     cursor: pointer;
