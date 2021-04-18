@@ -19,16 +19,16 @@ const LOGIN = gql`
 interface Props extends RouteComponentProps {
   closeModal: () => void;
   IsRegisterModal: boolean;
-  isRegisterModalHandler: () => void;
-  accessTokenHandler: (accessToken: string) => void;
+  setIsRegisterModal: (boolean: boolean) => void;
+  setAccessToken: (accessToken: string) => void;
 }
 
 function LoginPage(props: Props): ReactElement {
   const {
     closeModal,
     IsRegisterModal,
-    isRegisterModalHandler,
-    accessTokenHandler,
+    setIsRegisterModal,
+    setAccessToken,
   } = props;
 
   const [Email, setEmail] = useState("");
@@ -70,7 +70,7 @@ function LoginPage(props: Props): ReactElement {
       //   })
       //   .then((res) => {
       //     if (res.data.token) {
-      //       accessTokenHandler(res.data.token);
+      //       setAccessToken(res.data.token);
       //       setToastMessage({ success: "로그인 성공!", fail: "" });
       //     }
       //   })
@@ -162,7 +162,7 @@ function LoginPage(props: Props): ReactElement {
                       className="register-text"
                       onClick={() => {
                         setToastMessage({ success: "", fail: "" });
-                        isRegisterModalHandler();
+                        setIsRegisterModal(true);
                       }}
                       aria-hidden="true"
                     >
@@ -176,6 +176,7 @@ function LoginPage(props: Props): ReactElement {
                 closeModal={closeModal}
                 ToastMessage={ToastMessage}
                 setToastMessage={setToastMessage}
+                setIsRegisterModal={setIsRegisterModal}
               />
             )}
           </div>
