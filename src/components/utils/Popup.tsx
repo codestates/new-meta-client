@@ -2,11 +2,15 @@ import React, { ReactElement } from "react";
 
 interface Props {
   closeModal: () => void;
-  closePopup: () => void;
+  setIsPopupOpen: (boolean: boolean) => void;
   IsPopupOpen: boolean;
 }
 
-function Popup({ closeModal, closePopup, IsPopupOpen }: Props): ReactElement {
+function Popup({
+  closeModal,
+  setIsPopupOpen,
+  IsPopupOpen,
+}: Props): ReactElement {
   return (
     <>
       {IsPopupOpen ? (
@@ -49,8 +53,8 @@ function Popup({ closeModal, closePopup, IsPopupOpen }: Props): ReactElement {
               <button
                 className="close-btn"
                 onClick={() => {
-                  closePopup();
-                  //! 가입 성공시에만 closeModal();
+                  setIsPopupOpen(false);
+                  closeModal();
                 }}
                 type="button"
               >

@@ -1,11 +1,20 @@
 .toast-wrapper {
   //margin: 0 auto;
-  width: 400px;
+  width: 100%;
+  height: 18%;
   z-index: 10;
-
   position: absolute;
-  top: 20%;
-  left: 20%;
+  top: 50px;
+  animation: fadein 1s forwards;
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 .toast {
@@ -13,11 +22,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-
-  width: 100%;
+  width: max-content;
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 10px 48px 10px 38px;
+  padding: 12px 50px 12px 50px;
   // position: relative;
   margin-bottom: 10px;
   color: rgba($primary, 1);

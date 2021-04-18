@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-globals */
 import React, { ReactElement, useState } from "react";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
 import LoginPage from "../LoginPage/LoginPage";
 
@@ -19,15 +19,6 @@ function Nav(props: any): ReactElement {
   const closeModal = (): void => {
     document.body.style.overflow = "auto";
     setIsModalOpen(false);
-  };
-  const accessTokenHandler = (accessToken: string): void => {
-    setAccessToken(accessToken);
-  };
-  const logoutHandler = (): void => {
-    setAccessToken("");
-  };
-  const isRegisterModalHandler = (): void => {
-    setIsRegisterModal(true);
   };
   const toMainHandler = (): void => {
     props.history.push("/");
@@ -84,7 +75,7 @@ function Nav(props: any): ReactElement {
               type="button"
               className="nav-btn logout"
               onClick={() => {
-                logoutHandler();
+                setAccessToken("");
                 toMainHandler();
               }}
             >
@@ -98,8 +89,8 @@ function Nav(props: any): ReactElement {
         <LoginPage
           closeModal={closeModal}
           IsRegisterModal={IsRegisterModal}
-          isRegisterModalHandler={isRegisterModalHandler}
-          accessTokenHandler={accessTokenHandler}
+          setIsRegisterModal={setIsRegisterModal}
+          setAccessToken={setAccessToken}
         />
       ) : null}
     </>
