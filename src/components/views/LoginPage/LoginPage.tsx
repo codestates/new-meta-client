@@ -1,9 +1,20 @@
 import React, { ReactElement, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import axios from "axios";
+import { gql, useMutation } from "@apollo/client";
 import RegisterModal from "./Sections/RegisterModal";
 import Toast from "../../utils/Toast";
 import API from "../../../api";
+
+const LOGIN = gql`
+  mutation Login($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      id
+      nickname
+      email
+    }
+  }
+`;
 
 interface Props extends RouteComponentProps {
   closeModal: () => void;
@@ -23,6 +34,8 @@ function LoginPage(props: Props): ReactElement {
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [ToastMessage, setToastMessage] = useState({ success: "", fail: "" });
+
+  const [loginGraghpl, { data }] = useMutation(LOGIN);
 
   const onEmailHandler = (event: {
     currentTarget: { value: React.SetStateAction<string> };
@@ -44,26 +57,42 @@ function LoginPage(props: Props): ReactElement {
     };
 
     if (Email && Password) {
-      axios
-        .post(API.user_login_test, body, {
-          withCredentials: true,
-        })
+      loginGraghpl({
+        variables: { email: Email, password: Password },
+      })
         .then((res) => {
-          if (res.data.token) {
-            accessTokenHandler(res.data.token);
-            closeModal();
-            setToastMessage({ success: "로그인 성공!", fail: "" });
-          }
+          console.log("로그인 성공", res);
+          closeModal();
+          setToastMessage({ success: "로그인 성공!", fail: "" });
         })
         .catch((err) => {
-          //! ID & PW 불일치
           console.log("error : ", err);
           setToastMessage({
             success: "",
             fail: "아이디와 비밀번호를 확인해주세요",
           });
-          // alert("아이디와 비밀번호를 확인해주세요");
         });
+
+      // axios
+      //   .post(API.user_login_test, body, {
+      //     withCredentials: true,
+      //   })
+      //   .then((res) => {
+      //     if (res.data.token) {
+      //       accessTokenHandler(res.data.token);
+      //       closeModal();
+      //       setToastMessage({ success: "로그인 성공!", fail: "" });
+      //     }
+      //   })
+      //   .catch((err) => {
+      //     //! ID & PW 불일치
+      //     console.log("error : ", err);
+      //     setToastMessage({
+      //       success: "",
+      //       fail: "아이디와 비밀번호를 확인해주세요",
+      //     });
+      //     // alert("아이디와 비밀번호를 확인해주세요");
+      //   });
     } else {
       //! ID & PW가 채워지지 않은 경우
       setToastMessage({
