@@ -1,15 +1,13 @@
 .landing > * {
-  margin-bottom: 100px;
+  &:not(:last-child) {
+    margin-bottom: 100px;
+  }
 }
 
 .landing {
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
-
-  &:not(:last-child) {
-    margin-bottom: 100px;
-  }
 
   .landing-text.main {
     width: 100%;
@@ -23,11 +21,59 @@
     .landing-title {
       font-size: 4rem;
       padding-bottom: 1.5rem;
+
+      .typed-cursor {
+        color: $jade-dark;
+      }
     }
 
     .landing-description {
       font-size: 1rem;
     }
+
+    .landing-btn {
+      display: inline-block;
+      margin-top: 30px;
+      padding: 10px 30px;
+      color: $secondary;
+      border-radius: 5px;
+      outline: none;
+      font-size: 16px;
+      transition: 1s;
+      background-color: $jade-dark;
+      text-decoration: none;
+
+      &:hover {
+        cursor: pointer;
+        background: $jade;
+        color: $secondary;
+        box-shadow: 0 0 5px $jade-light, 0 0 30px $jade-light; //, 0 0 50px $jade;
+      }
+    }
+
+    // .landing-btn {
+    //   display: inline-block;
+    //   margin-top: 30px;
+    //   padding: 10px 30px;
+    //   font-size: 16px;
+    //   background: transparent;
+    //   color: $jade;
+    //   border-radius: 5px;
+    //   border: solid $jade 1px;
+    //   text-decoration: none;
+    //   transition: 1s;
+
+    //   &:hover {
+    //     cursor: pointer;
+    //     background: $jade;
+    //     color: $secondary;
+    //     box-shadow: 0 0 5px $jade, 0 0 25px $jade; //, 0 0 50px $jade;
+    //   }
+    // }
+  }
+
+  .sections.main {
+    height: 100vh;
   }
 
   .landing-img-wrapper {
@@ -35,7 +81,7 @@
     //   margin-bottom: 0;
     // }
     width: 100%;
-    height: 800px;
+    height: 100%;
     position: relative;
 
     & > * {
@@ -77,7 +123,8 @@
       left: 5%;
       top: 40%;
       z-index: 100;
-      transition: opacity 3s ease-out;
+      opacity: 0;
+      transition: opacity 1s ease-out;
 
       li {
         list-style: none;
@@ -90,7 +137,7 @@
         transition: background 0.3s ease-out;
 
         &.active {
-          background-color: $jade;
+          background-color: $jade-light;
           box-shadow: 0 0 5px $jade, 0 0 25px $jade;
         }
       }
@@ -111,6 +158,22 @@
     left: 10%;
     visibility: visible;
     opacity: 1;
+
+    animation: moveUp-minimap 1s ease-out;
+  }
+
+  @keyframes moveUp-minimap {
+    0% {
+      opacity: 0;
+      transform: translateY(70%);
+    }
+    40% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
 
   .image-wrapper {
@@ -217,16 +280,16 @@
 
     .clip-3 {
       position: absolute;
-      top: 25%;
+      top: 30%;
       left: 0;
       background: rgba($jade-light, $alpha: 0.7);
       width: 100%;
       height: 70%;
-      clip-path: polygon(0 0, 100% 60%, 100% 100%, 0 100%);
+      clip-path: polygon(0 0, 100% 65%, 100% 100%, 0 100%);
       z-index: -1;
     }
 
-    .side-section {
+    div.side-section {
       // &:last-child {
       //   margin-bottom: 0;
       // }
@@ -237,7 +300,7 @@
       flex-flow: row wrap;
       height: 70vh;
 
-      .img-wrapper {
+      .side-img-wrapper {
         width: 100%;
         height: 40%;
         position: relative;
@@ -256,7 +319,7 @@
         .right {
           position: absolute;
           left: 70%;
-          top: 95%;
+          top: 98%;
           transform: translate(-50%, -50%);
         }
 
@@ -306,7 +369,7 @@
         }
 
         &.second {
-          color: rgba($secondary, $alpha: 1);
+          color: $secondary;
           width: 100%;
           position: absolute;
           left: 73%;
@@ -317,10 +380,10 @@
           button {
             height: 35px;
             padding: 0 32px;
-            color: $secondary !important;
+            color: $secondary;
             border: $secondary solid 1px;
             position: absolute;
-            left: 50% !important;
+            left: 50%;
             transform: translate(-50%, -50%);
           }
         }
@@ -329,23 +392,53 @@
           width: 47%;
           position: absolute;
           left: 22%;
-          top: 20%;
+          top: 28%;
           transform: translate(-50%, -50%);
+        }
+      }
+
+      &.ani {
+        .side-img-wrapper {
+          .right {
+            animation: moveUp-services 1.2s ease-out;
+          }
+          .left {
+            animation: moveUp-services 1.2s ease-out;
+          }
+        }
+        .text-wrapper {
+          .title {
+            animation: moveDown-services 1.2s ease-out;
+          }
+          .description {
+            animation: moveDown-services 1.2s ease-out;
+          }
+        }
+
+        @keyframes moveUp-services {
+          0% {
+            opacity: 0;
+            transform: translate(-50%, -27%);
+          }
+          100% {
+            opacity: 1;
+            transform: translate(-50%, -50%);
+          }
+        }
+
+        @keyframes moveDown-services {
+          0% {
+            opacity: 0;
+            transform: translateY(-100%);
+          }
+          100% {
+            opacity: 1;
+            transform: translateY(0);
+          }
         }
       }
     }
   }
-}
-
-.btn {
-  display: inline-block;
-  padding: 10px 30px;
-  background: var(--primary-color);
-  color: #fff;
-  border-radius: 5px;
-  border: solid #fff 1px;
-  margin-top: 25px;
-  opacity: 0.7;
 }
 
 @media screen and (max-width: $md-breakpoint) {
@@ -380,7 +473,7 @@
         clip-path: polygon(0 0, 100% 0, 100% 100%, 0 40%) !important;
       }
 
-      .img-wrapper img {
+      .side-img-wrapper img {
         top: 65% !important;
         left: 50% !important;
         width: 80% !important;
@@ -388,12 +481,13 @@
 
       .text-wrapper {
         position: relative !important;
-        top: 34% !important;
+        top: 30% !important;
         left: 50% !important;
         transform: translate(-50%, -50%);
         text-align: center;
         padding: 0 !important;
         width: 80% !important;
+        height: 180px !important;
 
         button {
           left: 50% !important;
