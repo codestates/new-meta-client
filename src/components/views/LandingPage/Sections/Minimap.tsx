@@ -38,7 +38,7 @@ function Minimap(): ReactElement {
       activeImageWrapper = document.querySelector(".active .image-wrapper");
       innerWraps = document.querySelectorAll(".innerWrap");
       activeInnerWrap = document.querySelector(".active .innerWrap");
-      pointWrapper = document.querySelector(".pointWrap");
+      // pointWrapper = document.querySelector(".pointWrap");
       minimapPrevHeight = sections[0].offsetHeight;
       minimapPageHeight = window.innerHeight;
 
@@ -55,9 +55,14 @@ function Minimap(): ReactElement {
 
       if (
         section[0].offsetTop <= Math.ceil(scroll) &&
-        Math.ceil(section[4].offsetTop) >= Math.ceil(scroll)
+        section[4].offsetTop >= Math.ceil(scroll)
       ) {
-        if (activeImageWrapper && pointWrapper && activeInnerWrap) {
+        if (
+          activeImageWrapper &&
+          pointWrapper &&
+          activeInnerWrap &&
+          innerWraps
+        ) {
           for (let i = 0; i < totalNum; i += 1) {
             imageWrappers[i].style.position = "fixed";
             imageWrappers[i].style.opacity = "0";
@@ -99,6 +104,13 @@ function Minimap(): ReactElement {
       minimapPrevHeight = sections[0].offsetHeight;
       minimapPageHeight = window.innerHeight;
     });
+    return () => {
+      window.removeEventListener("scroll", scrollHandler);
+      window.removeEventListener("resize", () => {
+        minimapPrevHeight = sections[0].offsetHeight;
+        minimapPageHeight = window.innerHeight;
+      });
+    };
   }, []);
 
   const onClickHandler = (idx: number) => {
