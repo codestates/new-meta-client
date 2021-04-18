@@ -5,6 +5,16 @@
   z-index: 10;
   position: absolute;
   top: 50px;
+  animation: fadein 1s forwards;
+
+  @keyframes fadein {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
 }
 
 .toast {
