@@ -66,12 +66,8 @@ function Minimap(): ReactElement {
         ) {
           for (let i = 0; i < totalNum; i += 1) {
             imageWrappers[i].style.position = "fixed";
-            imageWrappers[i].style.opacity = "0";
             innerWraps[i].style.position = "fixed";
-            innerWraps[i].style.opacity = "0";
           }
-          activeImageWrapper.style.opacity = "1";
-          activeInnerWrap.style.opacity = "1";
           pointWrapper.style.opacity = "1";
           pointWrapper.style.position = "fixed";
         }
@@ -79,19 +75,16 @@ function Minimap(): ReactElement {
         for (let i = 0; i < totalNum; i += 1) {
           imageWrappers[i].style.position = "absolute";
           innerWraps[i].style.position = "absolute";
-          imageWrappers[i].style.opacity = "0";
-          innerWraps[i].style.opacity = "0";
         }
         if (pointWrapper) {
-          pointWrapper.style.position = "absolute";
           pointWrapper.style.opacity = "0";
+          pointWrapper.style.position = "absolute";
         }
       }
       for (let i = 0; i < totalNum; i += 1) {
         if (
-          Math.ceil(scroll) >=
-            section[i].offsetTop - window.innerHeight / 1.5 &&
-          Math.ceil(scroll) <=
+          scroll > section[i].offsetTop - window.innerHeight / 1.5 &&
+          scroll <
             section[i].offsetTop -
               window.innerHeight / 1.5 +
               section[i].offsetHeight
