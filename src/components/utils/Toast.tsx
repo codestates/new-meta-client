@@ -11,27 +11,15 @@ function Toast({
   setToastMessage,
   closeModal,
 }: Props): ReactElement {
-  const closeToast = () => {
-    setToastMessage({ success: "", fail: "" });
-  };
-
-  if (ToastMessage.success || ToastMessage.fail) {
-    setTimeout(() => {
-      closeToast();
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setToastMessage({ success: "", fail: "" });
       if (ToastMessage.success) {
         closeModal();
       }
     }, 4000);
-  }
-
-  useEffect(() => {
-    return () => {
-      setToastMessage({
-        success: "",
-        fail: "",
-      });
-    };
-  }, [setToastMessage]);
+    return () => clearTimeout(timeout);
+  }, [ToastMessage.success, closeModal, setToastMessage]);
 
   return (
     <div className="toast-wrapper">
@@ -42,7 +30,7 @@ function Toast({
             <i
               className="icon-cross"
               onClick={() => {
-                closeToast();
+                setToastMessage({ success: "", fail: "" });
                 closeModal();
               }}
               aria-hidden="true"
@@ -53,7 +41,13 @@ function Toast({
         <div className="toast toast-error">
           <span className="toast-msg">{ToastMessage.fail}</span>
           <span className="toast-close-icon">
-            <i className="icon-cross" onClick={closeToast} aria-hidden="true" />
+            <i
+              className="icon-cross"
+              onClick={() => {
+                setToastMessage({ success: "", fail: "" });
+              }}
+              aria-hidden="true"
+            />
           </span>
         </div>
       )}
