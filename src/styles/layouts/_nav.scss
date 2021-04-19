@@ -17,10 +17,6 @@
       height: 24px;
       width: auto;
     }
-
-    .page {
-      cursor: pointer;
-    }
   }
 
   .trans-page {
@@ -33,14 +29,38 @@
 
     .page {
       transition: 0.7s;
+
       &:hover {
+        transition: 1s;
         color: $jade;
+        text-shadow: 0 0 2px $jade;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .btn-wrapper {
+    width: 230px;
+    font-weight: lighter;
+    font-size: 0.9rem;
+    display: flex;
+    color: $jade;
+
+    .page {
+      transition: 0.7s;
+      margin-right: 2rem;
+
+      &:hover {
+        transition: 1s;
+        color: $jade;
+        text-shadow: 0 0 2px $jade;
+        cursor: pointer;
       }
     }
   }
 
   .nav-btn {
-    padding: 6.2px 0px;
+    padding: 6px 0px;
     flex: 0 1 auto;
     position: absolute;
     right: 90px;
@@ -54,7 +74,7 @@
     span {
       font-size: 16px;
       font-weight: 400;
-      padding: 6.2px 20px;
+      padding: 6px 17px;
       border-radius: 5px;
       background: linear-gradient(to right, $jade-light, $jade-dark);
       -webkit-background-clip: text;
@@ -162,8 +182,8 @@
       display: block;
     }
 
-    .trans-page {
-      display: none !important;
+    .page {
+      display: none;
     }
 
     .nav-btn span {

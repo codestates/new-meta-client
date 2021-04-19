@@ -5,9 +5,6 @@ import logo from "../../../assets/image/newmeta-logo-spell.png";
 import LoginPage from "../LoginPage/LoginPage";
 import Hamburger from "./Sections/Hamburger";
 
-// interface Props {
-// }
-
 function Nav(props: any): ReactElement {
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
@@ -73,6 +70,15 @@ function Nav(props: any): ReactElement {
           </div>
         ) : (
           <div className="btn-wrapper">
+            <div
+              aria-hidden
+              onClick={() => {
+                props.history.push("/mypage");
+              }}
+              className="page"
+            >
+              Mypage
+            </div>
             <button
               type="button"
               className="nav-btn logout"
