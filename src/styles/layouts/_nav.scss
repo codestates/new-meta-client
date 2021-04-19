@@ -83,7 +83,30 @@
 .hamburger {
   position: relative;
   display: none;
-  margin-right: 20px;
+  margin-right: 18px;
+
+  .bar {
+    position: relative;
+    background: $primary;
+    width: 18px;
+    height: 1px;
+    border-radius: 2px;
+    margin-bottom: 5.5px;
+    transition-property: transform, opacity, background-color, width;
+  }
+
+  .bar:first-child {
+    margin-top: 6.8px;
+    top: 0;
+  }
+
+  .bar:nth-child(2) {
+    opacity: 1;
+  }
+
+  .bar:last-child {
+    bottom: 0;
+  }
 
   .menu-trigger {
     background: transparent;
@@ -100,7 +123,7 @@
     font-size: 0.9rem;
     border-radius: 8px;
     position: absolute;
-    top: 35px;
+    top: 38px;
     left: 0;
     width: 150px;
     box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
@@ -132,12 +155,22 @@
 }
 
 @media screen and (max-width: $md-breakpoint) {
-  .hamburger {
-    display: block;
-  }
+  .nav {
+    padding: 0.7rem 1rem;
 
-  .trans-page {
-    display: none !important;
+    .hamburger {
+      display: block;
+    }
+
+    .trans-page {
+      display: none !important;
+    }
+
+    .nav-btn span {
+      position: absolute;
+      right: -40px;
+      top: 0;
+    }
   }
 }
 

@@ -29,7 +29,7 @@ function Nav(props: any): ReactElement {
     <>
       <div className="nav">
         <div className="logo">
-          <Hamburger />
+          <Hamburger AccessToken={AccessToken} />
           <img
             onClick={toMainHandler}
             aria-hidden

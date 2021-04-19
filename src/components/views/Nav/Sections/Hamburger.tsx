@@ -1,6 +1,10 @@
 import React, { ReactElement, useState, useEffect, useRef } from "react";
 
-function Hamburger(): ReactElement {
+interface Props {
+  AccessToken: string;
+}
+
+function Hamburger({ AccessToken }: Props): ReactElement {
   const dropdownRef = useRef<HTMLElement>(null);
   const [IsHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
@@ -27,7 +31,9 @@ function Hamburger(): ReactElement {
           className="menu-trigger"
           type="button"
         >
-          햄버거
+          <div className="bar"></div>
+          <div className="bar"></div>
+          <div className="bar"></div>
         </button>
         <nav
           ref={dropdownRef}
@@ -40,9 +46,11 @@ function Hamburger(): ReactElement {
             <li>
               <a href="board">Champ</a>
             </li>
-            <li>
-              <a href="mypage">Mypage</a>
-            </li>
+            {AccessToken ? (
+              <li>
+                <a href="mypage">Mypage</a>
+              </li>
+            ) : null}
           </ul>
         </nav>
       </div>
