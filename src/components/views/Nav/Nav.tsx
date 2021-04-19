@@ -3,6 +3,7 @@ import { gql, useQuery } from "@apollo/client";
 import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
+import { GET_CURRENT_USER, TokenVar } from "../../../graphql";
 import LoginPage from "../LoginPage/LoginPage";
 
 // interface Props {
@@ -21,13 +22,14 @@ function Nav(props: any): ReactElement {
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
   const [IsLogin, setIsLogin] = useState(false);
 
-  const { loading, error, data } = useQuery(CHECK_LOGIN);
+  // const { loading, error, data } = useQuery(CHECK_LOGIN);
+  const { data } = useQuery(GET_CURRENT_USER);
 
   useEffect(() => {
-    if (!error) {
-      setIsLogin(true);
-    }
-  }, [loading, error, data]);
+    console.log(data);
+
+    setIsLogin(!!data.token);
+  }, [data]);
 
   const openModal = (): void => {
     document.body.style.overflow = "hidden";
@@ -105,7 +107,7 @@ function Nav(props: any): ReactElement {
               onClick={() => {
                 toMainHandler();
                 setIsLogin(false);
-                localStorage.clear();
+                TokenVar(null);
               }}
             >
               <span>Logout</span>

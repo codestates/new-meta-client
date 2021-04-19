@@ -5,6 +5,7 @@ import { gql, useMutation } from "@apollo/client";
 import RegisterModal from "./Sections/RegisterModal";
 import Toast from "../../utils/Toast";
 import API from "../../../api";
+import { TokenVar } from "../../../graphql";
 
 const LOGIN = gql`
   mutation Login($data: LoginInputType!) {
@@ -47,8 +48,7 @@ function LoginPage(props: Props): ReactElement {
         variables: { data: { email: Email, password: Password } },
       })
         .then((res) => {
-          console.log("로그인 성공", res.data.login.token);
-          localStorage.setItem("accessToken", res.data.login.token);
+          TokenVar(res.data.login.token);
           setToastMessage({ success: "로그인 성공!", fail: "" });
         })
         .catch((err) => {
