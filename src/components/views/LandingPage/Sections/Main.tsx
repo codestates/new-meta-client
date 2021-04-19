@@ -1,4 +1,5 @@
 import React, { ReactElement, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
 import Typed from "typed.js";
 import ionia from "../../../../assets/image/ionia.jpeg";
 import Canvas from "./Canvas";
@@ -34,9 +35,9 @@ function Main(): ReactElement {
           Welcome to <span ref={titleRef}></span>
         </div>
         <div className="landing-description">검색하고 비교하고 분석하세요</div>
-        <a href="players" className="landing-btn">
-          Try now!
-        </a>
+        <Link to="players">
+          <div className="landing-btn">Try now!</div>
+        </Link>
       </div>
     </div>
   );
