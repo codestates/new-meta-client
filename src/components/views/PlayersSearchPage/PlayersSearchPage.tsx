@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-param-reassign */
 /* eslint-disable indent */
@@ -19,6 +20,9 @@ import HeatMapChart from "./Sections/HeatMapChart";
 import TimelineChart from "./Sections/TimelineChart";
 import WinRateChart from "./Sections/WinRateChart";
 import TagComponent from "./Sections/TagComponent";
+import MostChampion from "./Sections/MostChampion";
+import Toast from "../../utils/Toast";
+import Loading from "../../utils/Loading";
 import API from "../../../api";
 
 interface SummonerAllData {
@@ -125,6 +129,11 @@ function PlayersSearchPage(): ReactElement {
   const [userName2, setUserName2] = useState("");
   const [user1MainPosition, setUser1MainPosition] = useState("");
   const [user2MainPosition, setUser2MainPosition] = useState("");
+  const [ToastMessage, setToastMessage] = useState({ success: "", fail: "" });
+  const [loadingState, setLoadingState] = useState(false);
+
+  const soloBtn = useRef<HTMLButtonElement>(null);
+  const duoBtn = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (User1data.laneInfo) {
@@ -160,7 +169,6 @@ function PlayersSearchPage(): ReactElement {
           return acc;
         }, "")
       );
-      console.log("user1의 메인 포지션", user1MainPosition);
     }
 
     if (User2data.laneInfo) {
@@ -179,7 +187,7 @@ function PlayersSearchPage(): ReactElement {
           count: User2data.laneInfo.MID,
         },
         {
-          position: "AD_CARRY",
+          position: "ADC",
           count: User2data.laneInfo.AD_CARRY,
         },
         {
@@ -203,23 +211,27 @@ function PlayersSearchPage(): ReactElement {
   /* 입력한 소환사의 메인 포지션 확인하기 */
 
   const [User1data, setUser1data] = useState<SummonerAllData>(
-    // {
-    // summonerInfo: {
-    //   id: "",
-    //   accountId: "",
-    //   name: "",
-    // },
-    // }
+    /*   {
+      summonerInfo: {
+        id: "",
+        accountId: "",
+        name: "",
+      },
+    } */
     lanerData
   );
-  const [User2data, setUser2data] = useState<SummonerAllData>(
-    junglerData
-  ); /* 타입 설정 어떻게 하는 지 */
+  const [User2data, setUser2data] = useState<SummonerAllData>({
+    summonerInfo: {
+      id: "",
+      accountId: "",
+      name: "",
+    },
+  });
+  /* 타입 설정 어떻게 하는 지 */
 
   const onInputUserName1Handler = (e: {
     target: { value: React.SetStateAction<string> };
   }) => {
-    console.log(e.target.value);
     setUserName1(e.target.value);
   };
 
@@ -231,51 +243,82 @@ function PlayersSearchPage(): ReactElement {
 
   const clickTabs = (type: string) => {
     setSearchType(type);
+    if (type === "solo") {
+      duoBtn.current?.classList.remove("active");
+      soloBtn.current?.classList.add("active");
+    } else {
+      duoBtn.current?.classList.add("active");
+      soloBtn.current?.classList.remove("active");
+    }
   };
 
   const clickSoloSearch = async () => {
     // if (inputUser1) {
     if (userName1) {
-      console.log("검색시작", userName1);
+      setLoadingState(true);
       await axios
         .post(API.summonerInfo, {
           summonerName: encodeURI(userName1),
         })
         .then((res) => {
-          console.log("실행했다!");
           setUser1data(res.data);
+          console.log("소환사정보", res.data);
+          setLoadingState(false);
         })
-        .catch((err) => console.log(err));
+        .catch((err) => {
+          setToastMessage({
+            success: "",
+            fail: "소환사 정보를 찾을 수 없습니다!",
+          });
+          setLoadingState(false);
+        });
     } else {
-      console.log("소환사명을 입력하지 않으셨어요!");
+      setToastMessage({ success: "", fail: "소환사명을 입력하지 않으셨어요!" });
     }
   };
 
   const clickDuoSearch = async () => {
-    if (userName1 && userName2) {
-      console.log("@@@@@@@");
+    if ((!userName1 && userName2) || (userName1 && !userName2)) {
+      setToastMessage({
+        success: "",
+        fail: "소환사명을 모두 입력해주세요!",
+      });
+    } else if (userName1 && userName2) {
       if (userName1 === userName2) {
-        console.log("동일한 소환사명을 입력하실 수 없어요!");
+        setToastMessage({
+          success: "",
+          fail: "같은 소환사를 비교할 수는 없습니다!",
+        });
       } else {
-        console.log("실행했니?");
+        setLoadingState(true);
         await axios
-          .post(API.summonerInfo, { summonerName: userName1 })
+          .post(API.summonerInfo, { summonerName: encodeURI(userName1) })
           .then((res) => {
-            console.log(res.data);
             setUser1data(res.data);
-            console.log("실행했다?");
+          })
+          .catch((err) => {
+            setLoadingState(false);
+
+            setToastMessage({
+              success: "",
+              fail: "소환사 정보를 찾을 수 없습니다!",
+            });
           });
 
         await axios
-          .post(API.summonerInfo, { summonerName: userName2 })
+          .post(API.summonerInfo, { summonerName: encodeURI(userName2) })
           .then((res) => {
             console.log(res.data);
             setUser2data(res.data);
-            console.log("실행했다?");
+          })
+          .catch((err) => {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "소환사 정보를 찾을 수 없습니다!",
+            });
           });
-      }
-      if (!userName1 || !userName2) {
-        console.log("소환사명을 입력해주세요");
+        setLoadingState(false);
       }
     }
   };
@@ -289,6 +332,7 @@ function PlayersSearchPage(): ReactElement {
               onClick={() => {
                 clickTabs("solo");
               }}
+              ref={soloBtn}
               aria-hidden
               className="tab solo-tab active"
               type="button"
@@ -300,6 +344,7 @@ function PlayersSearchPage(): ReactElement {
                 clickTabs("duo");
               }}
               aria-hidden
+              ref={duoBtn}
               type="button"
               className="tab duo-tab"
             >
@@ -318,7 +363,7 @@ function PlayersSearchPage(): ReactElement {
                 onClick={() => {
                   clickSoloSearch();
                 }}
-                className="search-btn"
+                className="summoner-search-btn"
               >
                 Search
               </button>
@@ -332,7 +377,7 @@ function PlayersSearchPage(): ReactElement {
               ></input>
               <button
                 type="button"
-                className="search-btn"
+                className="summoner-search-btn"
                 onClick={clickDuoSearch}
               >
                 Search
@@ -341,11 +386,21 @@ function PlayersSearchPage(): ReactElement {
                 onChange={onInputUserName2Handler}
                 className="players-input"
                 type="text"
-              ></input>
+              />
             </div>
           )}
         </div>
+        {ToastMessage.fail ? (
+          <div>
+            <Toast
+              ToastMessage={ToastMessage}
+              setToastMessage={setToastMessage}
+              closeModal={() => {}}
+            />
+          </div>
+        ) : null}
         <div className="user-data-view">
+          {loadingState ? <Loading /> : null}
           {User1data.summonerInfo.accountId &&
           !User2data.summonerInfo.accountId ? (
             <>
@@ -369,19 +424,26 @@ function PlayersSearchPage(): ReactElement {
                     kdaInfo={User1data.kdaTimelineData!}
                   />
                 </div>
+                <div className="summoner-most-champion">
+                  <MostChampion userData={User1data.recentChampionStats!} />
+                </div>
               </div>
+
               <div className="summoner-graph">
                 <div className="graph-section">
-                  <div className="graph">
+                  <div className="graph win-rate">
                     <WinRateChart userData={User1data.leagueInfo!} />
                   </div>
                   <div className="graph">
-                    <LaneInfoChart userData={User1data.laneInfo!} />
+                    <LaneInfoChart
+                      userData={User1data.laneInfo!}
+                      position={user1MainPosition!}
+                    />
                   </div>
                 </div>
 
                 <div className="graph-section">
-                  <div className="graph">
+                  <div className="graph exp-timeline">
                     <TimelineChart userData={User1data.expTimelineData!} />
                   </div>
                   <div className="graph">
@@ -424,7 +486,10 @@ function PlayersSearchPage(): ReactElement {
                               <WinRateChart userData={User1data.leagueInfo!} />
                             </div>
                             <div className="graph">
-                              <LaneInfoChart userData={User1data.laneInfo!} />
+                              <LaneInfoChart
+                                userData={User1data.laneInfo!}
+                                position={user1MainPosition!}
+                              />
                             </div>
                           </div>
                         </div>
@@ -455,7 +520,10 @@ function PlayersSearchPage(): ReactElement {
                               <WinRateChart userData={User2data.leagueInfo!} />
                             </div>
                             <div className="graph">
-                              <LaneInfoChart userData={User2data.laneInfo!} />
+                              <LaneInfoChart
+                                userData={User2data.laneInfo!}
+                                position={user2MainPosition!}
+                              />
                             </div>
                           </div>
                         </div>
