@@ -4,9 +4,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
 import LoginPage from "../LoginPage/LoginPage";
-
-// interface Props {
-// }
+import Hamburger from "./Sections/Hamburger";
 
 function Nav(props: any): ReactElement {
   const [IsModalOpen, setIsModalOpen] = useState(false);
@@ -36,6 +34,7 @@ function Nav(props: any): ReactElement {
     <>
       <div className="nav">
         <div className="logo">
+          <Hamburger AccessToken={AccessToken} />
           <img
             onClick={toMainHandler}
             aria-hidden
@@ -79,6 +78,15 @@ function Nav(props: any): ReactElement {
           </div>
         ) : (
           <div className="btn-wrapper">
+            <div
+              aria-hidden
+              onClick={() => {
+                props.history.push("/mypage");
+              }}
+              className="page"
+            >
+              Mypage
+            </div>
             <button
               type="button"
               className="nav-btn logout"
@@ -92,7 +100,6 @@ function Nav(props: any): ReactElement {
           </div>
         )}
       </div>
-
       {IsModalOpen ? (
         <LoginPage
           closeModal={closeModal}

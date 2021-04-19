@@ -1,4 +1,4 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useState, useEffect, useRef } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import axios from "axios";
 import { gql, useMutation } from "@apollo/client";
@@ -28,17 +28,19 @@ interface Props extends RouteComponentProps {
   setIsRegisterModal: (boolean: boolean) => void;
 }
 
-function RegisterModal({
-  closeModal,
-  ToastMessage,
-  setToastMessage,
-  setIsRegisterModal,
-}: Props): ReactElement {
+function RegisterModal(props: Props): ReactElement {
+  const {
+    closeModal,
+    ToastMessage,
+    setToastMessage,
+    setIsRegisterModal,
+  } = props;
   const [Email, setEmail] = useState("");
   const [Username, setUsername] = useState("");
   const [Password, setPassword] = useState("");
   const [ConfirmPassword, setConfirmPassword] = useState("");
   const [IsPopupOpen, setIsPopupOpen] = useState(false);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const [registerGraghpl, { data }] = useMutation(REGISTER);
 
@@ -179,6 +181,20 @@ function RegisterModal({
     }
   };
 
+  useEffect(() => {
+    const modal = modalRef.current;
+    const handleClickOutside = (e: { target: any }) => {
+      if (modal && !modal.contains(e.target)) {
+        props.closeModal();
+      }
+    };
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [props]);
+
   return (
     <>
       {ToastMessage.fail ? (
@@ -189,7 +205,7 @@ function RegisterModal({
         />
       ) : null}
       {!IsPopupOpen ? (
-        <div className="modal-box">
+        <div className="modal-box" ref={modalRef}>
           <button
             className="btn-back"
             type="button"

@@ -17,10 +17,6 @@
       height: 24px;
       width: auto;
     }
-
-    .page {
-      cursor: pointer;
-    }
   }
 
   .trans-page {
@@ -33,14 +29,38 @@
 
     .page {
       transition: 0.7s;
+
       &:hover {
+        transition: 1s;
         color: $jade;
+        text-shadow: 0 0 2px $jade;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .btn-wrapper {
+    width: 230px;
+    font-weight: lighter;
+    font-size: 0.9rem;
+    display: flex;
+    color: $jade;
+
+    .page {
+      transition: 0.7s;
+      margin-right: 2rem;
+
+      &:hover {
+        transition: 1s;
+        color: $jade;
+        text-shadow: 0 0 2px $jade;
+        cursor: pointer;
       }
     }
   }
 
   .nav-btn {
-    padding: 6.2px 0px;
+    padding: 6px 0px;
     flex: 0 1 auto;
     position: absolute;
     right: 90px;
@@ -54,7 +74,7 @@
     span {
       font-size: 16px;
       font-weight: 400;
-      padding: 6.2px 20px;
+      padding: 6px 17px;
       border-radius: 5px;
       background: linear-gradient(to right, $jade-light, $jade-dark);
       -webkit-background-clip: text;
@@ -76,6 +96,100 @@
 
     &.logout span {
       padding: 6.2px 14px;
+    }
+  }
+}
+
+.hamburger {
+  position: relative;
+  display: none;
+  margin-right: 18px;
+
+  .bar {
+    position: relative;
+    background: $primary;
+    width: 18px;
+    height: 1px;
+    border-radius: 2px;
+    margin-bottom: 5.5px;
+    transition-property: transform, opacity, background-color, width;
+  }
+
+  .bar:first-child {
+    margin-top: 6.8px;
+    top: 0;
+  }
+
+  .bar:nth-child(2) {
+    opacity: 1;
+  }
+
+  .bar:last-child {
+    bottom: 0;
+  }
+
+  .menu-trigger {
+    background: transparent;
+    color: $primary;
+    font-weight: 200;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+  }
+
+  .menu {
+    background: $background;
+    font-weight: 200;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    position: absolute;
+    top: 38px;
+    left: 0;
+    width: 150px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
+
+    &.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      a {
+        text-decoration: none;
+        color: $primary;
+        font-weight: 200;
+        padding: 15px 20px;
+        display: block;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $md-breakpoint) {
+  .nav {
+    padding: 0.7rem 1rem;
+
+    .hamburger {
+      display: block;
+    }
+
+    .page {
+      display: none;
+    }
+
+    .nav-btn span {
+      position: absolute;
+      right: -40px;
+      top: 0;
     }
   }
 }

@@ -3,6 +3,7 @@
 /* eslint-disable array-callback-return */
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import ChampionCard from "./ChampionCard";
+import Loading from "../../../utils/Loading";
 
 interface Props {
   Champions: string[];
@@ -21,8 +22,14 @@ function ChampionCardList(props: Props): ReactElement {
   const diffBox = useRef<HTMLDivElement>(null);
   const tagBox = useRef<HTMLDivElement>(null);
 
+  const [Load, setLoad] = useState(false);
+
   useEffect(() => {
+    setLoad(true);
     setChamps(Champions);
+    setTimeout(() => {
+      setLoad(false);
+    }, 1500);
   }, [Champions]);
 
   const showChamps = (w: string, filtered: any[]) => {
@@ -318,7 +325,6 @@ function ChampionCardList(props: Props): ReactElement {
         </div>
       </div>
       {/* {FilterList.length > 0 && <div className="filter-list">Filtered :</div>} */}
-
       <div className="filter-list">
         {Isfiltering && <div className="prefix">Filtered : </div>}
         {FilterListT.length > 0 && (
@@ -336,11 +342,11 @@ function ChampionCardList(props: Props): ReactElement {
           </div>
         )}
       </div>
-
       <div className="champions">
         {Champs.map((el, idx) => {
           return <ChampionCard key={idx} data={el} />;
         })}
+        {Load ? <Loading /> : null}
       </div>
     </>
   );
