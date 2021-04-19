@@ -83,8 +83,9 @@ function Minimap(): ReactElement {
       }
       for (let i = 0; i < totalNum; i += 1) {
         if (
-          scroll > section[i].offsetTop - window.innerHeight / 1.5 &&
-          scroll <
+          Math.ceil(scroll) >=
+            section[i].offsetTop - window.innerHeight / 1.5 &&
+          Math.ceil(scroll) <=
             section[i].offsetTop -
               window.innerHeight / 1.5 +
               section[i].offsetHeight
