@@ -1,5 +1,5 @@
 /* eslint-disable no-restricted-globals */
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
@@ -8,17 +8,26 @@ import LoginPage from "../LoginPage/LoginPage";
 // interface Props {
 // }
 
+const CHECK_LOGIN = gql`
+  {
+    me {
+      nickname
+    }
+  }
+`;
+
 function Nav(props: any): ReactElement {
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
-  const [AccessToken, setAccessToken] = useState("");
+  const [IsLogin, setIsLogin] = useState(false);
+
+  const { loading, error, data } = useQuery(CHECK_LOGIN);
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      setAccessToken(token);
+    if (!error) {
+      setIsLogin(true);
     }
-  }, [AccessToken]);
+  }, [loading, error, data]);
 
   const openModal = (): void => {
     document.body.style.overflow = "hidden";
@@ -62,9 +71,20 @@ function Nav(props: any): ReactElement {
             >
               Champ
             </div>
+            {IsLogin && (
+              <div
+                aria-hidden
+                onClick={() => {
+                  props.history.push("/mypage");
+                }}
+                className="page"
+              >
+                My
+              </div>
+            )}
           </div>
         </div>
-        {!AccessToken ? (
+        {!IsLogin ? (
           <div className="btn-wrapper">
             <button
               type="button"
@@ -83,8 +103,9 @@ function Nav(props: any): ReactElement {
               type="button"
               className="nav-btn logout"
               onClick={() => {
-                setAccessToken("");
                 toMainHandler();
+                setIsLogin(false);
+                localStorage.clear();
               }}
             >
               <span>Logout</span>
@@ -98,7 +119,6 @@ function Nav(props: any): ReactElement {
           closeModal={closeModal}
           IsRegisterModal={IsRegisterModal}
           setIsRegisterModal={setIsRegisterModal}
-          setAccessToken={setAccessToken}
         />
       ) : null}
     </>

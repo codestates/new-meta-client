@@ -12,7 +12,7 @@ const USERNAME_RE = /^[가-힣|a-z|A-Z|0-9|]+$/;
 const PASSWORD_RE = /((?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W]).{8,64})/g;
 
 const REGISTER = gql`
-  mutation Register($data: RegisterInput!) {
+  mutation Register($data: RegisterType!) {
     register(data: $data) {
       id
       nickname
