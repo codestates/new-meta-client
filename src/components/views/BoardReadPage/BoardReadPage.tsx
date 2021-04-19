@@ -124,6 +124,15 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
     <div>
       {state ? (
         <div className="board-read-page">
+          <button
+            className="btn-goback"
+            type="button"
+            onClick={() => {
+              props.history.goBack();
+            }}
+          >
+            back
+          </button>
           <div className="champion-title-image">
             <img className="blur-img" src={Skins[CurrentIndex]} alt=""></img>
             <i
