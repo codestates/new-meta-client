@@ -80,20 +80,20 @@ function TimelineChart(props: Props): ReactElement {
     }
 
     for (let i = 0; i < array.length; i++) {
-      for (let j = 0; j < 15; j++) {
+      for (let j = 0; j < array[i].length; j++) {
         if (result[j]) {
           result[j].timestamp = 60000 * (j + 1);
           result[j].currentGold += Math.round(
-            array[i][j].participantFrames.currentGold / 20
+            array[i][j].participantFrames.currentGold / array.length
           );
           result[j].totalGold += Math.round(
-            array[i][j].participantFrames.totalGold / 20
+            array[i][j].participantFrames.totalGold / array.length
           );
           result[j].minionsKilled += Math.round(
-            array[i][j].participantFrames.minionsKilled / 20
+            array[i][j].participantFrames.minionsKilled / array.length
           );
           result[j].jungleMinionsKilled += Math.round(
-            array[i][j].participantFrames.jungleMinionsKilled / 20
+            array[i][j].participantFrames.jungleMinionsKilled / array.length
           );
         } else {
           result[j] = {
@@ -144,6 +144,9 @@ function TimelineChart(props: Props): ReactElement {
       },
     ],
     options: {
+      tooltip: {
+        theme: "dark",
+      },
       chart: {
         height: 350,
         // type: "line",
@@ -169,8 +172,10 @@ function TimelineChart(props: Props): ReactElement {
       },
       title: {
         text: "15 Minutes Exp",
+
         style: {
           color: "#FFF",
+          fontSize: "15px",
         },
       },
       dataLabels: {
@@ -178,6 +183,7 @@ function TimelineChart(props: Props): ReactElement {
         enabledOnSeries: [1],
       },
       labels: ["3m", "6m", "9m", "12m", "15m"],
+
       xaxis: {
         // type: "datetime",
       },
@@ -190,6 +196,7 @@ function TimelineChart(props: Props): ReactElement {
             },
           },
         },
+
         {
           opposite: true,
           title: {
@@ -211,7 +218,7 @@ function TimelineChart(props: Props): ReactElement {
           options={data.options}
           series={data.series}
           type="line"
-          height={350}
+          width={500}
         />
       </div>
     </>

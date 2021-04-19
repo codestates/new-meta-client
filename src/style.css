@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   font-family: 'Noto Sans KR', sans-serif; }
 
@@ -679,7 +678,7 @@ template {
 .landing {
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; }
+  overflow: hidden; }
   .landing .landing-text.main {
     width: 100%;
     text-align: center;
@@ -1024,12 +1023,12 @@ template {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 5;
+  z-index: 100;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   animation: fadein 1s forwards; }
 
 @keyframes fadein {
@@ -1110,10 +1109,19 @@ template {
       display: none; }
     .modal-box form .icon-x-circle.password {
       top: 32%; }
+  .modal-box .btn-back {
+    float: left;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    top: 10%; }
+    .modal-box .btn-back i {
+      font-size: 21px;
+      color: #0ec7b5; }
   .modal-box .btn-close {
     float: right;
     background-color: transparent;
-    color: #f7f8fa;
     border: none;
     outline: none;
     cursor: pointer; }
@@ -2168,7 +2176,6 @@ template {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.3);
   animation: fadein 1s forwards; }
 
 @keyframes fadein {
@@ -2183,7 +2190,7 @@ template {
     width: 300px;
     padding: 40px;
     transform: translate(-50%, -50%);
-    background: rgba(226, 228, 233, 0.1);
+    background: #0b0d12;
     box-sizing: border-box;
     box-shadow: 5px 30px 25px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
@@ -2205,10 +2212,8 @@ template {
   90% {
     transform: translateY(-3px); }
   100% {
-    /* final */
     opacity: 1;
-    transform: translate(0);
-    /* 가운데 */ } }
+    transform: translate(0); } }
     .popup-background .popup-box .btn-wrapper.popup {
       margin-top: 40px; }
       .popup-background .popup-box .btn-wrapper.popup button {
@@ -2279,21 +2284,28 @@ template {
     animation: 0.3s linear 0.9s both fadeIn; }
 
 .toast-wrapper {
-  width: 400px;
+  width: 100%;
+  height: 18%;
   z-index: 10;
   position: absolute;
-  top: 20%;
-  left: 20%; }
+  top: 50px;
+  animation: fadein 1s forwards; }
+
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
 
 .toast {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: max-content;
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 10px 48px 10px 38px;
+  padding: 12px 50px 12px 50px;
   margin-bottom: 10px;
   color: #e2e4e9;
   font-size: 13px;

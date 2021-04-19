@@ -150,14 +150,6 @@ function TagComponent(props: Props): ReactElement {
     }
   }
 
-  let deathCount = 0;
-  for (const el of kdaInfo) {
-    if (el.matchDeathForLevel3 > 0) {
-      deathCount += 1;
-    }
-  }
-  console.log(deathCount, "3렙 데스");
-
   /* "matchHeraldKills": 1이 5번 이상 나온 경우  => 전령 매니아 */
 
   if (heraldLover.current) {
@@ -281,7 +273,7 @@ function TagComponent(props: Props): ReactElement {
       <div
         className="tag"
         ref={lev3Strong}
-        data-ballon="3렙 싸움은 못 참지!"
+        data-ballon="최근 20전 기준 6번 이상 3렙 단계에서 킬관여를 했어요!"
       ></div>
       <div
         className="tag"

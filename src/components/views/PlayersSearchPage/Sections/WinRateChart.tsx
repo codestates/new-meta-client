@@ -35,27 +35,36 @@ function WinRateChart(props: Props): ReactElement {
 
   const data = {
     series: [winRate],
+    type: "radialBar",
+    height: 250,
+    width: 250,
 
-    chart: {
-      type: "radialBar",
-      offsetY: -10,
-      height: 250,
-      width: 250,
-    },
     options: {
+      title: {
+        text: "Rank Winning Rate",
+
+        style: {
+          color: "#FFF",
+          fontSize: "15px",
+        },
+      },
+      colors: ["#0ec7b5"],
       plotOptions: {
         radialBar: {
           dataLabels: {
             name: {
-              offsetY: 20,
-              color: "#FFF",
+              offsetY: 30,
+              color: "#e2e4e9",
+              align: "center",
               formatter() {
-                return ["Win Rate"];
+                const matchcounts = userData.wins + userData.losses;
+                return `${matchcounts} matches`;
               },
+              fontSize: "13px",
             },
             value: {
-              color: "#FFF",
-              offsetY: -30,
+              color: "#e2e4e9",
+              offsetY: -15,
               fontSize: "22px",
             },
           },
@@ -70,8 +79,8 @@ function WinRateChart(props: Props): ReactElement {
         options={data.options}
         series={data.series}
         type="radialBar"
-        width={250}
-        height={250}
+        width={280}
+        height={280}
       />
     </>
   );
