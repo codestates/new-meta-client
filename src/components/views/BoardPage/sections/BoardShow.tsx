@@ -84,13 +84,11 @@ const GET_ALL_POST = gql`
 `;
 function BoardShow(props: any): ReactElement {
   const [CurrentBoard, setCurrentBoard] = useState({});
-  const [BoardList, setBoardList] = useState([]); // todo : 서버에서 데이터 받아와야한다
+  const [BoardList, setBoardList] = useState([]);
   const getAllPostQuery = useQuery(GET_ALL_POST);
 
   useEffect(() => {
-    // console.log(getAllPostQuery.data.readAllPosts);
-    console.log(getAllPostQuery);
-
+    getAllPostQuery.refetch();
     const dataList = getAllPostQuery?.data?.readAllPosts;
     if (dataList) {
       const result = dataList.map((el: any) => {
