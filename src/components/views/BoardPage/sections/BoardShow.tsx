@@ -88,7 +88,6 @@ function BoardShow(props: any): ReactElement {
   const getAllPostQuery = useQuery(GET_ALL_POST);
 
   useEffect(() => {
-    getAllPostQuery.refetch();
     const dataList = getAllPostQuery?.data?.readAllPosts;
     if (dataList) {
       const result = dataList.map((el: any) => {
@@ -104,7 +103,12 @@ function BoardShow(props: any): ReactElement {
   }, [getAllPostQuery]);
 
   const clickWriteBtn = () => {
-    props.history.push("/board/write");
+    const token = localStorage.getItem("token");
+    if (token) {
+      props.history.push("/board/write");
+    } else {
+      // todo 로그인창 띄우기
+    }
   };
 
   return (
