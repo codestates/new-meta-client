@@ -40,7 +40,8 @@ function BoardSmall(props: Props): ReactElement {
     <div
       onClick={() => {
         setCurrentBoard(data);
-        window.scrollTo(0, 9999999999); // ! 위험한 알고리즘 (임시)
+
+        window.scrollTo({ top: 1800, behavior: "smooth" });
       }}
       onMouseEnter={() => {
         section1.current?.classList.remove("mouse-over");
