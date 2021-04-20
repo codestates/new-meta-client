@@ -59,7 +59,6 @@ function Footer(): ReactElement {
           >
             API
           </a>
-          <br />
           <a
             href="https://www.notion.so/5b77b8ec9b334d38b676f764c5ab8eed?v=6ad562ed027a4b1c83f5ea51096db317"
             className="more"
@@ -86,7 +85,7 @@ function Footer(): ReactElement {
         </div>
       </div>
       <div className="connect">
-        <div className="label">Connect</div>
+        <div className="label connect">Connect</div>
         <div className="icons">
           <i
             onClick={() => {
