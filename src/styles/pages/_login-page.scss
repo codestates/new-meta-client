@@ -198,3 +198,22 @@
     }
   }
 }
+
+@media screen and (max-width: 470px) {
+  .modal-box {
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10%;
+  }
+  h2 {
+    margin: 30% 0 20% 0;
+  }
+  input {
+    margin: 3% 0;
+  }
+  span {
+    margin: 5% 0;
+  }
+}

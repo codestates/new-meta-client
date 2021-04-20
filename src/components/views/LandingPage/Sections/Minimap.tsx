@@ -30,7 +30,7 @@ function Minimap(): ReactElement {
 
   useEffect(() => {
     section = document.querySelectorAll(".section-minimap");
-    li = document.querySelectorAll("li");
+    li = document.querySelectorAll(".pointWrap li");
     sections = document.querySelectorAll(".sections");
 
     const scrollHandler = () => {
@@ -66,12 +66,8 @@ function Minimap(): ReactElement {
         ) {
           for (let i = 0; i < totalNum; i += 1) {
             imageWrappers[i].style.position = "fixed";
-            imageWrappers[i].style.opacity = "0";
             innerWraps[i].style.position = "fixed";
-            innerWraps[i].style.opacity = "0";
           }
-          activeImageWrapper.style.opacity = "1";
-          activeInnerWrap.style.opacity = "1";
           pointWrapper.style.opacity = "1";
           pointWrapper.style.position = "fixed";
         }

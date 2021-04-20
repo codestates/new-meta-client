@@ -1,4 +1,4 @@
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { ReactElement, useState, useEffect, useRef } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import axios from "axios";
 import { gql, useMutation } from "@apollo/client";
@@ -30,6 +30,7 @@ function LoginPage(props: Props): ReactElement {
   const [Password, setPassword] = useState("");
   const [ToastMessage, setToastMessage] = useState({ success: "", fail: "" });
   const [loginGraghpl, { data }] = useMutation(LOGIN);
+  const modalRef = useRef<HTMLDivElement>(null);
 
   const onEmailHandler = (event: {
     currentTarget: { value: React.SetStateAction<string> };
@@ -76,6 +77,20 @@ function LoginPage(props: Props): ReactElement {
     };
   }, []);
 
+  useEffect(() => {
+    const modal = modalRef.current;
+    const handleClickOutside = (e: { target: any }) => {
+      if (modal && !modal.contains(e.target)) {
+        props.closeModal();
+      }
+    };
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, [props]);
+
   return (
     <>
       {ToastMessage.success ? (
@@ -97,7 +112,7 @@ function LoginPage(props: Props): ReactElement {
                   />
                 ) : null}
 
-                <div className="modal-box">
+                <div className="modal-box" ref={modalRef}>
                   <button
                     className="btn-close"
                     type="button"

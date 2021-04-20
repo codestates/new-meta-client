@@ -5,9 +5,7 @@ import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
 import { GET_CURRENT_USER, TokenVar } from "../../../graphql";
 import LoginPage from "../LoginPage/LoginPage";
-
-// interface Props {
-// }
+import Hamburger from "./Sections/Hamburger";
 
 const CHECK_LOGIN = gql`
   {
@@ -47,6 +45,7 @@ function Nav(props: any): ReactElement {
     <>
       <div className="nav">
         <div className="logo">
+          <Hamburger AccessToken={AccessToken} />
           <img
             onClick={toMainHandler}
             aria-hidden
@@ -101,6 +100,15 @@ function Nav(props: any): ReactElement {
           </div>
         ) : (
           <div className="btn-wrapper">
+            <div
+              aria-hidden
+              onClick={() => {
+                props.history.push("/mypage");
+              }}
+              className="page"
+            >
+              Mypage
+            </div>
             <button
               type="button"
               className="nav-btn logout"
@@ -115,7 +123,6 @@ function Nav(props: any): ReactElement {
           </div>
         )}
       </div>
-
       {IsModalOpen ? (
         <LoginPage
           closeModal={closeModal}

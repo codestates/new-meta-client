@@ -39,6 +39,30 @@
     }
   }
 
+  .btn-goback {
+    z-index: 1;
+    background: rgba($background, $alpha: 0.3);
+    cursor: pointer;
+    position: fixed;
+    top: 56px;
+    left: 28px;
+    font-weight: 300;
+    color: $jade;
+    outline: none;
+    border: $jade solid 1px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    padding: 4px 10px;
+
+    &:hover {
+      cursor: pointer;
+      transition: 1s;
+      background: $jade-dark;
+      color: $secondary;
+      box-shadow: 0 0 5px $jade-dark, 0 0 10px $jade-dark;
+    }
+  }
+
   .champion-introduce {
     width: 100%;
     padding-bottom: 4rem;
