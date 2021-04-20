@@ -36,6 +36,8 @@
 @import "./layouts/grids";
 @import "./layouts/nav";
 @import "./layouts/footer";
+@import "./layouts/popup";
+@import "./layouts/toast";
 
 @import "./pages/landing-page";
 @import "./pages/login-page";
@@ -44,7 +46,5 @@
 @import "./pages/board-write-page";
 @import "./pages/players-search-page";
 @import "./pages/loading-page";
-@import "./pages/popup";
-@import "./pages/toast";
 @import "./pages/not-found-page";
 @import "./pages/my-page";
