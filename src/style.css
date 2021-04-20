@@ -2007,8 +2007,139 @@ template {
     display: flex;
     flex-direction: column;
     position: relative; }
+    .players-search-page > .user-data-view > .solo-search-result > .summonerInfo {
+      display: flex;
+      margin-top: 30px;
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center; }
+      .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-name {
+        font-size: 24px; }
+      .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-lank-info {
+        display: flex;
+        flex-direction: column;
+        align-content: center;
+        font-size: 14px;
+        margin: 5px; }
+        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-lank-info .summoner-tier {
+          text-align: center;
+          margin: 3px; }
+      .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags {
+        display: flex;
+        justify-content: center; }
+        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active {
+          display: inline-block;
+          position: relative;
+          border-radius: 10px;
+          border-color: #815de6;
+          background-color: #815de6;
+          margin: 10px;
+          width: fit-content;
+          padding: 7px;
+          font-size: 12px;
+          text-align: center; }
+        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:after {
+          display: inline;
+          position: absolute;
+          top: 0px;
+          left: 0;
+          opacity: 0;
+          width: 100px;
+          padding: 10px;
+          border: 1px solid #212121;
+          background-color: #f7f8fa;
+          color: #212121;
+          pointer-events: none;
+          transition: opacity 250ms, top 250ms;
+          content: attr(data-ballon);
+          align-content: center;
+          font-size: 1em;
+          align-items: center; }
+        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:hover {
+          z-index: 100;
+          background-color: #00b6a4;
+          border-radius: none; }
+        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag:hover::after {
+          opacity: 1;
+          height: auto;
+          width: max-content;
+          font-family: "Noto-Sans KR";
+          border-radius: 10px;
+          font-size: 0.8rem;
+          align-self: center; }
+        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag:hover::after {
+          top: 30px; }
+    .players-search-page > .user-data-view > .solo-search-result > .summoner-graph {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      width: 100%; }
+      .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        flex-wrap: wrap; }
+        .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .graph {
+          flex: 0 0 300px;
+          margin: 20px;
+          padding: 20px;
+          background: #1f2127;
+          border-radius: 20px;
+          box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08); }
+        .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion {
+          background-color: #1f2127;
+          height: 270px;
+          width: 300px;
+          display: flex;
+          flex-direction: column;
+          align-self: center;
+          margin: 15px;
+          border-radius: 20px;
+          justify-content: space-evenly;
+          flex-wrap: wrap; }
+          .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp {
+            height: 45px;
+            display: flex;
+            margin-left: 20px;
+            flex-direction: row;
+            justify-content: flex-start; }
+            .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .mostChamp-img {
+              margin-right: 10px; }
+            .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .rate-detail {
+              display: flex;
+              flex-direction: row;
+              justify-content: space-between; }
+              .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .rate-detail img > {
+                margin-left: 5px; }
+              .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .rate-detail .champ-win-lose {
+                justify-content: center;
+                display: inline-block;
+                font-size: 18px;
+                line-height: 24px;
+                flex-wrap: wrap; }
+                .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .all {
+                  color: #f7f8fa; }
+                .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .win {
+                  color: #0ec7b5; }
+                .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .lose {
+                  color: #f86d7d; }
+              .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .rate-detail .champ-rate {
+                margin: 15px;
+                margin-left: 30px;
+                font-weight: 600;
+                display: inline-block;
+                font-size: 24px; }
+                .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .summoner-most-champion .mostChamp .rate-detail .champ-rate .champ-rate-num {
+                  color: #7044ed; }
+        .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section .win-rate {
+          flex: 0 0 0px;
+          margin: 20px;
+          padding: 20px; }
     .players-search-page > .user-data-view > .duo-search-result {
-      margin-top: 100px;
+      border: 2px solid red;
+      margin-top: 30px;
       display: flex; }
       .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail {
         display: flex;
@@ -2021,7 +2152,8 @@ template {
           margin: 30px;
           text-align: center;
           display: flex;
-          flex-wrap: wrap; }
+          flex-wrap: wrap;
+          background-color: red; }
         .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info {
           display: flex;
           flex-direction: row;
@@ -2043,10 +2175,17 @@ template {
               margin: 5px; }
               .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion {
                 display: flex;
-                align-items: center; }
+                align-self: center;
+                margin: 15px; }
               .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tier {
                 text-align: center;
                 margin: 3px; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tier .summoner-tier-icon {
+                  width: 50px;
+                  height: 100px; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tier .summoner-tier-icon img {
+                    width: 80px;
+                    height: auto; }
               .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph {
                 display: flex;
                 flex-direction: row;
@@ -2064,10 +2203,11 @@ template {
                     box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08); }
               .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags {
                 display: flex;
-                justify-content: center; }
+                justify-content: center;
+                width: 100px; }
                 .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags .tag.active {
-                  display: inline-block;
-                  position: relative;
+                  display: flex;
+                  position: absolute;
                   border-radius: 10px;
                   border-color: #815de6;
                   background-color: #815de6;
@@ -2107,92 +2247,6 @@ template {
                   align-self: center; }
                 .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags .tag:hover::after {
                   top: 30px; }
-    .players-search-page > .user-data-view > .summonerInfo {
-      display: flex;
-      margin-top: 30px;
-      width: 100%;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center; }
-      .players-search-page > .user-data-view > .summonerInfo .summoner-name {
-        font-size: 24px; }
-      .players-search-page > .user-data-view > .summonerInfo .summoner-lank-info {
-        display: flex;
-        flex-direction: column;
-        align-content: center;
-        font-size: 14px;
-        margin: 5px; }
-        .players-search-page > .user-data-view > .summonerInfo .summoner-lank-info .summoner-tier {
-          text-align: center;
-          margin: 3px; }
-      .players-search-page > .user-data-view > .summonerInfo .summoner-tags {
-        display: flex;
-        justify-content: center; }
-        .players-search-page > .user-data-view > .summonerInfo .summoner-tags .tag.active {
-          display: inline-block;
-          position: relative;
-          border-radius: 10px;
-          border-color: #815de6;
-          background-color: #815de6;
-          margin: 10px;
-          width: fit-content;
-          padding: 7px;
-          font-size: 12px;
-          text-align: center; }
-        .players-search-page > .user-data-view > .summonerInfo .summoner-tags .tag.active:after {
-          display: inline;
-          position: absolute;
-          top: 0px;
-          left: 0;
-          opacity: 0;
-          width: 100px;
-          padding: 10px;
-          border: 1px solid #212121;
-          background-color: #f7f8fa;
-          color: #212121;
-          pointer-events: none;
-          transition: opacity 250ms, top 250ms;
-          content: attr(data-ballon);
-          align-content: center;
-          font-size: 1em;
-          align-items: center; }
-        .players-search-page > .user-data-view > .summonerInfo .summoner-tags .tag.active:hover {
-          z-index: 100;
-          background-color: #00b6a4;
-          border-radius: none; }
-        .players-search-page > .user-data-view > .summonerInfo .summoner-tags .tag:hover::after {
-          opacity: 1;
-          height: auto;
-          width: max-content;
-          font-family: "Noto-Sans KR";
-          border-radius: 10px;
-          font-size: 0.8rem;
-          align-self: center; }
-        .players-search-page > .user-data-view > .summonerInfo .summoner-tags .tag:hover::after {
-          top: 30px; }
-    .players-search-page > .user-data-view > .summoner-graph {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-evenly;
-      flex-wrap: wrap;
-      width: 100%; }
-      .players-search-page > .user-data-view > .summoner-graph .graph-section {
-        display: flex;
-        width: 100%;
-        justify-content: center;
-        flex-wrap: wrap; }
-        .players-search-page > .user-data-view > .summoner-graph .graph-section .graph {
-          flex: 0 0 300px;
-          margin: 20px;
-          padding: 20px;
-          background: #2b2d3e;
-          border-radius: 20px;
-          box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08); }
-        .players-search-page > .user-data-view > .summoner-graph .graph-section .win-rate {
-          flex: 0 0 0px;
-          margin: 20px;
-          padding: 20px;
-          box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08); }
 
 .loading-background {
   position: fixed;
