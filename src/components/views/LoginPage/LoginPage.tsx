@@ -50,6 +50,7 @@ function LoginPage(props: Props): ReactElement {
       })
         .then((res) => {
           TokenVar(res.data.login.token);
+          localStorage.setItem("token", res.data.login.token);
           setToastMessage({ success: "로그인 성공!", fail: "" });
         })
         .catch((err) => {
