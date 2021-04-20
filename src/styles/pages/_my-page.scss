@@ -52,7 +52,16 @@
     border: 1px solid $border;
     margin: 1rem;
     width: 50%;
+    min-width: 320px;
     border-radius: 4px;
+  }
+
+  .my-post-empty,
+  .my-follower-empty,
+  .my-followee-empty,
+  .my-search-empty {
+    opacity: 0.3;
+    padding: 1rem;
   }
 
   & > .user-title {
@@ -128,11 +137,35 @@
         display: flex;
         width: 100%;
         height: max-content;
+        .my-post {
+          cursor: pointer;
+        }
+
         .post-item {
+          position: relative;
           margin-right: 1rem;
           width: 100px;
           height: 100px;
-          background-color: $block;
+
+          .text {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+          }
+
+          .title {
+            font-size: 1.2rem;
+            padding: 4px;
+          }
+
+          img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0.2;
+          }
         }
       }
     }
@@ -255,4 +288,16 @@
       }
     }
   }
+}
+
+// modal Scss
+
+.post-modal-background {
+}
+
+.post-modal {
+  //
+  min-width: 320px;
+  width: 80% !important;
+  height: 80% !important;
 }
