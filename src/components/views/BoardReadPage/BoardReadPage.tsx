@@ -3,7 +3,6 @@ import React, { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
 import { withRouter, RouteComponentProps, Redirect } from "react-router-dom";
 import API from "../../../api";
-import { removeFooter } from "../../utils/displayfooter";
 
 interface Champion {
   id: string;
@@ -78,7 +77,6 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
     setCurrentIndex(index);
   }
   useEffect(() => {
-    removeFooter();
     const run = async () => {
       const result = await axios.get(`${API.championInfo}/${state.id}.json`);
       const temp = result.data.data[state.id];

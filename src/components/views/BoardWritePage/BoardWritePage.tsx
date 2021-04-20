@@ -10,7 +10,6 @@ import { RouteComponentProps, withRouter } from "react-router-dom";
 import axios from "axios";
 import { gql, useMutation } from "@apollo/client";
 import rift from "../../../assets/image/summonersrift.jpg";
-import { removeFooter } from "../../utils/displayfooter";
 import API from "../../../api";
 
 // interface Props {}
@@ -18,7 +17,6 @@ import API from "../../../api";
 const patchVersion = "11.7.1";
 
 function BoardWritePage(props: RouteComponentProps): ReactElement {
-  removeFooter();
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const [Champions, setChampions] = useState<string[]>([]);
   const [CurrentChampion, setCurrentChampion] = useState<string>("");
@@ -62,28 +60,48 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
   const clickPost = () => {
     // todo : 서버에 게시물 등록 요청
     // axios
-    const postData = {
-      champion: CurrentChampion,
-      title: titleTag.current?.value,
-      description: descriptionTag.current?.value,
-      skills: JSON.stringify([
-        skillTagQ.current?.value,
-        skillTagW.current?.value,
-        skillTagE.current?.value,
-        skillTagR.current?.value,
-      ]),
-      play: JSON.stringify([playTag.current?.value, enemyTag.current?.value]),
-      etc: etcTag.current?.value,
-    };
+    if (
+      titleTag.current?.value &&
+      descriptionTag.current?.value &&
+      skillTagQ.current?.value &&
+      skillTagW.current?.value &&
+      skillTagE.current?.value &&
+      skillTagR.current?.value &&
+      playTag.current?.value &&
+      enemyTag.current?.value &&
+      etcTag.current?.value
+    ) {
+      const postData = {
+        champion: CurrentChampion,
+        title: titleTag.current?.value,
+        description: descriptionTag.current?.value,
+        skills: JSON.stringify([
+          skillTagQ.current?.value,
+          skillTagW.current?.value,
+          skillTagE.current?.value,
+          skillTagR.current?.value,
+        ]),
+        play: JSON.stringify([playTag.current?.value, enemyTag.current?.value]),
+        etc: etcTag.current?.value,
+      };
 
-    postGraghpl({
-      variables: {
-        data: postData,
-      },
-    }).then((res) => {
-      // console.log("res", res);
-      props.history.push("/board");
-    });
+      postGraghpl({
+        variables: {
+          data: postData,
+        },
+      }).then((res) => {
+        // console.log("res", res);
+        const location = {
+          pathname: "/board/",
+          state: {
+            page: 1,
+          },
+        };
+        props.history.push(location);
+      });
+    } else {
+      alert("공략을 모두 작성해주세요");
+    }
   };
 
   const clickIndex = (index: number, e: MouseEvent): void => {
