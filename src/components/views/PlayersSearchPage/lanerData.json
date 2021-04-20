@@ -6169,7 +6169,7 @@
         "veteran": true,
         "inactive": false,
         "freshBlood": false,
-        "hotStreak": true
+        "hotStreak": false
     },
     "laneInfo": {
         "TOP": 53,
