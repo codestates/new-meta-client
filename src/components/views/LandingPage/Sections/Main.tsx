@@ -19,8 +19,12 @@ function Main(): ReactElement {
     };
     const typed = new Typed(title!, options);
 
+    const footer = document.querySelector(".footer");
+    footer?.classList.add("footer-view");
+
     return () => {
       typed.destroy();
+      footer?.classList.remove("footer-view");
     };
   }, []);
 

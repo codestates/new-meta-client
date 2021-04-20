@@ -45,7 +45,7 @@ function Nav(props: any): ReactElement {
     <>
       <div className="nav">
         <div className="logo">
-          <Hamburger AccessToken={AccessToken} />
+          <Hamburger AccessToken="hi" />
           <img
             onClick={toMainHandler}
             aria-hidden
@@ -72,17 +72,6 @@ function Nav(props: any): ReactElement {
             >
               Champ
             </div>
-            {IsLogin && (
-              <div
-                aria-hidden
-                onClick={() => {
-                  props.history.push("/mypage");
-                }}
-                className="page"
-              >
-                My
-              </div>
-            )}
           </div>
         </div>
         {!IsLogin ? (

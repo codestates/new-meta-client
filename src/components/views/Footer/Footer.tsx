@@ -5,7 +5,7 @@ import logo from "../../../assets/image/newmeta-logo-spell.png";
 
 function Footer(): ReactElement {
   return (
-    <div className="footer display-none">
+    <div className="footer">
       <div className="logo">
         <img src={logo} alt=""></img>
         <div className="text">
