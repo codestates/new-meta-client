@@ -1,5 +1,6 @@
-import React, { ReactElement, useState } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
+import { gql, useQuery } from "@apollo/client";
 import EmptyDetail from "./EmptyDetail";
 import BoardDetail from "./BoardDetail";
 import BoardSmall from "./BoardSmall";
@@ -65,9 +66,44 @@ const tempData = [
   },
 ];
 
+const GET_ALL_POST = gql`
+  {
+    readAllPosts {
+      id
+      champion
+      title
+      description
+      skills
+      play
+      etc
+      author
+      createdAt
+      updatedAt
+    }
+  }
+`;
 function BoardShow(props: any): ReactElement {
   const [CurrentBoard, setCurrentBoard] = useState({});
   const [BoardList, setBoardList] = useState([]); // todo : 서버에서 데이터 받아와야한다
+  const getAllPostQuery = useQuery(GET_ALL_POST);
+
+  useEffect(() => {
+    // console.log(getAllPostQuery.data.readAllPosts);
+    console.log(getAllPostQuery);
+
+    const dataList = getAllPostQuery?.data?.readAllPosts;
+    if (dataList) {
+      const result = dataList.map((el: any) => {
+        return {
+          ...el,
+          skills: JSON.parse(el.skills),
+          play: JSON.parse(el.play),
+        };
+      });
+      // console.log(result);
+      setBoardList(result);
+    }
+  }, [getAllPostQuery]);
 
   const clickWriteBtn = () => {
     props.history.push("/board/write");
@@ -94,7 +130,7 @@ function BoardShow(props: any): ReactElement {
         </div>
         <div className="label">Recent</div>
         <div className="content-list">
-          {tempData.map((el) => {
+          {BoardList.map((el) => {
             return <BoardSmall data={el} setCurrentBoard={setCurrentBoard} />;
           })}
         </div>
