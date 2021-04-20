@@ -1,4 +1,5 @@
-import React, { ReactElement } from "react";
+import { gql, useQuery } from "@apollo/client";
+import React, { ReactElement, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import ionia from "../../../assets/image/ionia2.jpeg";
 
@@ -22,7 +23,33 @@ const tempData = {
   },
 };
 
+const MyINFO = gql`
+  {
+    me {
+      nickname
+      email
+      posts {
+        id
+        champion
+        title
+        createdAt
+        updatedAt
+      }
+    }
+  }
+`;
+
 function MyPage(): ReactElement {
+  const { loading, error, data } = useQuery(MyINFO);
+
+  useEffect(() => {
+    if (loading) {
+      console.log("loading");
+    }
+    if (error) console.log(`Error! ${error.message}`);
+    console.log("data:", data);
+  }, [data, error, loading]);
+
   return (
     <>
       {/* <div className="my-page-background-img">
