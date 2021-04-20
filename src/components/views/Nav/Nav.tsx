@@ -21,13 +21,11 @@ function Nav(props: any): ReactElement {
   const [IsLogin, setIsLogin] = useState(false);
 
   // const { loading, error, data } = useQuery(CHECK_LOGIN);
-  const { data } = useQuery(GET_CURRENT_USER);
+  const currentUser = useQuery(GET_CURRENT_USER);
 
   useEffect(() => {
-    console.log(data);
-
-    setIsLogin(!!data.token);
-  }, [data]);
+    setIsLogin(!!currentUser.data.token);
+  }, [currentUser, currentUser.data]);
 
   const openModal = (): void => {
     document.body.style.overflow = "hidden";
@@ -39,6 +37,9 @@ function Nav(props: any): ReactElement {
   };
   const toMainHandler = (): void => {
     props.history.push("/");
+    setIsLogin(false);
+    TokenVar(null);
+    localStorage.clear();
   };
 
   return (
@@ -103,8 +104,6 @@ function Nav(props: any): ReactElement {
               className="nav-btn logout"
               onClick={() => {
                 toMainHandler();
-                setIsLogin(false);
-                TokenVar(null);
               }}
             >
               <span>Logout</span>

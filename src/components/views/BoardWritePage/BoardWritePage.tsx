@@ -42,7 +42,25 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
       }
     }
   `;
-  const [postGraghpl, { data }] = useMutation(POST);
+  const GET_ALL_POST = gql`
+    {
+      readAllPosts {
+        id
+        champion
+        title
+        description
+        skills
+        play
+        etc
+        author
+        createdAt
+        updatedAt
+      }
+    }
+  `;
+  const [postGraghpl, { data }] = useMutation(POST, {
+    refetchQueries: [{ query: GET_ALL_POST }],
+  });
 
   useEffect(() => {
     const run = async () => {
