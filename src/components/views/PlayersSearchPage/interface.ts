@@ -39,6 +39,7 @@ export interface LeagueInfo {
 }
 
 export interface LaneInfo {
+  [index: string]: any;
   TOP: number;
   JUNGLE: number;
   MID: number;

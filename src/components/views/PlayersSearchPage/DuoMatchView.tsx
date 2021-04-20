@@ -19,6 +19,7 @@ import WinRateChart from "./Sections/WinRateChart";
 import TagComponent from "./Sections/TagComponent";
 import MostChampion from "./Sections/MostChampion";
 import MatchingPoints from "./Sections/MatchingPoints";
+import DuoTimeline from "./Sections/DuoTimeLine";
 
 interface Props {
   User1data: SummonerAllData;
@@ -54,27 +55,30 @@ function DuoMatchView(props: Props) {
                   recentChampionStats={User1data.recentChampionStats!}
                 />
               </div>
-              <div className="summoner-most-champion">
-                <MostChampion
-                  userData={User1data.recentChampionStats!}
-                  idx={0}
-                />
-                <MostChampion
-                  userData={User1data.recentChampionStats!}
-                  idx={1}
-                />
-                <MostChampion
-                  userData={User1data.recentChampionStats!}
-                  idx={2}
-                />
-              </div>
               <div className="summoner-graph">
                 <div className="graph-section">
                   <div className="graph">
                     <WinRateChart userData={User1data.leagueInfo!} />
                   </div>
-                  <div className="graph">
-                    <LaneInfoChart userData={User1data.laneInfo!} />
+                  <div className="graph summoner-most-champion">
+                    <div className="mostChamp">
+                      <MostChampion
+                        userData={User1data.recentChampionStats!}
+                        idx={0}
+                      />
+                    </div>
+                    <div className="mostChamp">
+                      <MostChampion
+                        userData={User1data.recentChampionStats!}
+                        idx={1}
+                      />
+                    </div>
+                    <div className="mostChamp">
+                      <MostChampion
+                        userData={User1data.recentChampionStats!}
+                        idx={2}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
@@ -99,32 +103,47 @@ function DuoMatchView(props: Props) {
                   recentChampionStats={User2data.recentChampionStats!}
                 />
               </div>
-              <div className="summoner-most-champion">
-                <MostChampion
-                  userData={User1data.recentChampionStats!}
-                  idx={0}
-                />
-                <MostChampion
-                  userData={User1data.recentChampionStats!}
-                  idx={1}
-                />
-                <MostChampion
-                  userData={User1data.recentChampionStats!}
-                  idx={2}
-                />
-              </div>
+
               <div className="summoner-graph">
                 <div className="graph-section">
                   <div className="graph">
                     <WinRateChart userData={User2data.leagueInfo!} />
                   </div>
-                  <div className="graph">
-                    <LaneInfoChart userData={User2data.laneInfo!} />
+                  <div className="graph summoner-most-champion">
+                    <div className="mostChamp">
+                      <MostChampion
+                        userData={User2data.recentChampionStats!}
+                        idx={0}
+                      />
+                    </div>
+                    <div className="mostChamp">
+                      <MostChampion
+                        userData={User2data.recentChampionStats!}
+                        idx={1}
+                      />
+                    </div>
+                    <div className="mostChamp">
+                      <MostChampion
+                        userData={User2data.recentChampionStats!}
+                        idx={2}
+                      />
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+
+        <div className="common-graph">
+          <DuoTimeline
+            User1Name={User1data.summonerInfo!.name}
+            User1data={User1data.expTimelineData!}
+            User2data={User2data.expTimelineData!}
+            User2Name={User2data.summonerInfo!.name}
+            User1LaneInfo={User1data.laneInfo!}
+            User2LaneInfo={User2data.laneInfo!}
+          />
         </div>
       </div>
     </div>

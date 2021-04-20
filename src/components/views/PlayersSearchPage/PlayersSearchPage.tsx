@@ -45,12 +45,8 @@ function PlayersSearchPage(): ReactElement {
   const soloBtn = useRef<HTMLButtonElement>(null);
   const duoBtn = useRef<HTMLButtonElement>(null);
 
-  /* 입력한 소환사의 메인 포지션 확인하기 */
-
-  const [User1data, setUser1data] = useState<SummonerAllData>({});
-  const [User2data, setUser2data] = useState<SummonerAllData>({});
-
-  /* 타입 설정 어떻게 하는 지 */
+  const [User1data, setUser1data] = useState<SummonerAllData>(LanerData);
+  const [User2data, setUser2data] = useState<SummonerAllData>(JunglerData);
 
   const onInputUserName1Handler = (e: {
     target: { value: React.SetStateAction<string> };

@@ -2145,7 +2145,7 @@ template {
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: space-evenly;
+        justify-content: space-between;
         flex-wrap: wrap;
         width: 100%; }
         .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .match-success-point {
@@ -2156,15 +2156,14 @@ template {
           background-color: red; }
         .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info {
           display: flex;
-          flex-direction: row;
-          flex-wrap: wrap; }
+          flex-wrap: wrap;
+          justify-content: flex-start; }
           .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo {
             display: flex;
             flex-direction: row;
             align-items: center;
             flex-direction: column;
-            justify-content: center;
-            align-items: center; }
+            justify-content: flex-start; }
             .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-name {
               font-size: 24px; }
             .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info {
@@ -2186,21 +2185,6 @@ template {
                   .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tier .summoner-tier-icon img {
                     width: 80px;
                     height: auto; }
-              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph {
-                display: flex;
-                flex-direction: row;
-                align-items: center;
-                width: 100%; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph .graph-section {
-                  display: flex;
-                  justify-content: space-between;
-                  flex-wrap: wrap;
-                  margin: 10px; }
-                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph .graph-section .graph {
-                    flex: 0 0 250px;
-                    background: #2b2d3e;
-                    border-radius: 20px;
-                    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08); }
               .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags {
                 display: flex;
                 justify-content: center;
@@ -2247,6 +2231,67 @@ template {
                   align-self: center; }
                 .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags .tag:hover::after {
                   top: 30px; }
+              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 100%; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph .graph-section {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-evenly;
+                  margin: 10px; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph .graph-section .graph {
+                    display: flex;
+                    flex: 0 0 250px;
+                    background: #1f2127;
+                    border-radius: 20px;
+                    box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08); }
+              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion {
+                background-color: #1f2127;
+                height: 270px;
+                width: 300px;
+                display: flex;
+                flex-direction: column;
+                align-self: center;
+                margin: 15px;
+                border-radius: 20px;
+                justify-content: space-evenly;
+                flex-wrap: wrap; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp {
+                  height: 45px;
+                  display: flex;
+                  margin-left: 20px;
+                  flex-direction: row;
+                  justify-content: flex-start; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .mostChamp-img {
+                    margin-right: 10px; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail {
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: space-between; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail img > {
+                      margin-left: 5px; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-win-lose {
+                      justify-content: center;
+                      display: inline-block;
+                      font-size: 18px;
+                      line-height: 24px;
+                      flex-wrap: wrap; }
+                      .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .all {
+                        color: #f7f8fa; }
+                      .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .win {
+                        color: #0ec7b5; }
+                      .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .lose {
+                        color: #f86d7d; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-rate {
+                      margin: 15px;
+                      margin-left: 30px;
+                      font-weight: 600;
+                      display: inline-block;
+                      font-size: 24px; }
+                      .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-rate .champ-rate-num {
+                        color: #7044ed; }
 
 .loading-background {
   position: fixed;

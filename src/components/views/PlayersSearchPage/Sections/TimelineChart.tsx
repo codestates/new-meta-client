@@ -18,24 +18,6 @@ interface AverageExpData {
 
 function TimelineChart(props: Props): ReactElement {
   const { userData } = props;
-  const [Champions, setChampions] = useState<any>([]);
-
-  useEffect(() => {
-    const cache = sessionStorage.getItem("Champions");
-    const run = async () => {
-      const result = await axios.get(API.allChampionInfo);
-      sessionStorage.setItem(
-        "Champions",
-        JSON.stringify(Object.values(result.data.data))
-      );
-      setChampions(Object.values(result.data.data));
-    };
-    if (!cache) {
-      run();
-    } else {
-      setChampions(JSON.parse(cache));
-    }
-  }, []);
 
   function getAverageExp(array: FrameExpData[][]) {
     const result: AverageExpData[] = [];
@@ -81,13 +63,6 @@ function TimelineChart(props: Props): ReactElement {
     return result;
   }
   const AvgData = getAverageExp(userData);
-
-  /*  const getChampionName(key: number):string => {
-    Champions.filter((el:ChampionEl) => {
-      return Number(el.key) === key
-    })
-    return Champions[0].id
-  } */
 
   const data = {
     series: [
