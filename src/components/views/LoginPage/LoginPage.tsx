@@ -80,7 +80,12 @@ function LoginPage(props: Props): ReactElement {
   useEffect(() => {
     const modal = modalRef.current;
     const handleClickOutside = (e: { target: any }) => {
-      if (modal && !modal.contains(e.target)) {
+      if (
+        modal &&
+        !modal.contains(e.target) &&
+        !ToastMessage.fail &&
+        !ToastMessage.success
+      ) {
         props.closeModal();
       }
     };
@@ -89,7 +94,7 @@ function LoginPage(props: Props): ReactElement {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [props]);
+  }, [ToastMessage.fail, ToastMessage.success, props]);
 
   return (
     <>

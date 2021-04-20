@@ -18,11 +18,11 @@ function ChampionCardList(props: Props): ReactElement {
   const [FilterListT, setFilterListT] = useState<string[]>([]);
   const [FilterListD, setFilterListD] = useState<string[]>([]);
   const [Isfiltering, setIsfiltering] = useState(false);
-
-  const diffBox = useRef<HTMLDivElement>(null);
-  const tagBox = useRef<HTMLDivElement>(null);
-
+  const diffBoxRef = useRef<HTMLDivElement>(null);
+  const tagBoxRef = useRef<HTMLDivElement>(null);
   const [Load, setLoad] = useState(false);
+  const [IsDiffBoxOpen, setIsDiffBoxOpen] = useState(false);
+  const [IsTagBoxOpen, setIsTagBoxOpen] = useState(false);
 
   useEffect(() => {
     setLoad(true);
@@ -31,6 +31,30 @@ function ChampionCardList(props: Props): ReactElement {
       setLoad(false);
     }, 1500);
   }, [Champions]);
+
+  useEffect(() => {
+    const diffBox = diffBoxRef.current;
+    const tagBox = tagBoxRef.current;
+    const handleClickOutsideDiff = (e: { target: any }) => {
+      if (diffBox && IsDiffBoxOpen && !diffBox.contains(e.target)) {
+        diffBox.style.display = "none";
+        setIsDiffBoxOpen(false);
+      }
+    };
+    const handleClickOutsideTag = (e: { target: any }) => {
+      if (tagBox && IsTagBoxOpen && !tagBox.contains(e.target)) {
+        tagBox.style.display = "none";
+        setIsTagBoxOpen(false);
+      }
+    };
+    window.addEventListener("click", handleClickOutsideDiff);
+    window.addEventListener("click", handleClickOutsideTag);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutsideDiff);
+      window.removeEventListener("click", handleClickOutsideTag);
+    };
+  }, [IsDiffBoxOpen, IsTagBoxOpen]);
 
   const showChamps = (w: string, filtered: any[]) => {
     setIsfiltering(true);
@@ -116,7 +140,7 @@ function ChampionCardList(props: Props): ReactElement {
     }
   };
 
-  const clickDropdownComtent = (htmlTag: any) => {
+  const clickDropdownContent = (htmlTag: any) => {
     const style: CSSStyleDeclaration | undefined = htmlTag.current?.style;
     if (style) style.display = "none";
   };
@@ -171,13 +195,10 @@ function ChampionCardList(props: Props): ReactElement {
           <div
             onClick={() => {
               const style: CSSStyleDeclaration | undefined =
-                tagBox.current?.style;
-              if (style) {
-                if (style.display === "block") {
-                  style.display = "none";
-                } else {
-                  style.display = "block";
-                }
+                tagBoxRef.current?.style;
+              if (style && !IsTagBoxOpen) {
+                style.display = "block";
+                setIsTagBoxOpen(true);
               }
             }}
             aria-hidden="true"
@@ -185,12 +206,12 @@ function ChampionCardList(props: Props): ReactElement {
           >
             Tags
           </div>
-          <div ref={tagBox} className="dropdown-contents">
+          <div ref={tagBoxRef} className="dropdown-contents">
             <div
               onClick={() => {
                 if (!FilterListT.includes("Fighter")) {
                   clickTag("Fighter");
-                  clickDropdownComtent(tagBox);
+                  clickDropdownContent(tagBoxRef);
                   FilterListT.push("Fighter");
                 }
               }}
@@ -202,7 +223,7 @@ function ChampionCardList(props: Props): ReactElement {
               onClick={() => {
                 if (!FilterListT.includes("Tank")) {
                   clickTag("Tank");
-                  clickDropdownComtent(tagBox);
+                  clickDropdownContent(tagBoxRef);
                   FilterListT.push("Tank");
                 }
               }}
@@ -214,7 +235,7 @@ function ChampionCardList(props: Props): ReactElement {
               onClick={() => {
                 if (!FilterListT.includes("Mage")) {
                   clickTag("Mage");
-                  clickDropdownComtent(tagBox);
+                  clickDropdownContent(tagBoxRef);
                   FilterListT.push("Mage");
                 }
               }}
@@ -226,7 +247,7 @@ function ChampionCardList(props: Props): ReactElement {
               onClick={() => {
                 if (!FilterListT.includes("Assassin")) {
                   clickTag("Assassin");
-                  clickDropdownComtent(tagBox);
+                  clickDropdownContent(tagBoxRef);
                   FilterListT.push("Assassin");
                 }
               }}
@@ -238,7 +259,7 @@ function ChampionCardList(props: Props): ReactElement {
               onClick={() => {
                 if (!FilterListT.includes("Support")) {
                   clickTag("Support");
-                  clickDropdownComtent(tagBox);
+                  clickDropdownContent(tagBoxRef);
                   FilterListT.push("Support");
                 }
               }}
@@ -250,7 +271,7 @@ function ChampionCardList(props: Props): ReactElement {
               onClick={() => {
                 if (!FilterListT.includes("Marksman")) {
                   clickTag("Marksman");
-                  clickDropdownComtent(tagBox);
+                  clickDropdownContent(tagBoxRef);
                   FilterListT.push("Marksman");
                 }
               }}
@@ -264,13 +285,10 @@ function ChampionCardList(props: Props): ReactElement {
           <div
             onClick={() => {
               const style: CSSStyleDeclaration | undefined =
-                diffBox.current?.style;
-              if (style) {
-                if (style.display === "block") {
-                  style.display = "none";
-                } else {
-                  style.display = "block";
-                }
+                diffBoxRef.current?.style;
+              if (style && !IsDiffBoxOpen) {
+                style.display = "block";
+                setIsDiffBoxOpen(true);
               }
             }}
             aria-hidden="true"
@@ -278,12 +296,12 @@ function ChampionCardList(props: Props): ReactElement {
           >
             Difficulty
           </div>
-          <div ref={diffBox} className="dropdown-contents">
+          <div ref={diffBoxRef} className="dropdown-contents">
             <div
               onClick={() => {
                 if (!FilterListD.includes("Hard")) {
                   clickDiff(8, 10);
-                  clickDropdownComtent(diffBox);
+                  clickDropdownContent(diffBoxRef);
                   FilterListD.push("Hard");
                   setFilterListD(FilterListD);
                 }
@@ -296,7 +314,7 @@ function ChampionCardList(props: Props): ReactElement {
               onClick={() => {
                 if (!FilterListD.includes("Normal")) {
                   clickDiff(4, 7);
-                  clickDropdownComtent(diffBox);
+                  clickDropdownContent(diffBoxRef);
                   FilterListD.push("Normal");
                   setFilterListD(FilterListD);
                 }
@@ -309,7 +327,7 @@ function ChampionCardList(props: Props): ReactElement {
               onClick={() => {
                 if (!FilterListD.includes("Easy")) {
                   clickDiff(0, 3);
-                  clickDropdownComtent(diffBox);
+                  clickDropdownContent(diffBoxRef);
                   FilterListD.push("Easy");
                   setFilterListD(FilterListD);
                 }
