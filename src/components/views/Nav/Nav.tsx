@@ -1,22 +1,33 @@
 /* eslint-disable no-restricted-globals */
-import { useQuery } from "@apollo/client";
+import { gql, useQuery } from "@apollo/client";
 import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
+import { GET_CURRENT_USER, TokenVar } from "../../../graphql";
 import LoginPage from "../LoginPage/LoginPage";
 import Hamburger from "./Sections/Hamburger";
+
+const CHECK_LOGIN = gql`
+  {
+    me {
+      nickname
+    }
+  }
+`;
 
 function Nav(props: any): ReactElement {
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
-  const [AccessToken, setAccessToken] = useState("");
+  const [IsLogin, setIsLogin] = useState(false);
+
+  // const { loading, error, data } = useQuery(CHECK_LOGIN);
+  const { data } = useQuery(GET_CURRENT_USER);
 
   useEffect(() => {
-    const token = localStorage.getItem("accessToken");
-    if (token) {
-      setAccessToken(token);
-    }
-  }, [AccessToken]);
+    console.log(data);
+
+    setIsLogin(!!data.token);
+  }, [data]);
 
   const openModal = (): void => {
     document.body.style.overflow = "hidden";
@@ -34,7 +45,7 @@ function Nav(props: any): ReactElement {
     <>
       <div className="nav">
         <div className="logo">
-          <Hamburger AccessToken={AccessToken} />
+          <Hamburger AccessToken="hi" />
           <img
             onClick={toMainHandler}
             aria-hidden
@@ -63,7 +74,7 @@ function Nav(props: any): ReactElement {
             </div>
           </div>
         </div>
-        {!AccessToken ? (
+        {!IsLogin ? (
           <div className="btn-wrapper">
             <button
               type="button"
@@ -91,8 +102,9 @@ function Nav(props: any): ReactElement {
               type="button"
               className="nav-btn logout"
               onClick={() => {
-                setAccessToken("");
                 toMainHandler();
+                setIsLogin(false);
+                TokenVar(null);
               }}
             >
               <span>Logout</span>
@@ -105,7 +117,6 @@ function Nav(props: any): ReactElement {
           closeModal={closeModal}
           IsRegisterModal={IsRegisterModal}
           setIsRegisterModal={setIsRegisterModal}
-          setAccessToken={setAccessToken}
         />
       ) : null}
     </>

@@ -5,16 +5,12 @@ import { gql, useMutation } from "@apollo/client";
 import RegisterModal from "./Sections/RegisterModal";
 import Toast from "../../utils/Toast";
 import API from "../../../api";
+import { TokenVar } from "../../../graphql";
 
 const LOGIN = gql`
-  mutation Login($email: String!, $password: String!) {
-    login(email: $email, password: $password) {
-      accessToken
-      user {
-        id
-        nickname
-        email
-      }
+  mutation Login($data: LoginInputType!) {
+    login(data: $data) {
+      token
     }
   }
 `;
@@ -23,16 +19,10 @@ interface Props extends RouteComponentProps {
   closeModal: () => void;
   IsRegisterModal: boolean;
   setIsRegisterModal: (boolean: boolean) => void;
-  setAccessToken: (accessToken: string) => void;
 }
 
 function LoginPage(props: Props): ReactElement {
-  const {
-    closeModal,
-    IsRegisterModal,
-    setIsRegisterModal,
-    setAccessToken,
-  } = props;
+  const { closeModal, IsRegisterModal, setIsRegisterModal } = props;
 
   // console.log(Document.cookie);
 
@@ -56,11 +46,10 @@ function LoginPage(props: Props): ReactElement {
     event.preventDefault();
     if (Email && Password) {
       loginGraghpl({
-        variables: { email: Email, password: Password },
+        variables: { data: { email: Email, password: Password } },
       })
         .then((res) => {
-          console.log("로그인 성공", res.data.login.accessToken);
-          localStorage.setItem("accessToken", res.data.login.accessToken);
+          TokenVar(res.data.login.token);
           setToastMessage({ success: "로그인 성공!", fail: "" });
         })
         .catch((err) => {
@@ -70,25 +59,6 @@ function LoginPage(props: Props): ReactElement {
             fail: "아이디와 비밀번호를 확인해주세요",
           });
         });
-
-      // axios
-      //   .post(API.user_login_test, body, {
-      //     withCredentials: true,
-      //   })
-      //   .then((res) => {
-      //     if (res.data.token) {
-      //       setAccessToken(res.data.token);
-      //       setToastMessage({ success: "로그인 성공!", fail: "" });
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     //! ID & PW 불일치
-      //     console.log("error : ", err);
-      //     setToastMessage({
-      //       success: "",
-      //       fail: "아이디와 비밀번호를 확인해주세요",
-      //     });
-      // });
     } else {
       //! ID & PW가 채워지지 않은 경우
       setToastMessage({
