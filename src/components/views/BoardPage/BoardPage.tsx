@@ -1,12 +1,11 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import axios from "axios";
-import { withRouter, Link } from "react-router-dom";
+import { withRouter, Link, RouteComponentProps } from "react-router-dom";
 
 import ChampionCardList from "./sections/ChampionCardList";
 import BoardShow from "./sections/BoardShow";
 import API from "../../../api";
-import { removeFooter } from "../../utils/displayfooter";
 
 // interface Props {}
 
@@ -19,12 +18,14 @@ import { removeFooter } from "../../utils/displayfooter";
 5: "Marksman"
 */
 
-function BoardPage(): ReactElement {
+function BoardPage(props: RouteComponentProps): ReactElement {
+  const { location } = props;
+  const { state }: any = location;
+
   const [Champions, setChampions] = useState<any>([]);
-  const [CurrentPage, setCurrentPage] = useState(0);
+  const [CurrentPage, setCurrentPage] = useState(state?.page || 0);
   const pageSection = useRef<HTMLDivElement>(null);
   useEffect(() => {
-    removeFooter();
     const cache = sessionStorage.getItem("Champions");
     const run = async () => {
       const result = await axios.get(API.allChampionInfo);

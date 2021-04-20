@@ -40,6 +40,8 @@ function BoardSmall(props: Props): ReactElement {
     <div
       onClick={() => {
         setCurrentBoard(data);
+
+        window.scrollTo({ top: 1800, behavior: "smooth" });
       }}
       onMouseEnter={() => {
         section1.current?.classList.remove("mouse-over");

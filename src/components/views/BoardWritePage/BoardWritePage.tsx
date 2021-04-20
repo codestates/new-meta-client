@@ -6,18 +6,17 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import axios from "axios";
+import { gql, useMutation } from "@apollo/client";
 import rift from "../../../assets/image/summonersrift.jpg";
-import { removeFooter } from "../../utils/displayfooter";
 import API from "../../../api";
 
 // interface Props {}
 
 const patchVersion = "11.7.1";
 
-function BoardWritePage(): ReactElement {
-  removeFooter();
+function BoardWritePage(props: RouteComponentProps): ReactElement {
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const [Champions, setChampions] = useState<string[]>([]);
   const [CurrentChampion, setCurrentChampion] = useState<string>("");
@@ -36,22 +35,32 @@ function BoardWritePage(): ReactElement {
   const enemyTag = useRef<HTMLTextAreaElement>(null);
   const etcTag = useRef<HTMLTextAreaElement>(null);
 
-  const postData = {
-    champion: CurrentChampion,
-    author: "osunguk", // todo : user 데이터로 바꾸기
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
-    title: titleTag.current?.value,
-    description: descriptionTag.current?.value,
-    skills: [
-      skillTagQ.current?.value,
-      skillTagW.current?.value,
-      skillTagE.current?.value,
-      skillTagR.current?.value,
-    ],
-    play: [playTag.current?.value, enemyTag.current?.value],
-    etc: etcTag.current?.value,
-  };
+  const POST = gql`
+    mutation CreatePost($data: CreatePostInputType!) {
+      createPost(data: $data) {
+        title
+      }
+    }
+  `;
+  const GET_ALL_POST = gql`
+    {
+      readAllPosts {
+        id
+        champion
+        title
+        description
+        skills
+        play
+        etc
+        author
+        createdAt
+        updatedAt
+      }
+    }
+  `;
+  const [postGraghpl, { data }] = useMutation(POST, {
+    refetchQueries: [{ query: GET_ALL_POST }],
+  });
 
   useEffect(() => {
     const run = async () => {
@@ -69,6 +78,48 @@ function BoardWritePage(): ReactElement {
   const clickPost = () => {
     // todo : 서버에 게시물 등록 요청
     // axios
+    if (
+      titleTag.current?.value &&
+      descriptionTag.current?.value &&
+      skillTagQ.current?.value &&
+      skillTagW.current?.value &&
+      skillTagE.current?.value &&
+      skillTagR.current?.value &&
+      playTag.current?.value &&
+      enemyTag.current?.value &&
+      etcTag.current?.value
+    ) {
+      const postData = {
+        champion: CurrentChampion,
+        title: titleTag.current?.value,
+        description: descriptionTag.current?.value,
+        skills: JSON.stringify([
+          skillTagQ.current?.value,
+          skillTagW.current?.value,
+          skillTagE.current?.value,
+          skillTagR.current?.value,
+        ]),
+        play: JSON.stringify([playTag.current?.value, enemyTag.current?.value]),
+        etc: etcTag.current?.value,
+      };
+
+      postGraghpl({
+        variables: {
+          data: postData,
+        },
+      }).then((res) => {
+        // console.log("res", res);
+        const location = {
+          pathname: "/board/",
+          state: {
+            page: 1,
+          },
+        };
+        props.history.push(location);
+      });
+    } else {
+      alert("공략을 모두 작성해주세요");
+    }
   };
 
   const clickIndex = (index: number, e: MouseEvent): void => {
@@ -199,13 +250,22 @@ function BoardWritePage(): ReactElement {
             )}
           </div>
           <div className="title-input-form">
+            <div className="champ-name">{CurrentChampion}</div>
             <div className="post-title">
-              <p>title</p>
-              <input ref={titleTag} type="text"></input>
+              <p>Title</p>
+              <input
+                ref={titleTag}
+                type="text"
+                placeholder="ex ) ??? 장인 1000판 꿀팁 대 공개"
+              ></input>
             </div>
             <div className="post-subtitle">
-              <p>description</p>
-              <input ref={descriptionTag} type="text"></input>
+              <p>Description</p>
+              <input
+                ref={descriptionTag}
+                type="text"
+                placeholder="ex ) ??? 메타 탑승하는 방법"
+              ></input>
             </div>
           </div>
         </div>
@@ -221,7 +281,10 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea ref={skillTagQ}></textarea>
+            <textarea
+              ref={skillTagQ}
+              placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
+            ></textarea>
           </div>
           <div className="skill-w">
             {SkillImages.length > 0 && (
@@ -233,7 +296,10 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea ref={skillTagW}></textarea>
+            <textarea
+              ref={skillTagW}
+              placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
+            ></textarea>
           </div>
           <div className="skill-e">
             {SkillImages.length > 0 && (
@@ -245,7 +311,10 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea ref={skillTagE}></textarea>
+            <textarea
+              ref={skillTagE}
+              placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
+            ></textarea>
           </div>
           <div className="skill-r">
             {SkillImages.length > 0 && (
@@ -257,19 +326,34 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea ref={skillTagR}></textarea>
+            <textarea
+              ref={skillTagR}
+              placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
+            ></textarea>
           </div>
         </div>
         <div className="write-page page-3">
           <div className="title">Tip`s</div>
           <div className="label">플레이할 때</div>
-          <textarea ref={playTag} className="play-tips"></textarea>
+          <textarea
+            ref={playTag}
+            className="play-tips"
+            placeholder=" 챔피언의 플레이 스타일을 작성해주세요!"
+          ></textarea>
           <div className="label">상대 할 때</div>
-          <textarea ref={enemyTag} className="enemy-tips"></textarea>
+          <textarea
+            ref={enemyTag}
+            className="enemy-tips"
+            placeholder=" 챔피언의 챔피언 상대법을 알려주세요!"
+          ></textarea>
         </div>
         <div className="write-page page-4">
           <div className="title">.etc</div>
-          <textarea ref={etcTag} className="another-tips"></textarea>
+          <textarea
+            ref={etcTag}
+            className="another-tips"
+            placeholder=" 그 외에 독특한 챔피언 팁이 있다면 알려주세요!"
+          ></textarea>
           <button onClick={clickPost} className="post-btn" type="button">
             Post
           </button>
