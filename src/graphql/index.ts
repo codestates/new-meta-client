@@ -20,7 +20,7 @@ export const GET_CURRENT_USER = gql`
 `;
 
 const link = createHttpLink({
-  uri: "http://localhost:4000/graphql",
+  uri: "http://localhost:4000/graphql", // ! EC2 배포시 변경하기
   credentials: "same-origin",
 });
 
