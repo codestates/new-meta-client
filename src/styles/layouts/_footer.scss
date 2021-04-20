@@ -4,20 +4,19 @@
 
 .footer {
   flex: 0 0 100px;
-  // border-top: 1px solid $border;
   background-color: $block;
-  // display: flex;
   display: none;
-  padding: 0 3rem 2rem 3rem;
-  justify-content: space-evenly;
+  padding: 0 6.5rem 4.5rem 6.5rem;
+  justify-content: space-between;
   align-items: flex-start;
   flex-wrap: wrap;
+  font-size: 0.9rem;
 
   & > * {
     width: max-content;
     font-weight: lighter;
     color: $border;
-    padding-top: 3rem;
+    padding-top: 3.5rem;
   }
 
   a {
@@ -44,6 +43,8 @@
   }
 
   & > .logo {
+    margin-right: 1rem;
+
     img {
       width: 200px;
       padding-left: 2px;
@@ -75,10 +76,13 @@
   }
 
   & > .info {
+    margin: 0 1rem;
     .mores {
       display: flex;
       flex-direction: column;
       text-align: center;
+      width: 120px;
+      line-height: 1.1rem;
     }
     .more {
       padding-bottom: 4px;
@@ -86,10 +90,14 @@
   }
 
   & > .team {
+    margin: 0 1rem;
     .members {
       display: flex;
       flex-direction: column;
       text-align: center;
+      margin: 0 1rem;
+      width: 120px;
+      line-height: 1.2rem;
     }
     .member {
       color: $primary;
@@ -98,11 +106,132 @@
   }
 
   & > .connect {
+    margin-left: 1rem;
     .icons {
       cursor: pointer;
-      width: 200px;
+      width: 120px;
       display: flex;
-      justify-content: space-evenly;
+      justify-content: space-between;
+      font-size: 1.5rem;
     }
+  }
+}
+
+@media screen and (max-width: 1220px) {
+  .footer {
+    position: relative;
+
+    .team {
+      margin: 0;
+    }
+
+    .connect {
+      justify-content: start;
+      width: 100%;
+      margin-left: 0 !important;
+      padding-top: 1.5rem;
+
+      .label {
+        display: none;
+      }
+
+      .icons i {
+        font-size: 1.4rem;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .footer {
+    padding: 0 6.5rem 5.5rem 6.5rem;
+
+    .logo {
+      width: 100%;
+    }
+
+    .info {
+      margin: 0;
+      padding-top: 1.5rem;
+    }
+
+    .team {
+      margin: 0;
+      padding-top: 1.5rem;
+    }
+
+    .connect {
+      padding-top: 1.5rem;
+      margin: 0;
+      width: 120px;
+      position: relative;
+
+      .label {
+        display: block;
+        position: absolute;
+        top: 0%;
+      }
+      .icons {
+        position: absolute;
+        top: 250%;
+        justify-content: space-around;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: $md-breakpoint) {
+  .info {
+    font-size: 0.8rem;
+  }
+
+  .team {
+    font-size: 0.8rem;
+  }
+
+  .connect {
+    .icons i {
+      font-size: 1.2rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 674px) {
+  .footer {
+    padding: 0 4rem 4rem 4rem;
+
+    .policy-en {
+      width: 100% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 586px) {
+  .footer {
+    padding: 0 3rem 4rem 3rem;
+  }
+}
+
+@media screen and (max-width: 552px) {
+  .footer {
+    padding: 0 3rem 6rem 3rem;
+
+    .connect {
+      width: 100% !important;
+      position: relative;
+      // padding-top: 0px;
+
+      .icons {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 420px) {
+  .footer {
+    padding: 0 2rem 6rem 2rem;
   }
 }
