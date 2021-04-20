@@ -199,13 +199,22 @@ function BoardWritePage(): ReactElement {
             )}
           </div>
           <div className="title-input-form">
+            <div className="champ-name">{CurrentChampion}</div>
             <div className="post-title">
-              <p>title</p>
-              <input ref={titleTag} type="text"></input>
+              <p>Title</p>
+              <input
+                ref={titleTag}
+                type="text"
+                placeholder="ex ) ??? 장인 1000판 꿀팁 대 공개"
+              ></input>
             </div>
             <div className="post-subtitle">
-              <p>description</p>
-              <input ref={descriptionTag} type="text"></input>
+              <p>Description</p>
+              <input
+                ref={descriptionTag}
+                type="text"
+                placeholder="ex ) ??? 메타 탑승하는 방법"
+              ></input>
             </div>
           </div>
         </div>
@@ -221,7 +230,10 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea ref={skillTagQ}></textarea>
+            <textarea
+              ref={skillTagQ}
+              placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
+            ></textarea>
           </div>
           <div className="skill-w">
             {SkillImages.length > 0 && (
@@ -233,7 +245,10 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea ref={skillTagW}></textarea>
+            <textarea
+              ref={skillTagW}
+              placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
+            ></textarea>
           </div>
           <div className="skill-e">
             {SkillImages.length > 0 && (
@@ -245,7 +260,10 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea ref={skillTagE}></textarea>
+            <textarea
+              ref={skillTagE}
+              placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
+            ></textarea>
           </div>
           <div className="skill-r">
             {SkillImages.length > 0 && (
@@ -257,19 +275,34 @@ function BoardWritePage(): ReactElement {
                 ></img>
               </>
             )}
-            <textarea ref={skillTagR}></textarea>
+            <textarea
+              ref={skillTagR}
+              placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
+            ></textarea>
           </div>
         </div>
         <div className="write-page page-3">
           <div className="title">Tip`s</div>
           <div className="label">플레이할 때</div>
-          <textarea ref={playTag} className="play-tips"></textarea>
+          <textarea
+            ref={playTag}
+            className="play-tips"
+            placeholder=" 챔피언의 플레이 스타일을 작성해주세요!"
+          ></textarea>
           <div className="label">상대 할 때</div>
-          <textarea ref={enemyTag} className="enemy-tips"></textarea>
+          <textarea
+            ref={enemyTag}
+            className="enemy-tips"
+            placeholder=" 챔피언의 챔피언 상대법을 알려주세요!"
+          ></textarea>
         </div>
         <div className="write-page page-4">
           <div className="title">.etc</div>
-          <textarea ref={etcTag} className="another-tips"></textarea>
+          <textarea
+            ref={etcTag}
+            className="another-tips"
+            placeholder=" 그 외에 독특한 챔피언 팁이 있다면 알려주세요!"
+          ></textarea>
           <button onClick={clickPost} className="post-btn" type="button">
             Post
           </button>
