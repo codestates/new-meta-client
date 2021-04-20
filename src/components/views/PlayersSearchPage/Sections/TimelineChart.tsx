@@ -3,37 +3,11 @@ import React, { ReactElement, useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import axios from "axios";
 import API from "../../../../api";
+import { FrameExpData, ParticipantFrames } from "../interface";
 
 interface Props {
   userData: FrameExpData[][];
 }
-
-interface FrameExpData {
-  timestamp: number;
-  participantFrames: ParticipantFrames;
-}
-interface ParticipantFrames {
-  [index: string]: any;
-  participantId: number;
-  position: {
-    x: number;
-    y: number;
-  };
-  currentGold: number;
-  totalGold: number;
-  level: number;
-  xp: number;
-  minionsKilled: number;
-  jungleMinionsKilled: number;
-  dominionScore: number;
-  teamScore: number;
-}
-
-/* interface ChampionEl {
-  key: string;
-  id: string;
-} */
-
 interface AverageExpData {
   timestamp: number;
   currentGold: number;
@@ -61,9 +35,6 @@ function TimelineChart(props: Props): ReactElement {
     } else {
       setChampions(JSON.parse(cache));
     }
-    return () => {
-      console.log("컴포넌트가 화면에서 사라짐");
-    };
   }, []);
 
   function getAverageExp(array: FrameExpData[][]) {
