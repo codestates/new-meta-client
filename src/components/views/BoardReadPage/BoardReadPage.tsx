@@ -192,7 +192,7 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
             </div>
             <div className="box-label">Tip</div>
             <div className="tips">
-              <div className="white-space"></div>
+              <div className="white-space bottom"></div>
               <div className="play-tips">
                 <div className="play-tips-title">플레이 할 경우</div>
                 <div className="tip-box">
@@ -200,7 +200,7 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
                     return (
                       <div className="tip" key={idx}>
                         <div className="numbering">{idx + 1}</div>
-                        {el}
+                        <div className="text-wrapper">{el}</div>
                       </div>
                     );
                   })}
@@ -213,13 +213,13 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
                     return (
                       <div className="tip" key={idx}>
                         <div className="numbering">{idx + 1}</div>
-                        {el}
+                        <div className="text-wrapper">{el}</div>
                       </div>
                     );
                   })}
                 </div>
               </div>
-              <div className="white-space"></div>
+              <div className="white-space bottom"></div>
             </div>
           </div>
         </div>

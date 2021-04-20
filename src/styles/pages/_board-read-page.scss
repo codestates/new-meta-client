@@ -1,4 +1,6 @@
 .board-read-page {
+  overflow-x: hidden;
+
   .champion-title-image {
     position: relative;
     padding-bottom: 2rem;
@@ -7,6 +9,7 @@
     align-items: center;
     filter: blur();
     width: 100%;
+
     .blur-img {
       width: 100%;
       position: absolute;
@@ -17,8 +20,10 @@
 
     .champion-image-wrapper {
       margin-top: 2rem;
-      height: 600px;
+      width: 90%;
+      height: 90%;
       img {
+        width: 100%;
         height: inherit;
       }
     }
@@ -81,16 +86,17 @@
 
   .champion-contents {
     position: relative;
-    margin: 1rem 2rem 6rem 4rem;
+    margin: 1rem 2rem 6rem 2rem;
     height: max-content;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     border: 1px solid $border;
+    line-height: 1.8rem;
 
     .white-space {
-      flex: 0 0 100px;
+      flex: 0 0 8%;
     }
 
     .box-label {
@@ -101,14 +107,14 @@
     }
 
     .story-title {
-      padding: 2em 0 1rem 0;
+      padding: 2rem 0 1rem 0;
       font-size: 1.2rem;
     }
 
     .story {
       display: flex;
       font-weight: lighter;
-      padding-bottom: 3rem;
+      padding-bottom: 5rem;
       width: 100%;
       border-bottom: 1px solid $border;
 
@@ -144,12 +150,13 @@
         display: none;
 
         .skill-name {
-          font-size: 1.4rem;
-          font-weight: 700;
-          padding-bottom: 1rem;
+          font-size: 1.2rem;
+          font-weight: 500;
+          padding-bottom: 0.8rem;
         }
 
         .skill-explanation {
+          font-size: 0.9rem;
         }
       }
 
@@ -164,6 +171,11 @@
       display: flex;
       width: 100%;
       // background-color: violet;
+
+      .white-space {
+        flex: 0 0 50px;
+      }
+
       .play-tips,
       .enemy-tips {
         flex: 1;
@@ -180,15 +192,20 @@
 
       .tip-box {
         padding: 1.5rem;
-        margin: 1rem;
+        margin: 1.5rem;
         margin-top: -1.4rem;
         border: 1px solid $border;
         width: 100vw/2;
 
         .tip {
           padding: 1rem 0;
-          margin: 1rem;
+          margin: 1rem 0;
           font-weight: lighter;
+
+          .text-wrapper {
+            margin: 0 1rem 0 3rem;
+          }
+
           .numbering {
             margin: 0 1rem 1rem 1rem;
             float: left;
@@ -196,6 +213,147 @@
           }
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: 1070px) {
+  .tips {
+    .white-space {
+      flex: 0 0 30px !important;
+    }
+  }
+}
+
+@media screen and (max-width: 940px) {
+  .champion-introduce .title {
+    font-size: 7rem !important;
+  }
+
+  .skills {
+    padding: 2rem 0 11rem 0 !important;
+  }
+
+  .tips {
+    flex-flow: column wrap;
+    padding: 1rem 0 !important;
+
+    .play-tips {
+      margin-bottom: 1.5rem;
+
+      .play-tips-title {
+        margin: 0 1.5rem;
+        background: none !important;
+      }
+    }
+
+    .enemy-tips-title {
+      margin: 0rem 1.5rem;
+      background: none !important;
+    }
+
+    .tip-box {
+      border: none !important;
+      padding: 1rem 1.5rem 1rem 1.5rem;
+    }
+
+    .white-space {
+      display: none;
+    }
+  }
+}
+
+@media screen and (max-width: $md-breakpoint) {
+  .champion-introduce {
+    .title {
+      font-size: 6rem !important;
+    }
+    .title-en {
+      font-size: 3rem !important;
+      margin-top: 0.3rem !important;
+    }
+  }
+
+  .skills {
+    img {
+      margin-bottom: 1rem !important;
+    }
+    .skill-description {
+      padding: 0 2rem 3rem 2rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .champion-introduce {
+    padding-bottom: 2rem !important;
+
+    .title {
+      font-size: 4rem !important;
+    }
+    .title-en {
+      font-size: 2rem !important;
+      margin-top: 0.3rem !important;
+    }
+  }
+
+  .champion-title-image {
+    .icon-left {
+      left: 0 !important;
+    }
+    .icon-right {
+      right: 0 !important;
+    }
+  }
+
+  .champion-image-wrapper {
+    width: 100% !important;
+  }
+
+  .skills {
+    padding: 2rem 0 12rem 0 !important;
+    font-size: 0.7rem !important;
+
+    .skill-name {
+      font-size: 1rem !important;
+      padding-bottom: 0.2rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .champion-contents {
+    margin: 1rem !important;
+
+    .story {
+      padding-bottom: 4rem !important;
+
+      .story-title {
+        padding: 1rem 0 !important;
+      }
+    }
+  }
+
+  .skills {
+    padding: 2rem 0 15rem 0 !important;
+    font-size: 0.7rem !important;
+  }
+
+  .tips {
+    padding-bottom: 3rem !important;
+
+    .play-tips {
+      margin-bottom: 3rem !important;
+    }
+  }
+
+  .tip-box {
+    margin: 0 !important;
+    padding: 0 !important;
+
+    .tip {
+      margin: 0 !important;
+      padding: 0.5rem !important;
     }
   }
 }

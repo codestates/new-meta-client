@@ -389,47 +389,76 @@
 }
 
 .search-bar-wrapper {
-  width: 100%;
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
+  position: relative;
+  width: 80%;
   font-weight: lighter;
+  display: flex;
+  left: 10%;
 
-  .dropdown {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
+  .search-bar {
+    left: 10%;
+    display: flex;
+    justify-content: flex-end;
+    width: 200px;
+    border-radius: 12px;
+    padding: 8px 12px;
+    background-color: $block;
 
-    // &:hover .dropdown-contents {
-    //   display: block;
-    // }
+    input {
+      background-color: transparent;
+      color: $jade;
+      border: none;
+    }
 
-    .dropdown-contents {
-      display: none;
-      margin-top: 0.4rem;
-      text-align: left;
-      position: absolute;
-      background-color: $block;
-      min-width: 120px;
-      padding: 5px;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      z-index: 9;
+    i {
+      cursor: pointer;
+      color: $jade;
+    }
+  }
 
-      & > * {
-        color: $primary;
-        padding: 8px;
-        text-decoration: none;
-        display: block;
-        cursor: pointer;
-        transition: 1s;
+  .filter-section {
+    width: 60%;
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-left: 13rem;
 
-        &:hover {
-          color: $jade;
+    .dropdown {
+      position: relative;
+      display: inline-block;
+      cursor: pointer;
+
+      // &:hover .dropdown-contents {
+      //   display: block;
+      // }
+
+      .dropdown-contents {
+        display: none;
+        margin-top: 0.4rem;
+        text-align: left;
+        position: absolute;
+        background-color: $block;
+        min-width: 120px;
+        padding: 5px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 9;
+
+        & > * {
+          color: $primary;
+          padding: 8px;
+          text-decoration: none;
+          display: block;
+          cursor: pointer;
+          transition: 1s;
+
+          &:hover {
+            color: $jade;
+          }
         }
       }
     }
   }
+
   .reset-btn {
     cursor: pointer;
     transition: 1s;
@@ -438,26 +467,6 @@
     &:hover {
       opacity: 0.7;
     }
-  }
-}
-
-.search-bar {
-  display: inline-flex;
-  justify-content: flex-end;
-  width: 200px;
-  border-radius: 12px;
-  padding: 8px 12px;
-  background-color: $block;
-
-  input {
-    background-color: transparent;
-    color: $jade;
-    border: none;
-  }
-
-  i {
-    cursor: pointer;
-    color: $jade;
   }
 }
 
@@ -515,6 +524,68 @@
 
     & > * {
       padding-bottom: 0.5rem;
+    }
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .filter-section {
+    margin-left: 3rem !important;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .filter-section {
+    width: 100% !important;
+    margin: 1.5rem 0 0 1rem !important;
+  }
+
+  .search-bar {
+    width: 50%;
+    padding: 6px !important;
+    position: absolute;
+    top: -15%;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+
+    i {
+      padding: 3px;
+    }
+
+    input {
+      width: 100%;
+    }
+  }
+
+  .filter-list {
+    margin: 1rem 5rem 0rem 1rem !important;
+  }
+}
+
+@media screen and (max-width: 655px) {
+  .filter-list {
+    display: flex;
+    align-items: center !important;
+
+    .prefix {
+      font-size: 0.8rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .search-bar-wrapper {
+    font-size: 0.9rem !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .search-bar {
+    padding: 0 !important;
+
+    i {
+      margin: 0.2rem;
+      font-size: 1.1rem;
     }
   }
 }
