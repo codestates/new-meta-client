@@ -6,8 +6,9 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { withRouter } from "react-router-dom";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import axios from "axios";
+import { gql, useMutation } from "@apollo/client";
 import rift from "../../../assets/image/summonersrift.jpg";
 import { removeFooter } from "../../utils/displayfooter";
 import API from "../../../api";
@@ -16,7 +17,7 @@ import API from "../../../api";
 
 const patchVersion = "11.7.1";
 
-function BoardWritePage(): ReactElement {
+function BoardWritePage(props: RouteComponentProps): ReactElement {
   removeFooter();
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const [Champions, setChampions] = useState<string[]>([]);
@@ -36,22 +37,14 @@ function BoardWritePage(): ReactElement {
   const enemyTag = useRef<HTMLTextAreaElement>(null);
   const etcTag = useRef<HTMLTextAreaElement>(null);
 
-  const postData = {
-    champion: CurrentChampion,
-    author: "osunguk", // todo : user 데이터로 바꾸기
-    createdAt: Date.now(),
-    updatedAt: Date.now(),
-    title: titleTag.current?.value,
-    description: descriptionTag.current?.value,
-    skills: [
-      skillTagQ.current?.value,
-      skillTagW.current?.value,
-      skillTagE.current?.value,
-      skillTagR.current?.value,
-    ],
-    play: [playTag.current?.value, enemyTag.current?.value],
-    etc: etcTag.current?.value,
-  };
+  const POST = gql`
+    mutation CreatePost($data: CreatePostInputType!) {
+      createPost(data: $data) {
+        title
+      }
+    }
+  `;
+  const [postGraghpl, { data }] = useMutation(POST);
 
   useEffect(() => {
     const run = async () => {
@@ -69,6 +62,28 @@ function BoardWritePage(): ReactElement {
   const clickPost = () => {
     // todo : 서버에 게시물 등록 요청
     // axios
+    const postData = {
+      champion: CurrentChampion,
+      title: titleTag.current?.value,
+      description: descriptionTag.current?.value,
+      skills: JSON.stringify([
+        skillTagQ.current?.value,
+        skillTagW.current?.value,
+        skillTagE.current?.value,
+        skillTagR.current?.value,
+      ]),
+      play: JSON.stringify([playTag.current?.value, enemyTag.current?.value]),
+      etc: etcTag.current?.value,
+    };
+
+    postGraghpl({
+      variables: {
+        data: postData,
+      },
+    }).then((res) => {
+      // console.log("res", res);
+      props.history.push("/board");
+    });
   };
 
   const clickIndex = (index: number, e: MouseEvent): void => {
