@@ -191,155 +191,157 @@ function ChampionCardList(props: Props): ReactElement {
             className="icon-search"
           ></i>
         </div>
-        <div className="dropdown">
-          <div
-            onClick={() => {
-              const style: CSSStyleDeclaration | undefined =
-                tagBoxRef.current?.style;
-              if (style && !IsTagBoxOpen) {
-                style.display = "block";
-                setIsTagBoxOpen(true);
-              }
-            }}
-            aria-hidden="true"
-            className="tags"
-          >
-            Tags
-          </div>
-          <div ref={tagBoxRef} className="dropdown-contents">
+        <div className="filter-section">
+          <div className="dropdown">
             <div
               onClick={() => {
-                if (!FilterListT.includes("Fighter")) {
-                  clickTag("Fighter");
-                  clickDropdownContent(tagBoxRef);
-                  FilterListT.push("Fighter");
+                const style: CSSStyleDeclaration | undefined =
+                  tagBoxRef.current?.style;
+                if (style && !IsTagBoxOpen) {
+                  style.display = "block";
+                  setIsTagBoxOpen(true);
                 }
               }}
               aria-hidden="true"
+              className="tags"
             >
-              Fighter
+              Tags
             </div>
-            <div
-              onClick={() => {
-                if (!FilterListT.includes("Tank")) {
-                  clickTag("Tank");
-                  clickDropdownContent(tagBoxRef);
-                  FilterListT.push("Tank");
-                }
-              }}
-              aria-hidden="true"
-            >
-              Tank
-            </div>
-            <div
-              onClick={() => {
-                if (!FilterListT.includes("Mage")) {
-                  clickTag("Mage");
-                  clickDropdownContent(tagBoxRef);
-                  FilterListT.push("Mage");
-                }
-              }}
-              aria-hidden="true"
-            >
-              Mage
-            </div>
-            <div
-              onClick={() => {
-                if (!FilterListT.includes("Assassin")) {
-                  clickTag("Assassin");
-                  clickDropdownContent(tagBoxRef);
-                  FilterListT.push("Assassin");
-                }
-              }}
-              aria-hidden="true"
-            >
-              Assassin
-            </div>
-            <div
-              onClick={() => {
-                if (!FilterListT.includes("Support")) {
-                  clickTag("Support");
-                  clickDropdownContent(tagBoxRef);
-                  FilterListT.push("Support");
-                }
-              }}
-              aria-hidden="true"
-            >
-              Support
-            </div>
-            <div
-              onClick={() => {
-                if (!FilterListT.includes("Marksman")) {
-                  clickTag("Marksman");
-                  clickDropdownContent(tagBoxRef);
-                  FilterListT.push("Marksman");
-                }
-              }}
-              aria-hidden="true"
-            >
-              Marksman
-            </div>
-          </div>
-        </div>
-        <div className="dropdown">
-          <div
-            onClick={() => {
-              const style: CSSStyleDeclaration | undefined =
-                diffBoxRef.current?.style;
-              if (style && !IsDiffBoxOpen) {
-                style.display = "block";
-                setIsDiffBoxOpen(true);
-              }
-            }}
-            aria-hidden="true"
-            className="difficulty"
-          >
-            Difficulty
-          </div>
-          <div ref={diffBoxRef} className="dropdown-contents">
-            <div
-              onClick={() => {
-                if (!FilterListD.includes("Hard")) {
-                  clickDiff(8, 10);
-                  clickDropdownContent(diffBoxRef);
-                  FilterListD.push("Hard");
-                  setFilterListD(FilterListD);
-                }
-              }}
-              aria-hidden="true"
-            >
-              Hard
-            </div>
-            <div
-              onClick={() => {
-                if (!FilterListD.includes("Normal")) {
-                  clickDiff(4, 7);
-                  clickDropdownContent(diffBoxRef);
-                  FilterListD.push("Normal");
-                  setFilterListD(FilterListD);
-                }
-              }}
-              aria-hidden="true"
-            >
-              Normal
-            </div>
-            <div
-              onClick={() => {
-                if (!FilterListD.includes("Easy")) {
-                  clickDiff(0, 3);
-                  clickDropdownContent(diffBoxRef);
-                  FilterListD.push("Easy");
-                  setFilterListD(FilterListD);
-                }
-              }}
-              aria-hidden="true"
-            >
-              Easy
+            <div ref={tagBoxRef} className="dropdown-contents">
+              <div
+                onClick={() => {
+                  if (!FilterListT.includes("Fighter")) {
+                    clickTag("Fighter");
+                    clickDropdownContent(tagBoxRef);
+                    FilterListT.push("Fighter");
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Fighter
+              </div>
+              <div
+                onClick={() => {
+                  if (!FilterListT.includes("Tank")) {
+                    clickTag("Tank");
+                    clickDropdownContent(tagBoxRef);
+                    FilterListT.push("Tank");
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Tank
+              </div>
+              <div
+                onClick={() => {
+                  if (!FilterListT.includes("Mage")) {
+                    clickTag("Mage");
+                    clickDropdownContent(tagBoxRef);
+                    FilterListT.push("Mage");
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Mage
+              </div>
+              <div
+                onClick={() => {
+                  if (!FilterListT.includes("Assassin")) {
+                    clickTag("Assassin");
+                    clickDropdownContent(tagBoxRef);
+                    FilterListT.push("Assassin");
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Assassin
+              </div>
+              <div
+                onClick={() => {
+                  if (!FilterListT.includes("Support")) {
+                    clickTag("Support");
+                    clickDropdownContent(tagBoxRef);
+                    FilterListT.push("Support");
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Support
+              </div>
+              <div
+                onClick={() => {
+                  if (!FilterListT.includes("Marksman")) {
+                    clickTag("Marksman");
+                    clickDropdownContent(tagBoxRef);
+                    FilterListT.push("Marksman");
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Marksman
+              </div>
             </div>
           </div>
-        </div>
-        <div onClick={clickReset} aria-hidden="true" className="reset-btn">
-          [ Reset Filter ]
+          <div className="dropdown">
+            <div
+              onClick={() => {
+                const style: CSSStyleDeclaration | undefined =
+                  diffBoxRef.current?.style;
+                if (style && !IsDiffBoxOpen) {
+                  style.display = "block";
+                  setIsDiffBoxOpen(true);
+                }
+              }}
+              aria-hidden="true"
+              className="difficulty"
+            >
+              Difficulty
+            </div>
+            <div ref={diffBoxRef} className="dropdown-contents">
+              <div
+                onClick={() => {
+                  if (!FilterListD.includes("Hard")) {
+                    clickDiff(8, 10);
+                    clickDropdownContent(diffBoxRef);
+                    FilterListD.push("Hard");
+                    setFilterListD(FilterListD);
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Hard
+              </div>
+              <div
+                onClick={() => {
+                  if (!FilterListD.includes("Normal")) {
+                    clickDiff(4, 7);
+                    clickDropdownContent(diffBoxRef);
+                    FilterListD.push("Normal");
+                    setFilterListD(FilterListD);
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Normal
+              </div>
+              <div
+                onClick={() => {
+                  if (!FilterListD.includes("Easy")) {
+                    clickDiff(0, 3);
+                    clickDropdownContent(diffBoxRef);
+                    FilterListD.push("Easy");
+                    setFilterListD(FilterListD);
+                  }
+                }}
+                aria-hidden="true"
+              >
+                Easy
+              </div>
+            </div>
+          </div>
+          <div onClick={clickReset} aria-hidden="true" className="reset-btn">
+            [ Reset Filter ]
+          </div>
         </div>
       </div>
       {/* {FilterList.length > 0 && <div className="filter-list">Filtered :</div>} */}
