@@ -40,14 +40,6 @@ function WinRateChart(props: Props): ReactElement {
     width: 250,
 
     options: {
-      title: {
-        text: "Rank Winning Rate",
-
-        style: {
-          color: "#FFF",
-          fontSize: "15px",
-        },
-      },
       colors: ["#0ec7b5"],
       plotOptions: {
         radialBar: {
@@ -79,8 +71,8 @@ function WinRateChart(props: Props): ReactElement {
         options={data.options}
         series={data.series}
         type="radialBar"
-        width={280}
-        height={280}
+        width={250}
+        height={250}
       />
     </>
   );
