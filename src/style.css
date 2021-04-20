@@ -1,4 +1,3 @@
-@charset "UTF-8";
 * {
   font-family: 'Noto Sans KR', sans-serif; }
 
@@ -679,7 +678,7 @@ template {
 .landing {
   display: flex;
   flex-direction: column;
-  overflow-x: hidden; }
+  overflow: hidden; }
   .landing .landing-text.main {
     width: 100%;
     text-align: center;
@@ -1024,12 +1023,12 @@ template {
   position: fixed;
   width: 100vw;
   height: 100vh;
-  z-index: 5;
+  z-index: 100;
   top: 0;
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.4);
   animation: fadein 1s forwards; }
 
 @keyframes fadein {
@@ -1110,10 +1109,19 @@ template {
       display: none; }
     .modal-box form .icon-x-circle.password {
       top: 32%; }
+  .modal-box .btn-back {
+    float: left;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    top: 10%; }
+    .modal-box .btn-back i {
+      font-size: 21px;
+      color: #0ec7b5; }
   .modal-box .btn-close {
     float: right;
     background-color: transparent;
-    color: #f7f8fa;
     border: none;
     outline: none;
     cursor: pointer; }
@@ -1885,37 +1893,117 @@ template {
   position: relative; }
   .players-search-page > .players-search-bar {
     display: flex;
+    width: 100%;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
-    align-self: center; }
+    align-items: center; }
+    .players-search-page > .players-search-bar > .match-search-bar {
+      width: 80%;
+      display: flex;
+      flex: 1 1 60px;
+      justify-content: space-around; }
     .players-search-page > .players-search-bar > .tabs {
       display: flex;
+      flex: flex-end;
       font-size: small;
-      color: #f7f8fa;
-      height: 50px; }
-      .players-search-page > .players-search-bar > .tabs > * {
-        width: 100px;
-        position: float;
+      height: 40px;
+      margin: 0;
+      width: 30%;
+      /*tab buttons hover*/
+      /* Tab active */ }
+      .players-search-page > .players-search-bar > .tabs .tab {
+        display: flex;
+        justify-content: center;
+        background: #f7f8fa;
+        background-image: linear-gradient(90deg, transparent 70%, rgba(255, 255, 255, 0.2) 100%);
+        border: none;
+        outline: none;
+        cursor: pointer;
+        width: 100%;
+        /*change depending on the number of tabs*/
+        height: 100%;
+        position: relative;
+        align-items: center;
+        font-size: 16px;
+        overflow: hidden;
+        transition: 0.3s ease; }
+      .players-search-page > .players-search-bar > .tabs .solo-tab {
+        border-top-left-radius: 0.7rem;
+        border-bottom-left-radius: 0.7rem; }
+      .players-search-page > .players-search-bar > .tabs .duo-tab {
+        border-top-right-radius: 0.7rem;
+        border-bottom-right-radius: 0.7rem; }
+      .players-search-page > .players-search-bar > .tabs .tab.active {
+        background-color: #0ec7b5;
+        background-image: linear-gradient(90deg, transparent 70%, rgba(255, 255, 255, 0.2) 100%);
+        z-index: 0;
+        border-right: 0px;
+        border-left: 0px;
+        height: 40px;
+        bottom: 0px;
+        overflow: hidden;
+        color: #f7f8fa; }
+        @media screen and (max-width: 512px) {
+          .players-search-page > .players-search-bar > .tabs .tab.active {
+            height: 40px; } }
+    .players-search-page > .players-search-bar > .solo-wrap > .players-input {
+      display: flex;
+      max-width: max-content;
+      height: 30px;
+      align-self: center;
+      border-radius: 5px;
+      background-color: #f7f8fa;
+      color: #0ec7b5; }
+    .players-search-page > .players-search-bar > .duo-wrap {
+      display: flex;
+      justify-content: space-evenly; }
+      .players-search-page > .players-search-bar > .duo-wrap > .players-input {
+        display: flex;
+        max-width: max-content;
+        align-self: center;
+        margin: 0;
         border-style: none;
-        cursor: pointer; }
-      .players-search-page > .players-search-bar > .tabs > .solo-tab {
-        background-color: #21efdb; }
-      .players-search-page > .players-search-bar > .tabs > .duo-tab {
-        background-color: #f7f8fa; }
-      .players-search-page > .players-search-bar > .tabs > .players-input {
-        background-color: #e2e4e9;
-        height: 2rem;
-        font-size: 12px; }
-    .players-search-page > .players-search-bar > .solo-wrap > .players-input,
-    .players-search-page > .players-search-bar .duo-wrap > .players-input {
-      max-width: 500px;
-      border-style: none; }
-    .players-search-page > .players-search-bar > .solo-wrap > .search-btn,
-    .players-search-page > .players-search-bar .duo-wrap > .search-btn {
-      background-color: #0ec7b5;
-      border-style: none; }
+        background-color: #f7f8fa;
+        height: 30px;
+        border-radius: 5px;
+        color: #0ec7b5; }
+    .players-search-page > .players-search-bar > .solo-wrap,
+    .players-search-page > .players-search-bar .duo-wrap {
+      display: flex;
+      align-self: center;
+      flex-direction: row;
+      justify-content: center; }
+      .players-search-page > .players-search-bar > .solo-wrap > .summoner-search-btn,
+      .players-search-page > .players-search-bar .duo-wrap > .summoner-search-btn {
+        display: flex;
+        align-self: center;
+        box-sizing: border-box;
+        appearance: none;
+        background-color: transparent;
+        border: 2px solid #7044ed;
+        border-radius: 3em;
+        color: #7044ed;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 400;
+        line-height: 1;
+        margin: 10px;
+        padding: 0.7rem 1.2rem;
+        text-decoration: none;
+        text-align: center;
+        text-transform: uppercase;
+        font-weight: 700;
+        transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out; }
+        .players-search-page > .players-search-bar > .solo-wrap > .summoner-search-btn:hover, .players-search-page > .players-search-bar > .solo-wrap > .summoner-search-btn:focus,
+        .players-search-page > .players-search-bar .duo-wrap > .summoner-search-btn:hover,
+        .players-search-page > .players-search-bar .duo-wrap > .summoner-search-btn:focus {
+          color: #fff;
+          outline: 0; }
+        .players-search-page > .players-search-bar > .solo-wrap > .summoner-search-btn:hover,
+        .players-search-page > .players-search-bar .duo-wrap > .summoner-search-btn:hover {
+          box-shadow: 0 0 40px 40px #7044ed inset; }
   .players-search-page > .user-data-view {
+    margin: 30px;
     display: flex;
     flex-direction: column;
     position: relative; }
@@ -1953,9 +2041,27 @@ template {
               align-content: center;
               font-size: 14px;
               margin: 5px; }
+              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion {
+                display: flex;
+                align-items: center; }
               .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tier {
                 text-align: center;
                 margin: 3px; }
+              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 100%; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph .graph-section {
+                  display: flex;
+                  justify-content: space-between;
+                  flex-wrap: wrap;
+                  margin: 10px; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph .graph-section .graph {
+                    flex: 0 0 250px;
+                    background: #2b2d3e;
+                    border-radius: 20px;
+                    box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08); }
               .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags {
                 display: flex;
                 justify-content: center; }
@@ -2076,11 +2182,16 @@ template {
         justify-content: center;
         flex-wrap: wrap; }
         .players-search-page > .user-data-view > .summoner-graph .graph-section .graph {
-          flex: 0 0 400px;
+          flex: 0 0 300px;
           margin: 20px;
           padding: 20px;
           background: #2b2d3e;
           border-radius: 20px;
+          box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08); }
+        .players-search-page > .user-data-view > .summoner-graph .graph-section .win-rate {
+          flex: 0 0 0px;
+          margin: 20px;
+          padding: 20px;
           box-shadow: 0px 1px 15px 1px rgba(69, 65, 78, 0.08); }
 
 .loading-background {
@@ -2168,7 +2279,6 @@ template {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.3);
   animation: fadein 1s forwards; }
 
 @keyframes fadein {
@@ -2183,7 +2293,7 @@ template {
     width: 300px;
     padding: 40px;
     transform: translate(-50%, -50%);
-    background: rgba(226, 228, 233, 0.1);
+    background: #0b0d12;
     box-sizing: border-box;
     box-shadow: 5px 30px 25px rgba(0, 0, 0, 0.5);
     border-radius: 15px;
@@ -2205,10 +2315,8 @@ template {
   90% {
     transform: translateY(-3px); }
   100% {
-    /* final */
     opacity: 1;
-    transform: translate(0);
-    /* 가운데 */ } }
+    transform: translate(0); } }
     .popup-background .popup-box .btn-wrapper.popup {
       margin-top: 40px; }
       .popup-background .popup-box .btn-wrapper.popup button {
@@ -2279,21 +2387,28 @@ template {
     animation: 0.3s linear 0.9s both fadeIn; }
 
 .toast-wrapper {
-  width: 400px;
+  width: 100%;
+  height: 18%;
   z-index: 10;
   position: absolute;
-  top: 20%;
-  left: 20%; }
+  top: 50px;
+  animation: fadein 1s forwards; }
+
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
 
 .toast {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 100%;
+  width: max-content;
   border-radius: 4px;
   box-sizing: border-box;
-  padding: 10px 48px 10px 38px;
+  padding: 12px 50px 12px 50px;
   margin-bottom: 10px;
   color: #e2e4e9;
   font-size: 13px;
