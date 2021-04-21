@@ -36,10 +36,10 @@ function Nav(props: any): ReactElement {
     setIsModalOpen(false);
   };
   const toMainHandler = (): void => {
-    props.history.push("/");
-    setIsLogin(false);
     TokenVar(null);
+    setIsLogin(false);
     localStorage.clear();
+    props.history.push("/");
   };
 
   return (

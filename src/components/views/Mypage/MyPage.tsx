@@ -1,6 +1,10 @@
 import { gql, useQuery } from "@apollo/client";
-import React, { ReactElement, useEffect } from "react";
+import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
+import PostModal from "./Sections/PostModal";
+import ChangeNicknameModal from "./Sections/ChangeNicknameModal";
+import LeaveModal from "./Sections/LeaveModal";
+import API from "../../../api";
 import ionia from "../../../assets/image/ionia2.jpeg";
 
 // interface Props {}
@@ -12,11 +16,11 @@ const tempData = {
     email: "osunguk@gmail.com",
 
     // post 와 조인
-    posts: ["1번 게시물 타이틀", "2번 게시물 타이틀"],
+    posts: [],
 
     // bookmarks(조인 테이블 user-user)
-    followerIds: ["Kim", "Na", "Park", "Lee"],
-    followeeIds: ["gab", "eul", "byung", "jeong"],
+    followerIds: [],
+    followeeIds: [],
 
     // likes(조인 테이블 user-post)
     likes: ["3번 게시물 타이틀", "4번 게시물 타이틀"],
@@ -39,61 +43,156 @@ const MyINFO = gql`
   }
 `;
 
+const MyPost = gql`
+  {
+    readMyPosts {
+      id
+      champion
+      title
+      description
+      skills
+      play
+      etc
+      createdAt
+      updatedAt
+      author
+    }
+  }
+`;
+
+interface myInfo {
+  email: string;
+  nickname: string;
+}
+
 function MyPage(): ReactElement {
-  const { loading, error, data } = useQuery(MyINFO);
+  // eslint-disable-next-line @typescript-eslint/ban-types
+  const [MyData, setMyData] = useState<myInfo | null>(null);
+  const [LikePosts, setLikePosts] = useState([]);
+  const [MyPosts, setMyPosts] = useState([]);
+  const [FollowerList, setFollowerList] = useState([]);
+  const [FolloweeList, setFolloweeList] = useState([]);
+  const [PModal, SetPostModal] = useState(false);
+  const [CNModal, SetChangeNicknameModal] = useState(false);
+  const [NPModal, SetNewPasswordModal] = useState(false);
+  const [LModal, SetLeaveModal] = useState(false);
+  const userInfoQuery = useQuery(MyINFO);
+  const userPostQuery = useQuery(MyPost);
+
+  const clickMyPost = (data: any) => {
+    console.log(data);
+    SetPostModal(true);
+  };
+
+  const clickChangeNick = () => {
+    //
+    SetChangeNicknameModal(true);
+  };
+  const clickNewPassword = () => {
+    SetNewPasswordModal(true);
+    //
+  };
+
+  const clickLeave = () => {
+    SetLeaveModal(true);
+    //
+  };
+  useEffect(() => {
+    // todo 팔로우, 좋아요 부분 다 하기
+
+    if (userInfoQuery.data) {
+      console.log(userInfoQuery.data.me);
+      setMyData(userInfoQuery.data.me);
+    }
+    if (userPostQuery.data) {
+      console.log(userPostQuery.data.readMyPosts);
+      setMyPosts(userPostQuery.data.readMyPosts);
+    }
+  }, [userInfoQuery, userInfoQuery.data, userPostQuery.data]);
 
   useEffect(() => {
-    if (loading) {
-      console.log("loading");
-    }
-    if (error) console.log(`Error! ${error.message}`);
-    console.log("data:", data);
-  }, [data, error, loading]);
+    userInfoQuery.refetch();
+    userPostQuery.refetch();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
+      {PModal && <PostModal closeModal={SetPostModal} />}
+      {CNModal && <ChangeNicknameModal closeModal={SetChangeNicknameModal} />}
+      {NPModal && <ChangeNicknameModal closeModal={SetNewPasswordModal} />}
+      {LModal && <LeaveModal closeModal={SetLeaveModal} />}
+
       {/* <div className="my-page-background-img">
         <img src={ionia} alt=""></img>
       </div>
       <div className="my-page-background-blur">&nbsp;</div> */}
+
       <div className="my-page">
         <section className="user-title">
-          <div className="">{tempData.user.nick}</div>
+          <div className="">{MyData?.nickname}</div>
         </section>
         <section className="user-info">
           <div className="box-label">Info</div>
-          <div className="user-email">Email : {tempData.user.email}</div>
+          <div className="user-email">Email : {MyData?.email}</div>
           <div className="numbers">
             <div className="post-num">
               <div className="">Post</div>
-              <div className="num">{tempData.user.posts.length}</div>
+              <div className="num">{MyPosts.length}</div>
             </div>
             <div className="follower-num">
               <div className="">Follower</div>
-              <div className="num">{tempData.user.followerIds.length}</div>
+              <div className="num">{FollowerList.length}</div>
             </div>
             <div className="followee-num">
               <div className="">Followee</div>
-              <div className="num">{tempData.user.followeeIds.length}</div>
+              <div className="num">{FolloweeList.length}</div>
             </div>
           </div>
         </section>
         <section className="user-posts">
           <div className="box-label">Post</div>
           <div className="post">
-            <div className="label">Recent posts</div>
+            <div className="label">My posts</div>
             <div className="post-list">
-              {tempData.user.posts.map((el: any) => {
-                return <div className="post-item">&nbsp;</div>;
-              })}
+              {MyPosts.length > 0 ? (
+                MyPosts.map((el: any) => {
+                  const data = el.createdAt.slice(0, 10).split("-").join(".");
+                  return (
+                    <div
+                      aria-hidden
+                      onClick={() => {
+                        clickMyPost(el);
+                      }}
+                      key={el.id}
+                      className="post-item my-post"
+                    >
+                      <img
+                        src={`${API.championSquare}/${el.champion}.png`}
+                        alt=""
+                      ></img>
+                      <div className="text">
+                        <div className="title">{el.champion}</div>
+                        <div className="description">{data}</div>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <div className="my-post-empty">No my posts yet</div>
+              )}
             </div>
           </div>
           <div className="post">
             <div className="label">like posts</div>
             <div className="post-list">
-              {tempData.user.posts.map((el: any) => {
-                return <div className="post-item">&nbsp;</div>;
-              })}
+              {tempData.user.posts.length > 0 ? (
+                tempData.user.posts.map((el: any) => {
+                  return <div className="post-item">&nbsp;</div>;
+                })
+              ) : (
+                <div className="my-post-empty">No like posts yet</div>
+              )}
             </div>
           </div>
         </section>
@@ -101,27 +200,37 @@ function MyPage(): ReactElement {
           <div className="box-label">Follow</div>
           <div className="label">Follower list</div>
           <div>
-            {tempData.user.followerIds.map((el: any) => {
-              return (
-                <div className="follow-item">
-                  <div className="nickname">osunguk</div>
-                  <div className="email">osunguk@gmail.com</div>
-                  <div className="unfollow">Unfollow</div>
-                </div>
-              );
-            })}
+            {tempData.user.followerIds.length > 0 ? (
+              tempData.user.followerIds.map((el: any) => {
+                return (
+                  <div className="follow-item">
+                    <div className="nickname">osunguk</div>
+                    <div className="email">osunguk@gmail.com</div>
+                    <div className="unfollow">Unfollow</div>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="my-follower-empty">Try follower your friends</div>
+            )}
           </div>
           <div className="label">Followee list</div>
           <div>
-            {tempData.user.followerIds.map((el: any) => {
-              return (
-                <div className="follow-item">
-                  <div className="nickname">osunguk</div>
-                  <div className="email">osunguk@gmail.com</div>
-                  <div className="following">Following</div>
-                </div>
-              );
-            })}
+            {tempData.user.followerIds.length > 0 ? (
+              tempData.user.followerIds.map((el: any) => {
+                return (
+                  <div className="follow-item">
+                    <div className="nickname">osunguk</div>
+                    <div className="email">osunguk@gmail.com</div>
+                    <div className="unfollow">Unfollow</div>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="my-followee-empty">
+                Let your friends know who you are.
+              </div>
+            )}
           </div>
         </section>
         <section className="user-search-history">
@@ -131,17 +240,33 @@ function MyPage(): ReactElement {
             <div className="right">reset</div>
           </div>
           <div className="search-list">
-            {tempData.user.followerIds.map((el: any) => {
-              return <div className="search-item">hide on bush</div>;
-            })}
+            {tempData.user.followerIds.length > 0 ? (
+              tempData.user.followerIds.map((el: any) => {
+                return (
+                  <div className="follow-item">
+                    <div className="nickname">osunguk</div>
+                    <div className="email">osunguk@gmail.com</div>
+                    <div className="unfollow">Unfollow</div>
+                  </div>
+                );
+              })
+            ) : (
+              <div className="my-search-empty">
+                You didn&#39;t search anything.
+              </div>
+            )}
           </div>
         </section>
         <section className="user-etc">
           <div className="box-label">etc.</div>
           <div className="button-group">
-            <button type="button">Change Nickname</button>
-            <button type="button">New Password</button>
-            <button className="leave" type="button">
+            <button onClick={clickChangeNick} type="button">
+              Change Nickname
+            </button>
+            <button onClick={clickNewPassword} type="button">
+              New Password
+            </button>
+            <button onClick={clickLeave} className="leave" type="button">
               Leave
             </button>
           </div>
