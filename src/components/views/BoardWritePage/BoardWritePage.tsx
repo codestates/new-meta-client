@@ -44,7 +44,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
   `;
   const GET_ALL_POST = gql`
     {
-      readAllPosts {
+      fetchAllPosts {
         id
         champion
         title
@@ -112,7 +112,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
         const location = {
           pathname: "/board/",
           state: {
-            page: 1,
+            page: 0,
           },
         };
         props.history.push(location);
@@ -124,7 +124,6 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
 
   const clickIndex = (index: number, e: MouseEvent): void => {
     // console.log("test");
-
     e.currentTarget.parentElement?.children[CurrentIndex].classList.remove(
       "selected"
     );
@@ -147,18 +146,18 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
     indexBoxDiv?.children[1].classList.add("selected");
   };
 
-  if (!CurrentChampion) {
-    // console.log("챔피언 미선택");
-    indexBox.current?.children[1].classList.add("display-none");
-    indexBox.current?.children[2].classList.add("display-none");
-    indexBox.current?.children[3].classList.add("display-none");
-    indexBox.current?.children[4].classList.add("display-none");
-  } else {
-    indexBox.current?.children[1].classList.remove("display-none");
-    indexBox.current?.children[2].classList.remove("display-none");
-    indexBox.current?.children[3].classList.remove("display-none");
-    indexBox.current?.children[4].classList.remove("display-none");
-  }
+  // if (!CurrentChampion) {
+  //   // console.log("챔피언 미선택");
+  //   indexBox.current?.children[1].classList.add("display-none");
+  //   indexBox.current?.children[2].classList.add("display-none");
+  //   indexBox.current?.children[3].classList.add("display-none");
+  //   indexBox.current?.children[4].classList.add("display-none");
+  // } else {
+  //   indexBox.current?.children[1].classList.remove("display-none");
+  //   indexBox.current?.children[2].classList.remove("display-none");
+  //   indexBox.current?.children[3].classList.remove("display-none");
+  //   indexBox.current?.children[4].classList.remove("display-none");
+  // }
 
   return (
     <div className="board-write-page">
@@ -204,7 +203,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
       </div>
       <div ref={writeBox} className="write-box">
         <div className="write-page page-0 is-active">
-          <div className="search-bar">
+          <div className="search-bar-write">
             <input type="text"></input>
             <i className="icon-search"></i>
           </div>
@@ -222,7 +221,6 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
                       .get(`${API.championInfo}/${championName}.json`)
                       .then((res) => {
                         const { spells } = res.data.data[championName];
-
                         const result = spells.map((el: any) => {
                           return [el.image.full, el.name];
                         });
@@ -241,6 +239,18 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
         </div>
 
         <div className="write-page page-1">
+          <button
+            className="btn-next"
+            type="button"
+            onClick={(e) => {
+              clickIndex(CurrentIndex + 1, e);
+              const indexBoxDiv = indexBox.current;
+              indexBoxDiv?.children[CurrentIndex].classList.remove("selected");
+              indexBoxDiv?.children[CurrentIndex + 1].classList.add("selected");
+            }}
+          >
+            Next
+          </button>
           <div className="current-champion-img">
             {CurrentChampion && (
               <img
@@ -270,6 +280,18 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           </div>
         </div>
         <div className="write-page page-2">
+          <button
+            className="btn-next page-2"
+            type="button"
+            onClick={(e) => {
+              clickIndex(CurrentIndex + 1, e);
+              const indexBoxDiv = indexBox.current;
+              indexBoxDiv?.children[CurrentIndex].classList.remove("selected");
+              indexBoxDiv?.children[CurrentIndex + 1].classList.add("selected");
+            }}
+          >
+            Next
+          </button>
           <div className="title">Skills</div>
           <div className="skill-q">
             {SkillImages.length > 0 && (
@@ -333,6 +355,18 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           </div>
         </div>
         <div className="write-page page-3">
+          <button
+            className="btn-next"
+            type="button"
+            onClick={(e) => {
+              clickIndex(CurrentIndex + 1, e);
+              const indexBoxDiv = indexBox.current;
+              indexBoxDiv?.children[CurrentIndex].classList.remove("selected");
+              indexBoxDiv?.children[CurrentIndex + 1].classList.add("selected");
+            }}
+          >
+            Next
+          </button>
           <div className="title">Tip`s</div>
           <div className="label">플레이할 때</div>
           <textarea

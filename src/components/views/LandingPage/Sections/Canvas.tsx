@@ -27,8 +27,8 @@ function Canvas(props: any): ReactElement {
 
     if (canvas) {
       context = canvas.getContext("2d");
-      width = canvas.width = window.innerWidth;
-      height = canvas.height = window.innerHeight;
+      width = canvas.width = 1500;
+      height = canvas.height = 700;
 
       if (context && width && height) {
         context.fillStyle = "rgba(30,30,30,1)";
@@ -118,33 +118,19 @@ function Canvas(props: any): ReactElement {
       }
     };
 
-    const onResizeHandler = () => {
-      if (canvas) {
-        width = canvas.width = window.innerWidth;
-        height = canvas.height = window.innerHeight;
-        loop();
-      }
-    };
-
-    if (canvas) {
-      canvas.addEventListener("mousemove", onMouseHandlaer);
-    }
-    window.addEventListener("resize", onResizeHandler);
+    canvas?.addEventListener("mousemove", onMouseHandlaer);
     window.requestAnimationFrame = onRequestFrame;
 
     loop();
     setInterval(loop, 1000 / 60);
 
     return () => {
-      if (canvas) {
-        canvas.removeEventListener("mousemove", onMouseHandlaer);
-      }
-      window.removeEventListener("resize", onResizeHandler);
+      canvas?.removeEventListener("mousemove", onMouseHandlaer);
       window.cancelAnimationFrame = onRequestFrame;
     };
   }, []);
 
-  return <canvas ref={canvasRef} width="1920" height="1080" {...props} />;
+  return <canvas className="canvas-top" ref={canvasRef} {...props} />;
 }
 
 export default Canvas;

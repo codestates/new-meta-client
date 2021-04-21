@@ -3,6 +3,7 @@ import React, { ReactElement, useEffect } from "react";
 import { Link } from "react-router-dom";
 import freljord from "../../../../assets/image/freljord.jpeg";
 import demacia from "../../../../assets/image/demacia.jpeg";
+import CanvasBottom from "./CanvasBottom";
 
 const sideTotalNum = 3;
 let sidePageNum = 0;
@@ -67,6 +68,7 @@ function Services(): ReactElement {
 
   return (
     <div className="sections services">
+      <CanvasBottom />
       <div className="side-section">
         <div className="clip-1" />
         <div className="side-img-wrapper">
@@ -90,7 +92,6 @@ function Services(): ReactElement {
       <div className="side-section">
         <div className="clip-2" />
         <div className="side-img-wrapper">
-          {/* <div className="rectangle-1" /> */}
           <img className="landing-img left" src={freljord} alt="" />
         </div>
         <div className="text-wrapper second">
