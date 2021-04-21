@@ -425,7 +425,8 @@
   }
 }
 
-.leave-modal {
+.leave-modal,
+.change-modal {
   display: flex;
   flex-direction: column;
   height: 30%;
