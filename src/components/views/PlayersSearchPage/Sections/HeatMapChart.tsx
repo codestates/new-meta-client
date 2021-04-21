@@ -201,7 +201,7 @@ function HeatMapChart(props: Props): ReactElement {
         enabled: false,
       },
       chart: {
-        background: "#2B2D3E",
+        background: "transparent",
         toolbar: {
           show: false,
         },

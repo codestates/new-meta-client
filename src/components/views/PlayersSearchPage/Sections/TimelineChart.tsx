@@ -3,37 +3,11 @@ import React, { ReactElement, useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import axios from "axios";
 import API from "../../../../api";
+import { FrameExpData, ParticipantFrames } from "../interface";
 
 interface Props {
   userData: FrameExpData[][];
 }
-
-interface FrameExpData {
-  timestamp: number;
-  participantFrames: ParticipantFrames;
-}
-interface ParticipantFrames {
-  [index: string]: any;
-  participantId: number;
-  position: {
-    x: number;
-    y: number;
-  };
-  currentGold: number;
-  totalGold: number;
-  level: number;
-  xp: number;
-  minionsKilled: number;
-  jungleMinionsKilled: number;
-  dominionScore: number;
-  teamScore: number;
-}
-
-/* interface ChampionEl {
-  key: string;
-  id: string;
-} */
-
 interface AverageExpData {
   timestamp: number;
   currentGold: number;
@@ -44,27 +18,6 @@ interface AverageExpData {
 
 function TimelineChart(props: Props): ReactElement {
   const { userData } = props;
-  const [Champions, setChampions] = useState<any>([]);
-
-  useEffect(() => {
-    const cache = sessionStorage.getItem("Champions");
-    const run = async () => {
-      const result = await axios.get(API.allChampionInfo);
-      sessionStorage.setItem(
-        "Champions",
-        JSON.stringify(Object.values(result.data.data))
-      );
-      setChampions(Object.values(result.data.data));
-    };
-    if (!cache) {
-      run();
-    } else {
-      setChampions(JSON.parse(cache));
-    }
-    return () => {
-      console.log("컴포넌트가 화면에서 사라짐");
-    };
-  }, []);
 
   function getAverageExp(array: FrameExpData[][]) {
     const result: AverageExpData[] = [];
@@ -110,13 +63,6 @@ function TimelineChart(props: Props): ReactElement {
     return result;
   }
   const AvgData = getAverageExp(userData);
-
-  /*  const getChampionName(key: number):string => {
-    Champions.filter((el:ChampionEl) => {
-      return Number(el.key) === key
-    })
-    return Champions[0].id
-  } */
 
   const data = {
     series: [

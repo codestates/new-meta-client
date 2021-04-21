@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import Chart from "react-apexcharts";
+import { LaneInfo } from "../interface";
 import iconJUNGLE from "../../../../assets/image/position/icon-jng.png";
 import iconMID from "../../../../assets/image/position/icon-mid.png";
 import iconTOP from "../../../../assets/image/position/icon-top.png";
@@ -8,19 +9,10 @@ import iconSUPPORT from "../../../../assets/image/position/icon-spt.png";
 
 interface Props {
   userData: LaneInfo;
-  position: string;
-}
-interface LaneInfo {
-  TOP: number;
-  JUNGLE: number;
-  MID: number;
-  AD_CARRY: number;
-  SUPPORT: number;
 }
 
 function LaneInfoChart(props: Props): ReactElement {
-  const { userData, position } = props;
-  console.log(position);
+  const { userData } = props;
 
   const data = {
     series: [
@@ -42,12 +34,10 @@ function LaneInfoChart(props: Props): ReactElement {
         show: false,
       },
       title: {
-        text: "RankGame Position",
-
         style: {
           color: "#FFF",
           fontSize: "15px",
-          align: "top",
+          align: "center",
         },
       },
       chart: {
@@ -55,29 +45,22 @@ function LaneInfoChart(props: Props): ReactElement {
       },
       plotOptions: {
         pie: {
-          customScale: 0.8,
+          customScale: 1,
           donut: {
             labels: {
               show: true,
               value: { color: "#FFF" },
-
-              // custom: () => {
-              //   return (
-              //     "<div>" +
-              //     '<img width="100" height="100" src={iconJUNGLE} alt="" />' +
-              //     "</div>"
-              //   );
-              // },
+              total: {
+                show: false,
+                label: "",
+                // showAlways: true,
+              },
             },
           },
         },
       },
       legend: {
         show: false,
-
-        labels: {
-          colors: "#f7f8fa",
-        },
       },
       tooltip: {
         enabled: true,
@@ -101,8 +84,8 @@ function LaneInfoChart(props: Props): ReactElement {
         options={data.options}
         series={data.series}
         type="donut"
-        width={300}
-        height={300}
+        width={250}
+        height={250}
       />
     </>
   );

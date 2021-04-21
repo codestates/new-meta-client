@@ -2,90 +2,22 @@
 /* eslint-disable no-restricted-syntax */
 
 import React, { useState, useEffect, useRef, ReactElement } from "react";
+import {
+  LaneInfo,
+  LeagueInfo,
+  KDAEventData,
+  PlayerMatchInfo,
+} from "../interface";
 
 interface Props {
   laneInfo: LaneInfo;
   leagueInfo: LeagueInfo;
   kdaInfo: KDAEventData[];
-}
-
-interface LeagueInfo {
-  leagueId: string;
-  queueType: string;
-  tier: string;
-  rank: string;
-  summonerId: string;
-  summonerName: string;
-  leaguePoints: number;
-  wins: number;
-  losses: number;
-  veteran: boolean;
-  inactive: boolean;
-  freshBlood: boolean;
-  hotStreak: boolean;
-}
-
-interface LaneInfo {
-  TOP: number;
-  JUNGLE: number;
-  MID: number;
-  AD_CARRY: number;
-  SUPPORT: number;
-}
-
-interface KDAEventData {
-  matchKills: number;
-  matchAssists: number;
-  matchDeaths: number;
-  matchDragonKills: number;
-  matchHeraldKills: number;
-  matchKillForLevel3: number;
-  matchAssistForLevel3: number;
-  matchDeathForLevel3: number;
-  matchKillForLevel2: number;
-  matchAssistForLevel2: number;
-  matchDeathForLevel2: number;
+  recentChampionStats: PlayerMatchInfo[];
 }
 
 function TagComponent(props: Props): ReactElement {
-  const { laneInfo, leagueInfo, kdaInfo } = props;
-  /* const [position, setPosition] = useState("");
-  useEffect(() => {
-    if (laneInfo) {
-      let max = 0;
-      const array = [
-        {
-          position: "TOP",
-          count: laneInfo.TOP,
-        },
-        {
-          position: "JUNGLE",
-          count: laneInfo.JUNGLE,
-        },
-        {
-          position: "MID",
-          count: laneInfo.MID,
-        },
-        {
-          position: "AD_CARRY",
-          count: laneInfo.AD_CARRY,
-        },
-        {
-          position: "SUPPORT",
-          count: laneInfo.SUPPORT,
-        },
-      ];
-      setPosition(
-        array.reduce((acc: string, a) => {
-          if (a.count > max) {
-            acc = a.position;
-            max = a.count;
-          }
-          return acc;
-        }, "")
-      );
-    }
-  }, [laneInfo]); */
+  const { laneInfo, leagueInfo, kdaInfo, recentChampionStats } = props;
 
   /* 태그- 컴포넌트로 만들어야함 */
   const hotStreak = useRef<HTMLDivElement>(null);
@@ -102,11 +34,25 @@ function TagComponent(props: Props): ReactElement {
   const earlyWeak = useRef<HTMLDivElement>(null);
 
   /* 연승중 */
+  function streakCount(array: PlayerMatchInfo[]) {
+    let count = 0;
+    for (const el of array) {
+      if (el.stats.win) {
+        count += 1;
+      } else {
+        break;
+      }
+    }
+    return count;
+  }
 
   if (hotStreak.current) {
-    if (leagueInfo.hotStreak) {
-      hotStreak.current.classList.add("active");
-      hotStreak.current.textContent = "연승 중";
+    if (leagueInfo.hotStreak === true) {
+      const streaks = streakCount(recentChampionStats);
+      if (streaks > 2) {
+        hotStreak.current.classList.add("active");
+        hotStreak.current.textContent = `${streaks}연승 중`;
+      }
     }
   }
 
@@ -209,11 +155,17 @@ function TagComponent(props: Props): ReactElement {
   if (earlyStrong.current) {
     let count = 0;
     for (const el of kdaInfo) {
-      if (el.matchDeathForLevel2 > 1) {
+      if (
+        el.matchKillForLevel2 +
+          el.matchAssistForLevel2 +
+          el.matchKillForLevel3 +
+          el.matchAssistForLevel3 >
+        0
+      ) {
         count += 1;
       }
     }
-    if (count > 5) {
+    if (count > 9) {
       earlyStrong.current.classList.add("active");
       earlyStrong.current.textContent = "초반에 강해요";
     }
@@ -226,7 +178,7 @@ function TagComponent(props: Props): ReactElement {
         count += 1;
       }
     }
-    if (count > 5) {
+    if (count > 8) {
       earlyWeak.current.classList.add("active");
       earlyWeak.current.textContent = "초반에 약해요";
     }
@@ -292,8 +244,16 @@ function TagComponent(props: Props): ReactElement {
       ></div>
       <div className="tag" ref={lev2Weak} data-ballon="2렙갱에 약해요!"></div>
       <div className="tag" ref={lev3Weak} data-ballon="3렙갱에 약해요!"></div>
-      <div className="tag" ref={earlyStrong} data-ballon="초반에 강함"></div>
-      <div className="tag" ref={earlyWeak} data-ballon="초반에 약함"></div>
+      <div
+        className="tag"
+        ref={earlyStrong}
+        data-ballon="3렙까지 킬관여 확률 50% 이상!(20전 기준)"
+      ></div>
+      <div
+        className="tag"
+        ref={earlyWeak}
+        data-ballon="3렙까지 죽을 확률 45% 이상(20전 기준)"
+      ></div>
       <div
         className="tag"
         ref={linePhaseStrong}

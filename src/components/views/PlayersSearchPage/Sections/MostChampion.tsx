@@ -1,27 +1,17 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-syntax */
 import React, { ReactElement, useEffect, useState } from "react";
+import Chart from "react-apexcharts";
 import axios from "axios";
 import API from "../../../../api";
+import { PlayerMatchInfo } from "../interface";
 // const squareImg =
 //   "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/{getChampionName(key)}.png";
 
 interface Props {
   userData: PlayerMatchInfo[];
+  idx: number;
 }
-
-interface PlayerMatchInfo {
-  gameId: number;
-  champion: number;
-  stats: {
-    participantId: number;
-    win: boolean;
-    kills: number;
-    deaths: number;
-    assists: number;
-  };
-}
-
 interface ChampionEl {
   id: string;
   key: string;
@@ -34,7 +24,7 @@ interface ChampionStat {
 }
 
 function MostChampion(props: Props): ReactElement {
-  const { userData } = props;
+  const { userData, idx } = props;
 
   const [Champions, setChampions] = useState<any>([]);
   useEffect(() => {
@@ -54,12 +44,16 @@ function MostChampion(props: Props): ReactElement {
     }
   }, []);
 
-  function getChampionName(key: number) {
+  function getChampionName(key: number): string {
     /* 챔피언 ID로 영문 이름 얻기  */
-    const champion = Champions.filter((el: ChampionEl) => {
-      return Number(el.key) === key;
-    });
-    return champion[0].id;
+    let resultName = "";
+    if (Champions.length > 0) {
+      const result = Champions.filter((el: ChampionEl) => {
+        return Number(el.key) === key;
+      });
+      resultName = result[0].id;
+    }
+    return resultName;
   }
 
   function getChampionKey(arr: PlayerMatchInfo[]): number[] {
@@ -90,28 +84,46 @@ function MostChampion(props: Props): ReactElement {
   }
   const ChampionStatArray = getChampionStatArray();
 
-  // for (const el of userData) {
-  //   if (el.stats.win) {
-  //   }
-  // }
+  for (const el of userData) {
+    if (el.stats.win) {
+      ChampionStatArray.filter((ele) => {
+        return ele.champion === el.champion;
+      })[0].wins += 1;
+    }
+    ChampionStatArray.filter((ele) => {
+      return ele.champion === el.champion;
+    })[0].losses += 1;
+  }
+
+  ChampionStatArray.sort((a, b) => {
+    return a.wins + a.losses > b.wins + b.losses ? -1 : 1;
+  });
+
+  const champImgURL = `http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/${getChampionName(
+    ChampionStatArray[idx].champion
+  )}.png`;
+  const matches = ChampionStatArray[idx].wins + ChampionStatArray[idx].losses;
+  const rate = ((ChampionStatArray[idx].wins / matches) * 100).toFixed(0);
 
   return (
-    <div>
+    <div className="mostChamp">
       <img
-        src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/Aatrox.png"
-        alt=""
+        src={champImgURL}
         width="49"
-      />
-      <img
-        src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/Yuumi.png"
+        height="49"
         alt=""
-        width="49"
+        className="mostChamp-img"
       />
-      <img
-        src="http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/Bard.png"
-        alt=""
-        width="49"
-      />
+      <div className="rate-detail">
+        <div className="champ-win-lose">
+          <div className="all">{matches}전</div>{" "}
+          <span className="win"> {ChampionStatArray[idx].wins}</span>승{" "}
+          <span className="lose">{ChampionStatArray[idx].losses}</span>패
+        </div>
+        <div className="champ-rate">
+          <span className="champ-rate-num">{rate}</span>%
+        </div>
+      </div>
     </div>
   );
 }
