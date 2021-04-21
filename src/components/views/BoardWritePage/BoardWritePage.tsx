@@ -295,13 +295,15 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           <div className="title">Skills</div>
           <div className="skill-q">
             {SkillImages.length > 0 && (
-              <>
+              <div>
                 <div className="skill-name">{SkillImages[0][1]}</div>
-                <img
-                  src={`${API.championSpell}/${SkillImages[0][0]}`}
-                  alt=""
-                ></img>
-              </>
+                <div className="skill-img">
+                  <img
+                    src={`${API.championSpell}/${SkillImages[0][0]}`}
+                    alt=""
+                  ></img>
+                </div>
+              </div>
             )}
             <textarea
               ref={skillTagQ}
@@ -312,10 +314,12 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
             {SkillImages.length > 0 && (
               <>
                 <div className="skill-name">{SkillImages[1][1]}</div>
-                <img
-                  src={`${API.championSpell}/${SkillImages[1][0]}`}
-                  alt=""
-                ></img>
+                <div className="skill-img">
+                  <img
+                    src={`${API.championSpell}/${SkillImages[1][0]}`}
+                    alt=""
+                  ></img>
+                </div>
               </>
             )}
             <textarea
@@ -327,10 +331,12 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
             {SkillImages.length > 0 && (
               <>
                 <div className="skill-name">{SkillImages[2][1]}</div>
-                <img
-                  src={`${API.championSpell}/${SkillImages[2][0]}`}
-                  alt=""
-                ></img>
+                <div className="skill-img">
+                  <img
+                    src={`${API.championSpell}/${SkillImages[2][0]}`}
+                    alt=""
+                  ></img>
+                </div>
               </>
             )}
             <textarea
@@ -342,10 +348,12 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
             {SkillImages.length > 0 && (
               <>
                 <div className="skill-name">{SkillImages[3][1]}</div>
-                <img
-                  src={`${API.championSpell}/${SkillImages[3][0]}`}
-                  alt=""
-                ></img>
+                <div className="skill-img">
+                  <img
+                    src={`${API.championSpell}/${SkillImages[3][0]}`}
+                    alt=""
+                  ></img>
+                </div>
               </>
             )}
             <textarea

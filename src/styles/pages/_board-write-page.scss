@@ -29,7 +29,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    transition: 2s;
+    // transition: 2s;
 
     .index-item {
       width: 100%;
@@ -116,8 +116,8 @@
       background: rgba($background, $alpha: 0.3);
       cursor: pointer;
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 2rem;
+      right: 2rem;
       font-weight: 300;
       color: $jade;
       outline: none;
@@ -158,6 +158,7 @@
         align-items: center;
         flex-wrap: wrap;
         overflow-y: scroll;
+        width: 95%;
 
         .champions-pick-square {
           width: 60px;
@@ -182,75 +183,74 @@
 
       .current-champion-img {
         padding-left: 2rem;
-        flex: 0 1 320px;
+        flex: 0 1 90;
 
         img {
-          max-width: 320px;
+          width: 90%;
         }
       }
 
       .title-input-form {
         height: 100%;
-        flex: 1;
+        flex: 0.9;
+        padding: 0 1rem;
         display: flex;
         justify-content: center;
-        align-items: center;
         flex-direction: column;
-        padding-right: 4rem;
 
         .champ-name {
-          font-size: 3rem;
+          font-size: 2.5rem;
           padding-bottom: 2rem;
         }
 
         .post-title,
         .post-subtitle {
-          width: 90%;
+          width: 100%;
         }
 
         p {
-          text-align: center;
           width: 100%;
           font-weight: lighter;
-          font-size: 2rem;
+          font-size: 1rem;
         }
         input {
           color: $primary;
-          width: 100%;
-          padding: 12px 24px;
+          width: 90%;
+          padding: 12px;
           background-color: $block;
           border: none;
         }
       }
     }
     & > .page-2 {
-      padding: 1rem;
-      // display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-evenly;
       position: relative;
 
       textarea {
         color: $primary;
-        margin-left: 2rem;
+        margin: 0 1.5rem;
         border: none;
         background-color: $block;
-        width: 100%;
-        height: 100%;
+        width: 80%;
+        height: 88%;
         resize: none;
+        padding: 5px;
+        font-size: 0.9rem;
       }
 
       & > *:not(.btn-next) {
         width: 90%;
         display: flex;
+        padding-left: 2rem;
       }
 
       & > *:nth-child(2) {
         color: $jade;
         font-weight: 500;
         font-size: 2rem;
-        margin-bottom: -3rem;
+        margin-bottom: -1rem;
       }
 
       .skill-name {
@@ -261,9 +261,12 @@
         margin: auto;
         margin-right: 1rem;
       }
+
+      .skill-img {
+        width: 100px;
+      }
     }
     & > .page-3 {
-      // display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -271,14 +274,14 @@
 
       .title {
         color: $jade-dark;
-        padding-bottom: 2rem;
-        font-size: 1.5rem;
+        padding-bottom: 1rem;
+        font-size: 2rem;
       }
 
       .label {
-        // margin-bottom: -6px;
-        font-size: 2rem;
+        font-size: 1.2rem;
         z-index: 3;
+        margin-top: 2rem;
       }
 
       textarea {
@@ -286,13 +289,13 @@
         background-color: $block;
         color: $primary;
         resize: none;
-        width: 90%;
-        height: 200px;
-        margin: 2rem;
+        width: 80%;
+        height: 25%;
+        margin: 1rem;
+        font-size: 0.9rem;
       }
     }
     & > .page-4 {
-      // display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;
@@ -334,6 +337,163 @@
           box-shadow: 0 0 5px $jade-dark, 0 0 10px $jade-dark;
         }
       }
+    }
+  }
+}
+
+@media screen and (max-width: $lg-breakpoint) {
+  .current-champion-img {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 24%;
+    width: 40%;
+  }
+
+  .write-box .page-1 .title-input-form {
+    padding-left: 0 !important;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 75%;
+    width: 50%;
+
+    .post-title {
+      width: 90% !important;
+      font-size: 0.9rem !important;
+    }
+
+    .post-subtitle {
+      width: 90% !important;
+      font-size: 0.9rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: $md-breakpoint) {
+  .write-box {
+    position: absolute;
+    left: 55% !important;
+    top: 43%;
+    transform: translate(-50%, -50%);
+  }
+
+  .search-bar-write {
+    position: absolute;
+    top: 3.5% !important;
+  }
+
+  .champions-pick {
+    position: absolute;
+    top: 10% !important;
+    height: 85% !important;
+  }
+
+  .index-box {
+    position: fixed !important;
+    left: -32px !important;
+    min-width: 65px;
+  }
+
+  .page-0 {
+    padding-top: 1rem !important;
+  }
+
+  .page-1 {
+    .current-champion-img {
+      img {
+        width: 90% !important;
+      }
+    }
+
+    .title-input-form {
+      padding-right: 2rem !important;
+
+      .champ-name {
+        font-size: 2.5rem !important;
+        padding-left: 3.5rem !important;
+      }
+      p {
+        width: 100% !important;
+        font-size: 1rem !important;
+        padding-left: 1.5rem;
+      }
+    }
+  }
+
+  .page-2 {
+    & > *:not(.btn-next) {
+      width: 95% !important;
+      padding-left: 1.5rem !important;
+    }
+  }
+}
+
+// @media screen and (max-width: 650px) {
+//   .write-box {
+//     margin-right: 2rem !important;
+//   }
+
+//   .index-box {
+//     margin: 1rem !important;
+//   }
+// }
+
+@media screen and (max-width: 600px) {
+  .page-1 {
+    position: relative;
+
+    .current-champion-img {
+      position: absolute;
+      top: 30%;
+      left: 48%;
+      transform: translate(-50%, -50%);
+      width: 46%;
+    }
+
+    .title-input-form {
+      position: absolute !important;
+      top: 78% !important;
+      left: 40% !important;
+      transform: translate(-50%, -50%);
+
+      .champ-name {
+        padding: 0 !important;
+        position: absolute;
+        top: 33% !important;
+        left: 67% !important;
+        transform: translate(-50%, -50%);
+      }
+
+      input {
+        width: 157% !important;
+      }
+    }
+  }
+
+  // .index-box {
+  //   margin: 0.5rem !important;
+  //   flex: 1 0 35px !important;
+  // }
+}
+
+@media screen and (max-width: 515px) {
+  .page-1 {
+    .current-champion-img {
+      width: 55%;
+    }
+    .title-input-form {
+      top: 79% !important;
+      font-size: 0.9rem !important;
+
+      .champ-name {
+        top: 30% !important;
+      }
+    }
+  }
+  .write-box {
+    .btn-next {
+      margin: -1rem;
     }
   }
 }
