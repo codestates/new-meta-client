@@ -56,7 +56,7 @@ function BoardPage(props: RouteComponentProps): ReactElement {
           aria-hidden="true"
           className="page-section"
         >
-          Champions
+          New-Meta
         </div>
         <div
           onClick={() => {
@@ -67,11 +67,11 @@ function BoardPage(props: RouteComponentProps): ReactElement {
           aria-hidden="true"
           className="page-section"
         >
-          New-Meta
+          Champions
         </div>
       </div>
-      {CurrentPage === 0 && <ChampionCardList Champions={Champions} />}
-      {CurrentPage === 1 && <BoardShow />}
+      {CurrentPage === 0 && <BoardShow />}
+      {CurrentPage === 1 && <ChampionCardList Champions={Champions} />}
     </div>
   );
 }

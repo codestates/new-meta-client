@@ -44,7 +44,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
   `;
   const GET_ALL_POST = gql`
     {
-      readAllPosts {
+      fetchAllPosts {
         id
         champion
         title
@@ -112,7 +112,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
         const location = {
           pathname: "/board/",
           state: {
-            page: 1,
+            page: 0,
           },
         };
         props.history.push(location);

@@ -29,9 +29,11 @@ const tempData = {
 
 const MyINFO = gql`
   {
-    me {
-      nickname
-      email
+    myInfo {
+      user {
+        nickname
+        email
+      }
       posts {
         id
         champion
@@ -61,8 +63,10 @@ const MyPost = gql`
 `;
 
 interface myInfo {
-  email: string;
-  nickname: string;
+  user: {
+    email: string;
+    nickname: string;
+  };
 }
 
 function MyPage(): ReactElement {
@@ -73,6 +77,7 @@ function MyPage(): ReactElement {
   const [FollowerList, setFollowerList] = useState([]);
   const [FolloweeList, setFolloweeList] = useState([]);
   const [PModal, SetPostModal] = useState(false);
+  const [PModalData, SetPostModalData] = useState(null);
   const [CNModal, SetChangeNicknameModal] = useState(false);
   const [NPModal, SetNewPasswordModal] = useState(false);
   const [LModal, SetLeaveModal] = useState(false);
@@ -80,32 +85,27 @@ function MyPage(): ReactElement {
   const userPostQuery = useQuery(MyPost);
 
   const clickMyPost = (data: any) => {
-    console.log(data);
     SetPostModal(true);
+    SetPostModalData(data);
   };
 
   const clickChangeNick = () => {
-    //
     SetChangeNicknameModal(true);
   };
   const clickNewPassword = () => {
     SetNewPasswordModal(true);
-    //
   };
 
   const clickLeave = () => {
     SetLeaveModal(true);
-    //
   };
   useEffect(() => {
     // todo 팔로우, 좋아요 부분 다 하기
 
     if (userInfoQuery.data) {
-      console.log(userInfoQuery.data.me);
-      setMyData(userInfoQuery.data.me);
+      setMyData(userInfoQuery.data.myInfo);
     }
     if (userPostQuery.data) {
-      console.log(userPostQuery.data.readMyPosts);
       setMyPosts(userPostQuery.data.readMyPosts);
     }
   }, [userInfoQuery, userInfoQuery.data, userPostQuery.data]);
@@ -118,7 +118,7 @@ function MyPage(): ReactElement {
 
   return (
     <>
-      {PModal && <PostModal closeModal={SetPostModal} />}
+      {PModal && <PostModal closeModal={SetPostModal} data={PModalData} />}
       {CNModal && <ChangeNicknameModal closeModal={SetChangeNicknameModal} />}
       {NPModal && <ChangeNicknameModal closeModal={SetNewPasswordModal} />}
       {LModal && <LeaveModal closeModal={SetLeaveModal} />}
@@ -130,11 +130,11 @@ function MyPage(): ReactElement {
 
       <div className="my-page">
         <section className="user-title">
-          <div className="">{MyData?.nickname}</div>
+          <div className="">{MyData?.user.nickname}</div>
         </section>
         <section className="user-info">
           <div className="box-label">Info</div>
-          <div className="user-email">Email : {MyData?.email}</div>
+          <div className="user-email">Email : {MyData?.user.email}</div>
           <div className="numbers">
             <div className="post-num">
               <div className="">Post</div>
