@@ -3,6 +3,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import PostModal from "./Sections/PostModal";
 import ChangeNicknameModal from "./Sections/ChangeNicknameModal";
+import NewPasswordModal from "./Sections/NewPasswordModal";
 import LeaveModal from "./Sections/LeaveModal";
 import API from "../../../api";
 import ionia from "../../../assets/image/ionia2.jpeg";
@@ -136,7 +137,7 @@ function MyPage(): ReactElement {
     <>
       {PModal && <PostModal closeModal={SetPostModal} data={PModalData} />}
       {CNModal && <ChangeNicknameModal closeModal={SetChangeNicknameModal} />}
-      {NPModal && <ChangeNicknameModal closeModal={SetNewPasswordModal} />}
+      {NPModal && <NewPasswordModal closeModal={SetNewPasswordModal} />}
       {LModal && <LeaveModal closeModal={SetLeaveModal} />}
 
       {/* <div className="my-page-background-img">
