@@ -400,25 +400,52 @@
     align-items: flex-end;
     opacity: 0.5;
   }
+}
+@media screen and (max-width: 576px) {
+  .post-modal {
+    height: 100% !important;
+  }
+}
 
-  & > .btn-close {
+.modal {
+  .btn-close {
     position: absolute;
     left: 90%;
     top: 5%;
   }
 
-  & > .btn-wrapper {
+  .btn-wrapper {
     position: absolute;
     top: 80%;
     left: 10%;
 
-    .delete {
+    .font-red {
       color: $red;
     }
   }
 }
-@media screen and (max-width: 576px) {
-  .post-modal {
-    height: 100% !important;
+
+.leave-modal {
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  justify-content: center;
+
+  .text {
+    font-size: 1.2rem;
+    text-align: center;
+    padding-bottom: 2rem;
+  }
+
+  input {
+    background-color: $block;
+    color: $primary;
+    border: none;
+    width: 90%;
+    padding: 4px 12px;
+  }
+
+  .btn-wrapper {
+    top: 60%;
   }
 }
