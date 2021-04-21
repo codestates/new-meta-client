@@ -108,11 +108,27 @@ function MyPage(): ReactElement {
     if (userPostQuery.data) {
       setMyPosts(userPostQuery.data.readMyPosts);
     }
+
+    return () => {
+      setMyData(null);
+      setLikePosts([]);
+      setMyPosts([]);
+      setFollowerList([]);
+      setFolloweeList([]);
+    };
   }, [userInfoQuery, userInfoQuery.data, userPostQuery.data]);
 
   useEffect(() => {
     userInfoQuery.refetch();
     userPostQuery.refetch();
+
+    return () => {
+      setMyData(null);
+      setLikePosts([]);
+      setMyPosts([]);
+      setFollowerList([]);
+      setFolloweeList([]);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -261,7 +277,7 @@ function MyPage(): ReactElement {
           <div className="box-label">etc.</div>
           <div className="button-group">
             <button onClick={clickChangeNick} type="button">
-              Change Nickname
+              Change Nick name
             </button>
             <button onClick={clickNewPassword} type="button">
               New Password
