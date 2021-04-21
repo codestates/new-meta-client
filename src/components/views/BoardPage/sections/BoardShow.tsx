@@ -28,8 +28,6 @@ function BoardShow(props: any): ReactElement {
   const getAllPostQuery = useQuery(GET_ALL_POST);
 
   useEffect(() => {
-    console.log("work");
-
     const dataList = getAllPostQuery?.data?.fetchAllPosts;
     if (dataList) {
       const result = dataList.map((el: any) => {
@@ -39,7 +37,6 @@ function BoardShow(props: any): ReactElement {
           play: JSON.parse(el.play),
         };
       });
-      console.log(result);
       setBoardList(result);
     }
   }, [getAllPostQuery]);

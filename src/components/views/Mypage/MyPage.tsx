@@ -103,11 +103,9 @@ function MyPage(): ReactElement {
     // todo 팔로우, 좋아요 부분 다 하기
 
     if (userInfoQuery.data) {
-      console.log(userInfoQuery.data.myInfo);
       setMyData(userInfoQuery.data.myInfo);
     }
     if (userPostQuery.data) {
-      console.log(userPostQuery.data.readMyPosts);
       setMyPosts(userPostQuery.data.readMyPosts);
     }
   }, [userInfoQuery, userInfoQuery.data, userPostQuery.data]);
