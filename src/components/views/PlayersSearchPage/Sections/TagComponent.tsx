@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-param-reassign */
 /* eslint-disable no-restricted-syntax */
 
@@ -18,6 +19,9 @@ interface Props {
 
 function TagComponent(props: Props): ReactElement {
   const { laneInfo, leagueInfo, kdaInfo, recentChampionStats } = props;
+  useEffect(() => {
+    return () => {};
+  }, [laneInfo, leagueInfo, kdaInfo, recentChampionStats]);
 
   /* 태그- 컴포넌트로 만들어야함 */
   const hotStreak = useRef<HTMLDivElement>(null);
@@ -92,7 +96,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev3Strong.current.classList.add("active");
       lev3Strong.current.textContent = "3렙 싸움꾼";
-      console.log("3렙 싸움꾼");
     }
   }
 
@@ -108,7 +111,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       heraldLover.current.classList.add("active");
       heraldLover.current.textContent = "전령은 잘 챙기는 편이야";
-      console.log("전령은 잘 챙기는 편이야", count);
     }
   }
 
@@ -122,7 +124,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       dragonKiller.current.classList.add("active");
       dragonKiller.current.textContent = "용은 잘 챙기는 편이야";
-      // dragonKiller.current.attributes.add("data-tag");
     }
   }
 
@@ -215,51 +216,51 @@ function TagComponent(props: Props): ReactElement {
       <div
         className="tag"
         ref={hotStreak}
-        data-ballon="기분 좋게 연승중!"
+        data-tooltip="기분 좋게 연승중!"
       ></div>
       <div
         className="tag"
         ref={lev2Strong}
-        data-ballon="2렙 싸움은 못 참지!"
+        data-tooltip="2렙 싸움은 못 참지!"
       ></div>
       <div
         className="tag"
         ref={lev3Strong}
-        data-ballon="최근 20전 기준 6번 이상 3렙 단계에서 킬관여를 했어요!"
+        data-tooltip="최근 20전 기준 6번 이상 3렙 단계에서 킬관여를 했어요!"
       ></div>
       <div
         className="tag"
         ref={carryMachine}
-        data-ballon="200전 이상 게임하는 동안 승률 55%를 유지하고 있어요!"
+        data-tooltip="200전 이상 게임하는 동안 승률 55%를 유지하고 있어요!"
       ></div>
       <div
         className="tag"
         ref={heraldLover}
-        data-ballon="최근 20전 기준 6번 이상 첫 전령을 챙겼어요!"
+        data-tooltip="최근 20전 기준 6번 이상 첫 전령을 챙겼어요!"
       ></div>
       <div
         className="tag"
         ref={dragonKiller}
-        data-ballon="최근 20전 기준 6번 이상 라인전 단계에서 첫 드래곤을 챙겼어요!"
+        data-tooltip="최근 20전 기준 6번 이상 라인전 단계에서 첫 드래곤을 챙겼어요!"
       ></div>
-      <div className="tag" ref={lev2Weak} data-ballon="2렙갱에 약해요!"></div>
-      <div className="tag" ref={lev3Weak} data-ballon="3렙갱에 약해요!"></div>
+      <div className="tag" ref={lev2Weak} data-tooltip="2렙갱에 약해요!"></div>
+      <div className="tag" ref={lev3Weak} data-tooltip="3렙갱에 약해요!"></div>
       <div
         className="tag"
         ref={earlyStrong}
-        data-ballon="3렙까지 킬관여 확률 50% 이상!(20전 기준)"
+        data-tooltip="3렙까지 킬관여 확률 50% 이상!(20전 기준)"
       ></div>
       <div
         className="tag"
         ref={earlyWeak}
-        data-ballon="3렙까지 죽을 확률 45% 이상(20전 기준)"
+        data-tooltip="3렙까지 죽을 확률 45% 이상(20전 기준)"
       ></div>
       <div
         className="tag"
         ref={linePhaseStrong}
-        data-ballon="라인전 강함"
+        data-tooltip="라인전 강함"
       ></div>
-      <div className="tag" ref={linePhaseWeak} data-ballon="라인전 약함"></div>
+      <div className="tag" ref={linePhaseWeak} data-tooltip="라인전 약함"></div>
     </>
   );
 }

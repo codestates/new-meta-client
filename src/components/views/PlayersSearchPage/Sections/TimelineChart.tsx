@@ -62,6 +62,7 @@ function TimelineChart(props: Props): ReactElement {
     }
     return result;
   }
+
   const AvgData = getAverageExp(userData);
 
   const data = {
@@ -117,7 +118,7 @@ function TimelineChart(props: Props): ReactElement {
         width: [0, 4],
       },
       title: {
-        text: "15 Minutes Exp",
+        text: "CS & Gold Data for 15 Minutes",
 
         style: {
           color: "#FFF",

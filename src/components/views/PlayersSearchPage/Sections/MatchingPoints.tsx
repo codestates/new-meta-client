@@ -13,7 +13,7 @@ interface Props {
 
 function MatchingPoints(props: Props): ReactElement {
   const { User1data, User2data } = props;
-  const [ResultPoint, setResultPoint] = useState(0);
+  const [ResultPoint, setResultPoint] = useState("0");
 
   const findPosition = (data: SummonerAllData) => {
     let result = "";

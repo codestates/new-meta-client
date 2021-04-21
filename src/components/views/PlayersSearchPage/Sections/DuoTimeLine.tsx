@@ -1,6 +1,6 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
-import React, { ReactElement } from "react";
+import React, { ReactElement, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import { FrameExpData, LaneInfo } from "../interface";
 
@@ -28,6 +28,13 @@ function DuoTimeLine(props: Props): ReactElement {
     User1LaneInfo,
     User2LaneInfo,
   } = props;
+
+  useEffect(() => {
+    console.log("Props로 데이터를 잘 받아왔음");
+    return () => {
+      console.log("컴포넌트가 화면에서 사라짐");
+    };
+  }, [props]);
 
   function getMainPosition(object: LaneInfo): string {
     const max = Object.values(object).reduce((acc, cur) => {
@@ -110,6 +117,7 @@ function DuoTimeLine(props: Props): ReactElement {
 
   /* 라이너 - 라이너일 경우 : 데이터- 미니언 */
   const graphData = {
+    // colors: ["#FFF"],
     series: [
       {
         name: User1Name,
@@ -132,6 +140,18 @@ function DuoTimeLine(props: Props): ReactElement {
         ],
       },
     ],
+    legend: {
+      position: "top",
+      horizontalAlign: "right",
+      floating: true,
+      offsetY: -25,
+      offsetX: -5,
+      fontSize: "18px",
+
+      labels: {
+        colors: ["#FFF"],
+      },
+    },
     options: {
       tooltip: {
         theme: "dark",
@@ -151,6 +171,7 @@ function DuoTimeLine(props: Props): ReactElement {
           show: false,
         },
       },
+
       colors: ["#21efdb", "#f86d7d"],
       dataLabels: {
         enabled: true,
@@ -178,6 +199,7 @@ function DuoTimeLine(props: Props): ReactElement {
       },
       xaxis: {
         categories: ["3m", "6m", "9m", "12m", "15m"],
+        colors: ["#FFF"],
         title: {
           text: "Timeline",
           style: {
@@ -190,16 +212,7 @@ function DuoTimeLine(props: Props): ReactElement {
         min: 5,
         max: 110,
       },
-      legend: {
-        // position: "top",
-        // horizontalAlign: "right",
-        floating: true,
-        offsetY: -25,
-        offsetX: -5,
-        /* labels: {
-          color: "#FFF",
-        }, */
-      },
+
       responsive: [
         {
           breakpoint: 300,

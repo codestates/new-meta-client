@@ -53,7 +53,7 @@ function LaneInfoChart(props: Props): ReactElement {
               total: {
                 show: false,
                 label: "",
-                // showAlways: true,
+                showAlways: true,
               },
             },
           },
@@ -84,7 +84,6 @@ function LaneInfoChart(props: Props): ReactElement {
         options={data.options}
         series={data.series}
         type="donut"
-        width={250}
         height={250}
       />
     </>
