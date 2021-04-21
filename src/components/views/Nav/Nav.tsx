@@ -9,8 +9,11 @@ import Hamburger from "./Sections/Hamburger";
 
 const CHECK_LOGIN = gql`
   {
-    me {
-      nickname
+    myInfo {
+      user {
+        nickname
+        email
+      }
     }
   }
 `;
