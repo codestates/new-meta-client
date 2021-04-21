@@ -70,8 +70,8 @@ function BoardPage(props: RouteComponentProps): ReactElement {
           New-Meta
         </div>
       </div>
-      {CurrentPage === 0 && <ChampionCardList Champions={Champions} />}
-      {CurrentPage === 1 && <BoardShow />}
+      {CurrentPage === 0 && <BoardShow />}
+      {CurrentPage === 1 && <ChampionCardList Champions={Champions} />}
     </div>
   );
 }
