@@ -144,7 +144,15 @@ function Canvas(props: any): ReactElement {
     };
   }, []);
 
-  return <canvas ref={canvasRef} width="1920" height="1080" {...props} />;
+  return (
+    <canvas
+      className="canvas-top"
+      ref={canvasRef}
+      width="1920"
+      height="1080"
+      {...props}
+    />
+  );
 }
 
 export default Canvas;
