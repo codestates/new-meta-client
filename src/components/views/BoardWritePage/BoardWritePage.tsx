@@ -204,7 +204,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
       </div>
       <div ref={writeBox} className="write-box">
         <div className="write-page page-0 is-active">
-          <div className="search-bar">
+          <div className="search-bar-write">
             <input type="text"></input>
             <i className="icon-search"></i>
           </div>
@@ -241,6 +241,9 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
         </div>
 
         <div className="write-page page-1">
+          <button className="btn-next" type="button">
+            Next
+          </button>
           <div className="current-champion-img">
             {CurrentChampion && (
               <img
@@ -270,6 +273,9 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           </div>
         </div>
         <div className="write-page page-2">
+          <button className="btn-next page-2" type="button">
+            Next
+          </button>
           <div className="title">Skills</div>
           <div className="skill-q">
             {SkillImages.length > 0 && (
@@ -333,6 +339,9 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           </div>
         </div>
         <div className="write-page page-3">
+          <button className="btn-next" type="button">
+            Next
+          </button>
           <div className="title">Tip`s</div>
           <div className="label">플레이할 때</div>
           <textarea
