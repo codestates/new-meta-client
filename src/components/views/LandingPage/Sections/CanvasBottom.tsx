@@ -1,121 +1,77 @@
-/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
-/* eslint-disable radix */
+import React, { ReactElement, useRef, useEffect } from "react";
 
-import React, { ReactElement, useEffect, useRef } from "react";
-
-const color = "0, 182, 164";
-const R = 1;
-const balls: any[] = [];
-const lineWidth = 0.7;
-const disLimit = 390;
+interface Star {
+  x: number;
+  y: number;
+  radius: number;
+  vx: number;
+  vy: number;
+}
 
 function CanvasBottom(): ReactElement {
   const canvasBottomRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvasBottom = canvasBottomRef.current;
-    const ctx = canvasBottom?.getContext("2d");
-    let width: number = parseInt(canvasBottom?.getAttribute("width")!);
-    let height: number = parseInt(canvasBottom?.getAttribute("height")!);
+    const context = canvasBottom?.getContext("2d");
+    const stars: Star[] = [];
+    const x = 33;
+    canvasBottom!.width = 1000;
+    canvasBottom!.height = 1100;
 
-    function randomNumFrom(min: number, max: number) {
-      return Math.random() * (max - min) + min;
+    for (let i = 0; i < x; i += 1) {
+      stars.push({
+        x: Math.random() * canvasBottom!.width,
+        y: Math.random() * canvasBottom!.height,
+        radius: Math.random() * 1 + 1,
+        vx: Math.floor(Math.random() * 50) - 25,
+        vy: Math.floor(Math.random() * 50) - 25,
+      });
     }
 
-    function randomSidePos(length: number) {
-      return Math.ceil(Math.random() * length);
-    }
+    function draw() {
+      context?.clearRect(0, 0, canvasBottom!.width, canvasBottom!.height);
+      context!.globalCompositeOperation = "lighter";
 
-    function renderBalls() {
-      Array.prototype.forEach.call(
-        balls,
-        (b: { x: number; y: number; alpha: number }) => {
-          if (!Object.prototype.hasOwnProperty.call(b, "type")) {
-            ctx!.fillStyle = `rgba(${color}, ${b.alpha})`;
-            ctx!.beginPath();
-            ctx!.arc(b.x, b.y, R, 0, Math.PI * 2, true);
-            ctx!.closePath();
-            ctx!.fill();
-          }
-        }
-      );
-    }
+      for (let i = 0, x = stars.length; i < x; i += 1) {
+        const star = stars[i];
+        context!.fillStyle = "#00b6a4";
+        context?.beginPath();
+        context?.arc(star.x, star.y, star.radius, 0, 2 * Math.PI);
+        context?.fill();
+        context?.stroke();
+      }
 
-    function renderLines() {
-      console.log("renderLines");
-      let fraction;
-      let alpha;
+      context?.beginPath();
 
-      for (let i = 0; i < balls.length; i += 1) {
-        for (let j = i + 1; j < balls.length; j += 1) {
-          fraction = getDisOf(balls[i], balls[j]) / disLimit;
+      for (let i = 0, x = stars.length; i < x; i += 1) {
+        const starI = stars[i];
+        context?.moveTo(starI.x, starI.y);
 
-          if (fraction < 1) {
-            alpha = (1 - fraction).toString();
-            ctx!.strokeStyle = `rgba(${color}, ${alpha})`;
-            ctx!.lineWidth = lineWidth;
-            ctx!.beginPath();
-            ctx!.moveTo(balls[i].x, balls[i].y);
-            ctx!.lineTo(balls[j].x, balls[j].y);
-            ctx!.stroke();
-            ctx!.closePath();
+        for (let j = 0, x = stars.length; j < x; j += 1) {
+          const starII = stars[j];
+          if (distance(starI, starII) < 200) {
+            context?.lineTo(starII.x, starII.y);
           }
         }
       }
+
+      context!.lineWidth = 0.05;
+      context!.strokeStyle = "#e2e4e9";
+      context?.stroke();
     }
 
-    function getDisOf(
-      b1: { x: number; y: number },
-      b2: { x: number; y: number }
-    ) {
-      const deltaX = Math.abs(b1.x - b2.x);
-      const deltaY = Math.abs(b1.y - b2.y);
-      return Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    function distance(point1: Star, point2: Star) {
+      let xs = 0;
+      let ys = 0;
+      xs = point2.x - point1.x;
+      xs *= xs;
+      ys = point2.y - point1.y;
+      ys *= ys;
+      return Math.sqrt(xs + ys);
     }
 
-    function render() {
-      console.log("render");
-      ctx!.clearRect(0, 0, width, height);
-      renderBalls();
-      renderLines();
-      window.requestAnimationFrame(render);
-    }
-
-    function initBalls(num: number) {
-      console.log("initBalls");
-      for (let i = 1; i <= num; i += 1) {
-        balls.push({
-          x: randomSidePos(width),
-          y: randomSidePos(height),
-          r: R,
-          alpha: 1,
-          phase: randomNumFrom(0, 10),
-        });
-      }
-    }
-
-    function initCanvas() {
-      console.log("initCanvas");
-      canvasBottom?.setAttribute("width", String(window.innerWidth * 0.96));
-      canvasBottom?.setAttribute("height", "1250px");
-      width = parseInt(canvasBottom?.getAttribute("width")!);
-      height = parseInt(canvasBottom?.getAttribute("height")!);
-    }
-
-    // window.addEventListener("resize", () => {
-    //   console.log("Window Resize...");
-    //   initCanvas();
-    // });
-
-    function goMovie() {
-      console.log("goMovie");
-      initCanvas();
-      initBalls(25);
-      window.requestAnimationFrame(render);
-    }
-
-    goMovie();
-    render();
+    draw();
   }, []);
 
   return <canvas className="canvas-bottom" ref={canvasBottomRef} />;

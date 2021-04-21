@@ -348,7 +348,7 @@
 
         button {
           margin-top: 30px;
-          background: $background;
+          background: transparent;
           color: $secondary;
           border: $secondary solid 1px;
           position: absolute;
@@ -441,9 +441,11 @@
 .canvas-bottom {
   background-color: transparent;
   position: absolute;
-  top: 18%;
-  left: 2%;
+  top: 23%;
+  left: 50%;
+  transform: translate(-50%);
   z-index: -1;
+  transition: 1s;
 }
 
 @media screen and (max-width: $md-breakpoint) {
