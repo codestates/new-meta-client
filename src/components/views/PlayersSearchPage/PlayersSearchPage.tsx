@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable react-hooks/exhaustive-deps */
@@ -45,8 +46,28 @@ function PlayersSearchPage(): ReactElement {
   const soloBtn = useRef<HTMLButtonElement>(null);
   const duoBtn = useRef<HTMLButtonElement>(null);
 
-  const [User1data, setUser1data] = useState<SummonerAllData>(LanerData);
-  const [User2data, setUser2data] = useState<SummonerAllData>(JunglerData);
+  const [User1data, setUser1data] = useState<SummonerAllData>(JunglerData);
+  const [User2data, setUser2data] = useState<SummonerAllData>({});
+
+  function getMainPosition(object: LaneInfo): string {
+    const max = Object.values(object).reduce((acc, cur) => {
+      return acc > cur ? acc : cur;
+    });
+    const array = ["TOP", "JUNGLE", "MID", "AD_CARRY", "SUPPORT"];
+    let mainPosition = "";
+    for (const el of array) {
+      if (object[el] === max) {
+        mainPosition = el;
+      }
+    }
+    return mainPosition;
+  }
+
+  useEffect(() => {
+    return () => {
+      setLoadingState(false);
+    };
+  }, [User1data, User2data, user1MainPosition, user2MainPosition]);
 
   const onInputUserName1Handler = (e: {
     target: { value: React.SetStateAction<string> };
@@ -72,19 +93,20 @@ function PlayersSearchPage(): ReactElement {
   };
 
   const clickSoloSearch = async () => {
-    // if (inputUser1) {
     if (userName1) {
       setLoadingState(true);
+
       await axios
         .post(API.summonerInfo, {
           summonerName: encodeURI(userName1),
         })
         .then((res) => {
           setUser1data(res.data);
-          console.log("소환사정보", res.data);
+          setUser1MainPosition(getMainPosition(User1data.laneInfo!));
           setLoadingState(false);
         })
         .catch((err) => {
+          console.log(err);
           setToastMessage({
             success: "",
             fail: "소환사 정보를 찾을 수 없습니다!",
@@ -118,6 +140,23 @@ function PlayersSearchPage(): ReactElement {
           .post(API.summonerInfo, { summonerName: encodeURI(userName1) })
           .then((res) => {
             setUser1data(res.data);
+            setUser1MainPosition(getMainPosition(User1data.laneInfo!));
+          })
+          .then(() => {
+            axios
+              .post(API.summonerInfo, { summonerName: encodeURI(userName2) })
+              .then((res) => {
+                setUser2data(res.data);
+                setUser2MainPosition(getMainPosition(User2data.laneInfo!));
+              })
+              .catch((err) => {
+                setLoadingState(false);
+                setToastMessage({
+                  success: "",
+                  fail: "소환사 정보를 찾을 수 없습니다!",
+                });
+              });
+            setLoadingState(false);
           })
           .catch((err) => {
             setLoadingState(false);
@@ -126,21 +165,6 @@ function PlayersSearchPage(): ReactElement {
               fail: "소환사 정보를 찾을 수 없습니다!",
             });
           });
-
-        await axios
-          .post(API.summonerInfo, { summonerName: encodeURI(userName2) })
-          .then((res) => {
-            console.log(res.data);
-            setUser2data(res.data);
-          })
-          .catch((err) => {
-            setLoadingState(false);
-            setToastMessage({
-              success: "",
-              fail: "소환사 정보를 찾을 수 없습니다!",
-            });
-          });
-        setLoadingState(false);
       }
     }
   };
@@ -225,9 +249,17 @@ function PlayersSearchPage(): ReactElement {
         <div className="user-data-view">
           {Object.keys(User1data).length > 0 ? (
             Object.keys(User2data).length > 0 ? (
-              <DuoMatchView User1data={User1data} User2data={User2data} />
+              <DuoMatchView
+                User1data={User1data}
+                User1MainPosition={user1MainPosition}
+                User2data={User2data}
+                User2MainPosition={user2MainPosition}
+              />
             ) : (
-              <SoloMatchView User1data={User1data} />
+              <SoloMatchView
+                User1data={User1data}
+                User1MainPosition={user1MainPosition}
+              />
             )
           ) : (
             <div></div>
