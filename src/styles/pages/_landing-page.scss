@@ -50,26 +50,6 @@
         box-shadow: 0 0 5px $jade-light, 0 0 30px $jade-light; //, 0 0 50px $jade;
       }
     }
-
-    // .landing-btn {
-    //   display: inline-block;
-    //   margin-top: 30px;
-    //   padding: 10px 30px;
-    //   font-size: 16px;
-    //   background: transparent;
-    //   color: $jade;
-    //   border-radius: 5px;
-    //   border: solid $jade 1px;
-    //   text-decoration: none;
-    //   transition: 1s;
-
-    //   &:hover {
-    //     cursor: pointer;
-    //     background: $jade;
-    //     color: $secondary;
-    //     box-shadow: 0 0 5px $jade, 0 0 25px $jade; //, 0 0 50px $jade;
-    //   }
-    // }
   }
 
   .sections.main {
@@ -77,9 +57,6 @@
   }
 
   .landing-img-wrapper {
-    // &:last-child {
-    //   margin-bottom: 0;
-    // }
     width: 100%;
     height: 100%;
     position: relative;
@@ -92,7 +69,8 @@
       position: absolute;
       top: 45%;
       left: 50%;
-      width: 100%;
+      transform: translate(-50%, -50%);
+      width: 1500px;
       height: 700px;
       z-index: 1;
       filter: blur(0.5px);
@@ -259,6 +237,16 @@
 
   .services {
     position: relative;
+
+    .canvas-bottom {
+      background-color: transparent;
+      position: absolute;
+      top: 23%;
+      left: 50%;
+      transform: translate(-50%);
+      z-index: -1;
+      transition: 1s;
+    }
 
     .clip-1 {
       position: absolute;
@@ -436,16 +424,6 @@
       }
     }
   }
-}
-
-.canvas-bottom {
-  background-color: transparent;
-  position: absolute;
-  top: 23%;
-  left: 50%;
-  transform: translate(-50%);
-  z-index: -1;
-  transition: 1s;
 }
 
 @media screen and (max-width: $md-breakpoint) {
