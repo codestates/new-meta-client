@@ -86,6 +86,7 @@ function PostModal(props: Props): ReactElement {
         query: gql`
           {
             readMyPosts {
+              id
               champion
               title
               description

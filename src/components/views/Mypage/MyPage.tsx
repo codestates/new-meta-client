@@ -5,6 +5,7 @@ import PostModal from "./Sections/PostModal";
 import ChangeNicknameModal from "./Sections/ChangeNicknameModal";
 import NewPasswordModal from "./Sections/NewPasswordModal";
 import LeaveModal from "./Sections/LeaveModal";
+import LikePostModal from "./Sections/LikePostModal";
 import API from "../../../api";
 import ionia from "../../../assets/image/ionia2.jpeg";
 
@@ -34,6 +35,20 @@ const MyINFO = gql`
       user {
         nickname
         email
+      }
+      likes {
+        post {
+          id
+          champion
+          title
+          description
+          skills
+          play
+          etc
+          createdAt
+          updatedAt
+          author
+        }
       }
       posts {
         id
@@ -68,17 +83,19 @@ interface myInfo {
     email: string;
     nickname: string;
   };
+  likes: any[];
 }
 
 function MyPage(): ReactElement {
   // eslint-disable-next-line @typescript-eslint/ban-types
   const [MyData, setMyData] = useState<myInfo | null>(null);
-  const [LikePosts, setLikePosts] = useState([]);
   const [MyPosts, setMyPosts] = useState([]);
   const [FollowerList, setFollowerList] = useState([]);
   const [FolloweeList, setFolloweeList] = useState([]);
   const [PModal, SetPostModal] = useState(false);
+  const [LPModal, SetLPostModal] = useState(false);
   const [PModalData, SetPostModalData] = useState(null);
+  const [LPModalData, SetLPostModalData] = useState(null);
   const [CNModal, SetChangeNicknameModal] = useState(false);
   const [NPModal, SetNewPasswordModal] = useState(false);
   const [LModal, SetLeaveModal] = useState(false);
@@ -88,6 +105,11 @@ function MyPage(): ReactElement {
   const clickMyPost = (data: any) => {
     SetPostModal(true);
     SetPostModalData(data);
+  };
+
+  const clickListPost = (data: any) => {
+    SetLPostModal(true);
+    SetLPostModalData(data);
   };
 
   const clickChangeNick = () => {
@@ -112,7 +134,6 @@ function MyPage(): ReactElement {
 
     return () => {
       setMyData(null);
-      setLikePosts([]);
       setMyPosts([]);
       setFollowerList([]);
       setFolloweeList([]);
@@ -125,7 +146,6 @@ function MyPage(): ReactElement {
 
     return () => {
       setMyData(null);
-      setLikePosts([]);
       setMyPosts([]);
       setFollowerList([]);
       setFolloweeList([]);
@@ -139,6 +159,9 @@ function MyPage(): ReactElement {
       {CNModal && <ChangeNicknameModal closeModal={SetChangeNicknameModal} />}
       {NPModal && <NewPasswordModal closeModal={SetNewPasswordModal} />}
       {LModal && <LeaveModal closeModal={SetLeaveModal} />}
+      {LPModal && (
+        <LikePostModal closeModal={SetLPostModal} data={LPModalData} />
+      )}
 
       {/* <div className="my-page-background-img">
         <img src={ionia} alt=""></img>
@@ -203,9 +226,28 @@ function MyPage(): ReactElement {
           <div className="post">
             <div className="label">like posts</div>
             <div className="post-list">
-              {tempData.user.posts.length > 0 ? (
-                tempData.user.posts.map((el: any) => {
-                  return <div className="post-item">&nbsp;</div>;
+              {MyData && MyData.likes.length > 0 ? (
+                MyData.likes.map((el: any) => {
+                  const element = el.post;
+                  return (
+                    <div
+                      aria-hidden
+                      onClick={() => {
+                        clickListPost(element);
+                      }}
+                      key={element.id}
+                      className="post-item my-post"
+                    >
+                      <img
+                        src={`${API.championSquare}/${element.champion}.png`}
+                        alt=""
+                      ></img>
+                      <div className="text">
+                        <div className="title">{element.author}</div>
+                        <div className="description">{element.champion}</div>
+                      </div>
+                    </div>
+                  );
                 })
               ) : (
                 <div className="my-post-empty">No like posts yet</div>
