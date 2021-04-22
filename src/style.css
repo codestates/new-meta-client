@@ -1,3 +1,4 @@
+@charset "UTF-8";
 * {
   font-family: 'Noto Sans KR', sans-serif; }
 
@@ -562,8 +563,6 @@ template {
       cursor: pointer;
       height: 24px;
       width: auto; }
-    .nav > .logo .page {
-      cursor: pointer; }
   .nav .trans-page {
     padding-left: 3rem;
     font-weight: lighter;
@@ -574,9 +573,26 @@ template {
     .nav .trans-page .page {
       transition: 0.7s; }
       .nav .trans-page .page:hover {
-        color: #0ec7b5; }
+        transition: 1s;
+        color: #0ec7b5;
+        text-shadow: 0 0 2px #0ec7b5;
+        cursor: pointer; }
+  .nav .btn-wrapper {
+    width: 230px;
+    font-weight: lighter;
+    font-size: 0.9rem;
+    display: flex;
+    color: #0ec7b5; }
+    .nav .btn-wrapper .page {
+      transition: 0.7s;
+      margin-right: 2rem; }
+      .nav .btn-wrapper .page:hover {
+        transition: 1s;
+        color: #0ec7b5;
+        text-shadow: 0 0 2px #0ec7b5;
+        cursor: pointer; }
   .nav .nav-btn {
-    padding: 6.2px 0px;
+    padding: 6px 0px;
     flex: 0 1 auto;
     position: absolute;
     right: 90px;
@@ -589,7 +605,7 @@ template {
     .nav .nav-btn span {
       font-size: 16px;
       font-weight: 400;
-      padding: 6.2px 20px;
+      padding: 6px 17px;
       border-radius: 5px;
       background: linear-gradient(to right, #21efdb, #00b6a4);
       -webkit-background-clip: text;
@@ -606,19 +622,99 @@ template {
     .nav .nav-btn.logout span {
       padding: 6.2px 14px; }
 
+.hamburger {
+  position: relative;
+  display: none;
+  margin-right: 18px; }
+  .hamburger .bar {
+    position: relative;
+    background: #e2e4e9;
+    width: 18px;
+    height: 1px;
+    border-radius: 2px;
+    margin-bottom: 5.5px;
+    transition-property: transform, opacity, background-color, width; }
+  .hamburger .bar:first-child {
+    margin-top: 6.8px;
+    top: 0; }
+  .hamburger .bar:nth-child(2) {
+    opacity: 1; }
+  .hamburger .bar:last-child {
+    bottom: 0; }
+  .hamburger .menu-trigger {
+    background: transparent;
+    color: #e2e4e9;
+    font-weight: 200;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none; }
+  .hamburger .menu {
+    background: #0b0d12;
+    font-weight: 200;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    position: absolute;
+    top: 38px;
+    left: 0;
+    width: 150px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-20px);
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s; }
+    .hamburger .menu.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0); }
+    .hamburger .menu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0; }
+      .hamburger .menu ul a {
+        text-decoration: none;
+        color: #e2e4e9;
+        font-weight: 200;
+        padding: 15px 20px;
+        display: block; }
+
+@media screen and (max-width: 768px) {
+  .nav {
+    padding: 0.7rem 1rem; }
+    .nav .hamburger {
+      display: block; }
+    .nav .page {
+      display: none; }
+    .nav .nav-btn {
+      position: absolute;
+      right: 45px !important;
+      top: 10px;
+      padding: 6px 17px;
+      font-size: 16px;
+      width: 80px;
+      height: 30px; }
+      .nav .nav-btn span {
+        position: absolute;
+        width: 100%;
+        left: 51% !important;
+        transform: translate(-50%, -50%); } }
+
+.footer-view {
+  display: flex !important; }
+
 .footer {
   flex: 0 0 100px;
   background-color: #1f2127;
-  display: flex;
-  padding: 0 3rem 2rem 3rem;
-  justify-content: space-evenly;
+  display: none;
+  padding: 0 6.5rem 4.5rem 6.5rem;
+  justify-content: space-between;
   align-items: flex-start;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  font-size: 0.9rem; }
   .footer > * {
     width: max-content;
     font-weight: lighter;
     color: #5a5b62;
-    padding-top: 3rem; }
+    padding-top: 3.5rem; }
   .footer a {
     text-decoration: none; }
     .footer a:link {
@@ -634,43 +730,486 @@ template {
     padding-bottom: 1rem;
     font-weight: 500;
     color: #e2e4e9; }
-  .footer > .logo img {
-    width: 200px;
-    padding-left: 2px; }
-  .footer > .logo .text {
-    padding: 1rem 0; }
-  .footer > .logo .copyright {
-    font-size: 0.8rem;
-    opacity: 0.8;
+  .footer > .logo {
+    margin-right: 1rem; }
+    .footer > .logo img {
+      width: 200px;
+      padding-left: 2px; }
+    .footer > .logo .text {
+      padding: 1rem 0; }
+    .footer > .logo .copyright {
+      font-size: 0.8rem;
+      opacity: 0.8;
+      color: #e2e4e9;
+      padding: 1rem 0; }
+    .footer > .logo .policy-en {
+      width: 400px;
+      font-size: 8px;
+      padding-bottom: 1rem; }
+    .footer > .logo .policy-ko {
+      color: #e2e4e9;
+      opacity: 0.8;
+      font-size: 12px;
+      padding-bottom: 12px; }
+  .footer > .info {
+    margin: 0 1rem; }
+    .footer > .info .mores {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      width: 120px;
+      line-height: 1.1rem; }
+    .footer > .info .more {
+      padding-bottom: 4px; }
+  .footer > .team {
+    margin: 0 1rem; }
+    .footer > .team .members {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      margin: 0 1rem;
+      width: 120px;
+      line-height: 1.2rem; }
+    .footer > .team .member {
+      color: #e2e4e9;
+      padding-bottom: 4px; }
+  .footer > .connect {
+    margin-left: 1rem; }
+    .footer > .connect .icons {
+      cursor: pointer;
+      width: 120px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 1.5rem; }
+
+@media screen and (max-width: 1220px) {
+  .footer {
+    position: relative; }
+    .footer .team {
+      margin: 0; }
+    .footer .connect {
+      justify-content: start;
+      width: 100%;
+      margin-left: 0 !important;
+      padding-top: 1.5rem; }
+      .footer .connect .label {
+        display: none; }
+      .footer .connect .icons i {
+        font-size: 1.4rem; } }
+
+@media screen and (max-width: 1000px) {
+  .footer {
+    padding: 0 6.5rem 5.5rem 6.5rem; }
+    .footer .logo {
+      width: 100%; }
+    .footer .info {
+      margin: 0;
+      padding-top: 1.5rem; }
+    .footer .team {
+      margin: 0;
+      padding-top: 1.5rem; }
+    .footer .connect {
+      padding-top: 1.5rem;
+      margin: 0;
+      width: 120px;
+      position: relative; }
+      .footer .connect .label {
+        display: block;
+        position: absolute;
+        top: 0%; }
+      .footer .connect .icons {
+        position: absolute;
+        top: 250%;
+        justify-content: space-around; } }
+
+@media screen and (max-width: 768px) {
+  .info {
+    font-size: 0.8rem; }
+  .team {
+    font-size: 0.8rem; }
+  .connect .icons i {
+    font-size: 1.2rem !important; } }
+
+@media screen and (max-width: 674px) {
+  .footer {
+    padding: 0 4rem 4rem 4rem; }
+    .footer .policy-en {
+      width: 100% !important; } }
+
+@media screen and (max-width: 586px) {
+  .footer {
+    padding: 0 3rem 4rem 3rem; } }
+
+@media screen and (max-width: 552px) {
+  .footer {
+    padding: 0 3rem 6rem 3rem; }
+    .footer .connect {
+      width: 100% !important;
+      position: relative; }
+      .footer .connect .icons {
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%); } }
+
+@media screen and (max-width: 420px) {
+  .footer {
+    padding: 0 2rem 6rem 2rem; } }
+
+.popup-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation: fadein 1s forwards; }
+
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+  .popup-background .popup-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    padding: 40px;
+    transform: translate(-50%, -50%);
+    background: #0b0d12;
+    box-sizing: border-box;
+    box-shadow: 5px 30px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
     color: #e2e4e9;
-    padding: 1rem 0; }
-  .footer > .logo .policy-en {
-    width: 400px;
-    font-size: 8px;
-    padding-bottom: 1rem; }
-  .footer > .logo .policy-ko {
+    text-align: center;
+    font-weight: 300;
+    font-size: 0.95rem; }
+    .popup-background .popup-box .result-message {
+      animation: pop 1s ease-out;
+      margin: 9px 0; }
+
+@keyframes pop {
+  0% {
+    /* initial */
+    opacity: 0;
+    transform: translateY(-80px); }
+  70% {
+    transform: translateY(10px); }
+  90% {
+    transform: translateY(-3px); }
+  100% {
+    opacity: 1;
+    transform: translate(0); } }
+    .popup-background .popup-box .btn-wrapper.popup {
+      margin-top: 40px; }
+      .popup-background .popup-box .btn-wrapper.popup button {
+        padding: 4px 15px;
+        border: none;
+        border-radius: 5px;
+        outline: none;
+        font-size: 0.7rem;
+        transition: 1s;
+        letter-spacing: 1px;
+        background: #0ec7b5;
+        color: #f7f8fa;
+        box-shadow: 0 0 5px #0ec7b5, 0 0 25px #0ec7b5; }
+        .popup-background .popup-box .btn-wrapper.popup button:hover {
+          cursor: pointer; }
+
+@keyframes scaleAnimation {
+  0% {
+    opacity: 0;
+    transform: scale(1.5); }
+  100% {
+    opacity: 1;
+    transform: scale(1); } }
+
+@keyframes drawCircle {
+  0% {
+    stroke-dashoffset: 151px; }
+  100% {
+    stroke-dashoffset: 0; } }
+
+@keyframes drawCheck {
+  0% {
+    stroke-dashoffset: 36px; }
+  100% {
+    stroke-dashoffset: 0; } }
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0; }
+  100% {
+    opacity: 1; } }
+
+#successAnimationCircle {
+  stroke-dasharray: 151px 151px;
+  stroke: #0ec7b5; }
+
+#successAnimationCheck {
+  stroke-dasharray: 36px 36px;
+  stroke: #0ec7b5; }
+
+#successAnimationResult {
+  fill: #0ec7b5;
+  opacity: 0; }
+
+#successAnimation.animated {
+  animation: 1s ease-out 0s 1 both scaleAnimation; }
+  #successAnimation.animated #successAnimationCircle {
+    animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCircle, 0.3s linear 0.9s 1 both fadeOut; }
+  #successAnimation.animated #successAnimationCheck {
+    animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCheck, 0.3s linear 0.9s 1 both fadeOut; }
+  #successAnimation.animated #successAnimationResult {
+    animation: 0.3s linear 0.9s both fadeIn; }
+
+.basic-popup-background {
+  position: fixed;
+  background-color: #0b0d12;
+  width: 100vw;
+  height: 100vh;
+  z-index: 10;
+  top: 49px;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  animation: fadein 0.5s forwards; }
+
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+  .basic-popup-background .basic-popup-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300px;
+    padding: 50px;
+    transform: translate(-50%, -50%);
+    background: rgba(90, 91, 98, 0.15);
+    box-sizing: border-box;
+    box-shadow: 5px 30px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
     color: #e2e4e9;
-    opacity: 0.8;
-    font-size: 12px;
-    padding-bottom: 12px; }
-  .footer > .info .mores {
-    display: flex;
-    flex-direction: column;
-    text-align: center; }
-  .footer > .info .more {
-    padding-bottom: 4px; }
-  .footer > .team .members {
-    display: flex;
-    flex-direction: column;
-    text-align: center; }
-  .footer > .team .member {
-    color: #e2e4e9;
-    padding-bottom: 4px; }
-  .footer > .connect .icons {
+    text-align: center;
+    font-weight: 300;
+    font-size: 0.95rem; }
+    .basic-popup-background .basic-popup-box .result-message {
+      margin: 15px 0; }
+    .basic-popup-background .basic-popup-box .btn-wrapper.popup {
+      margin-top: 40px; }
+      .basic-popup-background .basic-popup-box .btn-wrapper.popup button {
+        padding: 6px 15px;
+        border: #0ec7b5 solid 1px;
+        color: #0ec7b5;
+        border-radius: 5px;
+        outline: none;
+        font-size: 0.75rem;
+        transition: 1s;
+        background: transparent;
+        cursor: pointer; }
+
+.toast-wrapper {
+  width: 100%;
+  height: 18%;
+  z-index: 50;
+  position: absolute;
+  top: 50px;
+  animation: fadein 1s forwards; }
+
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.toast {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: max-content;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 12px 50px 12px 50px;
+  margin-bottom: 10px;
+  color: #e2e4e9;
+  font-size: 13px;
+  font-weight: 300; }
+  .toast:hover .toast-close-icon {
+    display: block; }
+  .toast .toast-close-icon {
+    font-size: 11px;
+    font-weight: 200;
+    position: absolute;
+    right: 16px;
+    top: 35%;
+    height: 12px;
+    line-height: 12px;
+    overflow: hidden;
     cursor: pointer;
-    width: 200px;
-    display: flex;
-    justify-content: space-evenly; }
+    display: none;
+    transition: 1s; }
+    .toast .toast-close-icon:hover {
+      transform: rotate(180deg); }
+  .toast.toast-success {
+    border: 1px solid rgba(14, 199, 181, 0.4);
+    background-color: rgba(14, 199, 181, 0.2); }
+  .toast.toast-error {
+    border: 1px solid rgba(219, 112, 147, 0.4);
+    background-color: rgba(219, 112, 147, 0.2); }
+
+.basic-modal-background {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.4);
+  animation: fadein 1s forwards; }
+
+@keyframes fadein {
+  from {
+    opacity: 0; }
+  to {
+    opacity: 1; } }
+
+.basic-modal-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  padding: 50px;
+  transform: translate(-50%, -50%);
+  background: #0b0d12;
+  box-sizing: border-box;
+  box-shadow: 5px 30px 25px rgba(0, 0, 0, 0.8);
+  border-radius: 10px; }
+  .basic-modal-box h2 {
+    color: #f7f8fa;
+    text-align: center;
+    font-weight: 300;
+    letter-spacing: 2px; }
+  .basic-modal-box form {
+    margin: 20px 0; }
+    .basic-modal-box form .user-box {
+      position: relative; }
+      .basic-modal-box form .user-box input {
+        width: 100%;
+        padding: 10px 0;
+        font-size: 14px;
+        color: #e2e4e9;
+        margin-top: 20px;
+        border: none;
+        border-bottom: 1px solid #e2e4e9;
+        outline: none;
+        background: transparent;
+        position: relative; }
+        .basic-modal-box form .user-box input:focus {
+          color: #e2e4e9;
+          font-size: 14px;
+          border-bottom: 1px solid #21efdb;
+          transition: 1.3s;
+          box-shadow: 0px 5px 5px -6px #21efdb; }
+        .basic-modal-box form .user-box input.valid-fail {
+          color: #e2e4e9;
+          font-size: 14px;
+          border-bottom: 1px solid palevioletred;
+          transition: 1s;
+          box-shadow: 0px 4.5px 5px -6px palevioletred; }
+      .basic-modal-box form .user-box :-webkit-autofill,
+      .basic-modal-box form .user-box :-webkit-autofill:hover,
+      .basic-modal-box form .user-box :-webkit-autofill:focus,
+      .basic-modal-box form .user-box :-webkit-autofill:active {
+        transition: background-color 5000s ease-in-out 0s;
+        -webkit-transition: background-color 9999s ease-out;
+        -webkit-box-shadow: 0 0 0px 1000px #0b0d12 inset !important;
+        -webkit-text-fill-color: #e2e4e9 !important; }
+    .basic-modal-box form .valid-check-text {
+      font-size: 0.7rem;
+      padding-top: 6px;
+      color: #5a5b62;
+      display: none; }
+    .basic-modal-box form .icon-check-circle {
+      color: #0ec7b5;
+      position: absolute;
+      top: 48%;
+      left: 93%;
+      font-size: 1.3rem;
+      display: none; }
+    .basic-modal-box form .icon-x-circle {
+      color: palevioletred;
+      position: absolute;
+      top: 39%;
+      left: 93%;
+      font-size: 1.3rem;
+      display: none; }
+    .basic-modal-box form .icon-x-circle.password {
+      top: 32%; }
+  .basic-modal-box .btn-close {
+    float: right;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer; }
+    .basic-modal-box .btn-close i {
+      font-size: 13px;
+      color: #e2e4e9; }
+  .basic-modal-box .btn-wrapper {
+    margin: 55px 0; }
+    .basic-modal-box .btn-wrapper button {
+      position: relative;
+      float: right;
+      padding: 10px 20px;
+      color: #0ec7b5;
+      border: none;
+      border-radius: 5px;
+      outline: none;
+      font-size: 16px;
+      transition: 1s;
+      background-color: transparent;
+      letter-spacing: 1px; }
+      .basic-modal-box .btn-wrapper button:hover {
+        cursor: pointer;
+        background: #0ec7b5;
+        color: #f7f8fa;
+        box-shadow: 0 0 5px #21efdb, 0 0 25px #21efdb; }
+    .basic-modal-box .btn-wrapper i {
+      margin-top: 10px;
+      float: left;
+      font-size: 25px;
+      letter-spacing: 30px; }
+      .basic-modal-box .btn-wrapper i:hover {
+        cursor: pointer;
+        transition: 1s;
+        color: #21efdb;
+        text-shadow: 0 0 5px #21efdb, 0 0 25px #21efdb, 0 0 50px #21efdb; }
+
+@media screen and (max-width: 470px) {
+  .modal-box {
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10%; }
+    .modal-box h2 {
+      margin: 30% 0 20% 0; }
+    .modal-box input {
+      margin: 3% 0; }
+    .modal-box span {
+      margin: 5% 0; } }
 
 .landing > *:not(:last-child) {
   margin-bottom: 100px; }
@@ -721,11 +1260,12 @@ template {
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%); }
-    .landing .landing-img-wrapper canvas {
+    .landing .landing-img-wrapper .canvas-top {
       position: absolute;
       top: 45%;
       left: 50%;
-      width: 100%;
+      transform: translate(-50%, -50%);
+      width: 1500px;
       height: 700px;
       z-index: 1;
       filter: blur(0.5px); }
@@ -763,26 +1303,24 @@ template {
           background-color: #21efdb;
           box-shadow: 0 0 5px #0ec7b5, 0 0 25px #0ec7b5; }
   .landing .innerWrap {
-    transition: opacity 1s ease-in-out;
-    visibility: hidden;
-    opacity: 0; }
+    position: absolute; }
   .landing .active .innerWrap {
     transition: opacity 1s ease-in-out;
-    position: relative;
+    position: fixed;
     padding: 30px 30px 30px 70px;
     width: 50%;
+    top: 35%;
+    left: 0%;
     z-index: 5;
     left: 10%;
     visibility: visible;
     opacity: 1;
-    animation: moveUp-minimap 1s ease-out; }
+    animation: moveUp-minimap 0.5s ease-out; }
 
 @keyframes moveUp-minimap {
   0% {
     opacity: 0;
-    transform: translateY(70%); }
-  40% {
-    opacity: 0; }
+    transform: translateY(40%); }
   100% {
     opacity: 1;
     transform: translateY(0); } }
@@ -792,7 +1330,8 @@ template {
     position: absolute;
     top: 50%;
     left: 40%;
-    transform: translate(-50%, -50%); }
+    transform: translate(-50%, -50%);
+    opacity: 0; }
     .landing .image-wrapper .minimap {
       position: fixed;
       width: 100%;
@@ -803,21 +1342,29 @@ template {
     .landing .image-wrapper .lane {
       position: fixed;
       width: 100%;
-      visibility: hidden;
+      top: 60%;
+      left: 70%;
+      transform: translate(-50%, -50%);
+      visibility: visible;
       opacity: 0;
-      width: 0%; }
+      z-index: 5; }
     .landing .image-wrapper .icon {
-      width: 100%;
       position: fixed;
-      visibility: hidden;
-      opacity: 0; }
+      width: 100%;
+      top: 60%;
+      left: 70%;
+      transform: translate(-50%, -50%);
+      visibility: visible;
+      opacity: 0;
+      z-index: 5; }
   .landing .active .image-wrapper {
     width: 100%;
     height: 100%;
-    position: absolute;
+    position: fixed;
     top: 50%;
     left: 40%;
-    transform: translate(-50%, -50%); }
+    transform: translate(-50%, -50%);
+    opacity: 1; }
     .landing .active .image-wrapper .minimap {
       position: fixed;
       width: 100%;
@@ -826,7 +1373,7 @@ template {
       transform: translate(-50%, -50%);
       opacity: 0.9; }
     .landing .active .image-wrapper .lane {
-      transition: opacity 1s ease-in-out;
+      transition: opacity 0.5s ease-in-out;
       position: fixed;
       width: 100%;
       top: 60%;
@@ -836,7 +1383,7 @@ template {
       visibility: visible;
       z-index: 5; }
     .landing .active .image-wrapper .icon {
-      transition: opacity 2.7s ease-in-out;
+      transition: opacity 1.3s ease-in-out;
       position: fixed;
       width: 100%;
       top: 60%;
@@ -847,6 +1394,14 @@ template {
       z-index: 5; }
   .landing .services {
     position: relative; }
+    .landing .services .canvas-bottom {
+      background-color: transparent;
+      position: absolute;
+      top: 23%;
+      left: 50%;
+      transform: translate(-50%);
+      z-index: -1;
+      transition: 1s; }
     .landing .services .clip-1 {
       position: absolute;
       top: 15%;
@@ -861,7 +1416,7 @@ template {
       position: absolute;
       top: 55%;
       left: 60%;
-      background: rgba(226, 228, 233, 0.3);
+      background: #5a5b62;
       width: 65%;
       height: 70%;
       clip-path: polygon(0 0, 100% 0, 100% 100%, 0 60%);
@@ -892,7 +1447,7 @@ template {
         .landing .services div.side-section .side-img-wrapper .left {
           position: absolute;
           left: 30%;
-          top: 80%;
+          top: 85%;
           transform: translate(-50%, -50%); }
         .landing .services div.side-section .side-img-wrapper .right {
           position: absolute;
@@ -911,18 +1466,37 @@ template {
           padding: 1rem 0;
           font-size: 0.8rem; }
         .landing .services div.side-section .text-wrapper button {
-          margin-top: 30px;
-          background: transparent;
-          color: #f7f8fa;
           border: #f7f8fa solid 1px;
+          color: #f7f8fa;
+          background: transparent;
+          height: 35px;
+          margin-top: 30px;
           position: absolute;
           left: 50%;
-          transform: translate(-50%, -50%); }
+          transform: translate(-50%, -50%);
+          overflow: hidden; }
+          .landing .services div.side-section .text-wrapper button span {
+            z-index: 20; }
+          .landing .services div.side-section .text-wrapper button:after {
+            background: #fff;
+            content: "";
+            height: 155px;
+            left: -75px;
+            opacity: 0.2;
+            position: absolute;
+            top: -50px;
+            transform: rotate(35deg);
+            transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1);
+            width: 50px;
+            z-index: -10; }
+        .landing .services div.side-section .text-wrapper button:hover:after {
+          left: 120%;
+          transition: all 550ms cubic-bezier(0.19, 1, 0.22, 1); }
         .landing .services div.side-section .text-wrapper.first {
           width: 47%;
           position: absolute;
           left: 22%;
-          top: 45%;
+          top: 48%;
           transform: translate(-50%, -50%); }
         .landing .services div.side-section .text-wrapper.second {
           color: #f7f8fa;
@@ -932,28 +1506,20 @@ template {
           top: 55%;
           clip-path: polygon(0 0, 100% 0, 100% 100%, 20% 100%);
           transform: translate(-50%, -50%); }
-          .landing .services div.side-section .text-wrapper.second button {
-            height: 35px;
-            padding: 0 32px;
-            color: #f7f8fa;
-            border: #f7f8fa solid 1px;
-            position: absolute;
-            left: 50%;
-            transform: translate(-50%, -50%); }
         .landing .services div.side-section .text-wrapper.third {
           width: 47%;
           position: absolute;
           left: 22%;
-          top: 28%;
+          top: 23%;
           transform: translate(-50%, -50%); }
       .landing .services div.side-section.ani .side-img-wrapper .right {
-        animation: moveUp-services 1.2s ease-out; }
+        animation: moveUp-services 1s ease-out; }
       .landing .services div.side-section.ani .side-img-wrapper .left {
-        animation: moveUp-services 1.2s ease-out; }
+        animation: moveUp-services 1s ease-out; }
       .landing .services div.side-section.ani .text-wrapper .title {
-        animation: moveDown-services 1.2s ease-out; }
+        animation: moveDown-services 1s ease-out; }
       .landing .services div.side-section.ani .text-wrapper .description {
-        animation: moveDown-services 1.2s ease-out; }
+        animation: moveDown-services 1s ease-out; }
 
 @keyframes moveUp-services {
   0% {
@@ -974,6 +1540,8 @@ template {
 @media screen and (max-width: 768px) {
   .landing-title {
     font-size: 3rem !important; }
+  .section-minimap .image-wrapper {
+    top: 45% !important; }
   .pointWrap {
     display: none; }
   .innerWrap {
@@ -1007,9 +1575,7 @@ template {
         height: 180px !important; }
         .services .side-section .text-wrapper button {
           left: 50% !important;
-          transform: translate(-50%, -50%);
-          height: 30px;
-          margin-top: 20px !important; } }
+          transform: translate(-50%, -50%); } }
 
 @media screen and (max-width: 580px) {
   .landing-title {
@@ -1017,7 +1583,13 @@ template {
   .landing-description {
     font-size: 0.95rem !important;
     font-weight: 300;
-    margin-bottom: 20px; } }
+    margin-bottom: 20px; }
+  .services .side-section .text-wrapper {
+    top: 20% !important; } }
+
+@media screen and (max-width: 400px) {
+  .services .side-section .text-wrapper {
+    top: 15% !important; } }
 
 .modal-background {
   position: fixed;
@@ -1028,7 +1600,7 @@ template {
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.4);
+  background: rgba(0, 0, 0, 0.45);
   animation: fadein 1s forwards; }
 
 @keyframes fadein {
@@ -1054,20 +1626,21 @@ template {
     font-weight: 300;
     letter-spacing: 2px; }
   .modal-box form {
-    margin: 20px 0; }
+    margin: 30px 0 20px 0; }
     .modal-box form .user-box {
       position: relative; }
       .modal-box form .user-box input {
         width: 100%;
-        padding: 10px 0;
+        padding: 5px 0;
         font-size: 14px;
         color: #e2e4e9;
-        margin-top: 20px;
+        margin-top: 27px;
         border: none;
         border-bottom: 1px solid #e2e4e9;
         outline: none;
         background: transparent;
-        position: relative; }
+        position: relative;
+        line-height: 1; }
         .modal-box form .user-box input:focus {
           color: #e2e4e9;
           font-size: 14px;
@@ -1077,9 +1650,9 @@ template {
         .modal-box form .user-box input.valid-fail {
           color: #e2e4e9;
           font-size: 14px;
-          border-bottom: 1px solid palevioletred;
+          border-bottom: 1px solid #f86d7d;
           transition: 1s;
-          box-shadow: 0px 4.5px 5px -6px palevioletred; }
+          box-shadow: 0px 4.5px 5px -6px #f86d7d; }
       .modal-box form .user-box :-webkit-autofill,
       .modal-box form .user-box :-webkit-autofill:hover,
       .modal-box form .user-box :-webkit-autofill:focus,
@@ -1127,7 +1700,7 @@ template {
     cursor: pointer; }
     .modal-box .btn-close i {
       font-size: 13px;
-      color: #0ec7b5; }
+      color: #e2e4e9; }
   .modal-box .btn-wrapper {
     margin: 55px 0; }
     .modal-box .btn-wrapper button {
@@ -1171,6 +1744,20 @@ template {
         color: #f7f8fa;
         text-shadow: 0 0 10px #f7f8fa;
         cursor: pointer; }
+
+@media screen and (max-width: 470px) {
+  .modal-box {
+    width: 100vw;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding-top: 10%; }
+    .modal-box h2 {
+      margin: 30% 0 20% 0; }
+    .modal-box input {
+      margin: 3% 0; }
+    .modal-box span {
+      margin: 5% 0; } }
 
 @keyframes rotate-ani {
   0% {
@@ -1445,56 +2032,61 @@ template {
       color: #f86d7d; }
 
 .search-bar-wrapper {
-  width: 100%;
-  display: inline-flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  align-items: center;
-  font-weight: lighter; }
-  .search-bar-wrapper .dropdown {
-    position: relative;
-    display: inline-block;
-    cursor: pointer; }
-    .search-bar-wrapper .dropdown .dropdown-contents {
-      display: none;
-      margin-top: 0.4rem;
-      text-align: left;
-      position: absolute;
-      background-color: #1f2127;
-      min-width: 120px;
-      padding: 5px;
-      box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-      z-index: 9; }
-      .search-bar-wrapper .dropdown .dropdown-contents > * {
-        color: #e2e4e9;
-        padding: 8px;
-        text-decoration: none;
-        display: block;
-        cursor: pointer;
-        transition: 1s; }
-        .search-bar-wrapper .dropdown .dropdown-contents > *:hover {
-          color: #0ec7b5; }
+  position: relative;
+  width: 80%;
+  font-weight: lighter;
+  display: flex;
+  left: 10%; }
+  .search-bar-wrapper .search-bar {
+    left: 10%;
+    display: flex;
+    justify-content: flex-end;
+    width: 200px;
+    border-radius: 12px;
+    padding: 8px 12px;
+    background-color: #1f2127; }
+    .search-bar-wrapper .search-bar input {
+      background-color: transparent;
+      color: #0ec7b5;
+      border: none; }
+    .search-bar-wrapper .search-bar i {
+      cursor: pointer;
+      color: #0ec7b5; }
+  .search-bar-wrapper .filter-section {
+    width: 60%;
+    display: inline-flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    margin-left: 13rem; }
+    .search-bar-wrapper .filter-section .dropdown {
+      position: relative;
+      display: inline-block;
+      cursor: pointer; }
+      .search-bar-wrapper .filter-section .dropdown .dropdown-contents {
+        display: none;
+        margin-top: 0.4rem;
+        text-align: left;
+        position: absolute;
+        background-color: #1f2127;
+        min-width: 120px;
+        padding: 5px;
+        box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+        z-index: 9; }
+        .search-bar-wrapper .filter-section .dropdown .dropdown-contents > * {
+          color: #e2e4e9;
+          padding: 8px;
+          text-decoration: none;
+          display: block;
+          cursor: pointer;
+          transition: 1s; }
+          .search-bar-wrapper .filter-section .dropdown .dropdown-contents > *:hover {
+            color: #0ec7b5; }
   .search-bar-wrapper .reset-btn {
     cursor: pointer;
     transition: 1s;
     opacity: 0.4; }
     .search-bar-wrapper .reset-btn:hover {
       opacity: 0.7; }
-
-.search-bar {
-  display: inline-flex;
-  justify-content: flex-end;
-  width: 200px;
-  border-radius: 12px;
-  padding: 8px 12px;
-  background-color: #1f2127; }
-  .search-bar input {
-    background-color: transparent;
-    color: #0ec7b5;
-    border: none; }
-  .search-bar i {
-    cursor: pointer;
-    color: #0ec7b5; }
 
 .champions {
   display: flex;
@@ -1540,131 +2132,279 @@ template {
     .champion-card .card-info > * {
       padding-bottom: 0.5rem; }
 
-.board-read-page .champion-title-image {
-  position: relative;
-  padding-bottom: 2rem;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  filter: blur();
-  width: 100%; }
-  .board-read-page .champion-title-image .blur-img {
-    width: 100%;
-    position: absolute;
-    filter: blur(6px);
-    opacity: 0.15;
-    z-index: -9999; }
-  .board-read-page .champion-title-image .champion-image-wrapper {
-    margin-top: 2rem;
-    height: 600px; }
-    .board-read-page .champion-title-image .champion-image-wrapper img {
-      height: inherit; }
-  .board-read-page .champion-title-image i {
-    position: absolute;
-    padding: 2rem;
-    cursor: pointer;
-    font-size: 2rem;
-    text-align: center; }
-  .board-read-page .champion-title-image .icon-left {
-    left: 5%; }
-  .board-read-page .champion-title-image .icon-right {
-    right: 5%; }
+@media screen and (max-width: 900px) {
+  .filter-section {
+    margin-left: 3rem !important; } }
 
-.board-read-page .champion-introduce {
-  width: 100%;
-  padding-bottom: 4rem; }
-  .board-read-page .champion-introduce .title {
-    text-align: center;
-    font-size: 8rem; }
-  .board-read-page .champion-introduce .title-en {
-    margin-top: -1rem;
-    text-align: center;
-    font-size: 3rem; }
+@media screen and (max-width: 700px) {
+  .filter-section {
+    width: 100% !important;
+    margin: 1.5rem 0 0 1rem !important; }
+  .search-bar {
+    width: 50%;
+    padding: 6px !important;
+    position: absolute;
+    top: -15%;
+    left: 50% !important;
+    transform: translate(-50%, -50%); }
+    .search-bar i {
+      padding: 3px; }
+    .search-bar input {
+      width: 100%; }
+  .filter-list {
+    margin: 1rem 5rem 0rem 1rem !important; } }
 
-.board-read-page .champion-contents {
-  position: relative;
-  margin: 1rem 2rem 6rem 4rem;
-  height: max-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 1px solid #5a5b62; }
-  .board-read-page .champion-contents .white-space {
-    flex: 0 0 100px; }
-  .board-read-page .champion-contents .box-label {
-    margin-top: -1rem;
-    font-size: 1.4rem;
-    background-color: #0b0d12;
-    padding: 0 1rem; }
-  .board-read-page .champion-contents .story-title {
-    padding: 2em 0 1rem 0;
-    font-size: 1.2rem; }
-  .board-read-page .champion-contents .story {
+@media screen and (max-width: 655px) {
+  .filter-list {
     display: flex;
-    font-weight: lighter;
-    padding-bottom: 3rem;
-    width: 100%;
-    border-bottom: 1px solid #5a5b62; }
-    .board-read-page .champion-contents .story .story-text {
-      flex: 1; }
-  .board-read-page .champion-contents .skills {
-    padding: 3rem 0 9rem 0;
-    width: 100%;
+    align-items: center !important; }
+    .filter-list .prefix {
+      font-size: 0.8rem !important; } }
+
+@media screen and (max-width: 600px) {
+  .search-bar-wrapper {
+    font-size: 0.9rem !important; } }
+
+@media screen and (max-width: 500px) {
+  .search-bar {
+    padding: 0 !important; }
+    .search-bar i {
+      margin: 0.2rem;
+      font-size: 1.1rem; } }
+
+.board-read-page {
+  overflow-x: hidden; }
+  .board-read-page .champion-title-image {
+    position: relative;
+    padding-bottom: 2rem;
     display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    border-bottom: 1px solid #5a5b62; }
-    .board-read-page .champion-contents .skills img {
-      transition: 0.7s;
-      cursor: pointer;
-      margin-bottom: 2rem; }
-      .board-read-page .champion-contents .skills img:hover {
-        transform: scale(1.4); }
-    .board-read-page .champion-contents .skills .skill-description {
-      padding-top: 2.5rem;
-      font-weight: lighter;
-      position: absolute;
-      text-align: center;
-      left: 0;
-      right: 0;
-      display: none; }
-      .board-read-page .champion-contents .skills .skill-description .skill-name {
-        font-size: 1.4rem;
-        font-weight: 700;
-        padding-bottom: 1rem; }
-    .board-read-page .champion-contents .skills .view-skill-text {
-      display: block;
-      padding: 0 100px; }
-  .board-read-page .champion-contents .tips {
-    padding: 3rem 0;
-    display: flex;
+    justify-content: center;
+    align-items: center;
+    filter: blur();
     width: 100%; }
-    .board-read-page .champion-contents .tips .play-tips,
-    .board-read-page .champion-contents .tips .enemy-tips {
-      flex: 1; }
-    .board-read-page .champion-contents .tips .play-tips-title,
-    .board-read-page .champion-contents .tips .enemy-tips-title {
+    .board-read-page .champion-title-image .blur-img {
+      width: 100%;
+      position: absolute;
+      filter: blur(6px);
+      opacity: 0.15;
+      z-index: -9999; }
+    .board-read-page .champion-title-image .champion-image-wrapper {
+      margin-top: 2rem;
+      width: 90%;
+      height: 90%; }
+      .board-read-page .champion-title-image .champion-image-wrapper img {
+        width: 100%;
+        height: inherit; }
+    .board-read-page .champion-title-image i {
+      position: absolute;
+      padding: 2rem;
+      cursor: pointer;
+      font-size: 2rem;
+      text-align: center; }
+    .board-read-page .champion-title-image .icon-left {
+      left: 5%; }
+    .board-read-page .champion-title-image .icon-right {
+      right: 5%; }
+  .board-read-page .btn-goback {
+    z-index: 1;
+    background: rgba(11, 13, 18, 0.3);
+    cursor: pointer;
+    position: fixed;
+    top: 56px;
+    left: 28px;
+    font-weight: 300;
+    color: #0ec7b5;
+    outline: none;
+    border: #0ec7b5 solid 1px;
+    border-radius: 15px;
+    font-size: 0.9rem;
+    padding: 4px 10px; }
+    .board-read-page .btn-goback:hover {
+      cursor: pointer;
+      transition: 1s;
+      background: #00b6a4;
+      color: #f7f8fa;
+      box-shadow: 0 0 5px #00b6a4, 0 0 10px #00b6a4; }
+  .board-read-page .champion-introduce {
+    width: 100%;
+    padding-bottom: 4rem; }
+    .board-read-page .champion-introduce .title {
       text-align: center;
+      font-size: 8rem; }
+    .board-read-page .champion-introduce .title-en {
+      margin-top: -1rem;
+      text-align: center;
+      font-size: 3rem; }
+  .board-read-page .champion-contents {
+    position: relative;
+    margin: 1rem 2rem 6rem 2rem;
+    height: max-content;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #5a5b62;
+    line-height: 1.8rem; }
+    .board-read-page .champion-contents .white-space {
+      flex: 0 0 8%; }
+    .board-read-page .champion-contents .box-label {
+      margin-top: -1rem;
       font-size: 1.4rem;
-      padding-bottom: 1rem;
-      background-color: #5a5b62;
-      padding: 1rem;
-      width: max-content; }
-    .board-read-page .champion-contents .tips .tip-box {
-      padding: 1.5rem;
-      margin: 1rem;
-      margin-top: -1.4rem;
-      border: 1px solid #5a5b62;
-      width: 100vw/2; }
-      .board-read-page .champion-contents .tips .tip-box .tip {
-        padding: 1rem 0;
-        margin: 1rem;
-        font-weight: lighter; }
-        .board-read-page .champion-contents .tips .tip-box .tip .numbering {
-          margin: 0 1rem 1rem 1rem;
-          float: left;
-          font-size: 2rem; }
+      background-color: #0b0d12;
+      padding: 0 1rem; }
+    .board-read-page .champion-contents .story-title {
+      padding: 2rem 0 1rem 0;
+      font-size: 1.2rem; }
+    .board-read-page .champion-contents .story {
+      display: flex;
+      font-weight: lighter;
+      padding-bottom: 5rem;
+      width: 100%;
+      border-bottom: 1px solid #5a5b62; }
+      .board-read-page .champion-contents .story .story-text {
+        flex: 1; }
+    .board-read-page .champion-contents .skills {
+      padding: 3rem 0 9rem 0;
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      border-bottom: 1px solid #5a5b62; }
+      .board-read-page .champion-contents .skills img {
+        transition: 0.7s;
+        cursor: pointer;
+        margin-bottom: 2rem; }
+        .board-read-page .champion-contents .skills img:hover {
+          transform: scale(1.4); }
+      .board-read-page .champion-contents .skills .skill-description {
+        padding-top: 2.5rem;
+        font-weight: lighter;
+        position: absolute;
+        text-align: center;
+        left: 0;
+        right: 0;
+        display: none; }
+        .board-read-page .champion-contents .skills .skill-description .skill-name {
+          font-size: 1.2rem;
+          font-weight: 500;
+          padding-bottom: 0.8rem; }
+        .board-read-page .champion-contents .skills .skill-description .skill-explanation {
+          font-size: 0.9rem; }
+      .board-read-page .champion-contents .skills .view-skill-text {
+        display: block;
+        padding: 0 100px; }
+    .board-read-page .champion-contents .tips {
+      padding: 3rem 0;
+      display: flex;
+      width: 100%; }
+      .board-read-page .champion-contents .tips .white-space {
+        flex: 0 0 50px; }
+      .board-read-page .champion-contents .tips .play-tips,
+      .board-read-page .champion-contents .tips .enemy-tips {
+        flex: 1; }
+      .board-read-page .champion-contents .tips .play-tips-title,
+      .board-read-page .champion-contents .tips .enemy-tips-title {
+        text-align: center;
+        font-size: 1.4rem;
+        padding-bottom: 1rem;
+        background-color: #5a5b62;
+        padding: 1rem;
+        width: max-content; }
+      .board-read-page .champion-contents .tips .tip-box {
+        padding: 1.5rem;
+        margin: 1.5rem;
+        margin-top: -1.4rem;
+        border: 1px solid #5a5b62;
+        width: 100vw/2; }
+        .board-read-page .champion-contents .tips .tip-box .tip {
+          padding: 1rem 0;
+          margin: 1rem 0;
+          font-weight: lighter; }
+          .board-read-page .champion-contents .tips .tip-box .tip .text-wrapper {
+            margin: 0 1rem 0 3rem; }
+          .board-read-page .champion-contents .tips .tip-box .tip .numbering {
+            margin: 0 1rem 1rem 1rem;
+            float: left;
+            font-size: 2rem; }
+
+@media screen and (max-width: 1070px) {
+  .tips .white-space {
+    flex: 0 0 30px !important; } }
+
+@media screen and (max-width: 940px) {
+  .champion-introduce .title {
+    font-size: 7rem !important; }
+  .skills {
+    padding: 2rem 0 11rem 0 !important; }
+  .tips {
+    flex-flow: column wrap;
+    padding: 1rem 0 !important; }
+    .tips .play-tips {
+      margin-bottom: 1.5rem; }
+      .tips .play-tips .play-tips-title {
+        margin: 0 1.5rem;
+        background: none !important; }
+    .tips .enemy-tips-title {
+      margin: 0rem 1.5rem;
+      background: none !important; }
+    .tips .tip-box {
+      border: none !important;
+      padding: 1rem 1.5rem 1rem 1.5rem; }
+    .tips .white-space {
+      display: none; } }
+
+@media screen and (max-width: 768px) {
+  .champion-introduce .title {
+    font-size: 6rem !important; }
+  .champion-introduce .title-en {
+    font-size: 3rem !important;
+    margin-top: 0.3rem !important; }
+  .skills img {
+    margin-bottom: 1rem !important; }
+  .skills .skill-description {
+    padding: 0 2rem 3rem 2rem !important; } }
+
+@media screen and (max-width: 500px) {
+  .champion-introduce {
+    padding-bottom: 2rem !important; }
+    .champion-introduce .title {
+      font-size: 4rem !important; }
+    .champion-introduce .title-en {
+      font-size: 2rem !important;
+      margin-top: 0.3rem !important; }
+  .champion-title-image .icon-left {
+    left: 0 !important; }
+  .champion-title-image .icon-right {
+    right: 0 !important; }
+  .champion-image-wrapper {
+    width: 100% !important; }
+  .skills {
+    padding: 2rem 0 12rem 0 !important;
+    font-size: 0.7rem !important; }
+    .skills .skill-name {
+      font-size: 1rem !important;
+      padding-bottom: 0.2rem !important; } }
+
+@media screen and (max-width: 500px) {
+  .champion-contents {
+    margin: 1rem !important; }
+    .champion-contents .story {
+      padding-bottom: 4rem !important; }
+      .champion-contents .story .story-title {
+        padding: 1rem 0 !important; }
+  .skills {
+    padding: 2rem 0 15rem 0 !important;
+    font-size: 0.7rem !important; }
+  .tips {
+    padding-bottom: 3rem !important; }
+    .tips .play-tips {
+      margin-bottom: 3rem !important; }
+  .tip-box {
+    margin: 0 !important;
+    padding: 0 !important; }
+    .tip-box .tip {
+      margin: 0 !important;
+      padding: 0.5rem !important; } }
 
 .board-write-page {
   width: 100%;
@@ -1691,8 +2431,7 @@ template {
     left: 5%;
     display: flex;
     flex-direction: column;
-    justify-content: space-around;
-    transition: 2s; }
+    justify-content: space-around; }
     .board-write-page .index-box .index-item {
       width: 100%;
       opacity: 0.8;
@@ -1753,127 +2492,156 @@ template {
     .board-write-page .write-box .is-active {
       display: flex;
       animation: 1.5s fadeIn; }
-    .board-write-page .write-box .page-0 {
+    .board-write-page .write-box .btn-next {
+      background: rgba(11, 13, 18, 0.3);
+      cursor: pointer;
+      position: absolute;
+      top: 2rem;
+      right: 2rem;
+      font-weight: 300;
+      color: #0ec7b5;
+      outline: none;
+      border: #0ec7b5 solid 1px;
+      border-radius: 15px;
+      font-size: 0.9rem;
+      padding: 4px 10px;
+      z-index: 1; }
+      .board-write-page .write-box .btn-next:hover {
+        cursor: pointer;
+        transition: 1s;
+        background: #00b6a4;
+        color: #f7f8fa;
+        box-shadow: 0 0 5px #00b6a4, 0 0 10px #00b6a4; }
+    .board-write-page .write-box > .page-0 {
       align-items: center;
       flex-direction: column;
       padding-top: 2rem;
       justify-content: start;
       height: calc(80vh - 60px); }
-      .board-write-page .write-box .page-0 .search-bar {
+      .board-write-page .write-box > .page-0 .search-bar-write {
         margin-bottom: 1.5rem; }
-      .board-write-page .write-box .page-0 .champions-pick {
+      .board-write-page .write-box > .page-0 .champions-pick {
         height: 100%;
         display: flex;
         justify-content: center;
         align-items: center;
         flex-wrap: wrap;
-        overflow: scroll; }
-        .board-write-page .write-box .page-0 .champions-pick .champions-pick-square {
+        overflow-y: scroll;
+        width: 95%; }
+        .board-write-page .write-box > .page-0 .champions-pick .champions-pick-square {
           width: 60px;
           transition: 0.5s; }
-          .board-write-page .write-box .page-0 .champions-pick .champions-pick-square img {
+          .board-write-page .write-box > .page-0 .champions-pick .champions-pick-square img {
             width: inherit; }
-          .board-write-page .write-box .page-0 .champions-pick .champions-pick-square:hover {
+          .board-write-page .write-box > .page-0 .champions-pick .champions-pick-square:hover {
             cursor: pointer;
             transform: scale(1.5); }
-    .board-write-page .write-box .page-1 {
+    .board-write-page .write-box > .page-1 {
       flex-direction: row;
       justify-content: center;
       align-items: center; }
-      .board-write-page .write-box .page-1 .current-champion-img {
+      .board-write-page .write-box > .page-1 .current-champion-img {
         padding-left: 2rem;
-        flex: 0 1 320px; }
-        .board-write-page .write-box .page-1 .current-champion-img img {
-          max-width: 320px; }
-      .board-write-page .write-box .page-1 .title-input-form {
+        flex: 0 1 90; }
+        .board-write-page .write-box > .page-1 .current-champion-img img {
+          width: 90%; }
+      .board-write-page .write-box > .page-1 .title-input-form {
         height: 100%;
-        flex: 1;
+        flex: 0.9;
+        padding: 0 1rem;
         display: flex;
         justify-content: center;
-        align-items: center;
-        flex-direction: column;
-        padding-right: 4rem; }
-        .board-write-page .write-box .page-1 .title-input-form .post-title,
-        .board-write-page .write-box .page-1 .title-input-form .post-subtitle {
-          width: 90%; }
-        .board-write-page .write-box .page-1 .title-input-form p {
-          text-align: center;
+        flex-direction: column; }
+        .board-write-page .write-box > .page-1 .title-input-form .champ-name {
+          font-size: 2.5rem;
+          padding-bottom: 2rem; }
+        .board-write-page .write-box > .page-1 .title-input-form .post-title,
+        .board-write-page .write-box > .page-1 .title-input-form .post-subtitle {
+          width: 100%; }
+        .board-write-page .write-box > .page-1 .title-input-form p {
           width: 100%;
           font-weight: lighter;
-          font-size: 2rem; }
-        .board-write-page .write-box .page-1 .title-input-form input {
+          font-size: 1rem; }
+        .board-write-page .write-box > .page-1 .title-input-form input {
           color: #e2e4e9;
-          width: 100%;
-          padding: 12px 24px;
+          width: 90%;
+          padding: 12px;
           background-color: #1f2127;
           border: none; }
-    .board-write-page .write-box .page-2 {
-      padding: 1rem;
+    .board-write-page .write-box > .page-2 {
       flex-direction: column;
       align-items: center;
-      justify-content: space-around;
+      justify-content: space-evenly;
       position: relative; }
-      .board-write-page .write-box .page-2 textarea {
+      .board-write-page .write-box > .page-2 textarea {
         color: #e2e4e9;
-        margin-left: 2rem;
+        margin: 0 2rem;
         border: none;
         background-color: #1f2127;
-        width: 100%;
-        height: 100%;
-        resize: none; }
-      .board-write-page .write-box .page-2 > * {
+        width: 70%;
+        height: 84%;
+        resize: none;
+        padding: 5px;
+        font-size: 0.9rem; }
+      .board-write-page .write-box > .page-2 > *:not(.btn-next) {
         width: 90%;
-        display: flex; }
-      .board-write-page .write-box .page-2 > *:first-child {
+        display: flex;
+        padding-left: 2rem; }
+      .board-write-page .write-box > .page-2 > *:nth-child(2) {
         color: #0ec7b5;
         font-weight: 500;
         font-size: 2rem;
-        margin-bottom: -3rem; }
-      .board-write-page .write-box .page-2 .skill-name {
+        margin-bottom: -1rem; }
+      .board-write-page .write-box > .page-2 .skill-name {
         font-weight: lighter;
-        width: 70px;
-        word-break: keep-all;
+        width: 100px;
         text-align: center;
-        margin: auto;
-        margin-right: 1rem; }
-    .board-write-page .write-box .page-3 {
+        margin: 1rem 1rem 0 0;
+        font-size: 0.9rem; }
+      .board-write-page .write-box > .page-2 .skill-img {
+        width: 75px; }
+        .board-write-page .write-box > .page-2 .skill-img img {
+          width: 100%; }
+    .board-write-page .write-box > .page-3 {
       flex-direction: column;
       justify-content: center;
       align-items: center;
       width: 100%; }
-      .board-write-page .write-box .page-3 .title {
+      .board-write-page .write-box > .page-3 .title {
         color: #00b6a4;
-        padding-bottom: 2rem;
-        font-size: 1.5rem; }
-      .board-write-page .write-box .page-3 .label {
-        font-size: 2rem;
-        z-index: 3; }
-      .board-write-page .write-box .page-3 textarea {
+        padding-bottom: 1rem;
+        font-size: 2rem; }
+      .board-write-page .write-box > .page-3 .label {
+        font-size: 1.2rem;
+        z-index: 3;
+        margin-top: 2rem; }
+      .board-write-page .write-box > .page-3 textarea {
         border: none;
         background-color: #1f2127;
         color: #e2e4e9;
         resize: none;
-        width: 90%;
-        height: 200px;
-        margin: 2rem; }
-    .board-write-page .write-box .page-4 {
+        width: 85%;
+        height: 25%;
+        margin: 1rem;
+        font-size: 0.9rem; }
+    .board-write-page .write-box > .page-4 {
       flex-direction: column;
       justify-content: center;
       align-items: center;
       width: 100%; }
-      .board-write-page .write-box .page-4 .title {
+      .board-write-page .write-box > .page-4 .title {
         color: #00b6a4;
         padding-bottom: 2rem;
         font-size: 2rem; }
-      .board-write-page .write-box .page-4 textarea {
+      .board-write-page .write-box > .page-4 textarea {
         border: none;
         background-color: #1f2127;
         color: #e2e4e9;
         resize: none;
-        width: 90%;
+        width: 85%;
         height: 200px;
         margin: 2rem; }
-      .board-write-page .write-box .page-4 .post-btn {
+      .board-write-page .write-box > .page-4 .post-btn {
         margin-top: 3rem;
         font-size: 1.2rem;
         padding: 4px 12px;
@@ -1883,9 +2651,117 @@ template {
         background-color: transparent;
         color: #00b6a4;
         transition: 0.5s; }
-        .board-write-page .write-box .page-4 .post-btn:hover {
-          background-color: #00b6a4;
-          color: #e2e4e9; }
+        .board-write-page .write-box > .page-4 .post-btn:hover {
+          border: none;
+          cursor: pointer;
+          transition: 1s;
+          background: #00b6a4;
+          color: #f7f8fa;
+          box-shadow: 0 0 5px #00b6a4, 0 0 10px #00b6a4; }
+
+@media screen and (max-width: 1200px) {
+  .current-champion-img {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 24%;
+    width: 40%; }
+  .write-box .page-1 .title-input-form {
+    padding-left: 0 !important;
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 50%;
+    left: 75%;
+    width: 50%; }
+    .write-box .page-1 .title-input-form .post-title {
+      width: 90% !important;
+      font-size: 0.9rem !important; }
+    .write-box .page-1 .title-input-form .post-subtitle {
+      width: 90% !important;
+      font-size: 0.9rem !important; } }
+
+@media screen and (max-width: 768px) {
+  .write-box {
+    position: absolute;
+    left: 55% !important;
+    top: 43%;
+    transform: translate(-50%, -50%); }
+  .search-bar-write {
+    position: absolute;
+    top: 3.5% !important; }
+  .champions-pick {
+    position: absolute;
+    top: 10% !important;
+    height: 85% !important; }
+  .index-box {
+    position: fixed !important;
+    left: -32px !important;
+    min-width: 65px; }
+  .page-0 {
+    padding-top: 1rem !important; }
+  .page-1 .current-champion-img img {
+    width: 90% !important; }
+  .page-1 .title-input-form {
+    padding-right: 2rem !important; }
+    .page-1 .title-input-form .champ-name {
+      font-size: 2.5rem !important;
+      padding-left: 3.5rem !important; }
+    .page-1 .title-input-form p {
+      width: 100% !important;
+      font-size: 1rem !important;
+      padding-left: 1.5rem; }
+  .page-2 > *:not(.btn-next) {
+    width: 95% !important;
+    padding-left: 1.5rem !important; } }
+
+@media screen and (max-width: 600px) {
+  .page-1 {
+    position: relative; }
+    .page-1 .current-champion-img {
+      position: absolute;
+      top: 30%;
+      left: 48%;
+      transform: translate(-50%, -50%);
+      width: 46%; }
+    .page-1 .title-input-form {
+      position: absolute !important;
+      top: 78% !important;
+      left: 40% !important;
+      transform: translate(-50%, -50%); }
+      .page-1 .title-input-form .champ-name {
+        padding: 0 !important;
+        position: absolute;
+        top: 33% !important;
+        left: 67% !important;
+        transform: translate(-50%, -50%); }
+      .page-1 .title-input-form input {
+        width: 157% !important; }
+  .page-2 .skill-name {
+    margin-top: 2.2rem !important;
+    width: 80px !important; }
+  .page-2 .skill-img {
+    margin-top: 1.2rem !important; }
+  .page-2 textarea {
+    height: 110% !important;
+    margin-left: 1rem !important; } }
+
+@media screen and (max-width: 515px) {
+  .write-box .btn-next {
+    margin: -1rem; }
+  .page-1 .current-champion-img {
+    width: 55%; }
+  .page-1 .title-input-form {
+    top: 79% !important;
+    font-size: 0.9rem !important; }
+    .page-1 .title-input-form .champ-name {
+      top: 30% !important; }
+  .page-2 > *:not(.btn-next) {
+    width: 95% !important;
+    padding-left: 1rem !important; }
+  .page-2 .skill-name {
+    margin-top: 1.5rem !important; }
+  .page-2 textarea {
+    margin-right: 1rem !important; } }
 
 .players-search-page {
   width: 100%;
@@ -2006,7 +2882,9 @@ template {
     margin: 30px;
     display: flex;
     flex-direction: column;
-    position: relative; }
+    position: relative;
+    /* 솔로 검색 시 */
+    /* 듀오 검색 시 */ }
     .players-search-page > .user-data-view > .solo-search-result > .summonerInfo {
       display: flex;
       margin-top: 30px;
@@ -2026,50 +2904,60 @@ template {
           text-align: center;
           margin: 3px; }
       .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags {
+        margin-top: 30px;
         display: flex;
-        justify-content: center; }
+        justify-content: space-evenly; }
         .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active {
           display: inline-block;
           position: relative;
-          border-radius: 10px;
-          border-color: #815de6;
-          background-color: #815de6;
-          margin: 10px;
-          width: fit-content;
-          padding: 7px;
+          background-color: #0cbaba;
+          text-align: center;
+          padding: 3px;
+          color: #fff;
           font-size: 12px;
-          text-align: center; }
-        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:after {
-          display: inline;
-          position: absolute;
-          top: 0px;
-          left: 0;
-          opacity: 0;
-          width: 100px;
-          padding: 10px;
-          border: 1px solid #212121;
-          background-color: #f7f8fa;
-          color: #212121;
-          pointer-events: none;
-          transition: opacity 250ms, top 250ms;
-          content: attr(data-ballon);
-          align-content: center;
-          font-size: 1em;
-          align-items: center; }
-        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:hover {
-          z-index: 100;
-          background-color: #00b6a4;
-          border-radius: none; }
-        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag:hover::after {
-          opacity: 1;
-          height: auto;
-          width: max-content;
-          font-family: "Noto-Sans KR";
           border-radius: 10px;
-          font-size: 0.8rem;
-          align-self: center; }
-        .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag:hover::after {
-          top: 30px; }
+          align-items: center;
+          width: fit-content;
+          margin-right: 10px;
+          padding: 5px;
+          box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7), inset 0 1px rgba(255, 255, 255, 0.3);
+          text-align: center;
+          transition: background-color 500ms, transform 100ms; }
+          .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active::before {
+            content: attr(data-tooltip);
+            width: 130px;
+            height: max-content;
+            padding: 10px;
+            background-color: #815de6;
+            font-size: 12px;
+            border-radius: 0.25rem;
+            line-height: 16px;
+            bottom: 90px;
+            left: calc(50% - 70px); }
+          .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active::after {
+            content: "";
+            width: 0;
+            height: 0;
+            border: 10px solid transparent;
+            border-top-color: #815de6;
+            left: calc(50% - 10px);
+            bottom: 70px; }
+          .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active::before, .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active::after {
+            position: absolute;
+            opacity: 0;
+            transition: all 500ms;
+            visibility: hidden; }
+          .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:hover {
+            background-color: #01baef; }
+            .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:hover::before, .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:hover::after {
+              opacity: 1;
+              visibility: visible; }
+            .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:hover::after {
+              bottom: 60px; }
+            .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:hover::before {
+              bottom: 80px; }
+          .players-search-page > .user-data-view > .solo-search-result > .summonerInfo .summoner-tags .tag.active:active {
+            transform: translate(2px, 2px); }
     .players-search-page > .user-data-view > .solo-search-result > .summoner-graph {
       display: flex;
       align-items: flex-start;
@@ -2138,9 +3026,9 @@ template {
           margin: 20px;
           padding: 20px; }
     .players-search-page > .user-data-view > .duo-search-result {
-      border: 2px solid red;
       margin-top: 30px;
-      display: flex; }
+      display: flex;
+      flex-direction: column; }
       .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail {
         display: flex;
         flex-direction: column;
@@ -2152,8 +3040,7 @@ template {
           margin: 30px;
           text-align: center;
           display: flex;
-          flex-wrap: wrap;
-          background-color: red; }
+          flex-wrap: wrap; }
         .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info {
           display: flex;
           flex-wrap: wrap;
@@ -2163,147 +3050,150 @@ template {
             flex-direction: row;
             align-items: center;
             flex-direction: column;
-            justify-content: flex-start; }
+            justify-content: center; }
             .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-name {
               font-size: 24px; }
-            .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info {
+            .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info {
               display: flex;
               flex-direction: column;
               align-content: center;
               font-size: 14px;
-              margin: 5px; }
-              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion {
-                display: flex;
-                align-self: center;
-                margin: 15px; }
-              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tier {
+              margin: 5px;
+              text-align: center;
+              align-items: center; }
+              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tier-info {
                 text-align: center;
-                margin: 3px; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tier .summoner-tier-icon {
-                  width: 50px;
-                  height: 100px; }
-                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tier .summoner-tier-icon img {
-                    width: 80px;
-                    height: auto; }
-              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags {
+                margin: 3px;
+                margin-bottom: 10px; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tier-info .summoner-tier-info {
+                  display: flex; }
+              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags {
+                margin-top: 30px;
                 display: flex;
-                justify-content: center;
-                width: 100px; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags .tag.active {
-                  display: flex;
-                  position: absolute;
-                  border-radius: 10px;
-                  border-color: #815de6;
-                  background-color: #815de6;
-                  margin: 10px;
-                  width: fit-content;
-                  padding: 7px;
+                justify-content: space-evenly; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active {
+                  display: inline-block;
+                  position: relative;
+                  background-color: #0cbaba;
+                  text-align: center;
+                  padding: 3px;
+                  color: #fff;
                   font-size: 12px;
-                  text-align: center; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags .tag.active:after {
-                  display: inline;
-                  position: absolute;
-                  top: 0px;
-                  left: 0;
-                  opacity: 0;
-                  width: 100px;
-                  padding: 10px;
-                  border: 1px solid #212121;
-                  background-color: #f7f8fa;
-                  color: #212121;
-                  pointer-events: none;
-                  transition: opacity 250ms, top 250ms;
-                  content: attr(data-ballon);
-                  align-content: center;
-                  font-size: 1em;
-                  align-items: center; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags .tag.active:hover {
-                  z-index: 100;
-                  background-color: #00b6a4;
-                  border-radius: none; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags .tag:hover::after {
-                  opacity: 1;
-                  height: auto;
-                  width: max-content;
-                  font-family: "Noto-Sans KR";
                   border-radius: 10px;
-                  font-size: 0.8rem;
-                  align-self: center; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-tags .tag:hover::after {
-                  top: 30px; }
-              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph {
+                  align-items: center;
+                  width: fit-content;
+                  margin-right: 10px;
+                  padding: 5px;
+                  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.7), inset 0 1px rgba(255, 255, 255, 0.3);
+                  text-align: center;
+                  transition: background-color 500ms, transform 100ms; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active::before {
+                    content: attr(data-tooltip);
+                    width: 130px;
+                    height: max-content;
+                    padding: 10px;
+                    background-color: #815de6;
+                    font-size: 12px;
+                    border-radius: 0.25rem;
+                    line-height: 16px;
+                    bottom: 90px;
+                    left: calc(50% - 70px); }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active::after {
+                    content: "";
+                    width: 0;
+                    height: 0;
+                    border: 10px solid transparent;
+                    border-top-color: #815de6;
+                    left: calc(50% - 10px);
+                    bottom: 70px; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active::before, .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active::after {
+                    position: absolute;
+                    opacity: 0;
+                    transition: all 500ms;
+                    visibility: hidden; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active:hover {
+                    background-color: #01baef; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active:hover::before, .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active:hover::after {
+                      opacity: 1;
+                      visibility: visible; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active:hover::after {
+                      bottom: 60px; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active:hover::before {
+                      bottom: 80px; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-rank-info .summoner-tags .tag.active:active {
+                    transform: translate(2px, 2px); }
+            .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo > .summoner-graph {
+              display: flex;
+              flex-direction: row;
+              align-items: center;
+              width: 100%; }
+              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo > .summoner-graph .graph-section {
                 display: flex;
                 flex-direction: row;
-                align-items: center;
-                width: 100%; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph .graph-section {
+                justify-content: space-between;
+                margin: 10px; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo > .summoner-graph .graph-section .graph {
                   display: flex;
-                  flex-direction: row;
-                  justify-content: space-evenly;
-                  margin: 10px; }
-                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info > .summoner-graph .graph-section .graph {
-                    display: flex;
-                    flex: 0 0 250px;
-                    background: #1f2127;
-                    border-radius: 20px;
-                    box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08); }
-              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion {
-                background-color: #1f2127;
-                height: 270px;
-                width: 300px;
+                  flex: 1 1 1;
+                  background: #1f2127;
+                  border-radius: 20px;
+                  box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08); }
+            .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion {
+              background-color: #1f2127;
+              height: 270px;
+              width: 300px;
+              display: flex;
+              flex-direction: column;
+              align-self: center;
+              margin: 15px;
+              border-radius: 20px;
+              justify-content: space-evenly;
+              flex-wrap: wrap; }
+              .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp {
+                height: 45px;
                 display: flex;
-                flex-direction: column;
-                align-self: center;
-                margin: 15px;
-                border-radius: 20px;
-                justify-content: space-evenly;
-                flex-wrap: wrap; }
-                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp {
-                  height: 45px;
+                margin-left: 20px;
+                flex-direction: row;
+                justify-content: flex-start; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .mostChamp-img {
+                  margin-right: 10px; }
+                .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .rate-detail {
                   display: flex;
-                  margin-left: 20px;
                   flex-direction: row;
-                  justify-content: flex-start; }
-                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .mostChamp-img {
-                    margin-right: 10px; }
-                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail {
-                    display: flex;
-                    flex-direction: row;
-                    justify-content: space-between; }
-                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail img > {
-                      margin-left: 5px; }
-                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-win-lose {
-                      justify-content: center;
-                      display: inline-block;
-                      font-size: 18px;
-                      line-height: 24px;
-                      flex-wrap: wrap; }
-                      .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .all {
-                        color: #f7f8fa; }
-                      .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .win {
-                        color: #0ec7b5; }
-                      .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .lose {
-                        color: #f86d7d; }
-                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-rate {
-                      margin: 15px;
-                      margin-left: 30px;
-                      font-weight: 600;
-                      display: inline-block;
-                      font-size: 24px; }
-                      .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-lank-info .summoner-most-champion .mostChamp .rate-detail .champ-rate .champ-rate-num {
-                        color: #7044ed; }
+                  justify-content: space-between; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .rate-detail img > {
+                    margin-left: 5px; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .rate-detail .champ-win-lose {
+                    justify-content: center;
+                    display: inline-block;
+                    font-size: 18px;
+                    line-height: 24px;
+                    flex-wrap: wrap; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .all {
+                      color: #f7f8fa; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .win {
+                      color: #0ec7b5; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .rate-detail .champ-win-lose > .lose {
+                      color: #f86d7d; }
+                  .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .rate-detail .champ-rate {
+                    margin: 15px;
+                    margin-left: 30px;
+                    font-weight: 600;
+                    display: inline-block;
+                    font-size: 24px; }
+                    .players-search-page > .user-data-view > .duo-search-result > .duo-match-thumbnail > .two-summoner-info > .summonerInfo .summoner-most-champion .mostChamp .rate-detail .champ-rate .champ-rate-num {
+                      color: #7044ed; }
 
 .loading-background {
   position: fixed;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: 1000;
-  top: 0;
+  top: 49px;
   right: 0;
   bottom: 0;
   left: 0;
-  background: rgba(0, 0, 0, 0.7);
-  animation: fadein 1s forwards; }
+  background: rgba(0, 0, 0, 0.8); }
   .loading-background .loading-container {
     position: relative;
     display: flex;
@@ -2368,172 +3258,6 @@ template {
 .circle:nth-of-type(2) .inner {
   -webkit-animation: spin 1.5s infinite linear;
   animation: spin 1.5s infinite linear; }
-
-.popup-background {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
-  z-index: 10;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  animation: fadein 1s forwards; }
-
-@keyframes fadein {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-  .popup-background .popup-box {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 300px;
-    padding: 40px;
-    transform: translate(-50%, -50%);
-    background: #0b0d12;
-    box-sizing: border-box;
-    box-shadow: 5px 30px 25px rgba(0, 0, 0, 0.5);
-    border-radius: 15px;
-    color: #e2e4e9;
-    text-align: center;
-    font-weight: 300;
-    font-size: 0.95rem; }
-    .popup-background .popup-box .result-message {
-      animation: pop 1s ease-out;
-      margin: 9px 0; }
-
-@keyframes pop {
-  0% {
-    /* initial */
-    opacity: 0;
-    transform: translateY(-80px); }
-  70% {
-    transform: translateY(10px); }
-  90% {
-    transform: translateY(-3px); }
-  100% {
-    opacity: 1;
-    transform: translate(0); } }
-    .popup-background .popup-box .btn-wrapper.popup {
-      margin-top: 40px; }
-      .popup-background .popup-box .btn-wrapper.popup button {
-        padding: 4px 15px;
-        border: none;
-        border-radius: 5px;
-        outline: none;
-        font-size: 0.7rem;
-        transition: 1s;
-        letter-spacing: 1px;
-        background: #0ec7b5;
-        color: #f7f8fa;
-        box-shadow: 0 0 5px #0ec7b5, 0 0 25px #0ec7b5; }
-        .popup-background .popup-box .btn-wrapper.popup button:hover {
-          cursor: pointer; }
-
-@keyframes scaleAnimation {
-  0% {
-    opacity: 0;
-    transform: scale(1.5); }
-  100% {
-    opacity: 1;
-    transform: scale(1); } }
-
-@keyframes drawCircle {
-  0% {
-    stroke-dashoffset: 151px; }
-  100% {
-    stroke-dashoffset: 0; } }
-
-@keyframes drawCheck {
-  0% {
-    stroke-dashoffset: 36px; }
-  100% {
-    stroke-dashoffset: 0; } }
-
-@keyframes fadeOut {
-  0% {
-    opacity: 1; }
-  100% {
-    opacity: 0; } }
-
-@keyframes fadeIn {
-  0% {
-    opacity: 0; }
-  100% {
-    opacity: 1; } }
-
-#successAnimationCircle {
-  stroke-dasharray: 151px 151px;
-  stroke: #0ec7b5; }
-
-#successAnimationCheck {
-  stroke-dasharray: 36px 36px;
-  stroke: #0ec7b5; }
-
-#successAnimationResult {
-  fill: #0ec7b5;
-  opacity: 0; }
-
-#successAnimation.animated {
-  animation: 1s ease-out 0s 1 both scaleAnimation; }
-  #successAnimation.animated #successAnimationCircle {
-    animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCircle, 0.3s linear 0.9s 1 both fadeOut; }
-  #successAnimation.animated #successAnimationCheck {
-    animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both drawCheck, 0.3s linear 0.9s 1 both fadeOut; }
-  #successAnimation.animated #successAnimationResult {
-    animation: 0.3s linear 0.9s both fadeIn; }
-
-.toast-wrapper {
-  width: 100%;
-  height: 18%;
-  z-index: 10;
-  position: absolute;
-  top: 50px;
-  animation: fadein 1s forwards; }
-
-@keyframes fadein {
-  from {
-    opacity: 0; }
-  to {
-    opacity: 1; } }
-
-.toast {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: max-content;
-  border-radius: 4px;
-  box-sizing: border-box;
-  padding: 12px 50px 12px 50px;
-  margin-bottom: 10px;
-  color: #e2e4e9;
-  font-size: 13px;
-  font-weight: 300; }
-  .toast:hover .toast-close-icon {
-    display: block; }
-  .toast .toast-close-icon {
-    font-size: 11px;
-    font-weight: 200;
-    position: absolute;
-    right: 16px;
-    top: 35%;
-    height: 12px;
-    line-height: 12px;
-    overflow: hidden;
-    cursor: pointer;
-    display: none;
-    transition: 1s; }
-    .toast .toast-close-icon:hover {
-      transform: rotate(180deg); }
-  .toast.toast-success {
-    border: 1px solid rgba(14, 199, 181, 0.4);
-    background-color: rgba(14, 199, 181, 0.2); }
-  .toast.toast-error {
-    border: 1px solid rgba(219, 112, 147, 0.4);
-    background-color: rgba(219, 112, 147, 0.2); }
 
 .not-found {
   height: 100%;
@@ -2632,7 +3356,14 @@ template {
     border: 1px solid #5a5b62;
     margin: 1rem;
     width: 50%;
+    min-width: 320px;
     border-radius: 4px; }
+  .my-page .my-post-empty,
+  .my-page .my-follower-empty,
+  .my-page .my-followee-empty,
+  .my-page .my-search-empty {
+    opacity: 0.3;
+    padding: 1rem; }
   .my-page > .user-title {
     border: none;
     display: flex;
@@ -2670,14 +3401,33 @@ template {
     padding-left: 8px;
     border-left: 1px solid #5a5b62; }
   .my-page > .user-posts .post .post-list {
+    overflow: scroll;
     display: flex;
     width: 100%;
     height: max-content; }
+    .my-page > .user-posts .post .post-list .my-post {
+      cursor: pointer; }
     .my-page > .user-posts .post .post-list .post-item {
+      flex: 0 0 100px;
+      position: relative;
       margin-right: 1rem;
       width: 100px;
-      height: 100px;
-      background-color: #1f2127; }
+      height: 100px; }
+      .my-page > .user-posts .post .post-list .post-item .text {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        text-align: center; }
+      .my-page > .user-posts .post .post-list .post-item .title {
+        font-size: 1.2rem;
+        padding: 4px; }
+      .my-page > .user-posts .post .post-list .post-item img {
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        opacity: 0.2; }
   .my-page > .user-follow > * {
     margin-bottom: 1rem; }
   .my-page > .user-follow .label {
@@ -2755,5 +3505,127 @@ template {
     .my-page > .user-etc .button-group .leave {
       color: #f86d7d;
       border-left: 1px solid #e2e4e9; }
+
+.post-modal {
+  font-weight: lighter;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  min-width: 320px;
+  max-width: 800px;
+  height: 80% !important; }
+  .post-modal > .contents-box {
+    width: 100%;
+    height: 100%;
+    min-width: 280px; }
+    .post-modal > .contents-box input {
+      background-color: #1f2127;
+      color: #e2e4e9;
+      border: none;
+      width: 90%; }
+    .post-modal > .contents-box .head {
+      display: flex;
+      align-items: center; }
+      .post-modal > .contents-box .head .head-text {
+        padding-left: 1rem;
+        width: 100%;
+        height: 100%; }
+        .post-modal > .contents-box .head .head-text .title {
+          font-size: 1.5rem;
+          padding-bottom: 1rem; }
+    .post-modal > .contents-box .skill-list {
+      width: 100%;
+      padding: 1rem 0; }
+    .post-modal > .contents-box .skill-group {
+      padding-top: 1rem;
+      display: flex;
+      align-items: center; }
+      .post-modal > .contents-box .skill-group img {
+        width: 50px; }
+      .post-modal > .contents-box .skill-group .skill-text {
+        margin-left: 1rem; }
+    .post-modal > .contents-box .square {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      width: max-content; }
+      .post-modal > .contents-box .square img {
+        width: 100px;
+        height: 100px; }
+      .post-modal > .contents-box .square .champion {
+        text-align: center;
+        width: 100%; }
+    .post-modal > .contents-box .play {
+      display: flex;
+      flex-direction: column; }
+      .post-modal > .contents-box .play .play-a,
+      .post-modal > .contents-box .play .play-b,
+      .post-modal > .contents-box .play .play-c {
+        display: flex;
+        padding: 1rem 0; }
+        .post-modal > .contents-box .play .play-a .label,
+        .post-modal > .contents-box .play .play-b .label,
+        .post-modal > .contents-box .play .play-c .label {
+          text-align: left;
+          width: 66px; }
+  .post-modal .date-data {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    opacity: 0.5; }
+
+@media screen and (max-width: 576px) {
+  .post-modal {
+    height: 100% !important; } }
+
+.modal .btn-close {
+  position: absolute;
+  left: 90%;
+  top: 5%; }
+
+.modal .btn-wrapper {
+  position: absolute;
+  top: 80%;
+  left: 10%; }
+  .modal .btn-wrapper .font-red {
+    color: #f86d7d; }
+
+.leave-modal,
+.change-modal,
+.new-password-modal {
+  display: flex;
+  flex-direction: column;
+  height: 30%;
+  justify-content: center; }
+  .leave-modal .text,
+  .change-modal .text,
+  .new-password-modal .text {
+    font-size: 1.2rem;
+    text-align: center;
+    padding-bottom: 2rem; }
+  .leave-modal input,
+  .change-modal input,
+  .new-password-modal input {
+    background-color: #1f2127;
+    color: #e2e4e9;
+    border: none;
+    width: 90%;
+    padding: 4px 12px; }
+  .leave-modal .btn-wrapper,
+  .change-modal .btn-wrapper,
+  .new-password-modal .btn-wrapper {
+    top: 60%; }
+
+.new-password-modal {
+  height: 40%; }
+  .new-password-modal .label {
+    font-weight: lighter;
+    padding-bottom: 1rem; }
+  .new-password-modal .btn-wrapper {
+    top: 70%; }
+  .new-password-modal .password1 {
+    margin-bottom: 1rem; }
 
 /*# sourceMappingURL=style.css.map */
