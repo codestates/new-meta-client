@@ -284,9 +284,6 @@
     }
 
     div.side-section {
-      // &:last-child {
-      //   margin-bottom: 0;
-      // }
       margin-top: 20vh;
       padding: 10px 0;
       position: relative;
@@ -306,7 +303,7 @@
         .left {
           position: absolute;
           left: 30%;
-          top: 80%;
+          top: 85%;
           transform: translate(-50%, -50%);
         }
 
@@ -431,6 +428,11 @@
     font-size: 3rem !important;
   }
 
+  .section-minimap {
+    .image-wrapper {
+      top: 45% !important;
+    }
+  }
   .pointWrap {
     display: none;
   }
@@ -493,5 +495,15 @@
     font-size: 0.95rem !important;
     font-weight: 300;
     margin-bottom: 20px;
+  }
+
+  .services .side-section .text-wrapper {
+    top: 20% !important;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .services .side-section .text-wrapper {
+    top: 15% !important;
   }
 }
