@@ -8,7 +8,7 @@ import BoardSmall from "./BoardSmall";
 
 const GET_ALL_POST = gql`
   {
-    fetchAllPosts {
+    fetchAllPostsOrderByCreatedAt {
       id
       champion
       title
@@ -28,7 +28,7 @@ function BoardShow(props: any): ReactElement {
   const getAllPostQuery = useQuery(GET_ALL_POST);
 
   useEffect(() => {
-    const dataList = getAllPostQuery?.data?.fetchAllPosts;
+    const dataList = getAllPostQuery?.data?.fetchAllPostsOrderByCreatedAt;
     if (dataList) {
       const result = dataList.map((el: any) => {
         return {
