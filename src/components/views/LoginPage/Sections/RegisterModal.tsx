@@ -1,9 +1,7 @@
 import React, { ReactElement, useState, useEffect, useRef } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import axios from "axios";
 import { gql, useMutation } from "@apollo/client";
-import API from "../../../../api";
-import Popup from "../../../utils/Popup";
+import SuccessPopup from "./SuccessPopup";
 import Toast from "../../../utils/Toast";
 
 // eslint-disable-next-line no-useless-escape
@@ -290,7 +288,7 @@ function RegisterModal(props: Props): ReactElement {
           </form>
         </div>
       ) : (
-        <Popup
+        <SuccessPopup
           setIsPopupOpen={setIsPopupOpen}
           closeModal={closeModal}
           setIsRegisterModal={setIsRegisterModal}
