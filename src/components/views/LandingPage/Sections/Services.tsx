@@ -83,7 +83,7 @@ function Services(): ReactElement {
           </div>
           <Link to="/players">
             <button className="btn-primary" type="button">
-              확인하기
+              <span>확인하기</span>
             </button>
           </Link>
         </div>
@@ -103,7 +103,7 @@ function Services(): ReactElement {
           </div>
           <Link to="/board">
             <button className="btn-primary" type="button">
-              확인하기
+              <span>확인하기</span>
             </button>
           </Link>
         </div>
@@ -123,7 +123,7 @@ function Services(): ReactElement {
           </div>
           <Link to="/players">
             <button className="btn-primary" type="button">
-              확인하기
+              <span>확인하기</span>
             </button>
           </Link>
         </div>
