@@ -55,14 +55,15 @@ function Minimap(): ReactElement {
       };
 
       if (
-        section[0].offsetTop <= Math.ceil(scroll) &&
-        section[4].offsetTop >= Math.ceil(scroll)
-      ) {
+        activeImageWrapper &&
+        pointWrapper &&
+        activeInnerWrap &&
+        innerWraps &&
+        imageWrappers
+      )
         if (
-          activeImageWrapper &&
-          pointWrapper &&
-          activeInnerWrap &&
-          innerWraps
+          section[0].offsetTop <= Math.ceil(scroll) &&
+          section[4].offsetTop >= Math.ceil(scroll)
         ) {
           for (let i = 0; i < totalNum; i += 1) {
             imageWrappers[i].style.position = "fixed";
@@ -70,17 +71,17 @@ function Minimap(): ReactElement {
           }
           pointWrapper.style.opacity = "1";
           pointWrapper.style.position = "fixed";
+        } else {
+          for (let i = 0; i < totalNum; i += 1) {
+            imageWrappers[i].style.position = "absolute";
+            innerWraps[i].style.position = "absolute";
+          }
+          if (pointWrapper) {
+            pointWrapper.style.opacity = "0";
+            pointWrapper.style.position = "absolute";
+          }
         }
-      } else {
-        for (let i = 0; i < totalNum; i += 1) {
-          imageWrappers[i].style.position = "absolute";
-          innerWraps[i].style.position = "absolute";
-        }
-        if (pointWrapper) {
-          pointWrapper.style.opacity = "0";
-          pointWrapper.style.position = "absolute";
-        }
-      }
+
       for (let i = 0; i < totalNum; i += 1) {
         if (
           Math.ceil(scroll) >=
@@ -96,6 +97,7 @@ function Minimap(): ReactElement {
       }
       pageChangeFunc();
     };
+
     window.addEventListener("scroll", scrollHandler);
     window.addEventListener("resize", () => {
       minimapPrevHeight = sections[0].offsetHeight;

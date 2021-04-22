@@ -146,18 +146,18 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
     indexBoxDiv?.children[1].classList.add("selected");
   };
 
-  // if (!CurrentChampion) {
-  //   // console.log("챔피언 미선택");
-  //   indexBox.current?.children[1].classList.add("display-none");
-  //   indexBox.current?.children[2].classList.add("display-none");
-  //   indexBox.current?.children[3].classList.add("display-none");
-  //   indexBox.current?.children[4].classList.add("display-none");
-  // } else {
-  //   indexBox.current?.children[1].classList.remove("display-none");
-  //   indexBox.current?.children[2].classList.remove("display-none");
-  //   indexBox.current?.children[3].classList.remove("display-none");
-  //   indexBox.current?.children[4].classList.remove("display-none");
-  // }
+  if (!CurrentChampion) {
+    // console.log("챔피언 미선택");
+    indexBox.current?.children[1].classList.add("display-none");
+    indexBox.current?.children[2].classList.add("display-none");
+    indexBox.current?.children[3].classList.add("display-none");
+    indexBox.current?.children[4].classList.add("display-none");
+  } else {
+    indexBox.current?.children[1].classList.remove("display-none");
+    indexBox.current?.children[2].classList.remove("display-none");
+    indexBox.current?.children[3].classList.remove("display-none");
+    indexBox.current?.children[4].classList.remove("display-none");
+  }
 
   return (
     <div className="board-write-page">
@@ -297,10 +297,12 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
             {SkillImages.length > 0 && (
               <>
                 <div className="skill-name">{SkillImages[0][1]}</div>
-                <img
-                  src={`${API.championSpell}/${SkillImages[0][0]}`}
-                  alt=""
-                ></img>
+                <div className="skill-img">
+                  <img
+                    src={`${API.championSpell}/${SkillImages[0][0]}`}
+                    alt=""
+                  ></img>
+                </div>
               </>
             )}
             <textarea
@@ -312,10 +314,12 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
             {SkillImages.length > 0 && (
               <>
                 <div className="skill-name">{SkillImages[1][1]}</div>
-                <img
-                  src={`${API.championSpell}/${SkillImages[1][0]}`}
-                  alt=""
-                ></img>
+                <div className="skill-img">
+                  <img
+                    src={`${API.championSpell}/${SkillImages[1][0]}`}
+                    alt=""
+                  ></img>
+                </div>
               </>
             )}
             <textarea
@@ -327,10 +331,12 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
             {SkillImages.length > 0 && (
               <>
                 <div className="skill-name">{SkillImages[2][1]}</div>
-                <img
-                  src={`${API.championSpell}/${SkillImages[2][0]}`}
-                  alt=""
-                ></img>
+                <div className="skill-img">
+                  <img
+                    src={`${API.championSpell}/${SkillImages[2][0]}`}
+                    alt=""
+                  ></img>
+                </div>
               </>
             )}
             <textarea
@@ -342,10 +348,12 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
             {SkillImages.length > 0 && (
               <>
                 <div className="skill-name">{SkillImages[3][1]}</div>
-                <img
-                  src={`${API.championSpell}/${SkillImages[3][0]}`}
-                  alt=""
-                ></img>
+                <div className="skill-img">
+                  <img
+                    src={`${API.championSpell}/${SkillImages[3][0]}`}
+                    alt=""
+                  ></img>
+                </div>
               </>
             )}
             <textarea
