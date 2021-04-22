@@ -1,3 +1,5 @@
+import { gql, useMutation } from "@apollo/client";
+import { RouteComponentProps, withRouter } from "react-router-dom";
 import React, {
   Dispatch,
   ReactElement,
@@ -5,14 +7,16 @@ import React, {
   useEffect,
   useRef,
 } from "react";
+import { TokenVar } from "../../../../graphql";
 
-interface Props {
+interface Props extends RouteComponentProps {
   closeModal: Dispatch<SetStateAction<boolean>>;
 }
 
 function LeaveModal(props: Props): ReactElement {
   const { closeModal } = props;
   const basicModalRef = useRef<HTMLDivElement>(null);
+  const password = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     const basicModal = basicModalRef.current;
@@ -29,10 +33,34 @@ function LeaveModal(props: Props): ReactElement {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const LEAVE = gql`
+    mutation Leave($password: String!) {
+      deleteAccount(password: $password)
+    }
+  `;
+
+  const [leaveQuery] = useMutation(LEAVE);
+
+  const clickLeave = () => {
+    leaveQuery({
+      variables: {
+        password: password.current?.value,
+      },
+    })
+      .then((res) => {
+        TokenVar(null);
+        localStorage.clear();
+        props.history.push("/");
+      })
+      .catch((err) => {
+        console.log("error : ", err);
+      });
+  };
+
   return (
     <>
       <div className="modal-background">
-        <div className="modal-box" ref={basicModalRef}>
+        <div className="modal modal-box leave-modal" ref={basicModalRef}>
           <button
             onClick={() => {
               closeModal(false);
@@ -42,10 +70,26 @@ function LeaveModal(props: Props): ReactElement {
           >
             <i className="icon-cross"></i>
           </button>
+          <div className="text">Are you really leaving?</div>
+          <input
+            ref={password}
+            placeholder="Inter your paassword"
+            className="password"
+            type="password"
+          ></input>
 
           <div className="btn-wrapper">
-            <button type="button">Leave</button>
-            <button type="button">Cancel</button>
+            <button onClick={clickLeave} className="font-red" type="button">
+              Leave
+            </button>
+            <button
+              onClick={() => {
+                closeModal(false);
+              }}
+              type="button"
+            >
+              Cancel
+            </button>
           </div>
         </div>
       </div>
@@ -53,4 +97,4 @@ function LeaveModal(props: Props): ReactElement {
   );
 }
 
-export default LeaveModal;
+export default withRouter(LeaveModal);
