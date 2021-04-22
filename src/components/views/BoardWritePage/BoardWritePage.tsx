@@ -44,7 +44,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
   `;
   const GET_ALL_POST = gql`
     {
-      fetchAllPosts {
+      fetchAllPostsOrderByCreatedAt {
         id
         champion
         title
@@ -266,6 +266,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
               <input
                 ref={titleTag}
                 type="text"
+                maxLength={50}
                 placeholder="ex ) ??? 장인 1000판 꿀팁 대 공개"
               ></input>
             </div>
@@ -274,6 +275,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
               <input
                 ref={descriptionTag}
                 type="text"
+                maxLength={50}
                 placeholder="ex ) ??? 메타 탑승하는 방법"
               ></input>
             </div>
@@ -306,6 +308,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
               </>
             )}
             <textarea
+              maxLength={50}
               ref={skillTagQ}
               placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
             ></textarea>
