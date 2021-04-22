@@ -232,7 +232,7 @@ function PostModal(props: Props): ReactElement {
   return (
     <>
       <div className="modal-background post-modal-background">
-        <div className="modal-box post-modal" ref={basicModalRef}>
+        <div className="modal modal-box post-modal" ref={basicModalRef}>
           <button
             onClick={() => {
               closeModal(false);
@@ -349,7 +349,11 @@ function PostModal(props: Props): ReactElement {
               </>
             ) : (
               <>
-                <button className="delete" onClick={clickDelete} type="button">
+                <button
+                  className="font-red"
+                  onClick={clickDelete}
+                  type="button"
+                >
                   Delete
                 </button>
                 <button onClick={clickEdit} type="button">

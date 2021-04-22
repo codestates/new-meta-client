@@ -3,6 +3,7 @@ import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import PostModal from "./Sections/PostModal";
 import ChangeNicknameModal from "./Sections/ChangeNicknameModal";
+import NewPasswordModal from "./Sections/NewPasswordModal";
 import LeaveModal from "./Sections/LeaveModal";
 import API from "../../../api";
 import ionia from "../../../assets/image/ionia2.jpeg";
@@ -108,11 +109,27 @@ function MyPage(): ReactElement {
     if (userPostQuery.data) {
       setMyPosts(userPostQuery.data.readMyPosts);
     }
+
+    return () => {
+      setMyData(null);
+      setLikePosts([]);
+      setMyPosts([]);
+      setFollowerList([]);
+      setFolloweeList([]);
+    };
   }, [userInfoQuery, userInfoQuery.data, userPostQuery.data]);
 
   useEffect(() => {
     userInfoQuery.refetch();
     userPostQuery.refetch();
+
+    return () => {
+      setMyData(null);
+      setLikePosts([]);
+      setMyPosts([]);
+      setFollowerList([]);
+      setFolloweeList([]);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -120,7 +137,7 @@ function MyPage(): ReactElement {
     <>
       {PModal && <PostModal closeModal={SetPostModal} data={PModalData} />}
       {CNModal && <ChangeNicknameModal closeModal={SetChangeNicknameModal} />}
-      {NPModal && <ChangeNicknameModal closeModal={SetNewPasswordModal} />}
+      {NPModal && <NewPasswordModal closeModal={SetNewPasswordModal} />}
       {LModal && <LeaveModal closeModal={SetLeaveModal} />}
 
       {/* <div className="my-page-background-img">
@@ -261,7 +278,7 @@ function MyPage(): ReactElement {
           <div className="box-label">etc.</div>
           <div className="button-group">
             <button onClick={clickChangeNick} type="button">
-              Change Nickname
+              Change Nick name
             </button>
             <button onClick={clickNewPassword} type="button">
               New Password
