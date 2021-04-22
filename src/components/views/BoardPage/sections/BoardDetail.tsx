@@ -2,6 +2,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
+import { gql, useMutation } from "@apollo/client";
 import axios from "axios";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import API from "../../../../api";
@@ -12,7 +13,6 @@ interface Props {
 
 function BoardDetail(props: Props): ReactElement {
   const { data } = props;
-  // console.log("??", data);
 
   const [viewData, setdata] = useState(data);
   const [CurrentIndex, setCurrentIndex] = useState(0);
@@ -63,6 +63,32 @@ function BoardDetail(props: Props): ReactElement {
       tt.transform = `translateX(-${calcWidth}px)`;
     }
     setCurrentIndex(CurrentIndex + 1);
+  };
+
+  const STAR = gql`
+    mutation CreateLike($postId: String!) {
+      createLike(postId: $postId) {
+        post {
+          title
+        }
+      }
+    }
+  `;
+
+  const [starQuery] = useMutation(STAR);
+
+  const clickStar = () => {
+    starQuery({
+      variables: {
+        postId: data.id,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("error : ", err);
+      });
   };
 
   useEffect(() => {
@@ -134,11 +160,15 @@ function BoardDetail(props: Props): ReactElement {
           <div className="label">꿀 팁</div>
           <div className="etc">{viewData.etc}</div>
           <div className="button-group">
-            <i className="icon-user"></i>
-            {viewData.author}
-            <i className="icon-star-full"></i>
-            <i className="icon-star-empty"></i>
-            <i className="icon-file"></i>
+            <div className="user">
+              <i className="icon-user"></i>
+              <div className="author">{viewData.author}</div>
+            </div>
+            <div aria-hidden onClick={clickStar} className="star">
+              {/* <i className="icon-star-full"></i> */}
+              <i className="icon-star-empty"></i>
+              <div className="state">Star</div>
+            </div>
           </div>
         </div>
       </div>
