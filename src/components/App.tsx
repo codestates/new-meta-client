@@ -12,6 +12,7 @@ import BoardWritePage from "./views/BoardWritePage/BoardWritePage";
 import Footer from "./views/Footer/Footer";
 import NotFoundPage from "./views/NotFoundPage/NotFoundPage";
 import ScrollToTop from "./utils/ScrollToTop";
+import Auth from "./utils/Auth";
 
 function App(): ReactElement {
   return (
@@ -23,10 +24,14 @@ function App(): ReactElement {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/players" component={PlayersSearchPage} />
           <Route exact path="/login" component={LoginPage} />
-          <Route exact path="/mypage" component={MyPage} />
+          <Route exact path="/mypage" component={Auth(MyPage, true)} />
           <Route exact path="/board" component={BoardPage} />
           <Route exact path="/board/read" component={BoardReadPage} />
-          <Route exact path="/board/write" component={BoardWritePage} />
+          <Route
+            exact
+            path="/board/write"
+            component={Auth(BoardWritePage, true)}
+          />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>
