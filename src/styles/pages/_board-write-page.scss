@@ -125,6 +125,7 @@
       border-radius: 15px;
       font-size: 0.9rem;
       padding: 4px 10px;
+      z-index: 1;
 
       &:hover {
         cursor: pointer;
@@ -132,10 +133,6 @@
         background: $jade-dark;
         color: $secondary;
         box-shadow: 0 0 5px $jade-dark, 0 0 10px $jade-dark;
-      }
-
-      &.page-2 {
-        right: 40px;
       }
     }
 

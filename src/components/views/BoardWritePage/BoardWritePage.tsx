@@ -146,18 +146,18 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
     indexBoxDiv?.children[1].classList.add("selected");
   };
 
-  // if (!CurrentChampion) {
-  //   // console.log("챔피언 미선택");
-  //   indexBox.current?.children[1].classList.add("display-none");
-  //   indexBox.current?.children[2].classList.add("display-none");
-  //   indexBox.current?.children[3].classList.add("display-none");
-  //   indexBox.current?.children[4].classList.add("display-none");
-  // } else {
-  //   indexBox.current?.children[1].classList.remove("display-none");
-  //   indexBox.current?.children[2].classList.remove("display-none");
-  //   indexBox.current?.children[3].classList.remove("display-none");
-  //   indexBox.current?.children[4].classList.remove("display-none");
-  // }
+  if (!CurrentChampion) {
+    // console.log("챔피언 미선택");
+    indexBox.current?.children[1].classList.add("display-none");
+    indexBox.current?.children[2].classList.add("display-none");
+    indexBox.current?.children[3].classList.add("display-none");
+    indexBox.current?.children[4].classList.add("display-none");
+  } else {
+    indexBox.current?.children[1].classList.remove("display-none");
+    indexBox.current?.children[2].classList.remove("display-none");
+    indexBox.current?.children[3].classList.remove("display-none");
+    indexBox.current?.children[4].classList.remove("display-none");
+  }
 
   return (
     <div className="board-write-page">
