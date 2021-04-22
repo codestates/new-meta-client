@@ -295,7 +295,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           <div className="title">Skills</div>
           <div className="skill-q">
             {SkillImages.length > 0 && (
-              <div>
+              <>
                 <div className="skill-name">{SkillImages[0][1]}</div>
                 <div className="skill-img">
                   <img
@@ -303,7 +303,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
                     alt=""
                   ></img>
                 </div>
-              </div>
+              </>
             )}
             <textarea
               ref={skillTagQ}

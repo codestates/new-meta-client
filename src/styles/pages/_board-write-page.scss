@@ -176,7 +176,6 @@
     }
 
     & > .page-1 {
-      // display: flex;
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -230,11 +229,11 @@
 
       textarea {
         color: $primary;
-        margin: 0 1.5rem;
+        margin: 0 2rem;
         border: none;
         background-color: $block;
-        width: 80%;
-        height: 88%;
+        width: 70%;
+        height: 84%;
         resize: none;
         padding: 5px;
         font-size: 0.9rem;
@@ -255,15 +254,18 @@
 
       .skill-name {
         font-weight: lighter;
-        width: 70px;
-        word-break: keep-all;
+        width: 100px;
         text-align: center;
-        margin: auto;
-        margin-right: 1rem;
+        margin: 1rem 1rem 0 0;
+        font-size: 0.9rem;
       }
 
       .skill-img {
-        width: 100px;
+        width: 75px;
+
+        img {
+          width: 100%;
+        }
       }
     }
     & > .page-3 {
@@ -289,7 +291,7 @@
         background-color: $block;
         color: $primary;
         resize: none;
-        width: 80%;
+        width: 85%;
         height: 25%;
         margin: 1rem;
         font-size: 0.9rem;
@@ -312,7 +314,7 @@
         background-color: $block;
         color: $primary;
         resize: none;
-        width: 90%;
+        width: 85%;
         height: 200px;
         margin: 2rem;
       }
@@ -429,16 +431,6 @@
   }
 }
 
-// @media screen and (max-width: 650px) {
-//   .write-box {
-//     margin-right: 2rem !important;
-//   }
-
-//   .index-box {
-//     margin: 1rem !important;
-//   }
-// }
-
 @media screen and (max-width: 600px) {
   .page-1 {
     position: relative;
@@ -471,17 +463,35 @@
     }
   }
 
-  // .index-box {
-  //   margin: 0.5rem !important;
-  //   flex: 1 0 35px !important;
-  // }
+  .page-2 {
+    .skill-name {
+      margin-top: 2.2rem !important;
+      width: 80px !important;
+    }
+
+    .skill-img {
+      margin-top: 1.2rem !important;
+    }
+
+    textarea {
+      height: 110% !important;
+      margin-left: 1rem !important;
+    }
+  }
 }
 
 @media screen and (max-width: 515px) {
+  .write-box {
+    .btn-next {
+      margin: -1rem;
+    }
+  }
+
   .page-1 {
     .current-champion-img {
       width: 55%;
     }
+
     .title-input-form {
       top: 79% !important;
       font-size: 0.9rem !important;
@@ -491,9 +501,19 @@
       }
     }
   }
-  .write-box {
-    .btn-next {
-      margin: -1rem;
+
+  .page-2 {
+    & > *:not(.btn-next) {
+      width: 95% !important;
+      padding-left: 1rem !important;
+    }
+
+    .skill-name {
+      margin-top: 1.5rem !important;
+    }
+
+    textarea {
+      margin-right: 1rem !important;
     }
   }
 }
