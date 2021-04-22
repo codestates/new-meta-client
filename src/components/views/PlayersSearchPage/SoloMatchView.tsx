@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable import/no-unresolved */
 import React, { ReactElement, useState, useEffect } from "react";
@@ -24,16 +25,14 @@ import PositionIcon from "./Sections/PositionIcon";
 
 interface Props {
   User1data: SummonerAllData;
-  User1MainPosition: string;
 }
 
 function SoloMatchView(props: Props): ReactElement {
-  const { User1data, User1MainPosition } = props;
+  const { User1data } = props;
 
   useEffect(() => {
-    console.log(User1MainPosition);
     return () => {};
-  }, [User1data, User1MainPosition]);
+  }, [User1data]);
 
   return (
     <div className="solo-search-result">
@@ -47,6 +46,9 @@ function SoloMatchView(props: Props): ReactElement {
           </div>
           <div className="summoner-tier">
             {User1data.leagueInfo!.leaguePoints} LP
+          </div>
+          <div className="summoner-tier">
+            <TierIcon userData={User1data.leagueInfo!.tier} />
           </div>
         </div>
         <div className="summoner-tags">
@@ -63,12 +65,13 @@ function SoloMatchView(props: Props): ReactElement {
           <div className="graph win-rate">
             <WinRateChart userData={User1data.leagueInfo!} />
           </div>
-          <div className="graph">
-            <LaneInfoChart userData={User1data.laneInfo!} />
-            <PositionIcon
-              userData={User1data.laneInfo!}
-              MainPosition={User1MainPosition}
-            />
+          <div className="graph-laneInfo">
+            <div className="div-laneInfo">
+              <LaneInfoChart userData={User1data.laneInfo!} />
+            </div>
+            <div className="img-laneInfo">
+              <PositionIcon userData={User1data.laneInfo!} />
+            </div>
           </div>
           <div className="graph summoner-most-champion">
             <div className="mostChamp">
@@ -85,9 +88,6 @@ function SoloMatchView(props: Props): ReactElement {
         <div className="graph-section">
           <div className="graph exp-timeline">
             <TimelineChart userData={User1data.expTimelineData!} />
-          </div>
-          <div className="graph">
-            <HeatMapChart userData={User1data.recentChampionStats!} />
           </div>
         </div>
       </div>
