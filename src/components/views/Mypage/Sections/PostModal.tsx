@@ -65,14 +65,17 @@ function PostModal(props: Props): ReactElement {
   const UPDATE_POST = gql`
     mutation UpdatePost($data: UpdatePostInputType!) {
       updatePost(data: $data) {
-        title
-        description
-        skills
-        play
-        etc
-        champion
-        createdAt
-        updatedAt
+        post {
+          id
+          champion
+          title
+          description
+          skills
+          play
+          etc
+          createdAt
+          updatedAt
+        }
       }
     }
   `;
@@ -83,7 +86,6 @@ function PostModal(props: Props): ReactElement {
         query: gql`
           {
             readMyPosts {
-              id
               champion
               title
               description
@@ -122,16 +124,13 @@ function PostModal(props: Props): ReactElement {
       },
     })
       .then((res) => {
-        //
-        const updatedData = res.data.updatePost;
+        const updatedData = res.data.updatePost.post;
         setEditMode(false);
         const result = {
           ...updatedData,
           play: JSON.parse(updatedData.play),
           skills: JSON.parse(updatedData.skills),
         };
-        console.log(result);
-
         setData(result);
       })
       .catch((err) => console.log("err : ", err));
