@@ -10,6 +10,7 @@ export interface SummonerAllData {
   recentChampionStats?: PlayerMatchInfo[];
   kdaTimelineData?: KDAEventData[];
   expTimelineData?: FrameExpData[][];
+  message?: string;
 }
 export interface MatchInfo {
   platformId: string;

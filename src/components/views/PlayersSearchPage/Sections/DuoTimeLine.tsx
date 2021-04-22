@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 import React, { ReactElement, useEffect } from "react";
@@ -30,11 +31,8 @@ function DuoTimeLine(props: Props): ReactElement {
   } = props;
 
   useEffect(() => {
-    console.log("Props로 데이터를 잘 받아왔음");
-    return () => {
-      console.log("컴포넌트가 화면에서 사라짐");
-    };
-  }, [props]);
+    return () => {};
+  }, [User1data, User2data]);
 
   function getMainPosition(object: LaneInfo): string {
     const max = Object.values(object).reduce((acc, cur) => {
@@ -91,6 +89,7 @@ function DuoTimeLine(props: Props): ReactElement {
   const user1ExpData = getAverageExp(User1data);
   const user2ExpData = getAverageExp(User2data);
   console.log(user1ExpData);
+  console.log(user2ExpData);
   const user1Main = getMainPosition(User1LaneInfo);
   const user2Main = getMainPosition(User2LaneInfo);
 

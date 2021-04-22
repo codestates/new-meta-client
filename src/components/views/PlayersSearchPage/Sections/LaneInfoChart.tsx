@@ -1,11 +1,7 @@
-import React, { ReactElement } from "react";
-import Chart from "react-apexcharts";
+/* eslint-disable @typescript-eslint/no-empty-function */
+import React, { ReactElement, useEffect } from "react";
+import ReactApexChart from "react-apexcharts";
 import { LaneInfo } from "../interface";
-import iconJUNGLE from "../../../../assets/image/position/icon-jng.png";
-import iconMID from "../../../../assets/image/position/icon-mid.png";
-import iconTOP from "../../../../assets/image/position/icon-top.png";
-import iconADC from "../../../../assets/image/position/icon-adc.png";
-import iconSUPPORT from "../../../../assets/image/position/icon-spt.png";
 
 interface Props {
   userData: LaneInfo;
@@ -24,7 +20,7 @@ function LaneInfoChart(props: Props): ReactElement {
     ],
 
     chart: {
-      type: "pie",
+      type: "donut",
     },
 
     options: {
@@ -34,12 +30,9 @@ function LaneInfoChart(props: Props): ReactElement {
         show: false,
       },
       title: {
-        style: {
-          color: "#FFF",
-          fontSize: "15px",
-          align: "center",
-        },
+        text: "",
       },
+
       chart: {
         background: "transparent",
       },
@@ -48,13 +41,7 @@ function LaneInfoChart(props: Props): ReactElement {
           customScale: 1,
           donut: {
             labels: {
-              show: true,
-              value: { color: "#FFF" },
-              total: {
-                show: false,
-                label: "",
-                showAlways: true,
-              },
+              show: false,
             },
           },
         },
@@ -72,7 +59,7 @@ function LaneInfoChart(props: Props): ReactElement {
       },
       responsive: [
         {
-          breakpoint: 150,
+          breakpoint: 250,
         },
       ],
     },
@@ -80,11 +67,12 @@ function LaneInfoChart(props: Props): ReactElement {
 
   return (
     <>
-      <Chart
+      <ReactApexChart
         options={data.options}
         series={data.series}
         type="donut"
         height={250}
+        className="LaneInfo-chart"
       />
     </>
   );

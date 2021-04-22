@@ -11,27 +11,39 @@ import { LaneInfo } from "../interface";
 
 interface Props {
   userData: LaneInfo;
-  MainPosition: string;
 }
 function PositionIcon(props: Props): ReactElement {
-  const { userData, MainPosition } = props;
-  useEffect(() => {
-    console.log(MainPosition);
-    return () => {};
-  }, [userData, MainPosition]);
+  const { userData } = props;
+
+  function getMainPosition(object: LaneInfo): string {
+    const max = Object.values(object).reduce((acc, cur) => {
+      return acc > cur ? acc : cur;
+    });
+
+    const array = ["TOP", "JUNGLE", "MID", "AD_CARRY", "SUPPORT"];
+    let mainPosition = "";
+    for (const el of array) {
+      if (object[el] === max) {
+        mainPosition = el;
+      }
+    }
+    return mainPosition;
+  }
+
+  const MainPosition = getMainPosition(userData);
 
   return (
     <>
       {MainPosition === "JUNGLE" ? (
-        <img src={JUNGLE} alt="" width="80" className="position-icon" />
+        <img src={JUNGLE} alt="" className="position-icon" width="64" />
       ) : MainPosition === "TOP" ? (
-        <img src={TOP} alt="" width="80" className="position-icon" />
+        <img src={TOP} alt="" className="position-icon" width="64" />
       ) : MainPosition === "MID" ? (
-        <img src={MID} alt="" width="80" className="position-icon" />
+        <img src={MID} alt="" className="position-icon" width="64" />
       ) : MainPosition === "AD_CARRY" ? (
-        <img src={AD_CARRY} alt="" width="80" className="position-icon" />
+        <img src={AD_CARRY} alt="" className="position-icon" width="64" />
       ) : (
-        <img src={SUPPORT} alt="" width="80" className="position-icon" />
+        <img src={SUPPORT} alt="" className="position-icon" width="64" />
       )}
     </>
   );

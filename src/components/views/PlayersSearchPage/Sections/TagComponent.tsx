@@ -19,9 +19,6 @@ interface Props {
 
 function TagComponent(props: Props): ReactElement {
   const { laneInfo, leagueInfo, kdaInfo, recentChampionStats } = props;
-  useEffect(() => {
-    return () => {};
-  }, [laneInfo, leagueInfo, kdaInfo, recentChampionStats]);
 
   /* 태그- 컴포넌트로 만들어야함 */
   const hotStreak = useRef<HTMLDivElement>(null);

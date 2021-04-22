@@ -5,14 +5,7 @@
 /* eslint-disable no-param-reassign */
 /* eslint-disable indent */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import React, {
-  ReactComponentElement,
-  ReactElement,
-  RefObject,
-  useRef,
-  useState,
-  useEffect,
-} from "react";
+import React, { ReactElement, useRef, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import {
@@ -33,41 +26,62 @@ import Loading from "../../utils/Loading";
 import API from "../../../api";
 import LanerData from "./lanerData.json";
 import JunglerData from "./junglerData.json";
+import FakerData from "./fakerData.json";
 
 function PlayersSearchPage(): ReactElement {
   const [SearchType, setSearchType] = useState("solo");
   const [userName1, setUserName1] = useState("");
   const [userName2, setUserName2] = useState("");
-  const [user1MainPosition, setUser1MainPosition] = useState("");
-  const [user2MainPosition, setUser2MainPosition] = useState("");
+
   const [ToastMessage, setToastMessage] = useState({ success: "", fail: "" });
   const [loadingState, setLoadingState] = useState(false);
 
   const soloBtn = useRef<HTMLButtonElement>(null);
   const duoBtn = useRef<HTMLButtonElement>(null);
+  const user1Input = useRef<HTMLInputElement>(null);
+  const user2Input = useRef<HTMLInputElement>(null);
 
-  const [User1data, setUser1data] = useState<SummonerAllData>(JunglerData);
+  const [User1data, setUser1data] = useState<SummonerAllData>({});
   const [User2data, setUser2data] = useState<SummonerAllData>({});
 
-  function getMainPosition(object: LaneInfo): string {
-    const max = Object.values(object).reduce((acc, cur) => {
-      return acc > cur ? acc : cur;
-    });
-    const array = ["TOP", "JUNGLE", "MID", "AD_CARRY", "SUPPORT"];
-    let mainPosition = "";
-    for (const el of array) {
-      if (object[el] === max) {
-        mainPosition = el;
-      }
-    }
-    return mainPosition;
-  }
-
   useEffect(() => {
-    return () => {
-      setLoadingState(false);
-    };
-  }, [User1data, User2data, user1MainPosition, user2MainPosition]);
+    console.log("component did mount");
+    setUser1data({});
+    setUser2data({});
+    setUserName1("");
+    setUserName2("");
+  }, []);
+
+  // 듀오 서치 -> User2data만 받아오기
+  useEffect(() => {
+    if (userName2 && Object.keys(User1data).length > 0) {
+      /* userName2 === userName1 */
+      axios
+        .post(API.summonerInfo, { summonerName: encodeURI(userName2) })
+        .then((res) => {
+          if (res.data.message === "Request failed with status code 429") {
+            setLoadingState(false);
+            console.log(res.data.message);
+            setToastMessage({
+              success: "",
+              fail: "잠시 후 다시 시도해주세요.",
+            });
+          }
+          console.log("userName2도 있을때", res.data);
+          setUser2data(res.data);
+          setLoadingState(false);
+          setUserName2("");
+        })
+        .catch((err) => {
+          setLoadingState(false);
+          setUserName2("");
+          setToastMessage({
+            success: "",
+            fail: "소환사 정보를 찾을 수 없습니다!",
+          });
+        });
+    }
+  }, [User1data]);
 
   const onInputUserName1Handler = (e: {
     target: { value: React.SetStateAction<string> };
@@ -92,80 +106,52 @@ function PlayersSearchPage(): ReactElement {
     }
   };
 
-  const clickSoloSearch = async () => {
+  const clickSearch = () => {
+    if (userName1 === userName2) {
+      console.log("같은애들");
+      setToastMessage({
+        success: "",
+        fail: "같은 소환사를 비교할 수 없습니다!",
+      });
+      setLoadingState(false);
+      return;
+    }
     if (userName1) {
       setLoadingState(true);
+      console.log(
+        "검색 시작",
+        "UserName1:",
+        userName1,
+        "UserName2:",
+        userName2
+      );
 
-      await axios
+      axios
         .post(API.summonerInfo, {
           summonerName: encodeURI(userName1),
         })
         .then((res) => {
+          if (res.data.message === "Request failed with status code 429") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "잠시 후 다시 시도해주세요.",
+            });
+          }
+          console.log("userName1만 있을때", res.data);
           setUser1data(res.data);
-          setUser1MainPosition(getMainPosition(User1data.laneInfo!));
-          setLoadingState(false);
+          if (!userName2) {
+            console.log("로딩 취소");
+            setLoadingState(false);
+          }
         })
         .catch((err) => {
-          console.log(err);
           setToastMessage({
             success: "",
             fail: "소환사 정보를 찾을 수 없습니다!",
           });
           setLoadingState(false);
         });
-    } else {
-      setToastMessage({ success: "", fail: "소환사명을 입력하지 않으셨어요!" });
-    }
-  };
-
-  const clickDuoSearch = async () => {
-    if (
-      (!userName1 && userName2) ||
-      (userName1 && !userName2) ||
-      (!userName1 && !userName2)
-    ) {
-      setToastMessage({
-        success: "",
-        fail: "소환사명을 모두 입력해주세요!",
-      });
-    } else if (userName1 && userName2) {
-      if (userName1 === userName2) {
-        setToastMessage({
-          success: "",
-          fail: "같은 소환사를 비교할 수는 없습니다!",
-        });
-      } else {
-        setLoadingState(true);
-        await axios
-          .post(API.summonerInfo, { summonerName: encodeURI(userName1) })
-          .then((res) => {
-            setUser1data(res.data);
-            setUser1MainPosition(getMainPosition(User1data.laneInfo!));
-          })
-          .then(() => {
-            axios
-              .post(API.summonerInfo, { summonerName: encodeURI(userName2) })
-              .then((res) => {
-                setUser2data(res.data);
-                setUser2MainPosition(getMainPosition(User2data.laneInfo!));
-              })
-              .catch((err) => {
-                setLoadingState(false);
-                setToastMessage({
-                  success: "",
-                  fail: "소환사 정보를 찾을 수 없습니다!",
-                });
-              });
-            setLoadingState(false);
-          })
-          .catch((err) => {
-            setLoadingState(false);
-            setToastMessage({
-              success: "",
-              fail: "소환사 정보를 찾을 수 없습니다!",
-            });
-          });
-      }
     }
   };
 
@@ -203,11 +189,15 @@ function PlayersSearchPage(): ReactElement {
                 onChange={onInputUserName1Handler}
                 className="players-input"
                 type="text"
+                ref={user1Input}
               ></input>
               <button
                 type="button"
                 onClick={() => {
-                  clickSoloSearch();
+                  user1Input.current!.value = "";
+                  setUser1data({});
+                  setUser2data({});
+                  clickSearch();
                 }}
                 className="summoner-search-btn"
               >
@@ -220,11 +210,18 @@ function PlayersSearchPage(): ReactElement {
                 onChange={onInputUserName1Handler}
                 className="players-input"
                 type="text"
+                ref={user1Input}
               ></input>
               <button
                 type="button"
                 className="summoner-search-btn"
-                onClick={clickDuoSearch}
+                onClick={() => {
+                  user1Input.current!.value = "";
+                  user2Input.current!.value = "";
+                  setUser1data({});
+                  setUser2data({});
+                  clickSearch();
+                }}
               >
                 Search
               </button>
@@ -232,11 +229,12 @@ function PlayersSearchPage(): ReactElement {
                 onChange={onInputUserName2Handler}
                 className="players-input"
                 type="text"
+                ref={user2Input}
               />
             </div>
           )}
         </div>
-        {ToastMessage.fail ? (
+        {ToastMessage.fail && (
           <div>
             <Toast
               ToastMessage={ToastMessage}
@@ -244,27 +242,22 @@ function PlayersSearchPage(): ReactElement {
               closeModal={() => {}}
             />
           </div>
-        ) : null}
-        {loadingState ? <Loading /> : null}
-        <div className="user-data-view">
-          {Object.keys(User1data).length > 0 ? (
-            Object.keys(User2data).length > 0 ? (
-              <DuoMatchView
-                User1data={User1data}
-                User1MainPosition={user1MainPosition}
-                User2data={User2data}
-                User2MainPosition={user2MainPosition}
-              />
+        )}
+        {loadingState ? (
+          <Loading />
+        ) : (
+          <div className="user-data-view">
+            {Object.keys(User1data).length > 0 ? (
+              Object.keys(User2data).length > 0 ? (
+                <DuoMatchView User1data={User1data} User2data={User2data} />
+              ) : (
+                <SoloMatchView User1data={User1data} />
+              )
             ) : (
-              <SoloMatchView
-                User1data={User1data}
-                User1MainPosition={user1MainPosition}
-              />
-            )
-          ) : (
-            <div></div>
-          )}
-        </div>
+              <div></div>
+            )}
+          </div>
+        )}
       </div>
     </>
   );

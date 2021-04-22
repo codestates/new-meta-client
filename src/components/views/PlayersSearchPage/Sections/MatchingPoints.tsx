@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-empty-function */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-param-reassign */
@@ -14,6 +15,10 @@ interface Props {
 function MatchingPoints(props: Props): ReactElement {
   const { User1data, User2data } = props;
   const [ResultPoint, setResultPoint] = useState("0");
+
+  useEffect(() => {
+    return () => {};
+  }, [User1data, User2data]);
 
   const findPosition = (data: SummonerAllData) => {
     let result = "";
