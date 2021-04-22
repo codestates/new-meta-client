@@ -186,10 +186,20 @@
       display: none;
     }
 
-    .nav-btn span {
+    .nav-btn {
       position: absolute;
-      right: -40px;
-      top: 0;
+      right: 45px !important;
+      top: 10px;
+      padding: 6px 17px;
+      font-size: 16px;
+      width: 80px;
+      height: 30px;
+      span {
+        position: absolute;
+        width: 100%;
+        left: 51% !important;
+        transform: translate(-50%, -50%);
+      }
     }
   }
 }
