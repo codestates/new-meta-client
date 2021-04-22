@@ -1,3 +1,4 @@
+/* eslint-disable no-lonely-if */
 /* eslint-disable no-undef */
 import React, { ReactElement, useEffect, useRef } from "react";
 
@@ -55,15 +56,15 @@ function Minimap(): ReactElement {
       };
 
       if (
-        activeImageWrapper &&
-        pointWrapper &&
-        activeInnerWrap &&
-        innerWraps &&
-        imageWrappers
-      )
+        section[0].offsetTop <= Math.ceil(scroll) &&
+        section[4].offsetTop >= Math.ceil(scroll)
+      ) {
         if (
-          section[0].offsetTop <= Math.ceil(scroll) &&
-          section[4].offsetTop >= Math.ceil(scroll)
+          activeImageWrapper &&
+          pointWrapper &&
+          activeInnerWrap &&
+          innerWraps &&
+          imageWrappers
         ) {
           for (let i = 0; i < totalNum; i += 1) {
             imageWrappers[i].style.position = "fixed";
@@ -71,7 +72,9 @@ function Minimap(): ReactElement {
           }
           pointWrapper.style.opacity = "1";
           pointWrapper.style.position = "fixed";
-        } else {
+        }
+      } else {
+        if (pointWrapper && innerWraps && imageWrappers) {
           for (let i = 0; i < totalNum; i += 1) {
             imageWrappers[i].style.position = "absolute";
             innerWraps[i].style.position = "absolute";
@@ -81,6 +84,7 @@ function Minimap(): ReactElement {
             pointWrapper.style.position = "absolute";
           }
         }
+      }
 
       for (let i = 0; i < totalNum; i += 1) {
         if (
