@@ -20,7 +20,7 @@ export const GET_CURRENT_USER = gql`
 `;
 // https://server.new-meta.ga:4000
 const link = createHttpLink({
-  uri: "http://localhost:4000/graphql", // ! EC2 배포시 변경하기
+  uri: "http://localhost:4000/graphql", // ! S3 배포시 변경하기
   credentials: "same-origin",
 });
 

@@ -207,7 +207,6 @@
           flex-direction: column;
           width: 100%;
           height: 100%;
-          display: flex;
           justify-content: center;
           align-items: center;
 
@@ -220,10 +219,37 @@
           }
 
           .button-group {
-            font-size: 2rem;
+            display: flex;
+            font-size: 1.2rem;
+            width: 100%;
+            justify-content: center;
             i {
-              padding: 2rem;
               color: $jade;
+              padding-right: 1rem;
+              transition: 0.7s;
+            }
+
+            .user {
+              margin-right: 2rem;
+            }
+
+            .user,
+            .star {
+              cursor: pointer;
+              padding: 8px 24px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              border: 1px solid $jade;
+              border-radius: 12px;
+              transition: 0.7s;
+
+              &:hover {
+                i {
+                  color: $primary;
+                }
+                background-color: $jade;
+              }
             }
           }
 
