@@ -23,7 +23,6 @@ function App(): ReactElement {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/players" component={PlayersSearchPage} />
-          <Route exact path="/login" component={LoginPage} />
           <Route exact path="/mypage" component={Auth(MyPage, true)} />
           <Route exact path="/board" component={BoardPage} />
           <Route exact path="/board/read" component={BoardReadPage} />
