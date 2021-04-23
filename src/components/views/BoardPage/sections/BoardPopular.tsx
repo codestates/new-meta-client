@@ -5,6 +5,9 @@ import API from "../../../../api";
 interface Props {
   data: {
     champion: string;
+    user: {
+      nickname: string;
+    };
     createdAt: string; // todo 추후 변경
     updatedAt: string; // todo 추후 변경
     title: string;
@@ -12,16 +15,15 @@ interface Props {
     skills: string[];
     play: string[];
     etc: string;
-    user: {
-      id: string;
-      nickname: string;
-    };
     numberOfLikes: number;
   };
 
   setCurrentBoard: React.Dispatch<
     React.SetStateAction<{
       champion: string;
+      user: {
+        nickname: string;
+      };
       createdAt: string;
       updatedAt: string;
       title: string;
@@ -29,45 +31,41 @@ interface Props {
       skills: string[];
       play: string[];
       etc: string;
-      user: {
-        id: string;
-        nickname: string;
-      };
       numberOfLikes: number;
     }>
   >;
 }
 
-function BoardSmall(props: Props): ReactElement {
+function BoardPopular(props: Props): ReactElement {
   const { data, setCurrentBoard } = props;
 
   const section1 = useRef<HTMLDivElement>(null);
   const section2 = useRef<HTMLDivElement>(null);
-  const section3 = useRef<HTMLDivElement>(null);
-  const section4 = useRef<HTMLDivElement>(null);
 
   console.log(data);
 
   return (
     <div
-      className="board-small"
       onClick={() => {
         setCurrentBoard(data);
       }}
+      onMouseEnter={() => {
+        section1.current?.classList.remove("mouse-over");
+        section2.current?.classList.add("mouse-over");
+      }}
+      onMouseLeave={() => {
+        section1.current?.classList.add("mouse-over");
+        section2.current?.classList.remove("mouse-over");
+      }}
       aria-hidden
+      className="board-small"
     >
-      <div ref={section1} className="simple-text">
-        <div className="champion-name">{data.champion}</div>
-        <img src={`${API.championSplash}/${data.champion}_0.jpg`} alt=""></img>
+      <img src={`${API.championSquare}/${data.champion}.png`} alt=""></img>
+      <div ref={section1} className="simple-text mouse-over">
+        <div className="champ-name">{data.champion}</div>
+        <div className="author">{data.user.nickname}</div>
       </div>
       <div ref={section2} className="simple-text2">
-        <div className="small-title">{data.title}</div>
-        <div className="small-description">{data.description}</div>
-      </div>
-      <div ref={section3} className="simple-text3">
-        <div>{data.user.nickname}</div>
-      </div>
-      <div ref={section4} className="simple-text4">
         <i className="icon-star-full"></i>
         <div className="like-num">{data.numberOfLikes}</div>
       </div>
@@ -75,4 +73,4 @@ function BoardSmall(props: Props): ReactElement {
   );
 }
 
-export default BoardSmall;
+export default BoardPopular;

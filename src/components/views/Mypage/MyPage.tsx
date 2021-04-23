@@ -7,7 +7,6 @@ import NewPasswordModal from "./Sections/NewPasswordModal";
 import LeaveModal from "./Sections/LeaveModal";
 import LikePostModal from "./Sections/LikePostModal";
 import API from "../../../api";
-import ionia from "../../../assets/image/ionia2.jpeg";
 
 // interface Props {}
 const tempData = {
@@ -56,6 +55,18 @@ const MyINFO = gql`
         createdAt
         updatedAt
       }
+      followers {
+        subject {
+          nickname
+          email
+        }
+      }
+      followings {
+        target {
+          nickname
+          email
+        }
+      }
     }
   }
 `;
@@ -88,8 +99,8 @@ function MyPage(): ReactElement {
   // eslint-disable-next-line @typescript-eslint/ban-types
   const [MyData, setMyData] = useState<myInfo | null>(null);
   const [MyPosts, setMyPosts] = useState([]);
+  const [FollowingList, setFollowingList] = useState([]);
   const [FollowerList, setFollowerList] = useState([]);
-  const [FolloweeList, setFolloweeList] = useState([]);
   const [PModal, SetPostModal] = useState(false);
   const [LPModal, SetLPostModal] = useState(false);
   const [PModalData, SetPostModalData] = useState(null);
@@ -99,6 +110,8 @@ function MyPage(): ReactElement {
   const [LModal, SetLeaveModal] = useState(false);
   const userInfoQuery = useQuery(MyINFO);
   const userPostQuery = useQuery(MyPost);
+
+  console.log(FollowerList);
 
   const clickMyPost = (data: any) => {
     SetPostModal(true);
@@ -124,7 +137,11 @@ function MyPage(): ReactElement {
     // todo 팔로우, 좋아요 부분 다 하기
 
     if (userInfoQuery.data) {
+      console.log(userInfoQuery.data);
+
       setMyData(userInfoQuery.data.myInfo);
+      setFollowerList(userInfoQuery.data.myInfo.followers); // 나를
+      setFollowingList(userInfoQuery.data.myInfo.followings); // 내가
     }
     if (userPostQuery.data) {
       setMyPosts(userPostQuery.data.readMyPosts);
@@ -134,7 +151,7 @@ function MyPage(): ReactElement {
       setMyData(null);
       setMyPosts([]);
       setFollowerList([]);
-      setFolloweeList([]);
+      setFollowingList([]);
     };
   }, [userInfoQuery, userInfoQuery.data, userPostQuery.data]);
 
@@ -146,7 +163,7 @@ function MyPage(): ReactElement {
       setMyData(null);
       setMyPosts([]);
       setFollowerList([]);
-      setFolloweeList([]);
+      setFollowingList([]);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -179,12 +196,12 @@ function MyPage(): ReactElement {
               <div className="num">{MyPosts.length}</div>
             </div>
             <div className="follower-num">
-              <div className="">Follower</div>
-              <div className="num">{FollowerList.length}</div>
+              <div className="">Following</div>
+              <div className="num">{FollowingList.length}</div>
             </div>
             <div className="followee-num">
-              <div className="">Followee</div>
-              <div className="num">{FolloweeList.length}</div>
+              <div className="">Follower</div>
+              <div className="num">{FollowerList.length}</div>
             </div>
           </div>
         </section>
@@ -255,15 +272,15 @@ function MyPage(): ReactElement {
         </section>
         <section className="user-follow">
           <div className="box-label">Follow</div>
-          <div className="label">Follower list</div>
+          <div className="label">Following list</div>
           <div>
-            {tempData.user.followerIds.length > 0 ? (
-              tempData.user.followerIds.map((el: any) => {
+            {FollowingList.length > 0 ? (
+              FollowingList.map((el: any) => {
+                const data = el.target;
                 return (
                   <div className="follow-item">
-                    <div className="nickname">osunguk</div>
-                    <div className="email">osunguk@gmail.com</div>
-                    <div className="unfollow">Unfollow</div>
+                    <div className="nickname">{data.nickname}</div>
+                    <div className="email">{data.email}</div>
                   </div>
                 );
               })
@@ -271,15 +288,15 @@ function MyPage(): ReactElement {
               <div className="my-follower-empty">Try follower your friends</div>
             )}
           </div>
-          <div className="label">Followee list</div>
+          <div className="label">Follower list</div>
           <div>
-            {tempData.user.followerIds.length > 0 ? (
-              tempData.user.followerIds.map((el: any) => {
+            {FollowerList.length > 0 ? (
+              FollowerList.map((el: any) => {
+                const data = el.subject;
                 return (
                   <div className="follow-item">
-                    <div className="nickname">osunguk</div>
-                    <div className="email">osunguk@gmail.com</div>
-                    <div className="unfollow">Unfollow</div>
+                    <div className="nickname">{data.nickname}</div>
+                    <div className="email">{data.email}</div>
                   </div>
                 );
               })

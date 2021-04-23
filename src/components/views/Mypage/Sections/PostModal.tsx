@@ -18,7 +18,6 @@ interface Props {
 }
 
 interface post {
-  author: string;
   champion: string;
   createdAt: string;
   description: string;
@@ -95,7 +94,6 @@ function PostModal(props: Props): ReactElement {
               etc
               createdAt
               updatedAt
-              author
             }
           }
         `,
@@ -158,7 +156,6 @@ function PostModal(props: Props): ReactElement {
               etc
               createdAt
               updatedAt
-              author
             }
           }
         `,
