@@ -5,7 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import EmptyDetail from "./EmptyDetail";
 import BoardDetail from "./BoardDetail";
 import BoardSmall from "./BoardSmall";
-import Popup from "../../../utils/Popup";
+import Login from "../../LoginPage/LoginPage";
 
 const GET_ALL_POST = gql`
   {
@@ -27,12 +27,9 @@ function BoardShow(props: any): ReactElement {
   const [BoardList, setBoardList] = useState([]);
   const getAllPostQuery = useQuery(GET_ALL_POST);
 
-  const [IsPopupOpen, setIsPopupOpen] = useState(false);
-  const popupMessage = "로그인이 필요한 서비스입니다.";
-  const btnMessage = "OK";
-  const closePopupHandler = () => {
-    setIsPopupOpen(false);
-  };
+  const [IsLoginOpen, setIsLoginOpen] = useState(false);
+  const [IsRegisterModal, setIsRegisterModal] = useState(false);
+  const closeModal = () => setIsLoginOpen(false);
 
   useEffect(() => {
     const dataList = getAllPostQuery?.data?.fetchAllPostsOrderByCreatedAt;
@@ -53,18 +50,17 @@ function BoardShow(props: any): ReactElement {
     if (token) {
       props.history.push("/board/write");
     } else {
-      setIsPopupOpen(true);
+      setIsLoginOpen(true);
     }
   };
 
   return (
     <div className="user-board">
-      {IsPopupOpen ? (
-        <Popup
-          popupMessage={popupMessage}
-          btnMessage={btnMessage}
-          IsPopupOpen={IsPopupOpen}
-          closePopupHandler={closePopupHandler}
+      {IsLoginOpen ? (
+        <Login
+          closeModal={closeModal}
+          IsRegisterModal={IsRegisterModal}
+          setIsRegisterModal={setIsRegisterModal}
         />
       ) : null}
       <div className="detail-view">
