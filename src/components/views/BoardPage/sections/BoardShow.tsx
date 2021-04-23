@@ -16,7 +16,6 @@ const GET_ALL_POST = gql`
       skills
       play
       etc
-      author
       createdAt
       updatedAt
     }
