@@ -9,6 +9,10 @@ export default (SpecificComponent: ComponentType, option: boolean) => {
     const [IsPopupOpen, setIsPopupOpen] = useState(false);
     const popupMessage = "로그인이 필요한 페이지입니다.";
     const btnMessage = "메인으로 돌아가기";
+    const closePopupHandler = () => {
+      setIsPopupOpen(false);
+      props.history.push("/");
+    };
 
     useEffect(() => {
       if (!currentUser.data.token && option) {
@@ -21,7 +25,7 @@ export default (SpecificComponent: ComponentType, option: boolean) => {
         popupMessage={popupMessage}
         btnMessage={btnMessage}
         IsPopupOpen={IsPopupOpen}
-        setIsPopupOpen={setIsPopupOpen}
+        closePopupHandler={closePopupHandler}
       />
     ) : (
       <SpecificComponent />
