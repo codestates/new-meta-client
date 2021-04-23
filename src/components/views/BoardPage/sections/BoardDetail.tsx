@@ -2,9 +2,10 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import axios from "axios";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { GET_CURRENT_USER } from "../../../../graphql";
 import API from "../../../../api";
 
 interface Props {
@@ -19,6 +20,13 @@ function BoardDetail(props: Props): ReactElement {
   const [info, setinfo] = useState<any>(null);
   const textTag = useRef<HTMLDivElement>(null);
   const partTag = useRef<HTMLDivElement>(null);
+  const [isLogin, setIsLogin] = useState(undefined);
+
+  const userLogin = useQuery(GET_CURRENT_USER);
+
+  useEffect(() => {
+    setIsLogin(userLogin.data.token);
+  }, [userLogin]);
 
   const clickLeftIcon = () => {
     if (CurrentIndex === 0) {
@@ -164,11 +172,13 @@ function BoardDetail(props: Props): ReactElement {
               <i className="icon-user"></i>
               <div className="author">{viewData.author}</div>
             </div>
-            <div aria-hidden onClick={clickStar} className="star">
-              {/* <i className="icon-star-full"></i> */}
-              <i className="icon-star-empty"></i>
-              <div className="state">Star</div>
-            </div>
+            {isLogin && (
+              <div aria-hidden onClick={clickStar} className="star">
+                {/* <i className="icon-star-full"></i> */}
+                <i className="icon-star-empty"></i>
+                <div className="state">Star</div>
+              </div>
+            )}
           </div>
         </div>
       </div>
