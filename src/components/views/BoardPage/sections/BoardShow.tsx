@@ -54,9 +54,6 @@ function BoardShow(props: any): ReactElement {
       props.history.push("/board/write");
     } else {
       setIsPopupOpen(true);
-      setTimeout(() => {
-        setIsPopupOpen(false);
-      }, 3000);
     }
   };
 
