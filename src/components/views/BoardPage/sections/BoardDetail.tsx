@@ -10,17 +10,17 @@ import { GET_CURRENT_USER } from "../../../../graphql";
 import API from "../../../../api";
 
 function BoardDetail(props: any): ReactElement {
-  const { data } = props;
+  const { data, setCurrentBoard } = props;
 
   const [viewData, setdata] = useState(data);
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const [info, setinfo] = useState<any>(null);
   const textTag = useRef<HTMLDivElement>(null);
   const partTag = useRef<HTMLDivElement>(null);
+  const boardModalRef = useRef<HTMLDivElement>(null);
   const [isLogin, setIsLogin] = useState(undefined);
   const [likeState, setLikeState] = useState<boolean | undefined>(undefined);
   const [Author, setAuthor] = useState(false);
-
   const userLogin = useQuery(GET_CURRENT_USER);
 
   const MY_LIKE_POST = gql`
@@ -202,90 +202,118 @@ function BoardDetail(props: any): ReactElement {
     run();
   }, [data]);
 
+  useEffect(() => {
+    const boardModal = boardModalRef.current;
+
+    const handleClickOutside = (e: { target: any }) => {
+      if (boardModal && !boardModal.contains(e.target)) {
+        setCurrentBoard(false);
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
-    <>
-      <div className="icon-box">
-        <i
-          onClick={clickLeftIcon}
-          aria-hidden
-          className="icon-arrow-left-circle view-left"
-        ></i>
-        <i
-          onClick={clickRightIcon}
-          aria-hidden
-          className="icon-arrow-right-circle view-right"
-        ></i>
-      </div>
-      <div ref={textTag} className="text-box">
-        <div ref={partTag} className="part part1 is-active">
-          <div className="contents-title">{viewData.title}</div>
-          <div className="contents-description">{viewData.description}</div>
+    <div className="board-modal-background">
+      <div className="board-modal-box" ref={boardModalRef}>
+        <button
+          className="btn-close"
+          type="button"
+          onClick={() => {
+            setCurrentBoard({});
+          }}
+        >
+          <i className="icon-cross"></i>
+        </button>
+        <div className="icon-box">
+          <i
+            onClick={clickLeftIcon}
+            aria-hidden
+            className="icon-arrow-left-circle view-left"
+          ></i>
+          <i
+            onClick={clickRightIcon}
+            aria-hidden
+            className="icon-arrow-right-circle view-right"
+          ></i>
         </div>
-        <div className="part part2">
-          <div className="contents-skill">
-            {info &&
-              info.spells.map((el: any, idx: number) => {
-                return (
-                  <div className="skill-group" key={idx}>
-                    <img
-                      src={`${API.championSpell}/${el.image.full}`}
-                      alt=""
-                    ></img>
-                    <div>{viewData.skills[idx]}</div>
-                  </div>
-                );
-                //
-              })}
+        <div ref={textTag} className="text-box">
+          <div ref={partTag} className="part part1 is-active">
+            <div className="contents-title">{viewData.title}</div>
+            <div className="contents-description">{viewData.description}</div>
           </div>
-        </div>
-        <div className="part part3">
-          <div className="label">플레이 할 때</div>
-          <div className="play">{viewData.play[0]}</div>
-          <div className="label">상대 할 때</div>
-          <div className="enemy">{viewData.play[1]}</div>
-        </div>
-        <div className="part part4">
-          <div className="label">꿀 팁</div>
-          <div className="etc">{viewData.etc}</div>
-          <div className="button-group">
-            <div
-              aria-hidden
-              onClick={() => {
-                clickAuthor(viewData.user.id);
-              }}
-              className="user"
-            >
-              <i className="icon-user"></i>
-              <div className="author">{viewData.user.nickname}</div>
+          <div className="part part2">
+            <div className="contents-skill">
+              {info &&
+                info.spells.map((el: any, idx: number) => {
+                  return (
+                    <div className="skill-group" key={idx}>
+                      <img
+                        src={`${API.championSpell}/${el.image.full}`}
+                        alt=""
+                        className="board-detail-img"
+                      ></img>
+                      <div>{viewData.skills[idx]}</div>
+                    </div>
+                  );
+                  //
+                })}
             </div>
-            {isLogin && (
-              <>
-                {!Author && (
-                  <>
-                    {likeState ? (
-                      <div aria-hidden onClick={clickUnstar} className="star">
-                        <i className="icon-star-full"></i>
-                        <div className="state">Unstar</div>
-                      </div>
-                    ) : (
-                      <div aria-hidden onClick={clickStar} className="star">
-                        <i className="icon-star-empty"></i>
-                        <div className="state">Star</div>
-                      </div>
-                    )}
-                  </>
-                )}
-              </>
-            )}
+          </div>
+          <div className="part part3">
+            <div className="label">플레이 할 때</div>
+            <div className="play">{viewData.play[0]}</div>
+            <div className="label">상대 할 때</div>
+            <div className="enemy">{viewData.play[1]}</div>
+          </div>
+          <div className="part part4">
+            <div className="label">꿀 팁</div>
+            <div className="etc">{viewData.etc}</div>
+            <div className="button-group">
+              <div
+                aria-hidden
+                onClick={() => {
+                  clickAuthor(viewData.user.id);
+                }}
+                className="user"
+              >
+                <i className="icon-user"></i>
+                <div className="author">{viewData.user.nickname}</div>
+              </div>
+              {isLogin && (
+                <>
+                  {!Author && (
+                    <>
+                      {likeState ? (
+                        <div aria-hidden onClick={clickUnstar} className="star">
+                          <i className="icon-star-full"></i>
+                          <div className="state">Unstar</div>
+                        </div>
+                      ) : (
+                        <div aria-hidden onClick={clickStar} className="star">
+                          <i className="icon-star-empty"></i>
+                          <div className="state">Star</div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
+        <img
+          className="detail-img"
+          src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.champion}_0.jpg`}
+          alt=""
+        ></img>
       </div>
-      <img
-        className="detail-img"
-        src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.champion}_0.jpg`}
-        alt=""
-      ></img>
-    </>
+    </div>
   );
 }
 
