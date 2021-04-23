@@ -1,10 +1,10 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { ReactElement, useRef } from "react";
+import API from "../../../../api";
 
 interface Props {
   data: {
     champion: string;
-    author: string;
     createdAt: string; // todo 추후 변경
     updatedAt: string; // todo 추후 변경
     title: string;
@@ -12,12 +12,16 @@ interface Props {
     skills: string[];
     play: string[];
     etc: string;
+    user: {
+      id: string;
+      nickname: string;
+    };
+    numberOfLikes: number;
   };
 
   setCurrentBoard: React.Dispatch<
     React.SetStateAction<{
       champion: string;
-      author: string;
       createdAt: string;
       updatedAt: string;
       title: string;
@@ -25,6 +29,11 @@ interface Props {
       skills: string[];
       play: string[];
       etc: string;
+      user: {
+        id: string;
+        nickname: string;
+      };
+      numberOfLikes: number;
     }>
   >;
 }
@@ -37,40 +46,30 @@ function BoardSmall(props: Props): ReactElement {
   const section3 = useRef<HTMLDivElement>(null);
   const section4 = useRef<HTMLDivElement>(null);
 
+  console.log(data);
+
   return (
     <div
-      // onMouseEnter={() => {
-      //   section1.current?.classList.remove("mouse-over");
-      //   section2.current?.classList.add("mouse-over");
-      // }}
-      // onMouseLeave={() => {
-      //   section1.current?.classList.add("mouse-over");
-      //   section2.current?.classList.remove("mouse-over");
-      // }}
       className="board-small"
+      onClick={() => {
+        setCurrentBoard(data);
+      }}
+      aria-hidden
     >
-      {/* <img src={`${API.championSquare}/${data.champion}.png`} alt=""></img> */}
       <div ref={section1} className="simple-text">
-        <div>{data.champion}</div>
+        <div className="champion-name">{data.champion}</div>
+        <img src={`${API.championSplash}/${data.champion}_0.jpg`} alt=""></img>
       </div>
       <div ref={section2} className="simple-text2">
-        <div
-          onClick={() => {
-            setCurrentBoard(data);
-          }}
-          aria-hidden
-        >
-          {data.title}
-        </div>
-        {/* <div>{data.description}</div> */}
+        <div className="small-title">{data.title}</div>
+        <div className="small-description">{data.description}</div>
       </div>
       <div ref={section3} className="simple-text3">
-        <div>author</div>
-        {/* <div>{`author: ${data.author}`}</div> */}
+        <div>{data.user.nickname}</div>
       </div>
       <div ref={section4} className="simple-text4">
-        <div>author</div>
-        {/* <div>{`author: ${data.author}`}</div> */}
+        <i className="icon-star-full"></i>
+        <div className="like-num">{data.numberOfLikes}</div>
       </div>
     </div>
   );

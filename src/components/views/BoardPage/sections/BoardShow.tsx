@@ -23,13 +23,37 @@ const GET_ALL_POST = gql`
         id
         nickname
       }
+      numberOfLikes
+    }
+  }
+`;
+
+const GET_ALL_POST_ORDER_STAR = gql`
+  {
+    fetchAllPostsOrderByLikes {
+      id
+      champion
+      title
+      description
+      skills
+      play
+      etc
+      createdAt
+      updatedAt
+      user {
+        id
+        nickname
+      }
+      numberOfLikes
     }
   }
 `;
 function BoardShow(props: any): ReactElement {
   const [CurrentBoard, setCurrentBoard] = useState({});
   const [BoardList, setBoardList] = useState([]);
+  const [BoardListOrdered, setBoardListOrdered] = useState([]);
   const getAllPostQuery = useQuery(GET_ALL_POST);
+  const getAllPostQueryOrderStar = useQuery(GET_ALL_POST_ORDER_STAR);
 
   const [IsLoginOpen, setIsLoginOpen] = useState(false);
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
@@ -37,6 +61,10 @@ function BoardShow(props: any): ReactElement {
 
   useEffect(() => {
     const dataList = getAllPostQuery?.data?.fetchAllPostsOrderByCreatedAt;
+    const dataListOrdered =
+      getAllPostQueryOrderStar?.data?.fetchAllPostsOrderByLikes;
+    console.log(getAllPostQuery);
+
     if (dataList) {
       const result = dataList.map((el: any) => {
         return {
@@ -47,7 +75,19 @@ function BoardShow(props: any): ReactElement {
       });
       setBoardList(result);
     }
-  }, [getAllPostQuery]);
+    if (dataListOrdered) {
+      console.log(dataListOrdered);
+
+      const result = dataListOrdered.map((el: any) => {
+        return {
+          ...el,
+          skills: JSON.parse(el.skills),
+          play: JSON.parse(el.play),
+        };
+      });
+      setBoardListOrdered(result);
+    }
+  }, [getAllPostQuery, getAllPostQueryOrderStar]);
 
   const clickWriteBtn = () => {
     const token = localStorage.getItem("token");
@@ -73,28 +113,32 @@ function BoardShow(props: any): ReactElement {
         ) : null}
       </div>
       <div className="list-view">
-        <div className="btn-wrapper">
-          <button
-            onClick={clickWriteBtn}
-            className="creat-meta-btn"
-            type="button"
-          >
-            create meta
-          </button>
+        <div className="popular-wrap">
+          <div className="label">Popular</div>
+          <div className="content-list popular">
+            {BoardListOrdered.map((el, idx) => {
+              return (
+                <BoardPopular
+                  key={idx}
+                  data={el}
+                  setCurrentBoard={setCurrentBoard}
+                />
+              );
+            })}
+          </div>
         </div>
-        <div className="label">Popular</div>
-        <div className="content-list popular">
-          {BoardList.map((el, idx) => {
-            return (
-              <BoardPopular
-                key={idx}
-                data={el}
-                setCurrentBoard={setCurrentBoard}
-              />
-            );
-          })}
+        <div className="label">
+          <div className="recent">Recent</div>
+          <div className="btn-wrapper">
+            <button
+              onClick={clickWriteBtn}
+              className="creat-meta-btn"
+              type="button"
+            >
+              create meta
+            </button>
+          </div>
         </div>
-        <div className="label">Recent</div>
         <div className="content-list recent">
           {BoardList.map((el, idx) => {
             return (

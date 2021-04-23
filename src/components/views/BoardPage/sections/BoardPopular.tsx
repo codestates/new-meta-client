@@ -5,7 +5,9 @@ import API from "../../../../api";
 interface Props {
   data: {
     champion: string;
-    author: string;
+    user: {
+      nickname: string;
+    };
     createdAt: string; // todo 추후 변경
     updatedAt: string; // todo 추후 변경
     title: string;
@@ -13,12 +15,15 @@ interface Props {
     skills: string[];
     play: string[];
     etc: string;
+    numberOfLikes: number;
   };
 
   setCurrentBoard: React.Dispatch<
     React.SetStateAction<{
       champion: string;
-      author: string;
+      user: {
+        nickname: string;
+      };
       createdAt: string;
       updatedAt: string;
       title: string;
@@ -26,6 +31,7 @@ interface Props {
       skills: string[];
       play: string[];
       etc: string;
+      numberOfLikes: number;
     }>
   >;
 }
@@ -35,6 +41,8 @@ function BoardPopular(props: Props): ReactElement {
 
   const section1 = useRef<HTMLDivElement>(null);
   const section2 = useRef<HTMLDivElement>(null);
+
+  console.log(data);
 
   return (
     <div
@@ -53,13 +61,13 @@ function BoardPopular(props: Props): ReactElement {
       className="board-small"
     >
       <img src={`${API.championSquare}/${data.champion}.png`} alt=""></img>
-      <div ref={section1} className="simple-text">
-        <div>{data.champion}</div>
-        <div>{data.author}</div>
+      <div ref={section1} className="simple-text mouse-over">
+        <div className="champ-name">{data.champion}</div>
+        <div className="author">{data.user.nickname}</div>
       </div>
       <div ref={section2} className="simple-text2">
-        <div>{data.title}</div>
-        <div>{data.description}</div>
+        <i className="icon-star-full"></i>
+        <div className="like-num">{data.numberOfLikes}</div>
       </div>
     </div>
   );
