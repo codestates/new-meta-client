@@ -169,14 +169,30 @@ function BoardDetail(props: any): ReactElement {
       });
   };
 
+  const MY_ID = gql`
+    {
+      myInfo {
+        user {
+          id
+        }
+      }
+    }
+  `;
+  const idQuery = useQuery(MY_ID);
+
   const clickAuthor = (userId: string) => {
-    const location = {
-      pathname: "/userpage",
-      state: {
-        userId,
-      },
-    };
-    props.history.push(location);
+    if (idQuery.data.myInfo.user.id === userId) {
+      props.history.push("/mypage");
+    } else {
+      const location = {
+        pathname: "/userpage",
+        state: {
+          userId,
+        },
+      };
+
+      props.history.push(location);
+    }
   };
 
   useEffect(() => {
