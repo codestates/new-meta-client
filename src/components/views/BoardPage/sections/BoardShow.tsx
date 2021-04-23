@@ -67,13 +67,11 @@ function BoardShow(props: any): ReactElement {
           setIsRegisterModal={setIsRegisterModal}
         />
       ) : null}
-      {/* <div className="detail-view">
+      <div className="detail-view">
         {Object.keys(CurrentBoard).length > 0 ? (
           <BoardDetail data={CurrentBoard} />
-        ) : (
-          <EmptyDetail />
-        )}
-      </div> */}
+        ) : null}
+      </div>
       <div className="list-view">
         <div className="btn-wrapper">
           <button

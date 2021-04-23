@@ -203,89 +203,94 @@ function BoardDetail(props: any): ReactElement {
   }, [data]);
 
   return (
-    <>
-      <div className="icon-box">
-        <i
-          onClick={clickLeftIcon}
-          aria-hidden
-          className="icon-arrow-left-circle view-left"
-        ></i>
-        <i
-          onClick={clickRightIcon}
-          aria-hidden
-          className="icon-arrow-right-circle view-right"
-        ></i>
-      </div>
-      <div ref={textTag} className="text-box">
-        <div ref={partTag} className="part part1 is-active">
-          <div className="contents-title">{viewData.title}</div>
-          <div className="contents-description">{viewData.description}</div>
+    <div className="board-modal-background">
+      <div className="board-modal-box">
+        <button className="btn-close" type="button">
+          <i className="icon-cross"></i>
+        </button>
+        <div className="icon-box">
+          <i
+            onClick={clickLeftIcon}
+            aria-hidden
+            className="icon-arrow-left-circle view-left"
+          ></i>
+          <i
+            onClick={clickRightIcon}
+            aria-hidden
+            className="icon-arrow-right-circle view-right"
+          ></i>
         </div>
-        <div className="part part2">
-          <div className="contents-skill">
-            {info &&
-              info.spells.map((el: any, idx: number) => {
-                return (
-                  <div className="skill-group" key={idx}>
-                    <img
-                      src={`${API.championSpell}/${el.image.full}`}
-                      alt=""
-                    ></img>
-                    <div>{viewData.skills[idx]}</div>
-                  </div>
-                );
-                //
-              })}
+        <div ref={textTag} className="text-box">
+          <div ref={partTag} className="part part1 is-active">
+            <div className="contents-title">{viewData.title}</div>
+            <div className="contents-description">{viewData.description}</div>
           </div>
-        </div>
-        <div className="part part3">
-          <div className="label">플레이 할 때</div>
-          <div className="play">{viewData.play[0]}</div>
-          <div className="label">상대 할 때</div>
-          <div className="enemy">{viewData.play[1]}</div>
-        </div>
-        <div className="part part4">
-          <div className="label">꿀 팁</div>
-          <div className="etc">{viewData.etc}</div>
-          <div className="button-group">
-            <div
-              aria-hidden
-              onClick={() => {
-                clickAuthor(viewData.user.id);
-              }}
-              className="user"
-            >
-              <i className="icon-user"></i>
-              <div className="author">{viewData.user.nickname}</div>
+          <div className="part part2">
+            <div className="contents-skill">
+              {info &&
+                info.spells.map((el: any, idx: number) => {
+                  return (
+                    <div className="skill-group" key={idx}>
+                      <img
+                        src={`${API.championSpell}/${el.image.full}`}
+                        alt=""
+                      ></img>
+                      <div>{viewData.skills[idx]}</div>
+                    </div>
+                  );
+                  //
+                })}
             </div>
-            {isLogin && (
-              <>
-                {!Author && (
-                  <>
-                    {likeState ? (
-                      <div aria-hidden onClick={clickUnstar} className="star">
-                        <i className="icon-star-full"></i>
-                        <div className="state">Unstar</div>
-                      </div>
-                    ) : (
-                      <div aria-hidden onClick={clickStar} className="star">
-                        <i className="icon-star-empty"></i>
-                        <div className="state">Star</div>
-                      </div>
-                    )}
-                  </>
-                )}
-              </>
-            )}
+          </div>
+          <div className="part part3">
+            <div className="label">플레이 할 때</div>
+            <div className="play">{viewData.play[0]}</div>
+            <div className="label">상대 할 때</div>
+            <div className="enemy">{viewData.play[1]}</div>
+          </div>
+          <div className="part part4">
+            <div className="label">꿀 팁</div>
+            <div className="etc">{viewData.etc}</div>
+            <div className="button-group">
+              <div
+                aria-hidden
+                onClick={() => {
+                  clickAuthor(viewData.user.id);
+                }}
+                className="user"
+              >
+                <i className="icon-user"></i>
+                <div className="author">{viewData.user.nickname}</div>
+              </div>
+              {isLogin && (
+                <>
+                  {!Author && (
+                    <>
+                      {likeState ? (
+                        <div aria-hidden onClick={clickUnstar} className="star">
+                          <i className="icon-star-full"></i>
+                          <div className="state">Unstar</div>
+                        </div>
+                      ) : (
+                        <div aria-hidden onClick={clickStar} className="star">
+                          <i className="icon-star-empty"></i>
+                          <div className="state">Star</div>
+                        </div>
+                      )}
+                    </>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
+        <img
+          className="detail-img"
+          src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.champion}_0.jpg`}
+          alt=""
+        ></img>
       </div>
-      <img
-        className="detail-img"
-        src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${data.champion}_0.jpg`}
-        alt=""
-      ></img>
-    </>
+    </div>
   );
 }
 
