@@ -87,7 +87,10 @@ function SoloMatchView(props: Props): ReactElement {
         </div>
         <div className="graph-section">
           <div className="graph exp-timeline">
-            <TimelineChart userData={User1data.expTimelineData!} />
+            <TimelineChart
+              userData={User1data.expTimelineData!}
+              userPosition={User1data.laneInfo!}
+            />
           </div>
         </div>
       </div>

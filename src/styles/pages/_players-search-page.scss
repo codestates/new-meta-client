@@ -308,6 +308,7 @@
           }
           .graph {
             flex: 0 0 300px;
+
             position: relative;
             margin: 20px;
             padding: 20px;
@@ -319,6 +320,7 @@
 
           .summoner-most-champion {
             background-color: $block;
+
             height: 270px;
             width: 300px;
             display: flex;
@@ -402,23 +404,47 @@
         justify-content: space-between;
         flex-wrap: wrap;
         width: 100%;
-        & > .match-success-point {
+        & > .match-success-result {
           margin: 30px;
           text-align: center;
           display: flex;
-          flex-wrap: wrap;
+          flex-direction: column;
+
+          .match-success-points-container {
+            font-size: $font-size-18;
+            line-height: $line-height-24;
+            font-weight: 300;
+            .match-success-points {
+              display: flex;
+              flex-direction: column;
+              font-size: $font-size-24;
+              line-height: $line-height-24;
+
+              align-items: center;
+              & > .result {
+                display: flex;
+                .number {
+                  color: $red;
+                  font-weight: 700;
+                }
+              }
+            }
+          }
         }
+
         & > .two-summoner-info {
           display: flex;
-          // flex-wrap: wrap;
+          width: 100%;
           justify-content: space-evenly;
+          flex-wrap: wrap;
+
           & > .summonerInfo {
             display: flex;
+            width: max-content;
+            flex: 1 1 auto;
 
             align-items: center;
             flex-direction: column;
-            justify-content: center;
-            // align-items: center;
             .summoner-name {
               font-size: $font-size-24;
             }
@@ -507,7 +533,6 @@
                       opacity: 1;
                       visibility: visible;
                     }
-
                     &::after {
                       bottom: 60px;
                     }
@@ -525,19 +550,90 @@
             }
 
             & > .summoner-graph {
+              width: 100%;
               display: flex;
               flex-direction: row;
+              justify-content: center;
               align-items: center;
-              justify-content: space-between;
-              width: 100%;
+
               .graph-section {
                 display: flex;
-                flex-direction: row;
-                justify-content: space-between;
 
+                width: 100%;
+
+                flex-direction: row;
+                justify-content: center;
+
+                // justify-content: space-between;
+                .graph.summoner-most-champion {
+                  background-color: $block;
+                  height: 270px;
+                  display: flex;
+                  flex-direction: column;
+                  margin: 15px;
+                  padding-right: 20px;
+                  min-width: 270px;
+
+                  border-radius: 20px;
+                  justify-content: space-evenly;
+                  flex-wrap: wrap;
+
+                  .mostChamp {
+                    height: 45px;
+                    display: flex;
+                    margin-left: 20px;
+                    flex-direction: row;
+
+                    // justify-content: flex-start;
+
+                    .mostChamp-img {
+                      margin-right: 10px;
+                    }
+
+                    .rate-detail {
+                      img > {
+                        margin-left: 5px;
+                      }
+                      display: flex;
+                      flex-direction: row;
+                      justify-content: space-between;
+
+                      .champ-win-lose {
+                        justify-content: center;
+                        display: inline-block;
+                        font-size: $font-size-18;
+                        line-height: 24px;
+                        flex-wrap: wrap;
+
+                        & > .all {
+                          color: $secondary;
+                        }
+
+                        & > .win {
+                          color: $jade;
+                        }
+
+                        & > .lose {
+                          color: $red;
+                        }
+                      }
+
+                      .champ-rate {
+                        margin: 15px;
+                        margin-left: 30px;
+                        font-weight: 600;
+                        display: inline-block;
+                        font-size: $font-size-24;
+                        .champ-rate-num {
+                          color: $purple;
+                        }
+                      }
+                    }
+                  }
+                }
                 margin: 10px;
 
-                .graph-laneInfo {
+                .graph.laneInfo {
                   flex: 0 0 250px;
                   position: relative;
                   margin: 20px;
@@ -578,71 +674,11 @@
                 }
               }
             }
-            .summoner-most-champion {
-              background-color: $block;
-              height: 270px;
-              width: 300px;
-              display: flex;
-              flex-direction: column;
-              align-self: center;
-              margin: 15px;
-              border-radius: 20px;
-              justify-content: space-evenly;
-              flex-wrap: wrap;
-
-              .mostChamp {
-                height: 45px;
-                display: flex;
-                margin-left: 20px;
-                flex-direction: row;
-                justify-content: flex-start;
-
-                .mostChamp-img {
-                  margin-right: 10px;
-                }
-
-                .rate-detail {
-                  img > {
-                    margin-left: 5px;
-                  }
-                  display: flex;
-                  flex-direction: row;
-                  justify-content: space-between;
-
-                  .champ-win-lose {
-                    justify-content: center;
-                    display: inline-block;
-                    font-size: $font-size-18;
-                    line-height: 24px;
-                    flex-wrap: wrap;
-
-                    & > .all {
-                      color: $secondary;
-                    }
-
-                    & > .win {
-                      color: $jade;
-                    }
-
-                    & > .lose {
-                      color: $red;
-                    }
-                  }
-
-                  .champ-rate {
-                    margin: 15px;
-                    margin-left: 30px;
-                    font-weight: 600;
-                    display: inline-block;
-                    font-size: $font-size-24;
-                    .champ-rate-num {
-                      color: $purple;
-                    }
-                  }
-                }
-              }
-            }
           }
+        }
+
+        & > .common-graph {
+          margin-top: 20px;
         }
       }
     }

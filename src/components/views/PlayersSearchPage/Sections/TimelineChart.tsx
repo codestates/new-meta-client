@@ -1,12 +1,14 @@
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-plusplus */
 import React, { ReactElement, useEffect, useState } from "react";
 import ReactApexChart from "react-apexcharts";
 import axios from "axios";
 import API from "../../../../api";
-import { FrameExpData, ParticipantFrames } from "../interface";
+import { LaneInfo, FrameExpData, ParticipantFrames } from "../interface";
 
 interface Props {
   userData: FrameExpData[][];
+  userPosition: LaneInfo;
 }
 interface AverageExpData {
   timestamp: number;
@@ -17,9 +19,26 @@ interface AverageExpData {
 }
 
 function TimelineChart(props: Props): ReactElement {
-  const { userData } = props;
+  const { userData, userPosition } = props;
 
-  function getAverageExp(array: FrameExpData[][]) {
+  function getMainPosition(object: LaneInfo): string {
+    const max = Object.values(object).reduce((acc, cur) => {
+      return acc > cur ? acc : cur;
+    });
+
+    const array = ["TOP", "JUNGLE", "MID", "AD_CARRY", "SUPPORT"];
+    let mainPosition = "";
+    for (const el of array) {
+      if (object[el] === max) {
+        mainPosition = el;
+      }
+    }
+    return mainPosition;
+  }
+
+  const MainPosition = getMainPosition(userPosition);
+
+  function getLanerAverageExp(array: FrameExpData[][]) {
     const result: AverageExpData[] = [];
 
     for (let i = 0; i < 15; i++) {
@@ -63,10 +82,35 @@ function TimelineChart(props: Props): ReactElement {
     return result;
   }
 
-  const AvgData = getAverageExp(userData);
-
-  const data = {
-    series: [
+  const AvgData = getLanerAverageExp(userData);
+  let timelineData = [];
+  if (MainPosition === "JUNGLE") {
+    timelineData = [
+      {
+        name: "Total Gold",
+        type: "column",
+        data: [
+          AvgData[2].totalGold,
+          AvgData[5].totalGold,
+          AvgData[8].totalGold,
+          AvgData[11].totalGold,
+          AvgData[14].totalGold,
+        ],
+      },
+      {
+        name: "Total CS",
+        type: "line",
+        data: [
+          AvgData[2].jungleMinionsKilled,
+          AvgData[5].jungleMinionsKilled,
+          AvgData[8].jungleMinionsKilled,
+          AvgData[11].jungleMinionsKilled,
+          AvgData[14].jungleMinionsKilled,
+        ],
+      },
+    ];
+  } else {
+    timelineData = [
       {
         name: "Total Gold",
         type: "column",
@@ -89,7 +133,11 @@ function TimelineChart(props: Props): ReactElement {
           AvgData[14].minionsKilled,
         ],
       },
-    ],
+    ];
+  }
+
+  const data = {
+    series: timelineData,
     options: {
       tooltip: {
         theme: "dark",

@@ -30,7 +30,7 @@ function DuoMatchView(props: Props): ReactElement {
   return (
     <div className="duo-search-result">
       <div className="duo-match-thumbnail">
-        <div className="match-success-point">
+        <div className="match-success-result">
           <MatchingPoints User1data={User1data} User2data={User2data} />
         </div>
         <div className="two-summoner-info">
@@ -57,7 +57,7 @@ function DuoMatchView(props: Props): ReactElement {
             </div>
             <div className="summoner-graph">
               <div className="graph-section">
-                <div className="graph-laneInfo">
+                <div className="graph laneInfo">
                   <div className="div-laneInfo">
                     <LaneInfoChart userData={User1data.laneInfo!} />
                   </div>
@@ -132,7 +132,7 @@ function DuoMatchView(props: Props): ReactElement {
                     />
                   </div>
                 </div>
-                <div className="graph-laneInfo">
+                <div className="graph laneInfo">
                   <div className="div-laneInfo">
                     <LaneInfoChart userData={User2data.laneInfo!} />
                   </div>
