@@ -5,6 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import EmptyDetail from "./EmptyDetail";
 import BoardDetail from "./BoardDetail";
 import BoardSmall from "./BoardSmall";
+import Popup from "../../../utils/Popup";
 
 const GET_ALL_POST = gql`
   {
@@ -26,6 +27,13 @@ function BoardShow(props: any): ReactElement {
   const [BoardList, setBoardList] = useState([]);
   const getAllPostQuery = useQuery(GET_ALL_POST);
 
+  const [IsPopupOpen, setIsPopupOpen] = useState(false);
+  const popupMessage = "로그인이 필요한 서비스입니다.";
+  const btnMessage = "OK";
+  const closePopupHandler = () => {
+    setIsPopupOpen(false);
+  };
+
   useEffect(() => {
     const dataList = getAllPostQuery?.data?.fetchAllPostsOrderByCreatedAt;
     if (dataList) {
@@ -45,12 +53,23 @@ function BoardShow(props: any): ReactElement {
     if (token) {
       props.history.push("/board/write");
     } else {
-      // todo 로그인창 띄우기
+      setIsPopupOpen(true);
+      setTimeout(() => {
+        setIsPopupOpen(false);
+      }, 3000);
     }
   };
 
   return (
     <div className="user-board">
+      {IsPopupOpen ? (
+        <Popup
+          popupMessage={popupMessage}
+          btnMessage={btnMessage}
+          IsPopupOpen={IsPopupOpen}
+          closePopupHandler={closePopupHandler}
+        />
+      ) : null}
       <div className="detail-view">
         {Object.keys(CurrentBoard).length > 0 ? (
           <BoardDetail data={CurrentBoard} />
