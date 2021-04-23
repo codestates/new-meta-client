@@ -21,12 +21,48 @@ function BoardDetail(props: Props): ReactElement {
   const textTag = useRef<HTMLDivElement>(null);
   const partTag = useRef<HTMLDivElement>(null);
   const [isLogin, setIsLogin] = useState(undefined);
+  const [likeState, setLikeState] = useState<boolean | undefined>(undefined);
 
   const userLogin = useQuery(GET_CURRENT_USER);
 
+  const MY_LIKE_POST = gql`
+    {
+      readMyLikes {
+        likes {
+          post {
+            id
+            title
+          }
+        }
+      }
+    }
+  `;
+
+  const userLikeList = useQuery(MY_LIKE_POST);
+
   useEffect(() => {
     setIsLogin(userLogin.data.token);
-  }, [userLogin]);
+
+    if (userLogin.data.token !== null && userLikeList.data) {
+      console.log(data.id);
+      const { likes } = userLikeList.data.readMyLikes;
+      console.log(likes);
+      const result = likes.filter((el: any) => {
+        if (el.post.id === data.id) {
+          return el;
+        }
+      });
+      console.log(result);
+      console.log(result.length);
+
+      if (result.length !== 0) {
+        setLikeState(true);
+      } else {
+        setLikeState(false);
+      }
+      //
+    }
+  }, [userLogin, data, userLikeList.data]);
 
   const clickLeftIcon = () => {
     if (CurrentIndex === 0) {
@@ -83,10 +119,43 @@ function BoardDetail(props: Props): ReactElement {
     }
   `;
 
-  const [starQuery] = useMutation(STAR);
+  const UNSTAR = gql`
+    mutation DeleteLike($postId: String!) {
+      deleteLike(postId: $postId)
+    }
+  `;
 
+  const [starQuery] = useMutation(STAR, {
+    refetchQueries: [
+      {
+        query: MY_LIKE_POST,
+      },
+    ],
+  });
+
+  const [unstarQuery] = useMutation(UNSTAR, {
+    refetchQueries: [
+      {
+        query: MY_LIKE_POST,
+      },
+    ],
+  });
   const clickStar = () => {
     starQuery({
+      variables: {
+        postId: data.id,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("error : ", err);
+      });
+  };
+
+  const clickUnstar = () => {
+    unstarQuery({
       variables: {
         postId: data.id,
       },
@@ -173,11 +242,19 @@ function BoardDetail(props: Props): ReactElement {
               <div className="author">{viewData.author}</div>
             </div>
             {isLogin && (
-              <div aria-hidden onClick={clickStar} className="star">
-                {/* <i className="icon-star-full"></i> */}
-                <i className="icon-star-empty"></i>
-                <div className="state">Star</div>
-              </div>
+              <>
+                {likeState ? (
+                  <div aria-hidden onClick={clickUnstar} className="star">
+                    <i className="icon-star-full"></i>
+                    <div className="state">Unstar</div>
+                  </div>
+                ) : (
+                  <div aria-hidden onClick={clickStar} className="star">
+                    <i className="icon-star-empty"></i>
+                    <div className="state">Star</div>
+                  </div>
+                )}
+              </>
             )}
           </div>
         </div>
