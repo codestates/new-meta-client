@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-expressions */
+/* eslint-disable no-plusplus */
 import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
@@ -68,7 +70,16 @@ const CURRENT_USER = gql`
   {
     myInfo {
       followings {
-        id
+        target {
+          id
+          nickname
+        }
+      }
+      followers {
+        target {
+          id
+          nickname
+        }
       }
     }
   }
@@ -86,14 +97,28 @@ function UserPage(props: RouteComponentProps): ReactElement {
   const [LPModal, SetLPostModal] = useState(false);
   const [LPModalData, SetLPostModalData] = useState(null);
   const [IsLogin, setIsLogin] = useState(false);
+  const [isFollow, setIsFollow] = useState(false);
 
-  const currentUser = useQuery(GET_CURRENT_USER);
+  const currentToken = useQuery(GET_CURRENT_USER);
+  const currentUser = useQuery(CURRENT_USER);
 
   useEffect(() => {
-    setIsLogin(!!currentUser.data.token);
-  }, [currentUser, currentUser.data]);
+    setIsLogin(!!currentToken.data.token);
+  }, [currentToken, currentToken.data]);
 
-  const [isFollow, setIsFollow] = useState(false);
+  useEffect(() => {
+    if (currentUser.data) {
+      const { followings } = currentUser.data.myInfo;
+
+      for (let i = 0; i < followings.length; i++) {
+        if (followings[i].target.id === state.userId) {
+          setIsFollow(true);
+          return;
+        }
+      }
+      setIsFollow(false);
+    }
+  }, [currentUser, currentUser.data, state.userId]);
 
   const clickMyPost = (data: any) => {
     SetLPostModal(true);
@@ -126,7 +151,9 @@ function UserPage(props: RouteComponentProps): ReactElement {
   const [followQuery] = useMutation(FOLLOW, {
     refetchQueries: [{ query: CURRENT_USER }],
   });
-  const [unfollowQuery] = useMutation(UNFOLLOW);
+  const [unfollowQuery] = useMutation(UNFOLLOW, {
+    refetchQueries: [{ query: CURRENT_USER }],
+  });
 
   const clickFollow = () => {
     //
@@ -134,7 +161,13 @@ function UserPage(props: RouteComponentProps): ReactElement {
       variables: {
         targetId: state.userId,
       },
-    });
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const clickUnfollow = () => {
@@ -143,7 +176,13 @@ function UserPage(props: RouteComponentProps): ReactElement {
       variables: {
         targetId: state.userId,
       },
-    });
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
 
   const userInfoQuery = useQuery(YOUR_INFO, {
@@ -194,12 +233,12 @@ function UserPage(props: RouteComponentProps): ReactElement {
             {IsLogin && (
               <>
                 {isFollow ? (
-                  <div aria-hidden onClick={clickFollow} className="follow">
+                  <div aria-hidden onClick={clickUnfollow} className="follow">
                     <i className="icon-user-minus"></i>
                     <div className="text">Unfollow</div>
                   </div>
                 ) : (
-                  <div aria-hidden onClick={clickUnfollow} className="follow">
+                  <div aria-hidden onClick={clickFollow} className="follow">
                     <i className="icon-user-plus"></i>
                     <div className="text">Follow</div>
                   </div>

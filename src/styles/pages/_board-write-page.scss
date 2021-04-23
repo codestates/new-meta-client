@@ -145,17 +145,35 @@
       height: calc(80vh - 60px);
 
       .search-bar-write {
-        margin-bottom: 1.5rem;
+        top: 15%;
+        position: fixed;
+        display: flex;
+        justify-content: flex-end;
+        width: 200px;
+        border-radius: 12px;
+        padding: 8px 12px;
+        background-color: #1f2127;
+
+        input {
+          background-color: transparent;
+          border: none;
+          color: $jade;
+        }
+        i {
+          cursor: pointer;
+          color: $jade;
+        }
       }
 
       .champions-pick {
-        height: 100%;
+        height: max-content;
         display: flex;
         justify-content: center;
-        align-items: center;
+        align-items: flex-start;
         flex-wrap: wrap;
-        overflow-y: scroll;
         width: 95%;
+        margin-top: 3rem;
+        overflow: scroll;
 
         .champions-pick-square {
           width: 60px;
