@@ -32,7 +32,6 @@ function BoardShow(props: any): ReactElement {
   const getAllPostQuery = useQuery(GET_ALL_POST);
 
   const [IsLoginOpen, setIsLoginOpen] = useState(false);
-  const [IsRegisterModal, setIsRegisterModal] = useState(false);
   const closeModal = () => setIsLoginOpen(false);
 
   useEffect(() => {
@@ -63,8 +62,8 @@ function BoardShow(props: any): ReactElement {
       {IsLoginOpen ? (
         <Login
           closeModal={closeModal}
-          IsRegisterModal={IsRegisterModal}
-          setIsRegisterModal={setIsRegisterModal}
+          setIsGoogleToken={() => null}
+          setIsFacebookToken={() => null}
         />
       ) : null}
       <div className="detail-view">
