@@ -1,9 +1,9 @@
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable no-restricted-syntax */
 /* eslint-disable no-param-reassign */
+/* eslint-disable radix */
+/* eslint-disable no-restricted-syntax */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { resultKeyNameFromField } from "@apollo/client/utilities";
-import React, { ReactElement, useState, useEffect } from "react";
+import React, { ReactElement, useState, useEffect, useRef } from "react";
 import { SummonerAllData } from "../interface";
 
 interface Props {
@@ -15,10 +15,29 @@ interface Props {
 function MatchingPoints(props: Props): ReactElement {
   const { User1data, User2data } = props;
   const [ResultPoint, setResultPoint] = useState("0");
+  const display = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    return () => {};
-  }, [User1data, User2data]);
+  function countUp(count: number) {
+    const divBy = 1;
+    const speed = Math.round(count / divBy);
+    let runCount = 1;
+    const intSpeed = 24;
+
+    const int = setInterval(function () {
+      if (display.current && runCount < divBy) {
+        display.current!.textContent = String(speed * runCount);
+        runCount += 1;
+      } else if (
+        display.current?.textContent &&
+        parseInt(display.current!.textContent) < count
+      ) {
+        const currCount = parseInt(display.current.textContent) + 1;
+        display.current!.textContent = String(currCount);
+      } else {
+        clearInterval(int);
+      }
+    }, intSpeed);
+  }
 
   const findPosition = (data: SummonerAllData) => {
     let result = "";
@@ -143,7 +162,7 @@ function MatchingPoints(props: Props): ReactElement {
   let resultPoint = 0;
 
   if (points === 8) {
-    resultPoint = 100;
+    resultPoint = 98;
   } else if (points === 7) {
     resultPoint = 92;
   } else if (points === 6) {
@@ -156,13 +175,25 @@ function MatchingPoints(props: Props): ReactElement {
     resultPoint = 52;
   }
 
+  countUp(resultPoint);
+
   return (
-    <div>
+    <div className="match-success-points-container">
       <div className="match-success-name">
         {User1data.summonerInfo!.name}님과 {User2data.summonerInfo!.name}님의
-        매칭 점수는
       </div>
-      <div className="match-success-points">{resultPoint}점입니다.</div>
+      <div className="match-success-points">
+        <div className="match-success-points">
+          매칭 점수는
+          <div className="result">
+            <div ref={display} className="number">
+              {" "}
+              0
+            </div>{" "}
+            <div>점입니다</div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

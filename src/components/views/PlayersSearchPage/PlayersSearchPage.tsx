@@ -8,17 +8,7 @@
 import React, { ReactElement, useRef, useState, useEffect } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
-import {
-  SummonerAllData,
-  MatchInfo,
-  LeagueInfo,
-  LaneInfo,
-  PlayerMatchInfo,
-  FrameExpData,
-  ParticipantFrames,
-  Position,
-  KDAEventData,
-} from "./interface";
+import { SummonerAllData } from "./interface";
 import SoloMatchView from "./SoloMatchView";
 import DuoMatchView from "./DuoMatchView";
 import Toast from "../../utils/Toast";
@@ -26,7 +16,6 @@ import Loading from "../../utils/Loading";
 import API from "../../../api";
 import LanerData from "./lanerData.json";
 import JunglerData from "./junglerData.json";
-import FakerData from "./fakerData.json";
 
 function PlayersSearchPage(): ReactElement {
   const [SearchType, setSearchType] = useState("solo");
@@ -45,9 +34,8 @@ function PlayersSearchPage(): ReactElement {
   const [User2data, setUser2data] = useState<SummonerAllData>({});
 
   useEffect(() => {
-    console.log("component did mount");
-    setUser1data({});
-    setUser2data({});
+    setUser1data(JunglerData);
+    setUser2data(LanerData);
     setUserName1("");
     setUserName2("");
   }, []);

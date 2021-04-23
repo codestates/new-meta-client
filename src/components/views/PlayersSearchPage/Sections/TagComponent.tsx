@@ -34,7 +34,7 @@ function TagComponent(props: Props): ReactElement {
   const earlyStrong = useRef<HTMLDivElement>(null);
   const earlyWeak = useRef<HTMLDivElement>(null);
 
-  /* 연승중 */
+  /* 연승 계산기 */
   function streakCount(array: PlayerMatchInfo[]) {
     let count = 0;
     for (const el of array) {
@@ -50,7 +50,7 @@ function TagComponent(props: Props): ReactElement {
   if (hotStreak.current) {
     if (leagueInfo.hotStreak === true) {
       const streaks = streakCount(recentChampionStats);
-      if (streaks > 2) {
+      if (streaks > 1) {
         hotStreak.current.classList.add("active");
         hotStreak.current.textContent = `${streaks}연승 중`;
       }
@@ -223,7 +223,7 @@ function TagComponent(props: Props): ReactElement {
       <div
         className="tag"
         ref={lev3Strong}
-        data-tooltip="최근 20전 기준 6번 이상 3렙 단계에서 킬관여를 했어요!"
+        data-tooltip="  최근 20전 기준 6번 이상 3렙 단계에서 킬관여를 했어요!"
       ></div>
       <div
         className="tag"
@@ -240,8 +240,16 @@ function TagComponent(props: Props): ReactElement {
         ref={dragonKiller}
         data-tooltip="최근 20전 기준 6번 이상 라인전 단계에서 첫 드래곤을 챙겼어요!"
       ></div>
-      <div className="tag" ref={lev2Weak} data-tooltip="2렙갱에 약해요!"></div>
-      <div className="tag" ref={lev3Weak} data-tooltip="3렙갱에 약해요!"></div>
+      <div
+        className="tag"
+        ref={lev2Weak}
+        data-tooltip="6번 이상 2렙 갱에 당했어요.  "
+      ></div>
+      <div
+        className="tag"
+        ref={lev3Weak}
+        data-tooltip="6번 이상 3렙 갱에 당했어요."
+      ></div>
       <div
         className="tag"
         ref={earlyStrong}
