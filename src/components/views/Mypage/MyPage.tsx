@@ -47,7 +47,6 @@ const MyINFO = gql`
           etc
           createdAt
           updatedAt
-          author
         }
       }
       posts {
@@ -73,7 +72,6 @@ const MyPost = gql`
       etc
       createdAt
       updatedAt
-      author
     }
   }
 `;
