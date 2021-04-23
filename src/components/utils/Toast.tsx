@@ -17,6 +17,9 @@ function Toast({
     const toastEl = toastElRef.current;
     const toastCloseHandler = (e: { target: any }) => {
       if (toastEl && !toastEl.contains(e.target)) {
+        if (ToastMessage.success) {
+          closeModal();
+        }
         setToastMessage({ success: "", fail: "" });
       }
     };
@@ -26,14 +29,14 @@ function Toast({
     return () => {
       window.removeEventListener("click", toastCloseHandler);
     };
-  }, [ToastMessage.fail, ToastMessage.success, setToastMessage]);
+  }, [ToastMessage.fail, ToastMessage.success, closeModal, setToastMessage]);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
-      setToastMessage({ success: "", fail: "" });
       if (ToastMessage.success) {
         closeModal();
       }
+      setToastMessage({ success: "", fail: "" });
     }, 3000);
     return () => clearTimeout(timeout);
   }, [ToastMessage.success, closeModal, setToastMessage]);

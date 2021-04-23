@@ -6,7 +6,7 @@ import axios from "axios";
 import API from "../../../../api";
 import { PlayerMatchInfo } from "../interface";
 // const squareImg =
-//   "http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/{getChampionName(key)}.png";
+//   "https://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/{getChampionName(key)}.png";
 
 interface Props {
   userData: PlayerMatchInfo[];
@@ -99,7 +99,7 @@ function MostChampion(props: Props): ReactElement {
     return a.wins + a.losses > b.wins + b.losses ? -1 : 1;
   });
 
-  const champImgURL = `http://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/${getChampionName(
+  const champImgURL = `https://ddragon.leagueoflegends.com/cdn/11.8.1/img/champion/${getChampionName(
     ChampionStatArray[idx].champion
   )}.png`;
   const matches = ChampionStatArray[idx].wins + ChampionStatArray[idx].losses;

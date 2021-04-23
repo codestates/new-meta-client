@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Nav from "./views/Nav/Nav";
 import LandingPage from "./views/LandingPage/LandingPage";
 import PlayersSearchPage from "./views/PlayersSearchPage/PlayersSearchPage";
-import LoginPage from "./views/LoginPage/LoginPage";
 import MyPage from "./views/MyPage/MyPage";
 import BoardPage from "./views/BoardPage/BoardPage";
 import BoardReadPage from "./views/BoardReadPage/BoardReadPage";

@@ -18,9 +18,17 @@ export const GET_CURRENT_USER = gql`
     token @client
   }
 `;
+
+let domain: string | undefined;
+if (process.env.NODE_ENV === "development") {
+  domain = process.env.REACT_APP_LOCAL_SERVER_DOMAIN;
+} else {
+  domain = process.env.REACT_APP_EC2_SERVER_DOMAIN;
+}
+
 // https://server.new-meta.ga:4000
 const link = createHttpLink({
-  uri: "http://localhost:4000/graphql", // ! S3 배포시 변경하기
+  uri: `${domain}/graphql`,
   credentials: "same-origin",
 });
 
