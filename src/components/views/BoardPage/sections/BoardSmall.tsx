@@ -1,6 +1,5 @@
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { ReactElement, useRef } from "react";
-import API from "../../../../api";
 
 interface Props {
   data: {
@@ -35,31 +34,43 @@ function BoardSmall(props: Props): ReactElement {
 
   const section1 = useRef<HTMLDivElement>(null);
   const section2 = useRef<HTMLDivElement>(null);
+  const section3 = useRef<HTMLDivElement>(null);
+  const section4 = useRef<HTMLDivElement>(null);
 
   return (
     <div
-      onClick={() => {
-        setCurrentBoard(data);
-      }}
-      onMouseEnter={() => {
-        section1.current?.classList.remove("mouse-over");
-        section2.current?.classList.add("mouse-over");
-      }}
-      onMouseLeave={() => {
-        section1.current?.classList.add("mouse-over");
-        section2.current?.classList.remove("mouse-over");
-      }}
-      aria-hidden
+      // onMouseEnter={() => {
+      //   section1.current?.classList.remove("mouse-over");
+      //   section2.current?.classList.add("mouse-over");
+      // }}
+      // onMouseLeave={() => {
+      //   section1.current?.classList.add("mouse-over");
+      //   section2.current?.classList.remove("mouse-over");
+      // }}
       className="board-small"
     >
-      <img src={`${API.championSquare}/${data.champion}.png`} alt=""></img>
+      {/* <img src={`${API.championSquare}/${data.champion}.png`} alt=""></img> */}
       <div ref={section1} className="simple-text">
         <div>{data.champion}</div>
-        <div>{data.author}</div>
       </div>
       <div ref={section2} className="simple-text2">
-        <div>{data.title}</div>
-        <div>{data.description}</div>
+        <div
+          onClick={() => {
+            setCurrentBoard(data);
+          }}
+          aria-hidden
+        >
+          {data.title}
+        </div>
+        {/* <div>{data.description}</div> */}
+      </div>
+      <div ref={section3} className="simple-text3">
+        <div>author</div>
+        {/* <div>{`author: ${data.author}`}</div> */}
+      </div>
+      <div ref={section4} className="simple-text4">
+        <div>author</div>
+        {/* <div>{`author: ${data.author}`}</div> */}
       </div>
     </div>
   );

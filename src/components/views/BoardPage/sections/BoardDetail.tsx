@@ -226,9 +226,7 @@ function BoardDetail(props: any): ReactElement {
         setCurrentBoard(false);
       }
     };
-
     window.addEventListener("click", handleClickOutside);
-
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
