@@ -2,7 +2,6 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
-import EmptyDetail from "./EmptyDetail";
 import BoardDetail from "./BoardDetail";
 import BoardSmall from "./BoardSmall";
 import Login from "../../LoginPage/LoginPage";
@@ -69,7 +68,7 @@ function BoardShow(props: any): ReactElement {
       ) : null}
       <div className="detail-view">
         {Object.keys(CurrentBoard).length > 0 ? (
-          <BoardDetail data={CurrentBoard} />
+          <BoardDetail data={CurrentBoard} setCurrentBoard={setCurrentBoard} />
         ) : null}
       </div>
       <div className="list-view">

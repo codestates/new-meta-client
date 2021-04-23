@@ -10,17 +10,17 @@ import { GET_CURRENT_USER } from "../../../../graphql";
 import API from "../../../../api";
 
 function BoardDetail(props: any): ReactElement {
-  const { data } = props;
+  const { data, setCurrentBoard } = props;
 
   const [viewData, setdata] = useState(data);
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const [info, setinfo] = useState<any>(null);
   const textTag = useRef<HTMLDivElement>(null);
   const partTag = useRef<HTMLDivElement>(null);
+  const boardModalRef = useRef<HTMLDivElement>(null);
   const [isLogin, setIsLogin] = useState(undefined);
   const [likeState, setLikeState] = useState<boolean | undefined>(undefined);
   const [Author, setAuthor] = useState(false);
-
   const userLogin = useQuery(GET_CURRENT_USER);
 
   const MY_LIKE_POST = gql`
@@ -202,10 +202,32 @@ function BoardDetail(props: any): ReactElement {
     run();
   }, [data]);
 
+  useEffect(() => {
+    const boardModal = boardModalRef.current;
+
+    const handleClickOutside = (e: { target: any }) => {
+      if (boardModal && !boardModal.contains(e.target)) {
+        setCurrentBoard(false);
+      }
+    };
+
+    window.addEventListener("click", handleClickOutside);
+
+    return () => {
+      window.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div className="board-modal-background">
-      <div className="board-modal-box">
-        <button className="btn-close" type="button">
+      <div className="board-modal-box" ref={boardModalRef}>
+        <button
+          className="btn-close"
+          type="button"
+          onClick={() => {
+            setCurrentBoard({});
+          }}
+        >
           <i className="icon-cross"></i>
         </button>
         <div className="icon-box">
@@ -234,6 +256,7 @@ function BoardDetail(props: any): ReactElement {
                       <img
                         src={`${API.championSpell}/${el.image.full}`}
                         alt=""
+                        className="board-detail-img"
                       ></img>
                       <div>{viewData.skills[idx]}</div>
                     </div>

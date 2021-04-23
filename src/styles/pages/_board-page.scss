@@ -99,24 +99,28 @@
         box-sizing: border-box;
         box-shadow: 5px 30px 25px rgba(0, 0, 0, 0.8);
         border-radius: 10px;
+        overflow: hidden;
 
         .btn-close {
-          float: right;
+          position: absolute;
+          top: 3%;
+          right: 3%;
           background-color: transparent;
           border: none;
           outline: none;
           cursor: pointer;
+          z-index: 110;
 
           i {
             font-size: 14px;
             color: $primary;
             opacity: 0.5;
+            z-index: 110;
           }
         }
 
         .icon-box {
           font-size: 30px;
-          // font-weight: 400;
           width: 100%;
           position: absolute;
           display: flex;
@@ -160,14 +164,6 @@
             font-size: 2rem;
             padding: 1rem;
           }
-
-          // .empty-detail-board {
-          //   display: flex;
-          //   flex-direction: column;
-          //   height: 100%;
-          //   width: 100%;
-          //   justify-content: center;
-          // }
 
           .is-active {
             animation: 0.7s in;
@@ -322,12 +318,12 @@
         height: 100%;
         width: 100%;
         object-fit: cover;
-        opacity: 0.1;
+        opacity: 0.3;
       }
 
       .detail-img {
         z-index: -1;
-        opacity: 0.35;
+        opacity: 0.2;
       }
     }
     @media screen and (max-width: 915px) {
@@ -439,7 +435,7 @@
 
         img {
           width: 100%;
-          opacity: 0.2;
+          opacity: 0.1 !important;
         }
 
         .simple-text,
