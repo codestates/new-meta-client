@@ -57,6 +57,7 @@ function TagComponent(props: Props): ReactElement {
   ) {
     carryMachine.current.classList.add("active");
     carryMachine.current.textContent = "캐.리.머.신";
+    console.log("active");
   }
 
   /*  matchKillForLevel2 + matchAssistForLevel2 가 1이상인 경기가 10경기 이상인 경우  */
@@ -71,6 +72,7 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev2Strong.current.classList.add("active");
       lev2Strong.current.textContent = "2렙 싸움꾼";
+      console.log("active");
     }
   }
 
@@ -85,6 +87,7 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev3Strong.current.classList.add("active");
       lev3Strong.current.textContent = "3렙 싸움꾼";
+      console.log("active");
     }
   }
 
@@ -100,6 +103,7 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       heraldLover.current.classList.add("active");
       heraldLover.current.textContent = "전령은 잘 챙기는 편이야";
+      console.log("active");
     }
   }
 
@@ -113,6 +117,7 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       dragonKiller.current.classList.add("active");
       dragonKiller.current.textContent = "용은 잘 챙기는 편이야";
+      console.log("active");
     }
   }
 
@@ -126,6 +131,7 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev2Weak.current.classList.add("active");
       lev2Weak.current.textContent = "2렙에 약해요";
+      console.log("active");
     }
   }
 
@@ -139,6 +145,7 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev3Weak.current.classList.add("active");
       lev3Weak.current.textContent = "2렙에 약해요";
+      console.log("active");
     }
   }
 
@@ -158,6 +165,7 @@ function TagComponent(props: Props): ReactElement {
     if (count > 9) {
       earlyStrong.current.classList.add("active");
       earlyStrong.current.textContent = "초반에 강해요";
+      console.log("active");
     }
   }
 
@@ -171,32 +179,35 @@ function TagComponent(props: Props): ReactElement {
     if (count > 8) {
       earlyWeak.current.classList.add("active");
       earlyWeak.current.textContent = "초반에 약해요";
+      console.log("active");
     }
   }
 
   if (linePhaseStrong.current) {
     let count = 0;
     for (const el of kdaInfo) {
-      if (el.matchDeathForLevel2 > 1) {
+      if (el.matchKills > 4) {
         count += 1;
       }
     }
     if (count > 5) {
       linePhaseStrong.current.classList.add("active");
       linePhaseStrong.current.textContent = "라인전 강해요";
+      console.log("active");
     }
   }
 
   if (linePhaseWeak.current) {
     let count = 0;
     for (const el of kdaInfo) {
-      if (el.matchDeathForLevel2 > 1) {
+      if (el.matchDeaths > 3 && el.matchKills + el.matchAssists < 3) {
         count += 1;
       }
     }
     if (count > 5) {
       linePhaseWeak.current.classList.add("active");
       linePhaseWeak.current.textContent = "라인전 약해요";
+      console.log("active");
     }
   }
 
@@ -235,12 +246,12 @@ function TagComponent(props: Props): ReactElement {
       <div
         className="tag"
         ref={lev2Weak}
-        data-tooltip="6번 이상 2렙 갱에 당했어요.  "
+        data-tooltip="6번 이상 2렙 갱에 당했어요. (20전 기준) "
       ></div>
       <div
         className="tag"
         ref={lev3Weak}
-        data-tooltip="6번 이상 3렙 갱에 당했어요."
+        data-tooltip="6번 이상 3렙 갱에 당했어요. (20전 기준)"
       ></div>
       <div
         className="tag"
@@ -255,9 +266,13 @@ function TagComponent(props: Props): ReactElement {
       <div
         className="tag"
         ref={linePhaseStrong}
-        data-tooltip="라인전 강함"
+        data-tooltip="라인전 단계에서 4번 이상 킬을 낼 확률이 30% 이상! (20전 기준)"
       ></div>
-      <div className="tag" ref={linePhaseWeak} data-tooltip="라인전 약함"></div>
+      <div
+        className="tag"
+        ref={linePhaseWeak}
+        data-tooltip="라인전 단계에서 4번 이상 죽을 확률이 30% 이상! (20전 기준)"
+      ></div>
     </>
   );
 }

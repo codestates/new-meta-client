@@ -29,18 +29,18 @@ function PlayersSearchPage(): ReactElement {
   const duoBtn = useRef<HTMLButtonElement>(null);
   const user1Input = useRef<HTMLInputElement>(null);
   const user2Input = useRef<HTMLInputElement>(null);
+  const searchBar = useRef<HTMLDivElement>(null);
 
   const [User1data, setUser1data] = useState<SummonerAllData>({});
   const [User2data, setUser2data] = useState<SummonerAllData>({});
 
   useEffect(() => {
-    setUser1data(JunglerData);
-    setUser2data(LanerData);
+    setUser1data(LanerData);
+    setUser2data(JunglerData);
     setUserName1("");
     setUserName2("");
   }, []);
 
-  // 듀오 서치 -> User2data만 받아오기
   useEffect(() => {
     if (userName2 && Object.keys(User1data).length > 0) {
       /* userName2 === userName1 */
@@ -117,6 +117,7 @@ function PlayersSearchPage(): ReactElement {
             });
           }
           setUser1data(res.data);
+
           if (!userName2) {
             setLoadingState(false);
           }
@@ -126,6 +127,7 @@ function PlayersSearchPage(): ReactElement {
             success: "",
             fail: "소환사 정보를 찾을 수 없습니다!",
           });
+
           setLoadingState(false);
         });
     }
@@ -134,7 +136,7 @@ function PlayersSearchPage(): ReactElement {
   return (
     <>
       <div className="players-search-page">
-        <div className="players-search-bar">
+        <div className="players-search-bar" ref={searchBar}>
           <div className="tabs">
             <button
               onClick={() => {
@@ -160,36 +162,42 @@ function PlayersSearchPage(): ReactElement {
             </button>
           </div>
           {SearchType === "solo" ? (
-            <div className="match-search-bar solo-wrap">
-              <input
-                onChange={onInputUserName1Handler}
-                className="players-input"
-                type="text"
-                ref={user1Input}
-              ></input>
-              <button
-                type="button"
+            <div className="match-search-bar solo-wrap" ref={searchBar}>
+              <div className="search-bar players-input">
+                <input
+                  onChange={onInputUserName1Handler}
+                  type="text"
+                  ref={user1Input}
+                ></input>
+                <i className="icon-search"></i>
+              </div>
+
+              <div
                 onClick={() => {
                   user1Input.current!.value = "";
                   setUser1data({});
                   setUser2data({});
                   clickSearch();
                 }}
+                aria-hidden
                 className="summoner-search-btn"
               >
                 Search
-              </button>
+              </div>
             </div>
           ) : (
-            <div className="match-search-bar duo-wrap">
-              <input
-                onChange={onInputUserName1Handler}
-                className="players-input"
-                type="text"
-                ref={user1Input}
-              ></input>
-              <button
-                type="button"
+            <div className="match-search-bar duo-wrap" ref={searchBar}>
+              <div className="search-bar players-input">
+                <input
+                  onChange={onInputUserName1Handler}
+                  className="players-input"
+                  type="text"
+                  ref={user1Input}
+                ></input>
+                <i className="icon-search"></i>
+              </div>
+
+              <div
                 className="summoner-search-btn"
                 onClick={() => {
                   user1Input.current!.value = "";
@@ -198,15 +206,19 @@ function PlayersSearchPage(): ReactElement {
                   setUser2data({});
                   clickSearch();
                 }}
+                aria-hidden
               >
                 Search
-              </button>
-              <input
-                onChange={onInputUserName2Handler}
-                className="players-input"
-                type="text"
-                ref={user2Input}
-              />
+              </div>
+              <div className="search-bar players-input">
+                <input
+                  onChange={onInputUserName1Handler}
+                  className="players-input"
+                  type="text"
+                  ref={user1Input}
+                ></input>
+                <i className="icon-search"></i>
+              </div>
             </div>
           )}
         </div>
@@ -230,7 +242,12 @@ function PlayersSearchPage(): ReactElement {
                 <SoloMatchView User1data={User1data} />
               )
             ) : (
-              <div></div>
+              <div>
+                {/* How To Use NEW-META? We serve our data analysis service for
+                passionate LoL gamers who play solo/duo rank game. If you have
+                played rank games less than 20 matches in this season, then it
+                is not possible to analyze your game data. */}
+              </div>
             )}
           </div>
         )}

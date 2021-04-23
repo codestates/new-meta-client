@@ -316,6 +316,7 @@ function DuoTimeLine(props: Props): ReactElement {
         type="line"
         width={800}
         height={500}
+        className="duoTimeline"
       />
     </>
   );

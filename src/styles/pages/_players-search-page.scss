@@ -58,7 +58,7 @@
       /* Tab active */
 
       .tab.active {
-        background-color: $jade;
+        background-color: $purple;
         background-image: linear-gradient(90deg, transparent 70%, rgba(255, 255, 255, 0.2) 100%);
 
         z-index: 0;
@@ -76,29 +76,57 @@
     }
 
     & > .solo-wrap {
-      & > .players-input {
+      .search-bar.players-input {
         display: flex;
-        max-width: max-content;
+
         height: 30px;
         align-self: center;
-        border-radius: 5px;
-        background-color: $secondary;
+        border-radius: 12px;
+        padding: 8px;
+        background-color: $block;
         color: $jade;
+        border: none;
+        justify-content: flex-end;
+
+        & > input {
+          background-color: $block;
+          border-style: none;
+          color: $jade;
+        }
+        & > i {
+          color: $jade;
+          margin: 1px;
+          line-height: 1;
+          font-size: 25px;
+          font-family: "new-meta" !important;
+        }
       }
     }
     & > .duo-wrap {
       display: flex;
       justify-content: space-evenly;
-      & > .players-input {
+
+      .search-bar.players-input {
         display: flex;
-        max-width: max-content;
         align-self: center;
-        margin: 0;
-        border-style: none;
-        background-color: $secondary;
+        background-color: $block;
         height: 30px;
-        border-radius: 5px;
+        border-radius: 12px;
+        padding: 8px;
         color: $jade;
+        justify-content: flex-end;
+        & > input {
+          background-color: $block;
+          border-style: none;
+          color: $jade;
+        }
+        & > i {
+          color: $jade;
+          margin: 1px;
+          line-height: 1;
+          font-size: 25px;
+          font-family: "new-meta" !important;
+        }
       }
     }
     & > .solo-wrap,
@@ -109,33 +137,23 @@
       justify-content: center;
 
       & > .summoner-search-btn {
-        display: flex;
-        align-self: center;
-        box-sizing: border-box;
-        appearance: none;
-        background-color: transparent;
-        border: 2px solid $purple;
-        border-radius: 3em;
-        color: $purple;
-        cursor: pointer;
-        font-size: $font-size-14;
-        font-weight: 400;
-        line-height: 1;
-        margin: 10px;
-        padding: 0.7rem 1.2rem;
+        display: inline-block;
+        padding: 20px 25px;
+        margin: 010px 10px 10px;
+        color: $secondary;
+        border-radius: 12px;
+        outline: none;
+        font-weight: 300;
+        font-size: 16px;
+        transition: 1s;
+        background-color: $jade-dark;
         text-decoration: none;
-        text-align: center;
-        text-transform: uppercase;
-        font-weight: 700;
 
-        &:hover,
-        &:focus {
-          color: #fff;
-          outline: 0;
-        }
-        transition: box-shadow 300ms ease-in-out, color 300ms ease-in-out;
         &:hover {
-          box-shadow: 0 0 40px 40px $purple inset;
+          cursor: pointer;
+          background: $jade;
+          color: $secondary;
+          box-shadow: 0 0 5px $jade-light, 0 0 30px $jade-light;
         }
       }
     }
@@ -186,6 +204,7 @@
           $tooltip-width: 130px;
           display: flex;
           justify-content: space-evenly;
+          height: 150px;
 
           .tag.active {
             display: inline-block;
@@ -200,7 +219,6 @@
             width: fit-content;
             margin-right: 10px;
             padding: 5px;
-
             box-shadow: 0 2px 20px rgba(#000, 0.7), inset 0 1px rgba(#fff, 0.3);
             text-align: center;
             transition: background-color $duration, transform 100ms;
@@ -409,6 +427,7 @@
           text-align: center;
           display: flex;
           flex-direction: column;
+          position: absolute;
 
           .match-success-points-container {
             font-size: $font-size-18;
@@ -445,8 +464,11 @@
 
             align-items: center;
             flex-direction: column;
+
+            height: 600px;
             .summoner-name {
               font-size: $font-size-24;
+              margin: 15px;
             }
 
             .summoner-rank-info {
@@ -460,12 +482,12 @@
 
               .summoner-tier-info {
                 text-align: center;
-                margin: 3px;
+                margin: 5px;
                 margin-bottom: 10px;
 
                 .summoner-tier {
                   text-align: center;
-                  margin: 3px;
+                  margin: 5px;
                   align-content: center;
                   align-items: center;
                 }
@@ -567,6 +589,7 @@
 
               .graph-section {
                 display: flex;
+                height: 120%;
 
                 width: 100%;
 
@@ -576,12 +599,11 @@
                 // justify-content: space-between;
                 .graph.summoner-most-champion {
                   background-color: $block;
-                  height: 270px;
                   display: flex;
                   flex-direction: column;
-                  margin: 15px;
-                  padding-right: 20px;
-                  min-width: 270px;
+                  margin: 20px;
+                  padding: 20px;
+                  flex: 0 0 270px;
 
                   border-radius: 20px;
                   justify-content: space-evenly;
@@ -643,8 +665,9 @@
                 margin: 10px;
 
                 .graph.laneInfo {
-                  flex: 0 0 250px;
+                  flex: 0 0 270px;
                   position: relative;
+
                   margin: 20px;
                   padding: 20px;
                   background: $block;
@@ -677,7 +700,8 @@
 
                 .graph {
                   display: flex;
-                  flex: 0 0 250px;
+                  flex: 0 0 270px;
+
                   background: $block;
                   border-radius: 20px;
                   box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08);
@@ -688,12 +712,18 @@
         }
 
         & > .common-graph {
-          margin-top: 20px;
+          margin-top: 1000px;
           display: flex;
-          padding: 10px;
+
+          padding-top: 1000px;
           border-radius: 20px;
           background-color: $block;
+
           box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08);
+
+          & > .duoTimeline {
+            margin-top: 1000px;
+          }
         }
       }
     }
