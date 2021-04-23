@@ -67,13 +67,13 @@ function BoardShow(props: any): ReactElement {
           setIsRegisterModal={setIsRegisterModal}
         />
       ) : null}
-      <div className="detail-view">
+      {/* <div className="detail-view">
         {Object.keys(CurrentBoard).length > 0 ? (
           <BoardDetail data={CurrentBoard} />
         ) : (
           <EmptyDetail />
         )}
-      </div>
+      </div> */}
       <div className="list-view">
         <div className="btn-wrapper">
           <button
@@ -83,6 +83,17 @@ function BoardShow(props: any): ReactElement {
           >
             create meta
           </button>
+        </div>
+        <div className="label">Popular</div>
+        <div className="content-list">
+          <div className="content"></div>
+          <div className="content"></div>
+          <div className="content"></div>
+          <div className="content"></div>
+          <div className="content"></div>
+          <div className="content"></div>
+          <div className="content"></div>
+          <div className="content"></div>
         </div>
         <div className="label">Recent</div>
         <div className="content-list">
@@ -95,25 +106,6 @@ function BoardShow(props: any): ReactElement {
               />
             );
           })}
-        </div>
-        <div className="label">Popular</div>
-        <div className="content-list">
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-        </div>
-        <div className="label">Recommend</div>
-        <div className="content-list">
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
         </div>
       </div>
     </div>
