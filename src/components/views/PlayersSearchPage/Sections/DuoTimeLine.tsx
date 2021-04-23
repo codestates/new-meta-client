@@ -116,28 +116,6 @@ function DuoTimeLine(props: Props): ReactElement {
     series: [
       {
         type: "line",
-        name: `${User1Name}'s Minions Killed`,
-        data: [
-          user1Result[2],
-          user1Result[5],
-          user1Result[8],
-          user1Result[11],
-          user1Result[14],
-        ],
-      },
-      {
-        type: "column",
-        name: `${User1Name}'s Total Gold`,
-        data: [
-          user1ExpData[2].totalGold,
-          user1ExpData[5].totalGold,
-          user1ExpData[8].totalGold,
-          user1ExpData[11].totalGold,
-          user1ExpData[14].totalGold,
-        ],
-      },
-      {
-        type: "line",
         name: `${User2Name}'s Minions Killed`,
         data: [
           user2Result[2],
@@ -147,7 +125,6 @@ function DuoTimeLine(props: Props): ReactElement {
           user2Result[14],
         ],
       },
-
       {
         type: "column",
         name: `${User2Name}'s Total Gold`,
@@ -157,6 +134,29 @@ function DuoTimeLine(props: Props): ReactElement {
           user2ExpData[8].totalGold,
           user2ExpData[11].totalGold,
           user2ExpData[14].totalGold,
+        ],
+      },
+      {
+        type: "line",
+        name: `${User1Name}'s Minions Killed`,
+        data: [
+          user1Result[2],
+          user1Result[5],
+          user1Result[8],
+          user1Result[11],
+          user1Result[14],
+        ],
+      },
+
+      {
+        type: "column",
+        name: `${User1Name}'s Total Gold`,
+        data: [
+          user1ExpData[2].totalGold,
+          user1ExpData[5].totalGold,
+          user1ExpData[8].totalGold,
+          user1ExpData[11].totalGold,
+          user1ExpData[14].totalGold,
         ],
       },
     ],
@@ -257,6 +257,7 @@ function DuoTimeLine(props: Props): ReactElement {
               colors: "#FFF",
             },
           },
+          max: 110,
 
           title: {
             text: "Minions / Jungle Minions",
@@ -272,8 +273,6 @@ function DuoTimeLine(props: Props): ReactElement {
           seriesName: "Total Gold",
           opposite: true,
           show: true,
-          min: 500,
-          max: 8000,
 
           axisTicks: {
             show: false,
@@ -287,6 +286,7 @@ function DuoTimeLine(props: Props): ReactElement {
               colors: "#FFF",
             },
           },
+          max: 8000,
 
           title: {
             text: "Total Gold",
