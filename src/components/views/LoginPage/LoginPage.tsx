@@ -1,10 +1,10 @@
 import React, { ReactElement, useState, useEffect, useRef } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
-import axios from "axios";
 import { gql, useMutation } from "@apollo/client";
+import axios from "axios";
+import qs from "qs";
 import RegisterModal from "./Sections/RegisterModal";
 import Toast from "../../utils/Toast";
-import API from "../../../api";
 import { TokenVar } from "../../../graphql";
 
 const LOGIN = gql`
@@ -17,17 +17,18 @@ const LOGIN = gql`
 
 interface Props extends RouteComponentProps {
   closeModal: () => void;
-  IsRegisterModal: boolean;
-  setIsRegisterModal: (boolean: boolean) => void;
+  setIsGoogleToken: (boolean: boolean) => void;
+  setIsFacebookToken: (boolean: boolean) => void;
 }
 
 function LoginPage(props: Props): ReactElement {
-  const { closeModal, IsRegisterModal, setIsRegisterModal } = props;
+  const { closeModal, setIsGoogleToken, setIsFacebookToken } = props;
 
   // console.log(Document.cookie);
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
+  const [IsRegisterModal, setIsRegisterModal] = useState(false);
   const [ToastMessage, setToastMessage] = useState({ success: "", fail: "" });
   const [loginGraghpl, { data }] = useMutation(LOGIN);
   const modalRef = useRef<HTMLDivElement>(null);
@@ -69,14 +70,39 @@ function LoginPage(props: Props): ReactElement {
     }
   };
 
+  const googleLoginHandler = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+
+    const GOOGLE_CLIENT_ID =
+      "712828129977-q8ff67tvbo16d08ia44r6uijl672ck0b.apps.googleusercontent.com";
+    const GOOGLE_REDIRECT_URI = "http://localhost:3000";
+    const GOOGLE_AUTH_URI = "https://accounts.google.com/o/oauth2/v2/auth";
+    const GOOGLE_PEOPLE_URI = "https://people.googleapis.com/v1/contactGroups";
+
+    const queryStr = qs.stringify({
+      client_id: GOOGLE_CLIENT_ID,
+      redirect_uri: GOOGLE_REDIRECT_URI, // window.location.href,
+      response_type: "token",
+      scope: "https://www.googleapis.com/auth/contacts.readonly",
+    });
+    const loginUrl = `${GOOGLE_AUTH_URI}?${queryStr}`;
+    window.open(loginUrl, "간편 로그인");
+
+    // window.location.assign(loginUrl); // 인가 서버 URL(loginUrl)로 사용자를 리다이렉트
+    // }
+  };
+
   useEffect(() => {
     return () => {
+      setIsGoogleToken(false);
+      setIsFacebookToken(false);
+      setIsRegisterModal(false);
       setToastMessage({
         success: "",
         fail: "",
       });
     };
-  }, []);
+  }, [setIsFacebookToken, setIsGoogleToken]);
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -149,8 +175,25 @@ function LoginPage(props: Props): ReactElement {
                       <button type="submit" onClick={loginHandler}>
                         Login
                       </button>
-                      <i className="icon-google"></i>
-                      <i className="icon-facebook"></i>
+                      <i
+                        className="icon-google"
+                        onClick={(e) => {
+                          console.log(
+                            "1. 구글 아이콘 클릭 -> setIsGoogleToken = true"
+                          );
+                          googleLoginHandler(e);
+                          setIsGoogleToken(true);
+                        }}
+                        aria-hidden
+                      ></i>
+                      <i
+                        className="icon-facebook"
+                        onClick={(e) => {
+                          console.log("페북 온클릭");
+                          setIsFacebookToken(true);
+                        }}
+                        aria-hidden
+                      ></i>
                       <i className="icon-github"></i>
                     </div>
                   </form>
@@ -184,3 +227,6 @@ function LoginPage(props: Props): ReactElement {
 }
 
 export default withRouter(LoginPage);
+function setIsFacebookToken(arg0: boolean) {
+  throw new Error("Function not implemented.");
+}
