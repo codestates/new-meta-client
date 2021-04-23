@@ -5,6 +5,7 @@ import Nav from "./views/Nav/Nav";
 import LandingPage from "./views/LandingPage/LandingPage";
 import PlayersSearchPage from "./views/PlayersSearchPage/PlayersSearchPage";
 import MyPage from "./views/MyPage/MyPage";
+import UserPage from "./views/MyPage/UserPage";
 import BoardPage from "./views/BoardPage/BoardPage";
 import BoardReadPage from "./views/BoardReadPage/BoardReadPage";
 import BoardWritePage from "./views/BoardWritePage/BoardWritePage";
@@ -23,6 +24,7 @@ function App(): ReactElement {
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/players" component={PlayersSearchPage} />
           <Route exact path="/mypage" component={Auth(MyPage, true)} />
+          <Route exact path="/userpage" component={UserPage} />
           <Route exact path="/board" component={BoardPage} />
           <Route exact path="/board/read" component={BoardReadPage} />
           <Route

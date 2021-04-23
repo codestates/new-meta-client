@@ -4,15 +4,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { gql, useMutation, useQuery } from "@apollo/client";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { GET_CURRENT_USER } from "../../../../graphql";
 import API from "../../../../api";
 
-interface Props {
-  data: any;
-}
-
-function BoardDetail(props: Props): ReactElement {
+function BoardDetail(props: any): ReactElement {
   const { data } = props;
 
   const [viewData, setdata] = useState(data);
@@ -172,6 +169,16 @@ function BoardDetail(props: Props): ReactElement {
       });
   };
 
+  const clickAuthor = (userId: string) => {
+    const location = {
+      pathname: "/userpage",
+      state: {
+        userId,
+      },
+    };
+    props.history.push(location);
+  };
+
   useEffect(() => {
     textTag.current?.children[1].classList.remove("is-active");
     textTag.current?.children[2].classList.remove("is-active");
@@ -241,7 +248,13 @@ function BoardDetail(props: Props): ReactElement {
           <div className="label">꿀 팁</div>
           <div className="etc">{viewData.etc}</div>
           <div className="button-group">
-            <div className="user">
+            <div
+              aria-hidden
+              onClick={() => {
+                clickAuthor(viewData.user.id);
+              }}
+              className="user"
+            >
               <i className="icon-user"></i>
               <div className="author">{viewData.user.nickname}</div>
             </div>
@@ -276,4 +289,4 @@ function BoardDetail(props: Props): ReactElement {
   );
 }
 
-export default BoardDetail;
+export default withRouter(BoardDetail);
