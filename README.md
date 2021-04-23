@@ -4,7 +4,7 @@
 
 
 ## Tech
-![image](https://user-images.githubusercontent.com/74342611/115836385-62651f80-a452-11eb-8f1a-5b1cd39cecbc.png)
+![image](https://user-images.githubusercontent.com/74342611/115836461-7ad53a00-a452-11eb-8d23-cd7d694bbaa7.png)
 
 ## We are Challengers 
 
