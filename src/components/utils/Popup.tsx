@@ -2,7 +2,7 @@ import React, { ReactElement } from "react";
 import { withRouter } from "react-router";
 
 function Popup(props: any): ReactElement {
-  const { popupMessage, btnMessage, IsPopupOpen, setIsPopupOpen } = props;
+  const { popupMessage, btnMessage, IsPopupOpen, closePopupHandler } = props;
 
   return (
     <>
@@ -13,10 +13,7 @@ function Popup(props: any): ReactElement {
             <div className="btn-wrapper popup">
               <button
                 className="close-btn"
-                onClick={() => {
-                  setIsPopupOpen(false);
-                  props.history.push("/");
-                }}
+                onClick={closePopupHandler}
                 type="button"
               >
                 {btnMessage}
