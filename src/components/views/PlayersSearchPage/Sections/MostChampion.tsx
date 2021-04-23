@@ -63,8 +63,10 @@ function MostChampion(props: Props): ReactElement {
         Array.push(el.champion);
       }
     }
+
     return Array;
   }
+
   const ChampionKey = getChampionKey(userData);
   const resultArray: ChampionStat[] = [];
 
@@ -80,6 +82,7 @@ function MostChampion(props: Props): ReactElement {
     for (let i = 0; i < ChampionKey.length; i++) {
       resultArray[i].champion = ChampionKey[i];
     }
+
     return resultArray;
   }
   const ChampionStatArray = getChampionStatArray();
@@ -89,10 +92,11 @@ function MostChampion(props: Props): ReactElement {
       ChampionStatArray.filter((ele) => {
         return ele.champion === el.champion;
       })[0].wins += 1;
+    } else {
+      ChampionStatArray.filter((ele) => {
+        return ele.champion === el.champion;
+      })[0].losses += 1;
     }
-    ChampionStatArray.filter((ele) => {
-      return ele.champion === el.champion;
-    })[0].losses += 1;
   }
 
   ChampionStatArray.sort((a, b) => {

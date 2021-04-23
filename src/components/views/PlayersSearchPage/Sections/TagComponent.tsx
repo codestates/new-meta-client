@@ -3,26 +3,20 @@
 /* eslint-disable no-restricted-syntax */
 
 import React, { useState, useEffect, useRef, ReactElement } from "react";
-import {
-  LaneInfo,
-  LeagueInfo,
-  KDAEventData,
-  PlayerMatchInfo,
-} from "../interface";
+import { LeagueInfo, KDAEventData, PlayerMatchInfo } from "../interface";
 
 interface Props {
-  laneInfo: LaneInfo;
   leagueInfo: LeagueInfo;
   kdaInfo: KDAEventData[];
   recentChampionStats: PlayerMatchInfo[];
 }
 
 function TagComponent(props: Props): ReactElement {
-  const { laneInfo, leagueInfo, kdaInfo, recentChampionStats } = props;
+  const { leagueInfo, kdaInfo, recentChampionStats } = props;
 
   /* 태그- 컴포넌트로 만들어야함 */
-  const hotStreak = useRef<HTMLDivElement>(null);
-  const lev2Strong = useRef<HTMLDivElement>(null);
+  const hotStreak = useRef<HTMLDivElement>(null); // 연승 중
+  const lev2Strong = useRef<HTMLDivElement>(null); // 2렙 강함
   const lev3Strong = useRef<HTMLDivElement>(null);
   const lev2Weak = useRef<HTMLDivElement>(null);
   const lev3Weak = useRef<HTMLDivElement>(null);
@@ -47,27 +41,24 @@ function TagComponent(props: Props): ReactElement {
     return count;
   }
 
-  if (hotStreak.current) {
-    if (leagueInfo.hotStreak === true) {
-      const streaks = streakCount(recentChampionStats);
-      if (streaks > 1) {
-        hotStreak.current.classList.add("active");
-        hotStreak.current.textContent = `${streaks}연승 중`;
-      }
+  if (leagueInfo.hotStreak === true) {
+    const streaks = streakCount(recentChampionStats);
+    if (streaks > 1 && hotStreak.current) {
+      hotStreak.current.classList.add("active");
+      hotStreak.current.textContent = `${streaks}연승 중`;
     }
   }
-
   /* 승률 60% 이상일 경우 */
 
-  if (carryMachine.current) {
-    if (
-      leagueInfo.wins / (leagueInfo.wins + leagueInfo.losses) > 0.55 &&
-      leagueInfo.wins + leagueInfo.losses > 200
-    ) {
-      carryMachine.current.classList.add("active");
-      carryMachine.current.textContent = "캐.리.머.신";
-    }
+  if (
+    leagueInfo.wins / (leagueInfo.wins + leagueInfo.losses) > 0.6 &&
+    leagueInfo.wins + leagueInfo.losses > 200 &&
+    carryMachine.current
+  ) {
+    carryMachine.current.classList.add("active");
+    carryMachine.current.textContent = "캐.리.머.신";
   }
+
   /*  matchKillForLevel2 + matchAssistForLevel2 가 1이상인 경기가 10경기 이상인 경우  */
 
   if (lev2Strong.current) {
@@ -82,6 +73,7 @@ function TagComponent(props: Props): ReactElement {
       lev2Strong.current.textContent = "2렙 싸움꾼";
     }
   }
+
   /*  matchKillForLevel3 + matchAssistForLevel3 가 1이상인 경기가 5경기 이상인 경우  */
   if (lev3Strong.current) {
     let count = 0;

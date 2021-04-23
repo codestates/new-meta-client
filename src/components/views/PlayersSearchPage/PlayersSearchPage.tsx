@@ -49,13 +49,11 @@ function PlayersSearchPage(): ReactElement {
         .then((res) => {
           if (res.data.message === "Request failed with status code 429") {
             setLoadingState(false);
-            console.log(res.data.message);
             setToastMessage({
               success: "",
               fail: "잠시 후 다시 시도해주세요.",
             });
           }
-          console.log("userName2도 있을때", res.data);
           setUser2data(res.data);
           setLoadingState(false);
           setUserName2("");
@@ -96,7 +94,6 @@ function PlayersSearchPage(): ReactElement {
 
   const clickSearch = () => {
     if (userName1 === userName2) {
-      console.log("같은애들");
       setToastMessage({
         success: "",
         fail: "같은 소환사를 비교할 수 없습니다!",
@@ -106,13 +103,6 @@ function PlayersSearchPage(): ReactElement {
     }
     if (userName1) {
       setLoadingState(true);
-      console.log(
-        "검색 시작",
-        "UserName1:",
-        userName1,
-        "UserName2:",
-        userName2
-      );
 
       axios
         .post(API.summonerInfo, {
@@ -126,10 +116,8 @@ function PlayersSearchPage(): ReactElement {
               fail: "잠시 후 다시 시도해주세요.",
             });
           }
-          console.log("userName1만 있을때", res.data);
           setUser1data(res.data);
           if (!userName2) {
-            console.log("로딩 취소");
             setLoadingState(false);
           }
         })

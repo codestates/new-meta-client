@@ -53,7 +53,6 @@ function SoloMatchView(props: Props): ReactElement {
         </div>
         <div className="summoner-tags">
           <TagComponent
-            laneInfo={User1data.laneInfo!}
             leagueInfo={User1data.leagueInfo!}
             kdaInfo={User1data.kdaTimelineData!}
             recentChampionStats={User1data.recentChampionStats!}
