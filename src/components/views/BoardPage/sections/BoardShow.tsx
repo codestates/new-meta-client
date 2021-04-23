@@ -5,6 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import EmptyDetail from "./EmptyDetail";
 import BoardDetail from "./BoardDetail";
 import BoardSmall from "./BoardSmall";
+import Login from "../../LoginPage/LoginPage";
 
 const GET_ALL_POST = gql`
   {
@@ -30,6 +31,10 @@ function BoardShow(props: any): ReactElement {
   const [BoardList, setBoardList] = useState([]);
   const getAllPostQuery = useQuery(GET_ALL_POST);
 
+  const [IsLoginOpen, setIsLoginOpen] = useState(false);
+  const [IsRegisterModal, setIsRegisterModal] = useState(false);
+  const closeModal = () => setIsLoginOpen(false);
+
   useEffect(() => {
     const dataList = getAllPostQuery?.data?.fetchAllPostsOrderByCreatedAt;
     if (dataList) {
@@ -49,12 +54,19 @@ function BoardShow(props: any): ReactElement {
     if (token) {
       props.history.push("/board/write");
     } else {
-      // todo 로그인창 띄우기
+      setIsLoginOpen(true);
     }
   };
 
   return (
     <div className="user-board">
+      {IsLoginOpen ? (
+        <Login
+          closeModal={closeModal}
+          IsRegisterModal={IsRegisterModal}
+          setIsRegisterModal={setIsRegisterModal}
+        />
+      ) : null}
       <div className="detail-view">
         {Object.keys(CurrentBoard).length > 0 ? (
           <BoardDetail data={CurrentBoard} />
