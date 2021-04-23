@@ -52,7 +52,6 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
         skills
         play
         etc
-        author
         createdAt
         updatedAt
       }
