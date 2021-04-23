@@ -2,9 +2,10 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable array-callback-return */
 /* eslint-disable react-hooks/exhaustive-deps */
-import { gql, useMutation } from "@apollo/client";
+import { gql, useMutation, useQuery } from "@apollo/client";
 import axios from "axios";
 import React, { ReactElement, useEffect, useRef, useState } from "react";
+import { GET_CURRENT_USER } from "../../../../graphql";
 import API from "../../../../api";
 
 interface Props {
@@ -19,6 +20,53 @@ function BoardDetail(props: Props): ReactElement {
   const [info, setinfo] = useState<any>(null);
   const textTag = useRef<HTMLDivElement>(null);
   const partTag = useRef<HTMLDivElement>(null);
+  const [isLogin, setIsLogin] = useState(undefined);
+  const [likeState, setLikeState] = useState<boolean | undefined>(undefined);
+  const [Author, setAuthor] = useState(false);
+
+  const userLogin = useQuery(GET_CURRENT_USER);
+
+  const MY_LIKE_POST = gql`
+    {
+      readMyLikes {
+        likes {
+          post {
+            id
+            title
+          }
+        }
+        user {
+          id
+        }
+      }
+    }
+  `;
+
+  const userLikeList = useQuery(MY_LIKE_POST);
+
+  useEffect(() => {
+    setIsLogin(userLogin.data.token);
+
+    if (userLogin.data.token !== null && userLikeList.data) {
+      const { likes, user } = userLikeList.data.readMyLikes;
+
+      if (data.user.id === user.id) {
+        setAuthor(true);
+      }
+      const result = likes.filter((el: any) => {
+        if (el.post.id === data.id) {
+          return el;
+        }
+      });
+
+      if (result.length !== 0) {
+        setLikeState(true);
+      } else {
+        setLikeState(false);
+      }
+      //
+    }
+  }, [userLogin, data, userLikeList.data]);
 
   const clickLeftIcon = () => {
     if (CurrentIndex === 0) {
@@ -75,10 +123,43 @@ function BoardDetail(props: Props): ReactElement {
     }
   `;
 
-  const [starQuery] = useMutation(STAR);
+  const UNSTAR = gql`
+    mutation DeleteLike($postId: String!) {
+      deleteLike(postId: $postId)
+    }
+  `;
 
+  const [starQuery] = useMutation(STAR, {
+    refetchQueries: [
+      {
+        query: MY_LIKE_POST,
+      },
+    ],
+  });
+
+  const [unstarQuery] = useMutation(UNSTAR, {
+    refetchQueries: [
+      {
+        query: MY_LIKE_POST,
+      },
+    ],
+  });
   const clickStar = () => {
     starQuery({
+      variables: {
+        postId: data.id,
+      },
+    })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("error : ", err);
+      });
+  };
+
+  const clickUnstar = () => {
+    unstarQuery({
       variables: {
         postId: data.id,
       },
@@ -162,13 +243,27 @@ function BoardDetail(props: Props): ReactElement {
           <div className="button-group">
             <div className="user">
               <i className="icon-user"></i>
-              <div className="author">{viewData.author}</div>
+              <div className="author">{viewData.user.nickname}</div>
             </div>
-            <div aria-hidden onClick={clickStar} className="star">
-              {/* <i className="icon-star-full"></i> */}
-              <i className="icon-star-empty"></i>
-              <div className="state">Star</div>
-            </div>
+            {isLogin && (
+              <>
+                {!Author && (
+                  <>
+                    {likeState ? (
+                      <div aria-hidden onClick={clickUnstar} className="star">
+                        <i className="icon-star-full"></i>
+                        <div className="state">Unstar</div>
+                      </div>
+                    ) : (
+                      <div aria-hidden onClick={clickStar} className="star">
+                        <i className="icon-star-empty"></i>
+                        <div className="state">Star</div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </>
+            )}
           </div>
         </div>
       </div>
