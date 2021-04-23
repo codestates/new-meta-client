@@ -4,13 +4,14 @@ import { SummonerAllData } from "./interface";
 
 import LaneInfoChart from "./Sections/LaneInfoChart";
 import HeatMapChart from "./Sections/HeatMapChart";
-import TimelineChart from "./Sections/TimelineChart";
 import WinRateChart from "./Sections/WinRateChart";
 import TagComponent from "./Sections/TagComponent";
 import MostChampion from "./Sections/MostChampion";
 import MatchingPoints from "./Sections/MatchingPoints";
 import DuoTimeline from "./Sections/DuoTimeLine";
+import TimelineChart from "./Sections/TimelineChart";
 import PositionIcon from "./Sections/PositionIcon";
+import TierIcon from "./Sections/TierIcon";
 
 interface Props {
   User1data: SummonerAllData;
@@ -46,9 +47,11 @@ function DuoMatchView(props: Props): ReactElement {
               <div className="summoner-tier">
                 {User1data.leagueInfo!.leaguePoints} LP
               </div>
+              <div className="summoner-tier">
+                <TierIcon userData={User1data.leagueInfo!.tier} />
+              </div>
               <div className="summoner-tags">
                 <TagComponent
-                  laneInfo={User1data.laneInfo!}
                   leagueInfo={User1data.leagueInfo!}
                   kdaInfo={User1data.kdaTimelineData!}
                   recentChampionStats={User1data.recentChampionStats!}
@@ -101,9 +104,11 @@ function DuoMatchView(props: Props): ReactElement {
               <div className="summoner-tier">
                 {User2data.leagueInfo!.leaguePoints} LP
               </div>
+              <div className="summoner-tier">
+                <TierIcon userData={User2data.leagueInfo!.tier} />
+              </div>
               <div className="summoner-tags">
                 <TagComponent
-                  laneInfo={User2data.laneInfo!}
                   leagueInfo={User2data.leagueInfo!}
                   kdaInfo={User2data.kdaTimelineData!}
                   recentChampionStats={User2data.recentChampionStats!}
@@ -143,17 +148,16 @@ function DuoMatchView(props: Props): ReactElement {
               </div>
             </div>
           </div>
-        </div>
-
-        <div className="common-graph">
-          <DuoTimeline
-            User1Name={User1data.summonerInfo!.name}
-            User1data={User1data.expTimelineData!}
-            User2data={User2data.expTimelineData!}
-            User2Name={User2data.summonerInfo!.name}
-            User1LaneInfo={User1data.laneInfo!}
-            User2LaneInfo={User2data.laneInfo!}
-          />
+          <div className="common-graph">
+            <DuoTimeline
+              User1data={User1data.expTimelineData!}
+              User1LaneInfo={User1data.laneInfo!}
+              User1Name={User1data.leagueInfo!.summonerName!}
+              User2data={User2data.expTimelineData!}
+              User2LaneInfo={User2data.laneInfo!}
+              User2Name={User2data.leagueInfo!.summonerName}
+            />
+          </div>
         </div>
       </div>
     </div>

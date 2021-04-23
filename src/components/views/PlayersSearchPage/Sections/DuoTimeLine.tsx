@@ -88,10 +88,6 @@ function DuoTimeLine(props: Props): ReactElement {
   }
   const user1ExpData = getAverageExp(User1data);
   const user2ExpData = getAverageExp(User2data);
-  console.log(user1ExpData);
-  console.log(user2ExpData);
-  const user1Main = getMainPosition(User1LaneInfo);
-  const user2Main = getMainPosition(User2LaneInfo);
 
   /* 정글러- 라이너일 경우 : 데이터- 정글미니언, 미니언 */
 
@@ -119,7 +115,8 @@ function DuoTimeLine(props: Props): ReactElement {
     // colors: ["#FFF"],
     series: [
       {
-        name: User1Name,
+        type: "line",
+        name: `${User1Name}'s Minions Killed`,
         data: [
           user1Result[2],
           user1Result[5],
@@ -129,13 +126,37 @@ function DuoTimeLine(props: Props): ReactElement {
         ],
       },
       {
-        name: User2Name,
+        type: "column",
+        name: `${User1Name}'s Total Gold`,
+        data: [
+          user1ExpData[2].totalGold,
+          user1ExpData[5].totalGold,
+          user1ExpData[8].totalGold,
+          user1ExpData[11].totalGold,
+          user1ExpData[14].totalGold,
+        ],
+      },
+      {
+        type: "line",
+        name: `${User2Name}'s Minions Killed`,
         data: [
           user2Result[2],
           user2Result[5],
           user2Result[8],
           user2Result[11],
           user2Result[14],
+        ],
+      },
+
+      {
+        type: "column",
+        name: `${User2Name}'s Total Gold`,
+        data: [
+          user2ExpData[2].totalGold,
+          user2ExpData[5].totalGold,
+          user2ExpData[8].totalGold,
+          user2ExpData[11].totalGold,
+          user2ExpData[14].totalGold,
         ],
       },
     ],
@@ -146,7 +167,8 @@ function DuoTimeLine(props: Props): ReactElement {
       offsetY: -25,
       offsetX: -5,
       fontSize: "18px",
-
+      fontColor: "#FFF",
+      show: false,
       labels: {
         colors: ["#FFF"],
       },
@@ -155,9 +177,15 @@ function DuoTimeLine(props: Props): ReactElement {
       tooltip: {
         theme: "dark",
       },
+      legend: {
+        show: true,
+        fontSize: "14px",
+        fontFamily: "Noto Sans KR",
+        fontWeight: "300",
+        labels: { colors: "#FFF" },
+      },
       chart: {
         height: 350,
-        // type: "line",
         dropShadow: {
           enabled: true,
           color: "#000",
@@ -171,46 +199,106 @@ function DuoTimeLine(props: Props): ReactElement {
         },
       },
 
-      colors: ["#21efdb", "#f86d7d"],
+      colors: ["#00b6a4", "#00b6a4", "#7044ed", "#7044ed"],
       dataLabels: {
         enabled: true,
+        fontSize: "15px",
+        fontFamily: "Noto Sans KR",
+        enabledOnSeries: [0, 2],
       },
+
       /* stroke: {
         curve: "smooth",
       }, */
       title: {
-        text: "Average 15 Minutes Exp Timeline",
+        text: "Average 15 Minutes' CS Exp & Total Gold for 20 Matches",
         style: {
           color: "#FFF",
           fontSize: "20px",
           fontFamily: "Noto Sans",
+          fontWeight: "300",
         },
       },
       grid: {
         borderColor: "#e7e7e7",
-        /*  row: {
-          colors: "#dDD", // takes an array which will be repeated on columns
-          opacity: 0,
-        }, */
       },
       markers: {
         size: 8,
       },
       xaxis: {
         categories: ["3m", "6m", "9m", "12m", "15m"],
-        colors: ["#FFF"],
+
         title: {
           text: "Timeline",
           style: {
             color: "#FFF",
             fontSize: "15px",
           },
+          labels: {
+            style: {
+              colors: "#FFF",
+            },
+          },
         },
       },
-      yaxis: {
-        min: 5,
-        max: 110,
-      },
+      yaxis: [
+        {
+          show: true,
+          seriesName: "Minions / Jungle Minions",
+          axisTicks: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+            color: "#008FFB",
+          },
+          labels: {
+            style: {
+              colors: "#FFF",
+            },
+          },
+
+          title: {
+            text: "Minions / Jungle Minions",
+            style: {
+              color: "#FFF",
+            },
+          },
+          tooltip: {
+            enabled: false,
+          },
+        },
+        {
+          seriesName: "Total Gold",
+          opposite: true,
+          show: true,
+          min: 500,
+          max: 8000,
+
+          axisTicks: {
+            show: false,
+          },
+          axisBorder: {
+            show: false,
+            color: "#008FFB",
+          },
+          labels: {
+            style: {
+              colors: "#FFF",
+            },
+          },
+
+          title: {
+            text: "Total Gold",
+            style: {
+              color: "#FFF",
+            },
+          },
+          tooltip: {
+            enabled: false,
+          },
+        },
+      ],
 
       responsive: [
         {
@@ -221,14 +309,15 @@ function DuoTimeLine(props: Props): ReactElement {
   };
 
   return (
-    <div>
+    <>
       <ReactApexChart
         options={graphData.options}
         series={graphData.series}
         type="line"
         width={800}
+        height={500}
       />
-    </div>
+    </>
   );
 }
 

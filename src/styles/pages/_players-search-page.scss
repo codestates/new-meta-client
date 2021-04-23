@@ -463,10 +463,18 @@
                 margin: 3px;
                 margin-bottom: 10px;
 
-                .summoner-tier-info {
-                  display: flex;
+                .summoner-tier {
+                  text-align: center;
+                  margin: 3px;
+                  align-content: center;
+                  align-items: center;
                 }
               }
+              .tier-icon {
+                width: 15%;
+                margin-top: 10px;
+              }
+
               .summoner-tags {
                 margin-top: 30px;
                 $duration: 500ms;
@@ -555,6 +563,7 @@
               flex-direction: row;
               justify-content: center;
               align-items: center;
+              flex-wrap: wrap;
 
               .graph-section {
                 display: flex;
@@ -644,6 +653,7 @@
                   width: max-content;
 
                   .div-laneInfo {
+                    display: inline-block;
                     position: absolute;
                     width: 90%;
                     height: max-content;
@@ -679,6 +689,11 @@
 
         & > .common-graph {
           margin-top: 20px;
+          display: flex;
+          padding: 10px;
+          border-radius: 20px;
+          background-color: $block;
+          box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08);
         }
       }
     }

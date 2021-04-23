@@ -180,7 +180,11 @@ function TimelineChart(props: Props): ReactElement {
       labels: ["3m", "6m", "9m", "12m", "15m"],
 
       xaxis: {
-        // type: "datetime",
+        labels: {
+          style: {
+            colors: "#FFF",
+          },
+        },
       },
       yaxis: [
         {
@@ -188,6 +192,13 @@ function TimelineChart(props: Props): ReactElement {
             text: "Total Gold",
             style: {
               color: "#FFF",
+            },
+          },
+          min: 500,
+          max: 8000,
+          labels: {
+            style: {
+              colors: "#FFF",
             },
           },
         },
@@ -199,6 +210,11 @@ function TimelineChart(props: Props): ReactElement {
             color: "#FFF",
             style: {
               color: "#FFF",
+            },
+          },
+          labels: {
+            style: {
+              colors: "#FFF",
             },
           },
         },
