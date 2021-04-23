@@ -5,6 +5,7 @@ import { gql, useQuery } from "@apollo/client";
 import BoardDetail from "./BoardDetail";
 import BoardSmall from "./BoardSmall";
 import Login from "../../LoginPage/LoginPage";
+import BoardPopular from "./BoardPopular";
 
 const GET_ALL_POST = gql`
   {
@@ -82,18 +83,19 @@ function BoardShow(props: any): ReactElement {
           </button>
         </div>
         <div className="label">Popular</div>
-        <div className="content-list">
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
-          <div className="content"></div>
+        <div className="content-list popular">
+          {BoardList.map((el, idx) => {
+            return (
+              <BoardPopular
+                key={idx}
+                data={el}
+                setCurrentBoard={setCurrentBoard}
+              />
+            );
+          })}
         </div>
         <div className="label">Recent</div>
-        <div className="content-list">
+        <div className="content-list recent">
           {BoardList.map((el, idx) => {
             return (
               <BoardSmall
