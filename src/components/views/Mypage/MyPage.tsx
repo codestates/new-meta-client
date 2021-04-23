@@ -7,7 +7,6 @@ import NewPasswordModal from "./Sections/NewPasswordModal";
 import LeaveModal from "./Sections/LeaveModal";
 import LikePostModal from "./Sections/LikePostModal";
 import API from "../../../api";
-import ionia from "../../../assets/image/ionia2.jpeg";
 
 // interface Props {}
 const tempData = {
@@ -168,8 +167,6 @@ function MyPage(): ReactElement {
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-
-  console.log(FollowingList, FollowerList);
 
   return (
     <>

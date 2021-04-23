@@ -61,10 +61,20 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
     refetchQueries: [{ query: GET_ALL_POST }],
   });
 
+  const [Query, setQuery] = useState("");
+
   useEffect(() => {
     const run = async () => {
       const result = await axios.get(API.allChampionInfo);
-      const squareImages = Object.values(result.data.data).map((el: any) => {
+
+      const champList = Object.values(result.data.data).filter((el: any) => {
+        if (el.name.includes(Query)) {
+          return el;
+        }
+        return null;
+      });
+
+      const squareImages = champList.map((el: any) => {
         return `${API.championSquare}/${el.id}.png`;
       });
 
@@ -72,7 +82,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
     };
     run();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [Query]);
 
   const clickPost = () => {
     // todo : 서버에 게시물 등록 요청
@@ -203,7 +213,15 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
       <div ref={writeBox} className="write-box">
         <div className="write-page page-0 is-active">
           <div className="search-bar-write">
-            <input type="text"></input>
+            <input
+              type="text"
+              onChange={(e) => {
+                setQuery(e.target.value);
+              }}
+              onKeyDown={(e) => {
+                //
+              }}
+            ></input>
             <i className="icon-search"></i>
           </div>
           <div className="champions-pick">
