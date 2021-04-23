@@ -18,6 +18,10 @@ const GET_ALL_POST = gql`
       etc
       createdAt
       updatedAt
+      user {
+        id
+        nickname
+      }
     }
   }
 `;

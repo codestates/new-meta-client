@@ -22,6 +22,7 @@ function BoardDetail(props: Props): ReactElement {
   const partTag = useRef<HTMLDivElement>(null);
   const [isLogin, setIsLogin] = useState(undefined);
   const [likeState, setLikeState] = useState<boolean | undefined>(undefined);
+  const [Author, setAuthor] = useState(false);
 
   const userLogin = useQuery(GET_CURRENT_USER);
 
@@ -34,6 +35,9 @@ function BoardDetail(props: Props): ReactElement {
             title
           }
         }
+        user {
+          id
+        }
       }
     }
   `;
@@ -44,16 +48,16 @@ function BoardDetail(props: Props): ReactElement {
     setIsLogin(userLogin.data.token);
 
     if (userLogin.data.token !== null && userLikeList.data) {
-      console.log(data.id);
-      const { likes } = userLikeList.data.readMyLikes;
-      console.log(likes);
+      const { likes, user } = userLikeList.data.readMyLikes;
+
+      if (data.user.id === user.id) {
+        setAuthor(true);
+      }
       const result = likes.filter((el: any) => {
         if (el.post.id === data.id) {
           return el;
         }
       });
-      console.log(result);
-      console.log(result.length);
 
       if (result.length !== 0) {
         setLikeState(true);
@@ -239,20 +243,24 @@ function BoardDetail(props: Props): ReactElement {
           <div className="button-group">
             <div className="user">
               <i className="icon-user"></i>
-              <div className="author">{viewData.author}</div>
+              <div className="author">{viewData.user.nickname}</div>
             </div>
             {isLogin && (
               <>
-                {likeState ? (
-                  <div aria-hidden onClick={clickUnstar} className="star">
-                    <i className="icon-star-full"></i>
-                    <div className="state">Unstar</div>
-                  </div>
-                ) : (
-                  <div aria-hidden onClick={clickStar} className="star">
-                    <i className="icon-star-empty"></i>
-                    <div className="state">Star</div>
-                  </div>
+                {!Author && (
+                  <>
+                    {likeState ? (
+                      <div aria-hidden onClick={clickUnstar} className="star">
+                        <i className="icon-star-full"></i>
+                        <div className="state">Unstar</div>
+                      </div>
+                    ) : (
+                      <div aria-hidden onClick={clickStar} className="star">
+                        <i className="icon-star-empty"></i>
+                        <div className="state">Star</div>
+                      </div>
+                    )}
+                  </>
                 )}
               </>
             )}
