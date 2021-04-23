@@ -129,7 +129,7 @@ function MatchingPoints(props: Props): ReactElement {
         if (el.matchKills + el.matchAssists + el.matchDeaths < 4) {
           laneNormal += 1;
         }
-        if (el.matchDeaths > 2 && el.matchKills < 3 && el.matchAssists < 3) {
+        if (el.matchDeaths > 2 && el.matchKills + el.matchAssists < 3) {
           laneWeak += 1;
         }
         if (

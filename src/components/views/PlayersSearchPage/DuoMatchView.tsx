@@ -22,12 +22,6 @@ function DuoMatchView(props: Props): ReactElement {
   const { User1data, User2data } = props;
   console.log(User1data, User2data);
 
-  /* useEffect(() => {
-    return () => {
-      console.log(User1data, User2data);
-    };
-  }, [User1data, User2data]);
- */
   return (
     <div className="duo-search-result">
       <div className="duo-match-thumbnail">
