@@ -111,8 +111,6 @@ function MyPage(): ReactElement {
   const userInfoQuery = useQuery(MyINFO);
   const userPostQuery = useQuery(MyPost);
 
-  console.log(FollowerList);
-
   const clickMyPost = (data: any) => {
     SetPostModal(true);
     SetPostModalData(data);
@@ -137,8 +135,6 @@ function MyPage(): ReactElement {
     // todo 팔로우, 좋아요 부분 다 하기
 
     if (userInfoQuery.data) {
-      console.log(userInfoQuery.data);
-
       setMyData(userInfoQuery.data.myInfo);
       setFollowerList(userInfoQuery.data.myInfo.followers); // 나를
       setFollowingList(userInfoQuery.data.myInfo.followings); // 내가

@@ -1,5 +1,6 @@
 import React, { ReactElement } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { TokenVar } from "../graphql";
 
 import Nav from "./views/Nav/Nav";
 import LandingPage from "./views/LandingPage/LandingPage";
@@ -15,6 +16,11 @@ import ScrollToTop from "./utils/ScrollToTop";
 import Auth from "./utils/Auth";
 
 function App(): ReactElement {
+  const token = localStorage.getItem("token");
+  if (token !== null && token !== undefined) {
+    TokenVar({ token });
+  }
+
   return (
     <Router>
       <ScrollToTop />
