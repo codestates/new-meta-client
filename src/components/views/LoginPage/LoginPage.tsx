@@ -1,8 +1,6 @@
 import React, { ReactElement, useState, useEffect, useRef } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { gql, useMutation } from "@apollo/client";
-import axios from "axios";
-import qs from "qs";
 import RegisterModal from "./Sections/RegisterModal";
 import Toast from "../../utils/Toast";
 import { TokenVar } from "../../../graphql";
@@ -17,18 +15,10 @@ const LOGIN = gql`
 
 interface Props extends RouteComponentProps {
   closeModal: () => void;
-  setIsGoogleToken: (boolean: boolean) => void;
-  setIsFacebookToken: (boolean: boolean) => void;
-  setIsGithubToken: (boolean: boolean) => void;
 }
 
 function LoginPage(props: Props): ReactElement {
-  const {
-    closeModal,
-    setIsGoogleToken,
-    setIsFacebookToken,
-    setIsGithubToken,
-  } = props;
+  const { closeModal } = props;
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
@@ -91,8 +81,6 @@ function LoginPage(props: Props): ReactElement {
 
   useEffect(() => {
     return () => {
-      // setIsGoogleToken(false);
-      // setIsFacebookToken(false);
       setToastMessage({
         success: "",
         fail: "",
@@ -178,7 +166,6 @@ function LoginPage(props: Props): ReactElement {
                             "1. 구글 아이콘 클릭 -> setIsGoogleToken = true"
                           );
                           googleLoginHandler(e);
-                          setIsGoogleToken(true);
                         }}
                         aria-hidden
                       ></i>
@@ -187,7 +174,6 @@ function LoginPage(props: Props): ReactElement {
                         onClick={(e) => {
                           console.log("페북 온클릭");
                           facebookLoginHandler(e);
-                          setIsFacebookToken(true);
                         }}
                         aria-hidden
                       ></i>
@@ -196,7 +182,6 @@ function LoginPage(props: Props): ReactElement {
                         onClick={(e) => {
                           console.log("깃헙 온클릭");
                           githubLoginHandler(e);
-                          setIsGithubToken(true);
                         }}
                         aria-hidden
                       ></i>

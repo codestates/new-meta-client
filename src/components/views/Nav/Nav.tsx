@@ -1,6 +1,5 @@
 /* eslint-disable no-restricted-globals */
 import { gql, useQuery } from "@apollo/client";
-import qs from "qs";
 import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter } from "react-router-dom";
 import logo from "../../../assets/image/newmeta-logo-spell.png";
@@ -23,9 +22,6 @@ function Nav(props: any): ReactElement {
   const [IsModalOpen, setIsModalOpen] = useState(false);
   const [IsLogin, setIsLogin] = useState(false);
 
-  const [IsGoogleToken, setIsGoogleToken] = useState(false);
-  const [IsFacebookToken, setIsFacebookToken] = useState(false);
-
   // const { loading, error, data } = useQuery(CHECK_LOGIN);
   const currentUser = useQuery(GET_CURRENT_USER);
 
@@ -47,21 +43,6 @@ function Nav(props: any): ReactElement {
     localStorage.clear();
     props.history.push("/");
   };
-
-  useEffect(() => {
-    console.log("2. IsGoogleToken의 상태가 바뀌어서 useEffect 실행됨");
-
-    const googleToken: any = qs.parse(window.location.hash.substr(1))
-      .access_token;
-    if (googleToken) {
-      console.log("3. 구글토큰 잘 받아와짐 => 이후 동작 여기서 처리하면 됨");
-    }
-    console.log(googleToken);
-  }, [IsGoogleToken]);
-
-  useEffect(() => {
-    console.log("페북토큰");
-  }, [IsFacebookToken]);
 
   return (
     <>
@@ -131,13 +112,7 @@ function Nav(props: any): ReactElement {
           </div>
         )}
       </div>
-      {IsModalOpen ? (
-        <LoginPage
-          closeModal={closeModal}
-          setIsGoogleToken={setIsGoogleToken}
-          setIsFacebookToken={setIsFacebookToken}
-        />
-      ) : null}
+      {IsModalOpen ? <LoginPage closeModal={closeModal} /> : null}
     </>
   );
 }
