@@ -120,33 +120,35 @@
         }
       }
     }
-  }
 
-  .innerWrap {
-    position: absolute;
-
-    h1 {
-      font-size: 1.5rem;
-    }
-
-    .text {
-      font-weight: lighter;
-      font-size: 1rem;
-      padding: 8px 0;
-      opacity: 0.7;
-    }
-  }
-
-  @media screen and (max-width: 800px) {
     .innerWrap {
+      position: absolute;
+      padding-top: 3.5rem;
+
       h1 {
         font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        opacity: 0.9;
       }
 
       .text {
         font-weight: lighter;
         font-size: 1rem;
-        padding: 4px 0;
+
+        &.q {
+          font-size: 0.95rem;
+        }
+
+        &.a {
+          color: $jade;
+          margin-top: 2.5rem;
+
+          .highlight {
+            color: $jade-light;
+            font-weight: 500;
+          }
+        }
       }
     }
   }
@@ -157,9 +159,8 @@
     padding: 30px 30px 30px 70px;
     width: 50%;
     top: 35%;
-    left: 0%;
+    left: 6.5%;
     z-index: 5;
-    left: 10%;
     visibility: visible;
     opacity: 1;
 
@@ -349,13 +350,13 @@
         text-align: center;
 
         .title {
-          font-weight: 500;
-          font-size: 2rem;
+          font-weight: 400;
+          font-size: 1.8rem;
         }
 
         .description {
           font-weight: lighter;
-          font-size: 1.2rem;
+          font-size: 0.95rem;
           padding: 1rem 0;
         }
 
@@ -476,11 +477,16 @@
     .image-wrapper {
       top: 45% !important;
     }
+
+    &.active .image-wrapper {
+      opacity: 0.7;
+    }
   }
   .pointWrap {
     display: none;
   }
   .innerWrap {
+    width: 80% !important;
     padding: 30px 30px 30px 10px !important;
   }
 
@@ -545,6 +551,21 @@
 }
 
 @media screen and (max-width: 400px) {
+  .section-minimap {
+    .image-wrapper {
+      top: 52% !important;
+      left: 21.5% !important;
+    }
+
+    &.active .image-wrapper {
+      opacity: 1;
+    }
+
+    &.active .innerWrap {
+      top: 22%;
+    }
+  }
+
   .services .side-section .text-wrapper {
     top: 15% !important;
   }

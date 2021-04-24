@@ -165,12 +165,11 @@ function Minimap(): ReactElement {
         </div>
         <div className="innerWrap">
           <h1>TOP</h1>
-          <div className="text gray">
-            &#34;우리 팀 정글러, 갱 잘 와줄까?&#34;
-          </div>
-          <div className="text bold">
-            &#10132;&nbsp;&nbsp;&nbsp;라인전 단계의 킬 관여율과 갱킹 선호도를
-            확인해봐!
+          <div className="text q">&#34;우리 팀 정글러, 갱 잘 와줄까?&#34;</div>
+          <div className="text a">
+            &#10132;&nbsp;&nbsp;&nbsp;라인전 단계의{" "}
+            <span className="highlight">킬 관여율</span>과{" "}
+            <span className="highlight">갱킹 선호도</span>를 확인해봐!
           </div>
         </div>
         <div className="image-wrapper top">
@@ -183,11 +182,12 @@ function Minimap(): ReactElement {
       <section className="section-minimap 1">
         <div className="innerWrap">
           <h1>JUNGLE</h1>
-          <div className="text">
+          <div className="text q">
             &#34;우리 팀 라이너들, CS는 얼마나 잘 챙길까?&#34;
           </div>
-          <div className="text">
-            &#10132;&nbsp;&nbsp;&nbsp;15분까지 라이너들의 CS 경험치를 비교해봐!
+          <div className="text a">
+            &#10132;&nbsp;&nbsp;&nbsp;15분까지 라이너들의{" "}
+            <span className="highlight">CS 경험치</span>를 비교해봐!
           </div>
         </div>
         <div className="image-wrapper jungle">
@@ -200,13 +200,15 @@ function Minimap(): ReactElement {
       <section className="section-minimap 2">
         <div className="innerWrap">
           <h1>MIDDLE</h1>
-          <div className="text">
+          <div className="text q">
             {" "}
             &#34;나의 야스오 승률, 증명할 수 있어! &#34;
           </div>
-          <div className="text">
+          <div className="text a">
             {" "}
-            &#10132;&nbsp;&nbsp;&nbsp;최근 챔피언의 전적과 승률로 보여줄게!
+            &#10132;&nbsp;&nbsp;&nbsp; 최근 챔피언의{" "}
+            <span className="highlight">전적</span>과{" "}
+            <span className="highlight">승률</span>로 보여줄게!
           </div>
         </div>
         <div className="image-wrapper mid">
@@ -219,13 +221,14 @@ function Minimap(): ReactElement {
       <section className="section-minimap 3">
         <div className="innerWrap">
           <h1>BOTTOM</h1>
-          <div className="text">
+          <div className="text q">
             {" "}
             &#34;우리 팀 정글러, 용을 잘 챙길까? &#34;
           </div>
-          <div className="text">
+          <div className="text a">
             {" "}
-            &#10132;&nbsp;&nbsp;&nbsp;정글러의 오브젝트 획득률을 확인해보자!
+            &#10132;&nbsp;&nbsp;&nbsp;정글러의
+            <span className="highlight"> 오브젝트 획득률</span>을 확인해보자!
           </div>
         </div>
         <div className="image-wrapper bottom">
@@ -238,13 +241,15 @@ function Minimap(): ReactElement {
       <section className="section-minimap 4">
         <div className="innerWrap">
           <h1>SUPPORT</h1>
-          <div className="text">
+          <div className="text q">
             {" "}
             &#34;우리 팀 원딜러의 숙련도를 알고 싶어! &#34;
           </div>
-          <div className="text">
+          <div className="text a">
             {" "}
-            &#10132;&nbsp;&nbsp;&nbsp;메인 포지션과 최근 전적의 KDA로 검증해봐!
+            &#10132;&nbsp;&nbsp;&nbsp;
+            <span className="highlight">메인 포지션</span>과 최근 전적의{" "}
+            <span className="highlight">KDA</span>로 검증해봐!
           </div>
         </div>
         <div className="image-wrapper support">
