@@ -28,20 +28,18 @@ function Nav(props: any): ReactElement {
   const currentUser = useQuery(GET_CURRENT_USER);
 
   useEffect(() => {
-    if (!IsLogin) {
-      const url = new URL(window.location.href);
-      const token = url.searchParams.get("token");
+    const url = new URL(window.location.href);
+    const token = url.searchParams.get("token");
 
-      if (token && !localStorage.getItem("token")) {
-        setIsLogin(true);
-        localStorage.setItem("token", token);
-        setToastMessage({
-          success: "New-Meta에 오신 것을 환영합니다!",
-          fail: "",
-        });
-      }
+    if (token && !localStorage.getItem("token")) {
+      localStorage.setItem("token", token);
+      setIsLogin(true);
+      setToastMessage({
+        success: "New-Meta에 오신 것을 환영합니다!",
+        fail: "",
+      });
     }
-  }, [IsLogin]);
+  }, []);
 
   useEffect(() => {
     setIsLogin(!!currentUser.data.token);
@@ -58,10 +56,8 @@ function Nav(props: any): ReactElement {
   const logoutHandler = (): void => {
     TokenVar(null);
     setIsLogin(false);
-    setToastMessage({ success: "다음에 다시 찾아주세요", fail: "" });
+    setToastMessage({ success: "로그아웃 되었습니다.", fail: "" });
     localStorage.clear();
-    console.log("");
-
     props.history.push("/");
   };
 
@@ -100,7 +96,7 @@ function Nav(props: any): ReactElement {
             </div>
           </div>
         </div>
-        {!IsLogin ? (
+        {!localStorage.getItem("token") ? (
           <div className="btn-wrapper">
             <button
               type="button"
