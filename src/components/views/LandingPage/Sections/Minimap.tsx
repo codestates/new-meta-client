@@ -164,16 +164,11 @@ function Minimap(): ReactElement {
           />
         </div>
         <div className="innerWrap">
-          <h2>top</h2>
-          <p>
-            description
-            <br />
-            description
-            <br />
-            description
-            <br />
-            description
-          </p>
+          <h1>Top Laner</h1>
+          <div className="text">다이브 라인인데 우리 정글 바텀갱 가네?</div>
+          <div className="text">복귀 텔 탄다고 뭐라 하지 마세요</div>
+          <div className="text">1 대 2 중인데 전령을 치네</div>
+          <div className="text">칼챔인데 왜 탱탬을 가라고 하지?</div>
         </div>
         <div className="image-wrapper top">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -184,16 +179,11 @@ function Minimap(): ReactElement {
 
       <section className="section-minimap 1">
         <div className="innerWrap">
-          <h2>jungle</h2>
-          <p>
-            description
-            <br />
-            description
-            <br />
-            description
-            <br />
-            description
-          </p>
+          <h1>Jungle Laner</h1>
+          <div className="text">저도 바위게 팀원이랑 같이 먹고 싶어요</div>
+          <div className="text">라인밀어 놓고 갱와달라고요?</div>
+          <div className="text">대각선 법칙 ... 아시죠?</div>
+          <div className="text">강타없는데 용치지 마요</div>
         </div>
         <div className="image-wrapper jungle">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -204,16 +194,11 @@ function Minimap(): ReactElement {
 
       <section className="section-minimap 2">
         <div className="innerWrap">
-          <h2>mid</h2>
-          <p>
-            description
-            <br />
-            description
-            <br />
-            description
-            <br />
-            description
-          </p>
+          <h1>Mid Laner</h1>
+          <div className="text">라인 버리고 갔더니 적에게 쌍 버프?</div>
+          <div className="text">윗 부쉬엔 적팀 탑 아랫 부쉬엔 적팀 서폿</div>
+          <div className="text">블루주면 캐리할게</div>
+          <div className="text">풀캠프 다 돌면 갱은 언제 와?</div>
         </div>
         <div className="image-wrapper mid">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -224,16 +209,11 @@ function Minimap(): ReactElement {
 
       <section className="section-minimap 3">
         <div className="innerWrap">
-          <h2>bottom</h2>
-          <p>
-            description
-            <br />
-            description
-            <br />
-            description
-            <br />
-            description
-          </p>
+          <h1>Bottom Laner</h1>
+          <div className="text">아니 저 베인 잘합니다</div>
+          <div className="text">아니 지금오면 더블킬인데</div>
+          <div className="text">아니 이게 안죽네</div>
+          <div className="text">아니시에이팅</div>
         </div>
         <div className="image-wrapper bottom">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -244,16 +224,11 @@ function Minimap(): ReactElement {
 
       <section className="section-minimap 4">
         <div className="innerWrap">
-          <h2>support</h2>
-          <p>
-            description
-            <br />
-            description
-            <br />
-            description
-            <br />
-            description
-          </p>
+          <h1>Support Laner</h1>
+          <div className="text">제발 와드하러 갔을 때 물리지마요</div>
+          <div className="text">제발 타곤산 있는데 대포 미니언 좀</div>
+          <div className="text">제발 저는 메라가 아니에요</div>
+          <div className="text">제발 타워 골드만이라도 ...</div>
         </div>
         <div className="image-wrapper support">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
