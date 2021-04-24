@@ -149,19 +149,6 @@ function RegisterModal(props: Props): ReactElement {
           // console.log("error:", err);
           setToastMessage({ success: "", fail: "가입에 실패했습니다." });
         });
-      // axios
-      //   .post(API.user_register_test, body, { withCredentials: true })
-      //   .then((res) => {
-      //     if (res.data.user) {
-      //       //! 가입 성공 => 팝업
-      //       console.log("success", res.data.user);
-      //       setIsPopupOpen(true);
-      //     } else {
-      //       //! 가입 실패 => 토스트
-      //       console.log("fail", res);
-      //       setToastMessage({ success: "", fail: "가입에 실패했습니다." });
-      //     }
-      //   });
     } else {
       //! 빈칸 => 토스트
       setToastMessage({
@@ -169,6 +156,28 @@ function RegisterModal(props: Props): ReactElement {
         fail: "모든 항목을 올바르게 입력해주세요",
       });
     }
+  };
+
+  let domain: string | undefined;
+  if (process.env.NODE_ENV === "development") {
+    domain = process.env.REACT_APP_LOCAL_SERVER_DOMAIN;
+  } else {
+    domain = process.env.REACT_APP_EC2_SERVER_DOMAIN;
+  }
+
+  const googleLoginHandler = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    window.open(`${domain}/auth/google`);
+  };
+
+  const facebookLoginHandler = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    window.open(`${domain}/auth/facebook`);
+  };
+
+  const githubLoginHandler = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    window.open(`${domain}/auth/github`);
   };
 
   useEffect(() => {
@@ -273,9 +282,21 @@ function RegisterModal(props: Props): ReactElement {
               <button type="submit" onClick={onSubmitHandler}>
                 <span>Sign Up</span>
               </button>
-              <i className="icon-google" />
-              <i className="icon-facebook" />
-              <i className="icon-github" />
+              <i
+                className="icon-google"
+                onClick={googleLoginHandler}
+                aria-hidden
+              />
+              <i
+                className="icon-facebook"
+                onClick={facebookLoginHandler}
+                aria-hidden
+              />
+              <i
+                className="icon-github"
+                onClick={githubLoginHandler}
+                aria-hidden
+              />
             </div>
           </form>
         </div>
