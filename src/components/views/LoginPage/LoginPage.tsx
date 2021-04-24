@@ -24,8 +24,6 @@ interface Props extends RouteComponentProps {
 function LoginPage(props: Props): ReactElement {
   const { closeModal, setIsGoogleToken, setIsFacebookToken } = props;
 
-  // console.log(Document.cookie);
-
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
@@ -73,6 +71,10 @@ function LoginPage(props: Props): ReactElement {
   const googleLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
 
+    // axios
+    //   .get("http://localhost:4000/auth/google")
+    //   .then((res) => console.log(res));
+
     const GOOGLE_CLIENT_ID =
       "712828129977-q8ff67tvbo16d08ia44r6uijl672ck0b.apps.googleusercontent.com";
     const GOOGLE_REDIRECT_URI = "http://localhost:3000";
@@ -88,21 +90,19 @@ function LoginPage(props: Props): ReactElement {
     const loginUrl = `${GOOGLE_AUTH_URI}?${queryStr}`;
     window.open(loginUrl, "간편 로그인");
 
-    // window.location.assign(loginUrl); // 인가 서버 URL(loginUrl)로 사용자를 리다이렉트
-    // }
+    window.location.assign(loginUrl); // 인가 서버 URL(loginUrl)로 사용자를 리다이렉트
   };
 
   useEffect(() => {
     return () => {
-      setIsGoogleToken(false);
-      setIsFacebookToken(false);
-      setIsRegisterModal(false);
+      // setIsGoogleToken(false);
+      // setIsFacebookToken(false);
       setToastMessage({
         success: "",
         fail: "",
       });
     };
-  }, [setIsFacebookToken, setIsGoogleToken]);
+  }, []);
 
   useEffect(() => {
     const modal = modalRef.current;
@@ -113,7 +113,7 @@ function LoginPage(props: Props): ReactElement {
         !ToastMessage.fail &&
         !ToastMessage.success
       ) {
-        props.closeModal();
+        closeModal();
       }
     };
     window.addEventListener("click", handleClickOutside);
@@ -121,7 +121,7 @@ function LoginPage(props: Props): ReactElement {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [ToastMessage.fail, ToastMessage.success, props]);
+  }, [ToastMessage.fail, ToastMessage.success, closeModal, IsRegisterModal]);
 
   return (
     <>
@@ -227,6 +227,3 @@ function LoginPage(props: Props): ReactElement {
 }
 
 export default withRouter(LoginPage);
-function setIsFacebookToken(arg0: boolean) {
-  throw new Error("Function not implemented.");
-}
