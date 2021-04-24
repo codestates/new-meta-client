@@ -170,17 +170,17 @@ function RegisterModal(props: Props): ReactElement {
 
   const googleLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/google`);
+    window.open(`${domain}/auth/google`, "", "width=450,height=600");
   };
 
   const facebookLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/facebook`);
+    window.open(`${domain}/auth/facebook`, "", "width=450,height=600");
   };
 
   const githubLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/github`);
+    window.open(`${domain}/auth/github`, "", "width=450,height=650");
   };
 
   useEffect(() => {
