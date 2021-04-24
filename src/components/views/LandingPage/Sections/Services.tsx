@@ -83,7 +83,7 @@ function Services(props: any): ReactElement {
           </div>
           <Link to="/players">
             <button className="btn-primary" type="button">
-              <span>확인하기</span>
+              <span>Try now!</span>
             </button>
           </Link>
         </div>
@@ -114,7 +114,7 @@ function Services(props: any): ReactElement {
             className="btn-primary"
             type="button"
           >
-            <span>확인하기</span>
+            <span>Try now!</span>
           </button>
         </div>
       </div>
@@ -129,7 +129,7 @@ function Services(props: any): ReactElement {
           <div className="description">
             챔피언에 대한 정보를 확인해보세요
             <br />
-            어떤 챔피언이 나랑 어룰릴까?
+            어떤 챔피언이 나랑 어울릴까?
           </div>
           <button
             onClick={() => {
@@ -144,7 +144,7 @@ function Services(props: any): ReactElement {
             className="btn-primary"
             type="button"
           >
-            <span>확인하기</span>
+            <span>Try now!</span>
           </button>
         </div>
       </div>
