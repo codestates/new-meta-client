@@ -211,11 +211,11 @@ function DuoTimeLine(props: Props): ReactElement {
         curve: "smooth",
       }, */
       title: {
-        text: "Average 15 Minutes' CS Exp & Total Gold for 20 Matches",
+        text: "Average 15 Minutes CS Exp & Total Gold for 20 Matches",
         style: {
           color: "#FFF",
           fontSize: "20px",
-          fontFamily: "Noto Sans",
+          fontFamily: "Noto Sans Kr",
           fontWeight: "300",
         },
       },

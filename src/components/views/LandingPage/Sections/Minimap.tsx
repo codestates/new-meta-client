@@ -167,8 +167,13 @@ function Minimap(): ReactElement {
           <h1>TOP</h1>
           <div className="text">다이브 라인인데 우리 정글 바텀갱 가네?</div>
           <div className="text">복귀 텔 탄다고 뭐라 하지 마세요</div>
+          <div className="text">찾으러 가기 ▶︎</div>
+          <div>.</div>
+          <div>.</div>
+          <div>.</div>
           <div className="text">1 대 2 중인데 전령을 치네</div>
           <div className="text">칼챔인데 왜 탱탬을 가라고 하지?</div>
+          <div className="text">찾으러 가기 ▶︎</div>
         </div>
         <div className="image-wrapper top">
           <img className="landing-img minimap" src={minimap} alt="minimap" />

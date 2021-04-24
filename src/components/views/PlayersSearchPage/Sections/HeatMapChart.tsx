@@ -181,16 +181,7 @@ function HeatMapChart(props: Props): ReactElement {
         style: {},
       },
       colors: ["#f86d7d", "#e2e4e9"],
-      title: {
-        text: `${userName}'s KDA for 16 Matches`,
-        style: {
-          fontSize: "14px",
-          color: "#f7f8fa",
-          align: "center",
-          fontFamily: "Noto Sans KR",
-          fontWeight: "300",
-        },
-      },
+
       legend: {
         labels: {
           colors: "#f7f8fa",
@@ -202,7 +193,7 @@ function HeatMapChart(props: Props): ReactElement {
       },
       responsive: [
         {
-          breakpoint: 250,
+          breakpoint: 375,
           options: {},
         },
       ],
