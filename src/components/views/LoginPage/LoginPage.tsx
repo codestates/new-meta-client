@@ -19,7 +19,6 @@ interface Props extends RouteComponentProps {
 
 function LoginPage(props: Props): ReactElement {
   const { closeModal } = props;
-
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
   const [IsRegisterModal, setIsRegisterModal] = useState(false);
@@ -32,11 +31,13 @@ function LoginPage(props: Props): ReactElement {
   }) => {
     setEmail(event.currentTarget.value);
   };
+
   const onPasswordHandler = (event: {
     currentTarget: { value: React.SetStateAction<string> };
   }) => {
     setPassword(event.currentTarget.value);
   };
+
   const loginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     if (Email && Password) {
@@ -64,19 +65,26 @@ function LoginPage(props: Props): ReactElement {
     }
   };
 
+  let domain: string | undefined;
+  if (process.env.NODE_ENV === "development") {
+    domain = process.env.REACT_APP_LOCAL_SERVER_DOMAIN;
+  } else {
+    domain = process.env.REACT_APP_EC2_SERVER_DOMAIN;
+  }
+
   const googleLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open("http://localhost:4000/auth/google");
+    window.open(`${domain}/auth/google`);
   };
 
   const facebookLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open("http://localhost:4000/auth/facebook");
+    window.open(`${domain}/auth/facebook`);
   };
 
   const githubLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open("http://localhost:4000/auth/github");
+    window.open(`${domain}/auth/github`);
   };
 
   useEffect(() => {
