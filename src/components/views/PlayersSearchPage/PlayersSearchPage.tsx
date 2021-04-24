@@ -47,7 +47,6 @@ function PlayersSearchPage(): ReactElement {
       axios
         .post(API.summonerInfo, { summonerName: encodeURI(userName2) })
         .then((res) => {
-          console.log(res.data);
           if (res.data.message === "Request failed with status code 429") {
             setLoadingState(false);
             setToastMessage({
@@ -137,19 +136,20 @@ function PlayersSearchPage(): ReactElement {
       setLoadingState(false);
       return;
     }
-    if (SearchType === "duo" && userName1 === userName2) {
-      setToastMessage({
-        success: "",
-        fail: "같은 소환사를 검색하실 수 없습니다!",
-      });
-      setLoadingState(false);
-      return;
-    }
 
     if (SearchType === "duo" && (!userName1 || !userName2)) {
       setToastMessage({
         success: "",
         fail: "소환사명을 모두 입력해주세요!",
+      });
+      setLoadingState(false);
+      return;
+    }
+
+    if (SearchType === "duo" && userName1 === userName2) {
+      setToastMessage({
+        success: "",
+        fail: "같은 소환사를 검색하실 수 없습니다!",
       });
       setLoadingState(false);
       return;

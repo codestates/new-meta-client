@@ -36,8 +36,8 @@ function WinRateChart(props: Props): ReactElement {
   const data = {
     series: [winRate],
     type: "radialBar",
-    height: 250,
-    width: 250,
+    height: 300,
+    width: 300,
 
     options: {
       colors: ["#0ec7b5"],
@@ -71,8 +71,9 @@ function WinRateChart(props: Props): ReactElement {
         options={data.options}
         series={data.series}
         type="radialBar"
-        width={250}
-        height={250}
+        width={350}
+        height={315}
+        className="winRate-Chart"
       />
     </>
   );
