@@ -19,10 +19,16 @@ interface Props extends RouteComponentProps {
   closeModal: () => void;
   setIsGoogleToken: (boolean: boolean) => void;
   setIsFacebookToken: (boolean: boolean) => void;
+  setIsGithubToken: (boolean: boolean) => void;
 }
 
 function LoginPage(props: Props): ReactElement {
-  const { closeModal, setIsGoogleToken, setIsFacebookToken } = props;
+  const {
+    closeModal,
+    setIsGoogleToken,
+    setIsFacebookToken,
+    setIsGithubToken,
+  } = props;
 
   const [Email, setEmail] = useState("");
   const [Password, setPassword] = useState("");
@@ -70,27 +76,17 @@ function LoginPage(props: Props): ReactElement {
 
   const googleLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    window.open("http://localhost:4000/auth/google");
+  };
 
-    // axios
-    //   .get("http://localhost:4000/auth/google")
-    //   .then((res) => console.log(res));
+  const facebookLoginHandler = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    window.open("http://localhost:4000/auth/facebook");
+  };
 
-    const GOOGLE_CLIENT_ID =
-      "712828129977-q8ff67tvbo16d08ia44r6uijl672ck0b.apps.googleusercontent.com";
-    const GOOGLE_REDIRECT_URI = "http://localhost:3000";
-    const GOOGLE_AUTH_URI = "https://accounts.google.com/o/oauth2/v2/auth";
-    const GOOGLE_PEOPLE_URI = "https://people.googleapis.com/v1/contactGroups";
-
-    const queryStr = qs.stringify({
-      client_id: GOOGLE_CLIENT_ID,
-      redirect_uri: GOOGLE_REDIRECT_URI, // window.location.href,
-      response_type: "token",
-      scope: "https://www.googleapis.com/auth/contacts.readonly",
-    });
-    const loginUrl = `${GOOGLE_AUTH_URI}?${queryStr}`;
-    window.open(loginUrl, "간편 로그인");
-
-    window.location.assign(loginUrl); // 인가 서버 URL(loginUrl)로 사용자를 리다이렉트
+  const githubLoginHandler = (event: { preventDefault: () => void }) => {
+    event.preventDefault();
+    window.open("http://localhost:4000/auth/github");
   };
 
   useEffect(() => {
@@ -190,11 +186,20 @@ function LoginPage(props: Props): ReactElement {
                         className="icon-facebook"
                         onClick={(e) => {
                           console.log("페북 온클릭");
+                          facebookLoginHandler(e);
                           setIsFacebookToken(true);
                         }}
                         aria-hidden
                       ></i>
-                      <i className="icon-github"></i>
+                      <i
+                        className="icon-github"
+                        onClick={(e) => {
+                          console.log("깃헙 온클릭");
+                          githubLoginHandler(e);
+                          setIsGithubToken(true);
+                        }}
+                        aria-hidden
+                      ></i>
                     </div>
                   </form>
                   <div className="text-wrapper">
