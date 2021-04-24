@@ -35,8 +35,8 @@ function PlayersSearchPage(): ReactElement {
   const [User2data, setUser2data] = useState<SummonerAllData>({});
 
   useEffect(() => {
-    setUser1data(LanerData);
-    setUser2data(JunglerData);
+    setUser1data({});
+    setUser2data({});
     setUserName1("");
     setUserName2("");
   }, []);
@@ -47,6 +47,7 @@ function PlayersSearchPage(): ReactElement {
       axios
         .post(API.summonerInfo, { summonerName: encodeURI(userName2) })
         .then((res) => {
+          console.log(res.data);
           if (res.data.message === "Request failed with status code 429") {
             setLoadingState(false);
             setToastMessage({
@@ -54,11 +55,20 @@ function PlayersSearchPage(): ReactElement {
               fail: "잠시 후 다시 시도해주세요.",
             });
           }
+
+          if (res.data.message === "Request failed with status code 404") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "존재하지 않는 소환사입니다!",
+            });
+          }
           setUser2data(res.data);
           setLoadingState(false);
           setUserName2("");
         })
         .catch((err) => {
+          console.log(err);
           setLoadingState(false);
           setUserName2("");
           setToastMessage({
@@ -93,14 +103,32 @@ function PlayersSearchPage(): ReactElement {
   };
 
   const clickSearch = () => {
-    if (userName1 === userName2) {
+    if (SearchType === "solo" && !userName1) {
       setToastMessage({
         success: "",
-        fail: "같은 소환사를 비교할 수 없습니다!",
+        fail: "소환사명을 입력해주세요!",
       });
       setLoadingState(false);
       return;
     }
+    if (SearchType === "duo" && userName1 === userName2) {
+      setToastMessage({
+        success: "",
+        fail: "같은 소환사를 검색하실 수 없습니다!",
+      });
+      setLoadingState(false);
+      return;
+    }
+
+    if (SearchType === "duo" && (!userName1 || !userName2)) {
+      setToastMessage({
+        success: "",
+        fail: "소환사명을 모두 입력해주세요!",
+      });
+      setLoadingState(false);
+      return;
+    }
+
     if (userName1) {
       setLoadingState(true);
 
@@ -115,14 +143,37 @@ function PlayersSearchPage(): ReactElement {
               success: "",
               fail: "잠시 후 다시 시도해주세요.",
             });
+            return;
           }
+
+          if (res.data.message === "Request failed with status code 404") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "존재하지 않는 소환사입니다.",
+            });
+            return;
+          }
+
+          if (res.data.message === "Request failed with status code 504") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "현재 .",
+            });
+            return;
+          }
+
           setUser1data(res.data);
+          console.log(res.data);
+          setUserName1("");
 
           if (!userName2) {
             setLoadingState(false);
           }
         })
         .catch((err) => {
+          console.log(err);
           setToastMessage({
             success: "",
             fail: "소환사 정보를 찾을 수 없습니다!",
@@ -167,6 +218,7 @@ function PlayersSearchPage(): ReactElement {
                 <input
                   onChange={onInputUserName1Handler}
                   type="text"
+                  className="players-input"
                   ref={user1Input}
                 ></input>
                 <i className="icon-search"></i>
@@ -212,10 +264,10 @@ function PlayersSearchPage(): ReactElement {
               </div>
               <div className="search-bar players-input">
                 <input
-                  onChange={onInputUserName1Handler}
+                  onChange={onInputUserName2Handler}
                   className="players-input"
                   type="text"
-                  ref={user1Input}
+                  ref={user2Input}
                 ></input>
                 <i className="icon-search"></i>
               </div>

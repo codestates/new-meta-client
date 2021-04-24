@@ -91,6 +91,9 @@ function SoloMatchView(props: Props): ReactElement {
               userPosition={User1data.laneInfo!}
             />
           </div>
+          <div className="graph">
+            <HeatMapChart userData={User1data.recentChampionStats!} />
+          </div>
         </div>
       </div>
     </div>
