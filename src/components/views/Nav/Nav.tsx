@@ -69,7 +69,7 @@ function Nav(props: any): ReactElement {
     <>
       <div className="nav">
         <div className="logo">
-          <Hamburger AccessToken="hi" />
+          <Hamburger IsLogin={IsLogin} />
           <img
             onClick={() => {
               props.history.push("/");
