@@ -132,12 +132,6 @@ function RegisterModal(props: Props): ReactElement {
   const onSubmitHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
     if (Email && Username && Password && ConfirmPassword) {
-      const body = {
-        email: Email,
-        nickname: Username,
-        password: Password,
-      };
-
       registerGraghpl({
         variables: {
           data: {
@@ -148,12 +142,11 @@ function RegisterModal(props: Props): ReactElement {
         },
       })
         .then((res) => {
-          console.log("success:", res);
-          // console.log("success", res.data.user);
+          // console.log("success:", res);
           setIsPopupOpen(true);
         })
         .catch((err) => {
-          console.log("error:", err);
+          // console.log("error:", err);
           setToastMessage({ success: "", fail: "가입에 실패했습니다." });
         });
       // axios
@@ -175,7 +168,6 @@ function RegisterModal(props: Props): ReactElement {
         success: "",
         fail: "모든 항목을 올바르게 입력해주세요",
       });
-      console.log(ToastMessage);
     }
   };
 
@@ -188,7 +180,7 @@ function RegisterModal(props: Props): ReactElement {
         !ToastMessage.fail &&
         !ToastMessage.success
       ) {
-        props.closeModal();
+        closeModal();
       }
     };
     window.addEventListener("click", handleClickOutside);
@@ -196,7 +188,7 @@ function RegisterModal(props: Props): ReactElement {
     return () => {
       window.removeEventListener("click", handleClickOutside);
     };
-  }, [ToastMessage.fail, ToastMessage.success, props]);
+  }, [ToastMessage.fail, ToastMessage.success, closeModal]);
 
   return (
     <>
