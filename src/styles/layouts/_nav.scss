@@ -63,8 +63,9 @@
     padding: 6px 0px;
     flex: 0 1 auto;
     position: absolute;
-    right: 90px;
-    top: 20%;
+    right: 3.5%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     background-color: transparent;
     border: none;
     border-radius: 4px;
@@ -184,22 +185,6 @@
 
     .page {
       display: none;
-    }
-
-    .nav-btn {
-      position: absolute;
-      right: 45px !important;
-      top: 10px;
-      padding: 6px 17px;
-      font-size: 16px;
-      width: 80px;
-      height: 30px;
-      span {
-        position: absolute;
-        width: 100%;
-        left: 51% !important;
-        transform: translate(-50%, -50%);
-      }
     }
   }
 }
