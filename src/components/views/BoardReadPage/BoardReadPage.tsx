@@ -2,6 +2,7 @@
 import React, { ReactElement, useEffect, useState } from "react";
 import axios from "axios";
 import { withRouter, RouteComponentProps, Redirect } from "react-router-dom";
+import Loading from "../../utils/Loading";
 import API from "../../../api";
 
 interface Champion {
@@ -64,6 +65,8 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
   const [CurrentIndex, setCurrentIndex] = useState(0);
   const [Spells, setSpells] = useState([]);
 
+  const [loading, setloading] = useState(true);
+
   function previousSlide(): void {
     const lastIndex = Skins.length - 1;
     const shouldResetIndex = CurrentIndex === 0;
@@ -120,13 +123,20 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
 
   return (
     <div>
+      {loading ? <Loading /> : null}
       {state ? (
         <div className="board-read-page">
           <button
             className="btn-goback"
             type="button"
             onClick={() => {
-              props.history.goBack();
+              const location = {
+                pathname: "/board",
+                state: {
+                  page: 1,
+                },
+              };
+              props.history.push(location);
             }}
           >
             back
@@ -139,7 +149,11 @@ function BoardReadPage(props: RouteComponentProps): ReactElement {
               className="icon-arrow-left-circle icon-left"
             ></i>
             <div className="champion-image-wrapper">
-              <img src={Skins[CurrentIndex]} alt=""></img>
+              <img
+                onLoad={() => setloading(false)}
+                src={Skins[CurrentIndex]}
+                alt=""
+              ></img>
             </div>
             <i
               onClick={nextSlide}

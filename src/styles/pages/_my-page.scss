@@ -215,7 +215,12 @@
       padding-bottom: 4px;
 
       .nickname {
+        cursor: pointer;
         padding-right: 8px;
+
+        &:hover {
+          text-decoration: underline;
+        }
       }
       .email {
         font-size: 0.8rem;

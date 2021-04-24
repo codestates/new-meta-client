@@ -9,10 +9,11 @@ import API from "../../../../api";
 
 interface Props extends RouteComponentProps {
   data: any;
+  inreaseCounter: any;
 }
 
 function ChampionCard(props: Props): ReactElement {
-  const { data } = props;
+  const { data, inreaseCounter } = props;
   const [SplashImage, setSplashImage] = useState("");
   const { blurb, info, name, tags, title } = data;
 
@@ -40,7 +41,12 @@ function ChampionCard(props: Props): ReactElement {
       }}
       aria-hidden="true"
     >
-      <img src={SplashImage} alt="" loading="lazy"></img>
+      <img
+        src={SplashImage}
+        alt=""
+        loading="lazy"
+        onLoad={inreaseCounter}
+      ></img>
       <div className="card-info">
         <div>{name}</div>
         <div>&lt;{title}&gt;</div>
