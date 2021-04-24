@@ -74,7 +74,7 @@ function LoginPage(props: Props): ReactElement {
 
   const googleLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/google`, "", "width=450,height=600");
+    window.location.href = `${domain}/auth/google`;
   };
 
   const facebookLoginHandler = (event: { preventDefault: () => void }) => {
