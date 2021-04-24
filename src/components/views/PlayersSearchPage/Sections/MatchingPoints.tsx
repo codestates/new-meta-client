@@ -86,13 +86,13 @@ function MatchingPoints(props: Props): ReactElement {
       let prefer3LevGank = 0; // 6게임 이상 시 1점
       let prefer2LevGank = 0; // 6게임 이상 시 1점
       for (const el of data.kdaTimelineData!) {
-        if (el.matchAssists + el.matchKills > 5) {
+        if (el.matchAssists + el.matchKills > 4) {
           gankingPositive += 1;
         }
-        if (el.matchKills + el.matchAssists < 4) {
+        if (el.matchKills + el.matchAssists < 5) {
           gankingPassive += 1;
         }
-        if (el.matchKills + el.matchAssists < 2) {
+        if (el.matchKills + el.matchAssists < 3) {
           gankingNegative += 1;
         }
         if (el.matchAssistForLevel3 + el.matchKillForLevel3 > 0) {
@@ -102,7 +102,7 @@ function MatchingPoints(props: Props): ReactElement {
           prefer2LevGank += 1;
         }
       }
-      if (gankingPositive > 5) {
+      if (gankingPositive > 4) {
         resultPoint += 3;
       }
       if (gankingPassive > 5) {

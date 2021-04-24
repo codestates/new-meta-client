@@ -161,39 +161,6 @@ function HeatMapChart(props: Props): ReactElement {
           },
         ],
       },
-      {
-        name: "",
-        data: [
-          {
-            x: "",
-            y: (
-              (userData[16].stats.kills + userData[16].stats.assists) /
-              userData[16].stats.deaths
-            ).toFixed(2),
-          },
-          {
-            x: "",
-            y: (
-              (userData[17].stats.kills + userData[17].stats.assists) /
-              userData[17].stats.deaths
-            ).toFixed(2),
-          },
-          {
-            x: "",
-            y: (
-              (userData[18].stats.kills + userData[18].stats.assists) /
-              userData[18].stats.deaths
-            ).toFixed(2),
-          },
-          {
-            x: "",
-            y: (
-              (userData[19].stats.kills + userData[19].stats.assists) /
-              0
-            ).toFixed(2),
-          },
-        ],
-      },
     ],
 
     options: {
@@ -201,7 +168,7 @@ function HeatMapChart(props: Props): ReactElement {
         enabled: false,
       },
       chart: {
-        background: "#2B2D3E",
+        background: "transparent",
         toolbar: {
           show: false,
         },
@@ -273,7 +240,7 @@ function HeatMapChart(props: Props): ReactElement {
               },
               {
                 from: 7,
-                to: 100,
+                to: 20,
                 color: "#f86d7d",
                 name: "KDA 7.00 이상",
               },
