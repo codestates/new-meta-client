@@ -47,20 +47,37 @@ function BoardSmall(props: Props): ReactElement {
   const section4 = useRef<HTMLDivElement>(null);
 
   return (
-    <div
-      className="board-small"
-      onClick={() => {
-        setCurrentBoard(data);
-      }}
-      aria-hidden
-    >
-      <div ref={section1} className="simple-text">
+    <div className="board-small">
+      <div
+        onClick={() => {
+          setCurrentBoard(data);
+        }}
+        aria-hidden
+        ref={section1}
+        className="simple-text"
+      >
         <div className="champion-name">{data.champion}</div>
         <img src={`${API.championSplash}/${data.champion}_0.jpg`} alt=""></img>
       </div>
       <div ref={section2} className="simple-text2">
-        <div className="small-title">{data.title}</div>
-        <div className="small-description">{data.description}</div>
+        <div
+          onClick={() => {
+            setCurrentBoard(data);
+          }}
+          aria-hidden
+          className="small-title"
+        >
+          {data.title}
+        </div>
+        <div
+          onClick={() => {
+            setCurrentBoard(data);
+          }}
+          aria-hidden
+          className="small-description"
+        >
+          {data.description}
+        </div>
       </div>
       <div ref={section3} className="simple-text3">
         <div>{data.user.nickname}</div>
