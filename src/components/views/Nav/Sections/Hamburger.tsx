@@ -1,10 +1,10 @@
 import React, { ReactElement, useState, useEffect, useRef } from "react";
 
 interface Props {
-  AccessToken: string;
+  IsLogin: boolean;
 }
 
-function Hamburger({ AccessToken }: Props): ReactElement {
+function Hamburger({ IsLogin }: Props): ReactElement {
   const dropdownRef = useRef<HTMLElement>(null);
   const [IsHamburgerOpen, setIsHamburgerOpen] = useState(false);
 
@@ -46,7 +46,7 @@ function Hamburger({ AccessToken }: Props): ReactElement {
             <li>
               <a href="board">Champ</a>
             </li>
-            {AccessToken ? (
+            {IsLogin ? (
               <li>
                 <a href="mypage">Mypage</a>
               </li>

@@ -79,12 +79,12 @@ function LoginPage(props: Props): ReactElement {
 
   const facebookLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/facebook`, "", "width=450,height=600");
+    window.location.href = `${domain}/auth/facebook`;
   };
 
   const githubLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/github`, "", "width=450,height=650");
+    window.location.href = `${domain}/auth/github`;
   };
 
   useEffect(() => {
