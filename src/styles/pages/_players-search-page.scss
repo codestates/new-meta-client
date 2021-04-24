@@ -428,15 +428,14 @@
     /* 듀오 검색 시 */
 
     & > .duo-search-result {
-      margin-top: 30px;
       display: flex;
       flex-direction: column;
+      width: 100%;
+
       & > .duo-match-thumbnail {
         display: flex;
-        flex-direction: column;
         align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
+        justify-content: center;
         width: 100%;
 
         & > .match-success-result {
@@ -444,7 +443,6 @@
           text-align: center;
           display: flex;
           flex-direction: column;
-          position: absolute;
 
           .match-success-points-container {
             font-size: $font-size-18;
@@ -468,287 +466,293 @@
           }
         }
 
-        & > .two-summoner-info {
+        & > .summonerInfo {
           display: flex;
-          width: 100%;
-          justify-content: space-evenly;
-          flex-wrap: wrap;
+          flex-direction: column;
+          align-items: center;
 
-          & > .summonerInfo {
+          .summoner-name {
+            font-size: $font-size-24;
+            margin: 15px;
+          }
+
+          .summoner-rank-info {
             display: flex;
-            width: max-content;
-            flex: 1 1 auto;
-
-            align-items: center;
             flex-direction: column;
+            align-content: center;
+            font-size: $font-size-14;
+            margin: 5px;
+            text-align: center;
+            align-items: center;
 
-            height: 600px;
-            .summoner-name {
-              font-size: $font-size-24;
-              margin: 15px;
-            }
-
-            .summoner-rank-info {
-              display: flex;
-              flex-direction: column;
-              align-content: center;
-              font-size: $font-size-14;
-              margin: 5px;
+            .summoner-tier-info {
               text-align: center;
-              align-items: center;
+              margin: 5px;
+              margin-bottom: 10px;
 
-              .summoner-tier-info {
+              .summoner-tier {
                 text-align: center;
                 margin: 5px;
-                margin-bottom: 10px;
-
-                .summoner-tier {
-                  text-align: center;
-                  margin: 5px;
-                  align-content: center;
-                  align-items: center;
-                }
+                align-content: center;
+                align-items: center;
               }
-              .tier-icon {
-                width: 15%;
-                margin-top: 10px;
+            }
+            .tier-icon {
+              width: 15%;
+              margin-top: 10px;
+            }
+
+            .summoner-tags {
+              margin-top: 20px;
+              $duration: 500ms;
+              $tooltip-height: max-content;
+              $tooltip-width: 130px;
+              display: flex;
+              flex-wrap: wrap;
+              justify-content: space-evenly;
+              width: 100%;
+              height: 100px;
+
+              .tag {
+                display: none;
               }
 
-              .summoner-tags {
-                margin-top: 30px;
-                $duration: 500ms;
-                $tooltip-height: max-content;
-                $tooltip-width: 130px;
+              .tag.active {
+                height: max-content;
+                padding: 8px 16px;
                 display: flex;
-                justify-content: space-evenly;
+                position: relative;
+                background-color: transparent;
+                border: 1px solid $jade-dark;
+                color: $jade-dark;
+                font-size: $font-size-12;
+                border-radius: 10px;
+                align-items: center;
+                width: fit-content;
+                margin-right: 10px;
+                transition: 0.7s;
 
-                .tag.active {
-                  display: inline-block;
-                  position: relative;
-                  background-color: #0cbaba;
-                  text-align: center;
-                  padding: 3px;
-                  color: #fff;
+                &:hover {
+                  background-color: $jade;
+                  color: $primary;
+                }
+
+                // Tooltip
+                &::before {
+                  color: $primary;
+                  content: attr(data-tooltip);
+                  width: $tooltip-width;
+                  height: $tooltip-height;
+                  padding: 10px;
+                  background-color: $purple-light;
                   font-size: $font-size-12;
-                  border-radius: 10px;
-                  align-items: center;
-                  width: fit-content;
-                  margin-right: 10px;
-                  padding: 5px;
+                  border-radius: 0.25rem;
+                  line-height: $line-height-12;
+                  bottom: 90px;
+                  left: calc(50% - 70px);
+                }
 
-                  box-shadow: 0 2px 20px rgba(#000, 0.7), inset 0 1px rgba(#fff, 0.3);
-                  text-align: center;
-                  transition: background-color $duration, transform 100ms;
+                &::after {
+                  content: "";
+                  width: 0;
+                  height: 0;
+                  border: 10px solid transparent;
+                  border-top-color: $purple-light;
+                  left: calc(50% - 10px);
+                  bottom: 70px;
+                }
 
-                  // Tooltip
-                  &::before {
-                    content: attr(data-tooltip);
-                    width: $tooltip-width;
-                    height: $tooltip-height;
-                    padding: 10px;
-                    background-color: $purple-light;
-                    font-size: $font-size-12;
-                    border-radius: 0.25rem;
-                    line-height: $line-height-12;
-                    bottom: 90px;
-                    left: calc(50% - 70px);
-                  }
-
-                  &::after {
-                    content: "";
-                    width: 0;
-                    height: 0;
-                    border: 10px solid transparent;
-                    border-top-color: $purple-light;
-                    left: calc(50% - 10px);
-                    bottom: 70px;
-                  }
-
+                &::before,
+                &::after {
+                  position: absolute;
+                  opacity: 0;
+                  transition: all $duration;
+                  visibility: hidden;
+                }
+                //- tag hover
+                &:hover {
                   &::before,
                   &::after {
-                    position: absolute;
-                    opacity: 0;
-                    transition: all $duration;
-                    visibility: hidden;
-                  }
-                  //- tag hover
-                  &:hover {
-                    background-color: #01baef;
-
-                    &::before,
-                    &::after {
-                      opacity: 1;
-                      visibility: visible;
-                    }
-                    &::after {
-                      bottom: 60px;
-                    }
-
-                    &::before {
-                      bottom: 80px;
-                    }
+                    opacity: 1;
+                    visibility: visible;
                   }
 
-                  &:active {
-                    transform: translate(2px, 2px);
-                  }
-                }
-              }
-            }
-
-            & > .summoner-graph {
-              width: 100%;
-              display: flex;
-              flex-direction: row;
-              justify-content: center;
-              align-items: center;
-              flex-wrap: wrap;
-
-              .graph-section {
-                display: flex;
-                height: 120%;
-
-                width: 100%;
-
-                flex-direction: row;
-                justify-content: center;
-
-                .graph.summoner-most-champion {
-                  background-color: $block;
-                  display: flex;
-                  flex-direction: column;
-                  margin: 20px;
-                  padding: 20px;
-                  flex: 0 0 270px;
-
-                  border-radius: 20px;
-                  justify-content: space-evenly;
-                  flex-wrap: wrap;
-
-                  .mostChamp {
-                    height: 45px;
-                    display: flex;
-                    margin-left: 20px;
-                    flex-direction: row;
-
-                    // justify-content: flex-start;
-
-                    .mostChamp-img {
-                      margin-right: 10px;
-                    }
-
-                    .rate-detail {
-                      img > {
-                        margin-left: 5px;
-                      }
-                      display: flex;
-                      flex-direction: row;
-                      justify-content: space-between;
-
-                      .champ-win-lose {
-                        justify-content: center;
-                        display: inline-block;
-                        font-size: $font-size-18;
-                        line-height: 24px;
-                        flex-wrap: wrap;
-
-                        & > .all {
-                          color: $secondary;
-                        }
-
-                        & > .win {
-                          color: $jade;
-                        }
-
-                        & > .lose {
-                          color: $red;
-                        }
-                      }
-
-                      .champ-rate {
-                        margin: 15px;
-                        margin-left: 30px;
-                        font-weight: 600;
-                        display: inline-block;
-                        font-size: $font-size-24;
-                        .champ-rate-num {
-                          color: $purple;
-                        }
-                      }
-                    }
-                  }
-                }
-                margin: 10px;
-
-                .graph.laneInfo {
-                  flex: 0 0 270px;
-                  position: relative;
-
-                  margin: 20px;
-                  padding: 20px;
-                  background: $block;
-                  border-radius: 20px;
-                  box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08);
-                  width: max-content;
-
-                  .div-laneInfo {
-                    display: inline-block;
-                    position: absolute;
-                    width: 90%;
-                    height: max-content;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate((-50%, -50%));
-
-                    .LaneInfo-chart {
-                      height: 100%;
-                    }
+                  &::after {
+                    bottom: 30px;
                   }
 
-                  .img-laneInfo {
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    transform: translate((-50%, -50%));
-                    display: flex;
+                  &::before {
+                    bottom: 50px;
                   }
                 }
 
-                .graph {
-                  display: flex;
-                  flex: 0 0 270px;
-                  background: $block;
-                  border-radius: 20px;
-                  box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08);
+                &:active {
+                  transform: translate(2px, 2px);
                 }
               }
             }
           }
         }
-        & > .common-graph {
+      }
+
+      & > .both {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        z-index: 1;
+
+        .middle {
+          z-index: 2;
+          position: absolute;
+          transform: translate(-50%, -50%);
+          top: 50%;
+          left: 50%;
           display: flex;
-          width: 100%;
+          flex-direction: column;
           align-items: center;
-          justify-content: space-evenly;
-          flex-wrap: wrap;
+          font-size: 1.1rem;
 
-          & > .graph {
-            margin-bottom: 20px;
-            padding: 10px;
-            background: $block;
-            border-radius: 20px;
-            box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08);
+          .text {
+            height: max-content;
+            padding: 3rem 0;
+            background-color: $background;
           }
 
-          & > .graph.duo-timeline {
-            margin-bottom: 20px;
-            padding: 10px;
-            background: $block;
-            border-radius: 20px;
-            box-shadow: 0px 1px 15px 1px rgba(152, 151, 151, 0.08);
-            width: max-content;
+          .most {
+            height: 180px;
+            display: flex;
+            align-items: center;
+          }
+
+          .lane {
+            margin: 3rem 0;
+            height: 260px;
+            display: flex;
+            align-items: center;
+          }
+
+          .heatmap {
+            height: 315px;
+            display: flex;
+            align-items: center;
           }
         }
+
+        .left {
+          margin-right: 1rem;
+        }
+
+        .right {
+          margin-left: 1rem;
+        }
+
+        .left,
+        .right {
+          flex: 1 1 auto;
+          & > .summoner-graph {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+
+            .graph.summoner-most-champion {
+              border: 1px solid $border;
+              display: flex;
+              flex-direction: column;
+              align-self: center;
+              justify-content: center;
+              width: 100%;
+              flex: 0 0 180px;
+
+              .mostChamp {
+                height: 45px;
+                display: flex;
+
+                justify-content: space-evenly;
+                flex-direction: row;
+
+                .mostChamp-img {
+                  margin-right: 10px;
+                }
+
+                .rate-detail {
+                  display: flex;
+                  align-items: center;
+
+                  .champ-win-lose {
+                    font-size: $font-size-18;
+                    line-height: 24px;
+
+                    & > .all {
+                      color: $secondary;
+                    }
+
+                    & > .win {
+                      color: $jade;
+                    }
+
+                    & > .lose {
+                      color: $red;
+                    }
+                  }
+
+                  .champ-rate {
+                    margin-left: 30px;
+                    font-weight: 600;
+                    display: inline-block;
+                    font-size: $font-size-24;
+                    .champ-rate-num {
+                      color: $purple;
+                    }
+                  }
+                }
+              }
+            }
+
+            .laneInfo {
+              border: 1px solid $border;
+              position: relative;
+              width: 100%;
+              height: 260px;
+              margin: 3rem 0;
+              .div-laneInfo {
+                display: inline-block;
+                position: absolute;
+                width: 90%;
+                height: max-content;
+                top: 50%;
+                left: 50%;
+                transform: translate((-50%, -50%));
+
+                .LaneInfo-chart {
+                  height: 100%;
+                }
+              }
+
+              .img-laneInfo {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate((-50%, -50%));
+                display: flex;
+              }
+            }
+
+            .heatmapInfo {
+              display: flex;
+              justify-content: center;
+              width: 100%;
+              border: 1px solid $border;
+            }
+          }
+        }
+      }
+      & > .common-graph {
+        margin-top: 3rem;
+        display: flex;
+        width: 100%;
+        justify-content: center;
       }
     }
   }
