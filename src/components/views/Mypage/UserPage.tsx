@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable no-unused-expressions */
 /* eslint-disable no-plusplus */
 import { gql, useMutation, useQuery } from "@apollo/client";
@@ -89,6 +90,10 @@ function UserPage(props: RouteComponentProps): ReactElement {
   const { location } = props;
   const { state }: any = location;
 
+  if (state === undefined) {
+    props.history.push("/");
+  }
+
   // eslint-disable-next-line @typescript-eslint/ban-types
   const [MyData, setMyData] = useState<myInfo | null>(null);
   const [MyPosts, setMyPosts] = useState([]);
@@ -118,7 +123,7 @@ function UserPage(props: RouteComponentProps): ReactElement {
       }
       setIsFollow(false);
     }
-  }, [currentUser, currentUser.data, state.userId]);
+  }, [currentUser, currentUser.data]);
 
   const clickMyPost = (data: any) => {
     SetLPostModal(true);
@@ -157,37 +162,41 @@ function UserPage(props: RouteComponentProps): ReactElement {
 
   const clickFollow = () => {
     //
-    followQuery({
-      variables: {
-        targetId: state.userId,
-      },
-    })
-      .then((res) => {
-        console.log(res);
+    if (state) {
+      followQuery({
+        variables: {
+          targetId: state.userId,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const clickUnfollow = () => {
     //
-    unfollowQuery({
-      variables: {
-        targetId: state.userId,
-      },
-    })
-      .then((res) => {
-        console.log(res);
+    if (state) {
+      unfollowQuery({
+        variables: {
+          targetId: state.userId,
+        },
       })
-      .catch((err) => {
-        console.log(err);
-      });
+        .then((res) => {
+          console.log(res);
+        })
+        .catch((err) => {
+          console.log(err);
+        });
+    }
   };
 
   const userInfoQuery = useQuery(YOUR_INFO, {
     variables: {
-      userId: state.userId,
+      userId: state && state.userId,
     },
   });
   const userPostQuery = useQuery(MyPost);
