@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 import React, { ReactElement, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, withRouter } from "react-router-dom";
 import freljord from "../../../../assets/image/freljord.jpeg";
 import demacia from "../../../../assets/image/demacia.jpeg";
 import CanvasBottom from "./CanvasBottom";
@@ -12,7 +12,7 @@ let sections: NodeListOf<HTMLElement>;
 let pageHeight: number;
 let prevHeight: number;
 
-function Services(): ReactElement {
+function Services(props: any): ReactElement {
   useEffect(() => {
     sectionSide = document.querySelectorAll("div.side-section");
     sections = document.querySelectorAll(".sections");
@@ -75,7 +75,7 @@ function Services(): ReactElement {
           <img className="landing-img right" src={demacia} alt="" />
         </div>
         <div className="text-wrapper first">
-          <div className="title">Welcome to New-Meta</div>
+          <div className="title">Match Your Teammate</div>
           <div className="description">
             유저간의 데이터를 비교해보세요
             <br />
@@ -95,17 +95,27 @@ function Services(): ReactElement {
           <img className="landing-img left" src={freljord} alt="" />
         </div>
         <div className="text-wrapper second">
-          <div className="title">Welcome to New-Meta</div>
+          <div className="title">Create Your New Meta</div>
           <div className="description">
             자신만의 새로운 메타를 만들어 보세요
             <br />
-            공략 공유하기
+            그리고 새로운 메타를 공유하세요
           </div>
-          <Link to="/board">
-            <button className="btn-primary" type="button">
-              <span>확인하기</span>
-            </button>
-          </Link>
+          <button
+            onClick={() => {
+              const location = {
+                pathname: "/board",
+                state: {
+                  page: 0,
+                },
+              };
+              props.history.push(location);
+            }}
+            className="btn-primary"
+            type="button"
+          >
+            <span>확인하기</span>
+          </button>
         </div>
       </div>
 
@@ -115,21 +125,31 @@ function Services(): ReactElement {
           <img className="landing-img right" src={demacia} alt="" />
         </div>
         <div className="text-wrapper third">
-          <div className="title">Welcome to New-Meta</div>
+          <div className="title">Find Your Champion</div>
           <div className="description">
-            유저간의 데이터를 비교해보세요
+            챔피언에 대한 정보를 확인해보세요
             <br />
-            나와 맞는 유저일까?
+            어떤 챔피언이 나랑 어룰릴까?
           </div>
-          <Link to="/players">
-            <button className="btn-primary" type="button">
-              <span>확인하기</span>
-            </button>
-          </Link>
+          <button
+            onClick={() => {
+              const location = {
+                pathname: "/board",
+                state: {
+                  page: 1,
+                },
+              };
+              props.history.push(location);
+            }}
+            className="btn-primary"
+            type="button"
+          >
+            <span>확인하기</span>
+          </button>
         </div>
       </div>
     </div>
   );
 }
 
-export default Services;
+export default withRouter(Services);

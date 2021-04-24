@@ -124,7 +124,32 @@
 
   .innerWrap {
     position: absolute;
+
+    h1 {
+      font-size: 2rem;
+    }
+
+    .text {
+      font-weight: lighter;
+      font-size: 1.2rem;
+      padding: 8px 0;
+    }
   }
+
+  @media screen and (max-width: 800px) {
+    .innerWrap {
+      h1 {
+        font-size: 1.5rem;
+      }
+
+      .text {
+        font-weight: lighter;
+        font-size: 1rem;
+        padding: 4px 0;
+      }
+    }
+  }
+
   .active .innerWrap {
     transition: opacity 1s ease-in-out;
     position: fixed;
@@ -323,12 +348,14 @@
         text-align: center;
 
         .title {
-          font-size: 1.5rem;
+          font-weight: 500;
+          font-size: 2rem;
         }
 
         .description {
+          font-weight: lighter;
+          font-size: 1.2rem;
           padding: 1rem 0;
-          font-size: 0.8rem;
         }
 
         button {
