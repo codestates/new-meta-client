@@ -14,6 +14,8 @@ interface Props {
 function TagComponent(props: Props): ReactElement {
   const { leagueInfo, kdaInfo, recentChampionStats } = props;
 
+  useEffect(() => {}, []);
+
   /* 태그- 컴포넌트로 만들어야함 */
   const hotStreak = useRef<HTMLDivElement>(null); // 연승 중
   const lev2Strong = useRef<HTMLDivElement>(null); // 2렙 강함
