@@ -165,15 +165,13 @@ function Minimap(): ReactElement {
         </div>
         <div className="innerWrap">
           <h1>TOP</h1>
-          <div className="text">다이브 라인인데 우리 정글 바텀갱 가네?</div>
-          <div className="text">복귀 텔 탄다고 뭐라 하지 마세요</div>
-          <div className="text">찾으러 가기 ▶︎</div>
-          <div>.</div>
-          <div>.</div>
-          <div>.</div>
-          <div className="text">1 대 2 중인데 전령을 치네</div>
-          <div className="text">칼챔인데 왜 탱탬을 가라고 하지?</div>
-          <div className="text">찾으러 가기 ▶︎</div>
+          <div className="text gray">
+            &#34;우리 팀 정글러, 갱 잘 와줄까?&#34;
+          </div>
+          <div className="text bold">
+            &#10132;&nbsp;&nbsp;&nbsp;라인전 단계의 킬 관여율과 갱킹 선호도를
+            확인해봐!
+          </div>
         </div>
         <div className="image-wrapper top">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -185,10 +183,12 @@ function Minimap(): ReactElement {
       <section className="section-minimap 1">
         <div className="innerWrap">
           <h1>JUNGLE</h1>
-          <div className="text">저도 바위게 팀원이랑 같이 먹고 싶어요</div>
-          <div className="text">라인밀어 놓고 갱와달라고요?</div>
-          <div className="text">대각선 법칙 ... 아시죠?</div>
-          <div className="text">강타없는데 용치지 마요</div>
+          <div className="text">
+            &#34;우리 팀 라이너들, CS는 얼마나 잘 챙길까?&#34;
+          </div>
+          <div className="text">
+            &#10132;&nbsp;&nbsp;&nbsp;15분까지 라이너들의 CS 경험치를 비교해봐!
+          </div>
         </div>
         <div className="image-wrapper jungle">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -200,10 +200,14 @@ function Minimap(): ReactElement {
       <section className="section-minimap 2">
         <div className="innerWrap">
           <h1>MIDDLE</h1>
-          <div className="text">라인 버리고 갔더니 적에게 쌍 버프?</div>
-          <div className="text">윗 부쉬엔 적팀 탑 아랫 부쉬엔 적팀 서폿</div>
-          <div className="text">블루주면 캐리할게</div>
-          <div className="text">풀캠프 다 돌면 갱은 언제 와?</div>
+          <div className="text">
+            {" "}
+            &#34;나의 야스오 승률, 증명할 수 있어! &#34;
+          </div>
+          <div className="text">
+            {" "}
+            &#10132;&nbsp;&nbsp;&nbsp;최근 챔피언의 전적과 승률로 보여줄게!
+          </div>
         </div>
         <div className="image-wrapper mid">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -215,10 +219,14 @@ function Minimap(): ReactElement {
       <section className="section-minimap 3">
         <div className="innerWrap">
           <h1>BOTTOM</h1>
-          <div className="text">아니 저 베인 잘합니다</div>
-          <div className="text">아니 지금오면 더블킬인데</div>
-          <div className="text">아니 이게 안죽네</div>
-          <div className="text">아니시에이팅</div>
+          <div className="text">
+            {" "}
+            &#34;우리 팀 정글러, 용을 잘 챙길까? &#34;
+          </div>
+          <div className="text">
+            {" "}
+            &#10132;&nbsp;&nbsp;&nbsp;정글러의 오브젝트 획득률을 확인해보자!
+          </div>
         </div>
         <div className="image-wrapper bottom">
           <img className="landing-img minimap" src={minimap} alt="minimap" />
@@ -230,10 +238,14 @@ function Minimap(): ReactElement {
       <section className="section-minimap 4">
         <div className="innerWrap">
           <h1>SUPPORT</h1>
-          <div className="text">제발 와드하러 갔을 때 물리지마요</div>
-          <div className="text">제발 타곤산 있는데 대포 미니언 좀</div>
-          <div className="text">제발 저는 메라가 아니에요</div>
-          <div className="text">제발 타워 골드만이라도 ...</div>
+          <div className="text">
+            {" "}
+            &#34;우리 팀 원딜러의 숙련도를 알고 싶어! &#34;
+          </div>
+          <div className="text">
+            {" "}
+            &#10132;&nbsp;&nbsp;&nbsp;메인 포지션과 최근 전적의 KDA로 검증해봐!
+          </div>
         </div>
         <div className="image-wrapper support">
           <img className="landing-img minimap" src={minimap} alt="minimap" />

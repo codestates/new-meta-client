@@ -200,8 +200,8 @@ function HeatMapChart(props: Props): ReactElement {
 
       plotOptions: {
         heatmap: {
+          enableShade: false,
           max: Infinity,
-
           min: 0,
           radius: 0,
           useFillColorAsStroke: true,
