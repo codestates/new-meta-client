@@ -11,5 +11,5 @@
 ### Oh Sung kook - Team Lead, Full Stack
 ### Lee Yeon ju - Full Stack
 ### Nah Soo Yeon -  Full Stack
-### Yang Hae sSeung - Backend
+### Yang Hae Seung - Backend
 
