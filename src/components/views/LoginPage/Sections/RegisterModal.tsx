@@ -147,13 +147,16 @@ function RegisterModal(props: Props): ReactElement {
         })
         .catch((err) => {
           // console.log("error:", err);
-          setToastMessage({ success: "", fail: "가입에 실패했습니다." });
+          setToastMessage({
+            success: "",
+            fail: "모든 항목을 조건에 맞게 입력해주세요",
+          });
         });
     } else {
       //! 빈칸 => 토스트
       setToastMessage({
         success: "",
-        fail: "모든 항목을 올바르게 입력해주세요",
+        fail: "모든 항목을 입력해주세요",
       });
     }
   };
