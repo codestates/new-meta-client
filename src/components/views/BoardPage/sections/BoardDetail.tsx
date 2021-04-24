@@ -76,7 +76,6 @@ function BoardDetail(props: any): ReactElement {
     let textBoxWidth: string = "0px";
     if (box) {
       textBoxWidth = window.getComputedStyle(box).width;
-      console.log(window.getComputedStyle(box).width);
     }
     const tt = textTag.current?.style;
     const pt = partTag.current?.style;

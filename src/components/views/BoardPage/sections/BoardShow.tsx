@@ -62,7 +62,6 @@ function BoardShow(props: any): ReactElement {
     const dataList = getAllPostQuery?.data?.fetchAllPostsOrderByCreatedAt;
     const dataListOrdered =
       getAllPostQueryOrderStar?.data?.fetchAllPostsOrderByLikes;
-    console.log(getAllPostQuery);
 
     if (dataList) {
       const result = dataList.map((el: any) => {
@@ -75,8 +74,6 @@ function BoardShow(props: any): ReactElement {
       setBoardList(result);
     }
     if (dataListOrdered) {
-      console.log(dataListOrdered);
-
       const result = dataListOrdered.map((el: any) => {
         return {
           ...el,

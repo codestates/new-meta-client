@@ -46,8 +46,6 @@ function BoardSmall(props: Props): ReactElement {
   const section3 = useRef<HTMLDivElement>(null);
   const section4 = useRef<HTMLDivElement>(null);
 
-  console.log(data);
-
   return (
     <div
       className="board-small"

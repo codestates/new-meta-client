@@ -42,8 +42,6 @@ function BoardPopular(props: Props): ReactElement {
   const section1 = useRef<HTMLDivElement>(null);
   const section2 = useRef<HTMLDivElement>(null);
 
-  console.log(data);
-
   return (
     <div
       onClick={() => {
