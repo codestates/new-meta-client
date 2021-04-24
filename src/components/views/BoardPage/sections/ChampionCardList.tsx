@@ -24,13 +24,19 @@ function ChampionCardList(props: Props): ReactElement {
   const [IsDiffBoxOpen, setIsDiffBoxOpen] = useState(false);
   const [IsTagBoxOpen, setIsTagBoxOpen] = useState(false);
 
+  const [Counter, setCounter] = useState(0);
+
   useEffect(() => {
     setLoad(true);
     setChamps(Champions);
-    setTimeout(() => {
-      setLoad(false);
-    }, 1500);
   }, [Champions]);
+
+  const inreaseCounter = () => {
+    setCounter(Counter + 1);
+    if (Counter + 1 > 40) {
+      setLoad(false);
+    }
+  };
 
   useEffect(() => {
     const diffBox = diffBoxRef.current;
@@ -364,7 +370,9 @@ function ChampionCardList(props: Props): ReactElement {
       </div>
       <div className="champions">
         {Champs.map((el, idx) => {
-          return <ChampionCard key={idx} data={el} />;
+          return (
+            <ChampionCard key={idx} data={el} inreaseCounter={inreaseCounter} />
+          );
         })}
         {Load ? <Loading /> : null}
       </div>
