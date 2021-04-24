@@ -74,17 +74,17 @@ function LoginPage(props: Props): ReactElement {
 
   const googleLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/google`);
+    window.location.href = `${domain}/auth/google`;
   };
 
   const facebookLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/facebook`);
+    window.open(`${domain}/auth/facebook`, "", "width=450,height=600");
   };
 
   const githubLoginHandler = (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    window.open(`${domain}/auth/github`);
+    window.open(`${domain}/auth/github`, "", "width=450,height=650");
   };
 
   useEffect(() => {
@@ -169,28 +169,17 @@ function LoginPage(props: Props): ReactElement {
                       </button>
                       <i
                         className="icon-google"
-                        onClick={(e) => {
-                          console.log(
-                            "1. 구글 아이콘 클릭 -> setIsGoogleToken = true"
-                          );
-                          googleLoginHandler(e);
-                        }}
+                        onClick={googleLoginHandler}
                         aria-hidden
                       ></i>
                       <i
                         className="icon-facebook"
-                        onClick={(e) => {
-                          console.log("페북 온클릭");
-                          facebookLoginHandler(e);
-                        }}
+                        onClick={facebookLoginHandler}
                         aria-hidden
                       ></i>
                       <i
                         className="icon-github"
-                        onClick={(e) => {
-                          console.log("깃헙 온클릭");
-                          githubLoginHandler(e);
-                        }}
+                        onClick={githubLoginHandler}
                         aria-hidden
                       ></i>
                     </div>
