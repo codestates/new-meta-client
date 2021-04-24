@@ -169,28 +169,17 @@ function LoginPage(props: Props): ReactElement {
                       </button>
                       <i
                         className="icon-google"
-                        onClick={(e) => {
-                          console.log(
-                            "1. 구글 아이콘 클릭 -> setIsGoogleToken = true"
-                          );
-                          googleLoginHandler(e);
-                        }}
+                        onClick={googleLoginHandler}
                         aria-hidden
                       ></i>
                       <i
                         className="icon-facebook"
-                        onClick={(e) => {
-                          console.log("페북 온클릭");
-                          facebookLoginHandler(e);
-                        }}
+                        onClick={facebookLoginHandler}
                         aria-hidden
                       ></i>
                       <i
                         className="icon-github"
-                        onClick={(e) => {
-                          console.log("깃헙 온클릭");
-                          githubLoginHandler(e);
-                        }}
+                        onClick={githubLoginHandler}
                         aria-hidden
                       ></i>
                     </div>
