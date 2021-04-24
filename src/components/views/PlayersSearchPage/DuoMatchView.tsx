@@ -146,7 +146,21 @@ function DuoMatchView(props: Props): ReactElement {
                   </div>
                 </div>
               </div>
-              <div className="common-graph">
+            </div>
+            <div className="common-graph">
+              <div className="graph">
+                <HeatMapChart
+                  userData={User1data.recentChampionStats!}
+                  userName={User1data.leagueInfo.summonerName}
+                />
+              </div>
+              <div className="graph">
+                <HeatMapChart
+                  userData={User2data.recentChampionStats!}
+                  userName={User2data.leagueInfo.summonerName}
+                />
+              </div>
+              <div className="graph duo-timeline">
                 <DuoTimeline
                   User1data={User1data.expTimelineData!}
                   User1LaneInfo={User1data.laneInfo!}

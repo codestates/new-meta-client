@@ -93,8 +93,10 @@ function SoloMatchView(props: Props): ReactElement {
                 />
               </div>
               <div className="graph">
-                <div className="label">KDA for 20 Matches</div>
-                <HeatMapChart userData={User1data.recentChampionStats!} />
+                <HeatMapChart
+                  userData={User1data.recentChampionStats!}
+                  userName={User1data.leagueInfo.summonerName!}
+                />
               </div>
             </div>
           </div>

@@ -8,9 +8,11 @@ import React, {
 import axios from "axios";
 import Chart from "react-apexcharts";
 import API from "../../../../api";
+import { LeagueInfo } from "../interface";
 
 interface Props {
   userData: PlayerMatchInfo[];
+  userName: string;
 }
 interface PlayerMatchInfo {
   gameId: number;
@@ -25,7 +27,7 @@ interface PlayerMatchInfo {
 }
 
 function HeatMapChart(props: Props): ReactElement {
-  const { userData } = props;
+  const { userData, userName } = props;
 
   const data = {
     series: [
@@ -179,7 +181,16 @@ function HeatMapChart(props: Props): ReactElement {
         style: {},
       },
       colors: ["#f86d7d", "#e2e4e9"],
-
+      title: {
+        text: `${userName}'s KDA for 16 Matches`,
+        style: {
+          fontSize: "14px",
+          color: "#f7f8fa",
+          align: "center",
+          fontFamily: "Noto Sans KR",
+          fontWeight: "300",
+        },
+      },
       legend: {
         labels: {
           colors: "#f7f8fa",
@@ -209,32 +220,32 @@ function HeatMapChart(props: Props): ReactElement {
               {
                 from: 0,
                 to: 1,
-                color: "#5a5b62",
+                color: "#E06161",
                 name: "KDA 1.0 이하",
                 foreColor: "#e2e4e9",
               },
               {
                 from: 1,
                 to: 3.0,
-                color: "#21efdb",
+                color: "#E38585",
                 name: "KDA 1.00 이상",
               },
               {
                 from: 3.0,
                 to: 4.0,
-                color: "#0ec7b5",
+                color: "#21efdb",
                 name: "KDA 3.0 이상",
               },
               {
                 from: 4.0,
                 to: 10,
-                color: "#7044ed",
+                color: "#0ec7b5",
                 name: "KDA 4.00 이상",
               },
               {
                 from: 7,
                 to: 20,
-                color: "#f86d7d",
+                color: "#00b6a4",
                 name: "KDA 7.00 이상",
               },
             ],

@@ -164,7 +164,7 @@ function Minimap(): ReactElement {
           />
         </div>
         <div className="innerWrap">
-          <h1>Top Laner</h1>
+          <h1>TOP</h1>
           <div className="text">다이브 라인인데 우리 정글 바텀갱 가네?</div>
           <div className="text">복귀 텔 탄다고 뭐라 하지 마세요</div>
           <div className="text">1 대 2 중인데 전령을 치네</div>
@@ -179,7 +179,7 @@ function Minimap(): ReactElement {
 
       <section className="section-minimap 1">
         <div className="innerWrap">
-          <h1>Jungle Laner</h1>
+          <h1>JUNGLE</h1>
           <div className="text">저도 바위게 팀원이랑 같이 먹고 싶어요</div>
           <div className="text">라인밀어 놓고 갱와달라고요?</div>
           <div className="text">대각선 법칙 ... 아시죠?</div>
@@ -194,7 +194,7 @@ function Minimap(): ReactElement {
 
       <section className="section-minimap 2">
         <div className="innerWrap">
-          <h1>Mid Laner</h1>
+          <h1>MIDDLE</h1>
           <div className="text">라인 버리고 갔더니 적에게 쌍 버프?</div>
           <div className="text">윗 부쉬엔 적팀 탑 아랫 부쉬엔 적팀 서폿</div>
           <div className="text">블루주면 캐리할게</div>
@@ -209,7 +209,7 @@ function Minimap(): ReactElement {
 
       <section className="section-minimap 3">
         <div className="innerWrap">
-          <h1>Bottom Laner</h1>
+          <h1>BOTTOM</h1>
           <div className="text">아니 저 베인 잘합니다</div>
           <div className="text">아니 지금오면 더블킬인데</div>
           <div className="text">아니 이게 안죽네</div>
@@ -224,7 +224,7 @@ function Minimap(): ReactElement {
 
       <section className="section-minimap 4">
         <div className="innerWrap">
-          <h1>Support Laner</h1>
+          <h1>SUPPORT</h1>
           <div className="text">제발 와드하러 갔을 때 물리지마요</div>
           <div className="text">제발 타곤산 있는데 대포 미니언 좀</div>
           <div className="text">제발 저는 메라가 아니에요</div>

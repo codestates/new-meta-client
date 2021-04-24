@@ -233,6 +233,7 @@ function DuoTimeLine(props: Props): ReactElement {
           style: {
             color: "#FFF",
             fontSize: "15px",
+            fontColor: "#FFF",
           },
           labels: {
             style: {
@@ -302,7 +303,7 @@ function DuoTimeLine(props: Props): ReactElement {
 
       responsive: [
         {
-          breakpoint: 300,
+          breakpoint: 375,
         },
       ],
     },
