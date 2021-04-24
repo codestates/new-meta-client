@@ -66,7 +66,33 @@ function PlayersSearchPage(): ReactElement {
           setUser2data(res.data);
           setLoadingState(false);
           setUserName2("");
+
+          if (res.data.message === "Request failed with status code 504") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "소환사의 데이터를 불러오는 데 실패했습니다. (504)",
+            });
+            return;
+          }
+
+          if (res.data.message === "Request failed with status code 403") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "소환사의 데이터를 불러오는 데 실패했습니다.",
+            });
+          }
+
+          if (res.data.message === "Request failed with status code 401") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "소환사의 데이터를 불러오는 데 실패했습니다.",
+            });
+          }
         })
+
         .catch((err) => {
           console.log(err);
           setLoadingState(false);
@@ -159,13 +185,29 @@ function PlayersSearchPage(): ReactElement {
             setLoadingState(false);
             setToastMessage({
               success: "",
-              fail: "현재 .",
+              fail: "소환사의 데이터를 불러오는 데 실패했습니다. (504)",
             });
             return;
           }
 
+          if (res.data.message === "Request failed with status code 403") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "소환사의 데이터를 불러오는 데 실패했습니다.",
+            });
+          }
+
+          if (res.data.message === "Request failed with status code 401") {
+            setLoadingState(false);
+            setToastMessage({
+              success: "",
+              fail: "소환사의 데이터를 불러오는 데 실패했습니다.",
+            });
+          }
+
           setUser1data(res.data);
-          console.log(res.data);
+
           setUserName1("");
 
           if (!userName2) {
@@ -294,12 +336,7 @@ function PlayersSearchPage(): ReactElement {
                 <SoloMatchView User1data={User1data} />
               )
             ) : (
-              <div>
-                {/* How To Use NEW-META? We serve our data analysis service for
-                passionate LoL gamers who play solo/duo rank game. If you have
-                played rank games less than 20 matches in this season, then it
-                is not possible to analyze your game data. */}
-              </div>
+              <div></div>
             )}
           </div>
         )}
