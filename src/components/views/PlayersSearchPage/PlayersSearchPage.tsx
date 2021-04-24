@@ -35,7 +35,7 @@ function PlayersSearchPage(): ReactElement {
   const [User2data, setUser2data] = useState<SummonerAllData>({});
 
   useEffect(() => {
-    setUser1data({});
+    setUser1data(JunglerData);
     setUser2data({});
     setUserName1("");
     setUserName2("");
@@ -70,7 +70,7 @@ function PlayersSearchPage(): ReactElement {
             setLoadingState(false);
             setToastMessage({
               success: "",
-              fail: "소환사의 데이터를 불러오는 데 실패했습니다. (504)",
+              fail: "소환사의 데이터를 불러오는 데 실패했습니다.",
             });
             return;
           }
@@ -185,7 +185,7 @@ function PlayersSearchPage(): ReactElement {
             setLoadingState(false);
             setToastMessage({
               success: "",
-              fail: "소환사의 데이터를 불러오는 데 실패했습니다. (504)",
+              fail: "소환사의 데이터를 불러오는 데 실패했습니다.",
             });
             return;
           }
