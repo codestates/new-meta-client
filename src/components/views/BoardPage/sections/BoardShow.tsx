@@ -96,13 +96,7 @@ function BoardShow(props: any): ReactElement {
 
   return (
     <div className="user-board">
-      {IsLoginOpen ? (
-        <Login
-          closeModal={closeModal}
-          setIsGoogleToken={() => null}
-          setIsFacebookToken={() => null}
-        />
-      ) : null}
+      {IsLoginOpen ? <Login closeModal={closeModal} /> : null}
       <div className="detail-view">
         {Object.keys(CurrentBoard).length > 0 ? (
           <BoardDetail data={CurrentBoard} setCurrentBoard={setCurrentBoard} />
