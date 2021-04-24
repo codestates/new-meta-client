@@ -59,12 +59,14 @@ const MyINFO = gql`
         subject {
           nickname
           email
+          id
         }
       }
       followings {
         target {
           nickname
           email
+          id
         }
       }
     }
@@ -95,7 +97,7 @@ interface myInfo {
   likes: any[];
 }
 
-function MyPage(): ReactElement {
+function MyPage(props: any): ReactElement {
   // eslint-disable-next-line @typescript-eslint/ban-types
   const [MyData, setMyData] = useState<myInfo | null>(null);
   const [MyPosts, setMyPosts] = useState([]);
@@ -124,6 +126,7 @@ function MyPage(): ReactElement {
   const clickChangeNick = () => {
     SetChangeNicknameModal(true);
   };
+
   const clickNewPassword = () => {
     SetNewPasswordModal(true);
   };
@@ -131,6 +134,17 @@ function MyPage(): ReactElement {
   const clickLeave = () => {
     SetLeaveModal(true);
   };
+
+  const clickFollow = (userId: string) => {
+    const location = {
+      pathname: "/userpage",
+      state: {
+        userId,
+      },
+    };
+    props.history.push(location);
+  };
+
   useEffect(() => {
     // todo 팔로우, 좋아요 부분 다 하기
 
@@ -273,9 +287,18 @@ function MyPage(): ReactElement {
             {FollowingList.length > 0 ? (
               FollowingList.map((el: any) => {
                 const data = el.target;
+
                 return (
-                  <div className="follow-item">
-                    <div className="nickname">{data.nickname}</div>
+                  <div key={data.id} className="follow-item">
+                    <div
+                      aria-hidden
+                      onClick={() => {
+                        clickFollow(data.id);
+                      }}
+                      className="nickname"
+                    >
+                      {data.nickname}
+                    </div>
                     <div className="email">{data.email}</div>
                   </div>
                 );
@@ -290,8 +313,16 @@ function MyPage(): ReactElement {
               FollowerList.map((el: any) => {
                 const data = el.subject;
                 return (
-                  <div className="follow-item">
-                    <div className="nickname">{data.nickname}</div>
+                  <div key={data.id} className="follow-item">
+                    <div
+                      aria-hidden
+                      onClick={() => {
+                        clickFollow(data.id);
+                      }}
+                      className="nickname"
+                    >
+                      {data.nickname}
+                    </div>
                     <div className="email">{data.email}</div>
                   </div>
                 );

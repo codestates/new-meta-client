@@ -76,7 +76,7 @@ const CURRENT_USER = gql`
         }
       }
       followers {
-        target {
+        subject {
           id
           nickname
         }
