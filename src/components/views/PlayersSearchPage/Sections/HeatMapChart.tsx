@@ -179,14 +179,7 @@ function HeatMapChart(props: Props): ReactElement {
         style: {},
       },
       colors: ["#f86d7d", "#e2e4e9"],
-      title: {
-        text: "KDA for 20 Matches",
-        style: {
-          fontSize: "14px",
-          color: "#f7f8fa",
-          align: "center",
-        },
-      },
+
       legend: {
         labels: {
           colors: "#f7f8fa",
@@ -258,6 +251,7 @@ function HeatMapChart(props: Props): ReactElement {
         series={data.series}
         width={400}
         height={300}
+        className="heatmap"
       />
     </>
   );

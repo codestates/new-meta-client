@@ -165,14 +165,6 @@ function TimelineChart(props: Props): ReactElement {
       stroke: {
         width: [0, 4],
       },
-      title: {
-        text: "CS & Gold Data for 15 Minutes",
-
-        style: {
-          color: "#FFF",
-          fontSize: "15px",
-        },
-      },
       dataLabels: {
         enabled: true,
         enabledOnSeries: [1],
@@ -230,6 +222,7 @@ function TimelineChart(props: Props): ReactElement {
           series={data.series}
           type="line"
           width={500}
+          className="timeline-chart"
         />
       </div>
     </>

@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/no-non-null-assertion */
-/* eslint-disable @typescript-eslint/no-empty-function */
-/* eslint-disable import/no-unresolved */
 import React, { ReactElement, useState, useEffect } from "react";
 import { SummonerAllData } from "./interface";
 
@@ -21,13 +18,9 @@ interface Props {
 function SoloMatchView(props: Props): ReactElement {
   const { User1data } = props;
 
-  useEffect(() => {
-    return () => {};
-  }, [User1data]);
-
   return (
     <>
-      {User1data.leagueInfo !== undefined && (
+      {User1data.leagueInfo && (
         <div className="solo-search-result">
           <div className="summonerInfo">
             <div className="summoner-name">
@@ -55,9 +48,11 @@ function SoloMatchView(props: Props): ReactElement {
           <div className="summoner-graph">
             <div className="graph-section">
               <div className="graph win-rate">
+                <div className="label">Win Rate</div>
                 <WinRateChart userData={User1data.leagueInfo!} />
               </div>
-              <div className="graph-laneInfo">
+              <div className="graph graph-laneInfo">
+                <div className="label">Position Rate</div>
                 <div className="div-laneInfo">
                   <LaneInfoChart userData={User1data.laneInfo!} />
                 </div>
@@ -66,34 +61,39 @@ function SoloMatchView(props: Props): ReactElement {
                 </div>
               </div>
               <div className="graph summoner-most-champion">
-                <div className="mostChamp">
-                  <MostChampion
-                    userData={User1data.recentChampionStats!}
-                    idx={0}
-                  />
-                </div>
-                <div className="mostChamp">
-                  <MostChampion
-                    userData={User1data.recentChampionStats!}
-                    idx={1}
-                  />
-                </div>
-                <div className="mostChamp">
-                  <MostChampion
-                    userData={User1data.recentChampionStats!}
-                    idx={2}
-                  />
+                <div className="label">Most Champions</div>
+                <div className="most-champ-wrap">
+                  <div className="mostChamp">
+                    <MostChampion
+                      userData={User1data.recentChampionStats!}
+                      idx={0}
+                    />
+                  </div>
+                  <div className="mostChamp">
+                    <MostChampion
+                      userData={User1data.recentChampionStats!}
+                      idx={1}
+                    />
+                  </div>
+                  <div className="mostChamp">
+                    <MostChampion
+                      userData={User1data.recentChampionStats!}
+                      idx={2}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
             <div className="graph-section">
               <div className="graph exp-timeline">
+                <div className="label">Total CS & Gold for 15 Minutes </div>
                 <TimelineChart
                   userData={User1data.expTimelineData!}
                   userPosition={User1data.laneInfo!}
                 />
               </div>
               <div className="graph">
+                <div className="label">KDA for 20 Matches</div>
                 <HeatMapChart userData={User1data.recentChampionStats!} />
               </div>
             </div>
