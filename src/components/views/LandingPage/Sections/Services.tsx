@@ -3,6 +3,8 @@ import React, { ReactElement, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import freljord from "../../../../assets/image/freljord.jpeg";
 import demacia from "../../../../assets/image/demacia.jpeg";
+import champList from "../../../../assets/image/champList.png";
+import champDetail from "../../../../assets/image/champDetail.png";
 import CanvasBottom from "./CanvasBottom";
 
 const sideTotalNum = 3;
@@ -121,8 +123,17 @@ function Services(props: any): ReactElement {
 
       <div className="side-section">
         <div className="clip-3" />
-        <div className="side-img-wrapper right">
-          <img className="landing-img right" src={demacia} alt="" />
+        <div className="side-img-wrapper right last-img">
+          <img
+            className="landing-img right champ-list-image"
+            src={champList}
+            alt=""
+          />
+          <img
+            className="landing-img right image-down detail-image"
+            src={champDetail}
+            alt=""
+          />
         </div>
         <div className="text-wrapper third">
           <div className="title">Find Your Champion</div>
