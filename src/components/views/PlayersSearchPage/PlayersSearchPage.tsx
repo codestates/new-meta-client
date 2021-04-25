@@ -280,7 +280,7 @@ function PlayersSearchPage(): ReactElement {
           </div>
           {SearchType === "solo" ? (
             <div className="match-search-bar solo-wrap" ref={searchBar}>
-              <div className="search-bar players-input">
+              <div className="search-bar-container players-input">
                 <input
                   onChange={onInputUserName1Handler}
                   type="text"
@@ -305,7 +305,7 @@ function PlayersSearchPage(): ReactElement {
             </div>
           ) : (
             <div className="match-search-bar duo-wrap" ref={searchBar}>
-              <div className="search-bar players-input">
+              <div className="search-bar-container players-input">
                 <input
                   onChange={onInputUserName1Handler}
                   className="players-input"
@@ -328,7 +328,7 @@ function PlayersSearchPage(): ReactElement {
               >
                 Search
               </div>
-              <div className="search-bar players-input">
+              <div className="search-bar-container players-input">
                 <input
                   onChange={onInputUserName2Handler}
                   className="players-input"
