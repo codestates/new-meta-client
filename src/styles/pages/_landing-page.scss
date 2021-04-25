@@ -319,6 +319,14 @@
       flex-flow: row wrap;
       height: 70vh;
 
+      .first-img {
+        box-shadow: 16px 16px #7044ed;
+        border-top: 1px solid #5a5b62;
+        border-left: 1px solid #5a5b62;
+      }
+
+
+
       .last-img {
         .champ-list-image {
           border-top: 1px solid $border;
