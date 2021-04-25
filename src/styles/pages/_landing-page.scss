@@ -133,16 +133,17 @@
       }
 
       .text {
-        font-weight: lighter;
         font-size: 1rem;
 
         &.q {
           font-size: 0.9rem;
+          opacity: 0.7;
         }
 
         &.a {
           color: $jade;
           margin-top: 2.5rem;
+          font-weight: lighter;
 
           .highlight {
             color: $jade-light;
