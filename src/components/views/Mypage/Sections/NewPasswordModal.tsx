@@ -83,14 +83,14 @@ function NewPasswordModal(props: Props): ReactElement {
           <div className="label">Current</div>
           <input
             ref={pw1}
-            placeholder="Inter Current paassword"
+            placeholder="Enter Current paassword"
             className="password1"
             type="password"
           ></input>
           <div className="label">New</div>
           <input
             ref={pw2}
-            placeholder="Inter New password"
+            placeholder="Enter New password"
             className="password2"
             type="password"
           ></input>
