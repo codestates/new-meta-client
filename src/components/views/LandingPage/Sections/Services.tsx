@@ -2,7 +2,7 @@
 import React, { ReactElement, useEffect } from "react";
 import { Link, withRouter } from "react-router-dom";
 import freljord from "../../../../assets/image/freljord.jpeg";
-import demacia from "../../../../assets/image/demacia.jpeg";
+import searchPage from "../../../../assets/image/searchpage-resized.gif";
 import champList from "../../../../assets/image/champList.png";
 import champDetail from "../../../../assets/image/champDetail.png";
 import CanvasBottom from "./CanvasBottom";
@@ -74,7 +74,11 @@ function Services(props: any): ReactElement {
       <div className="side-section">
         <div className="clip-1" />
         <div className="side-img-wrapper">
-          <img className="landing-img right" src={demacia} alt="" />
+          <img
+            className="landing-img right first-img"
+            src={searchPage}
+            alt=""
+          />
         </div>
         <div className="text-wrapper first">
           <div className="title">Match Your Teammate</div>
