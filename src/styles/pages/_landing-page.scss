@@ -123,31 +123,37 @@
 
     .innerWrap {
       position: absolute;
-      padding-top: 3.5rem;
+      padding-top: 3rem;
 
       h1 {
-        font-size: 1.5rem;
-        font-weight: 600;
+        font-size: 1.7rem;
+        font-weight: 500;
         margin-bottom: 1rem;
-        opacity: 0.9;
       }
 
       .text {
         font-size: 1rem;
+        font-weight: 200;
 
         &.q {
           font-size: 0.9rem;
           opacity: 0.7;
+          padding-left: 0.5rem;
         }
 
         &.a {
-          color: $jade;
+          color: $primary;
           margin-top: 2.5rem;
-          font-weight: lighter;
 
           .highlight {
             color: $jade-light;
             font-weight: 500;
+          }
+
+          .arrow {
+            color: $jade-light;
+            opacity: 0.4;
+            font-size: 1.3rem !important;
           }
         }
       }
@@ -160,7 +166,7 @@
     padding: 30px 30px 30px 70px;
     width: 50%;
     top: 35%;
-    left: 6.5%;
+    left: 6%;
     z-index: 5;
     visibility: visible;
     opacity: 1;
