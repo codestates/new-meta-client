@@ -139,6 +139,7 @@ function TimelineChart(props: Props): ReactElement {
   const data = {
     series: timelineData,
     options: {
+      colors: ["#815de6", "#00b6a4"],
       tooltip: {
         theme: "dark",
       },

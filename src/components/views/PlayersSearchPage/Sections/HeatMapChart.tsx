@@ -1,3 +1,8 @@
+/* eslint-disable no-dupe-args */
+/* eslint-disable no-redeclare */
+/* eslint-disable no-undef */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable no-restricted-syntax */
 import React, {
   ReactElement,
   useEffect,
@@ -8,26 +13,61 @@ import React, {
 import axios from "axios";
 import Chart from "react-apexcharts";
 import API from "../../../../api";
-import { LeagueInfo } from "../interface";
+import { LeagueInfo, PlayerMatchInfo } from "../interface";
 
 interface Props {
   userData: PlayerMatchInfo[];
   userName: string;
 }
-interface PlayerMatchInfo {
-  gameId: number;
-  champion: number;
-  stats: {
-    participantId: number;
-    win: boolean;
-    kills: number;
-    deaths: number;
-    assists: number;
-  };
+interface ChampionEl {
+  id: string;
+  key: string;
 }
 
 function HeatMapChart(props: Props): ReactElement {
   const { userData, userName } = props;
+  const [Champions, setChampions] = useState<any>([]);
+  useEffect(() => {
+    const cache = sessionStorage.getItem("Champions");
+    const run = async () => {
+      const result = await axios.get(API.allChampionInfo);
+      sessionStorage.setItem(
+        "Champions",
+        JSON.stringify(Object.values(result.data.data))
+      );
+      setChampions(Object.values(result.data.data));
+    };
+    if (!cache) {
+      run();
+    } else {
+      setChampions(JSON.parse(cache));
+    }
+  }, []);
+
+  function getChampionName(key: number): string {
+    /* 챔피언 ID로 영문 이름 얻기  */
+    let resultName = "";
+    if (Champions.length > 0) {
+      const result = Champions.filter((el: ChampionEl) => {
+        return Number(el.key) === key;
+      });
+      resultName = result[0].id;
+    }
+    return resultName;
+  }
+
+  function getChampionKey(arr: PlayerMatchInfo[]): number[] {
+    const Array: number[] = [];
+    for (const el of arr) {
+      if (!Array.includes(el.champion)) {
+        Array.push(el.champion);
+      }
+    }
+
+    return Array;
+  }
+
+  const ChampionKey = getChampionKey(userData);
 
   const data = {
     series: [
@@ -168,6 +208,7 @@ function HeatMapChart(props: Props): ReactElement {
     options: {
       tooltip: {
         enabled: false,
+        theme: "dark",
       },
       chart: {
         background: "transparent",
