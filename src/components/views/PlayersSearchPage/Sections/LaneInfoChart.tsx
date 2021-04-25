@@ -59,7 +59,24 @@ function LaneInfoChart(props: Props): ReactElement {
       },
       responsive: [
         {
-          breakpoint: 250,
+          breakpoint: 1200,
+          options: {
+            chart: {
+              width: "200px",
+              height: "200px",
+              type: "donut",
+            },
+          },
+        },
+        {
+          breakpoint: 375,
+          options: {
+            chart: {
+              width: "90px",
+              height: "90px",
+              type: "donut",
+            },
+          },
         },
       ],
     },

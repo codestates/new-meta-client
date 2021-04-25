@@ -186,6 +186,7 @@ function DuoTimeLine(props: Props): ReactElement {
       },
       chart: {
         height: 350,
+        theme: "dark",
         dropShadow: {
           enabled: true,
           color: "#000",
@@ -227,19 +228,12 @@ function DuoTimeLine(props: Props): ReactElement {
       },
       xaxis: {
         categories: ["3m", "6m", "9m", "12m", "15m"],
-
-        title: {
-          text: "Timeline",
-          style: {
-            color: "#FFF",
-            fontSize: "15px",
-            fontColor: "#FFF",
-          },
-          labels: {
-            style: {
-              colors: "#FFF",
-            },
-          },
+        labels: {
+          show: true,
+          style: { colors: "#FFF", fontFamily: "Noto Sans Kr" },
+        },
+        axisTicks: {
+          show: false,
         },
       },
       yaxis: [
@@ -249,6 +243,7 @@ function DuoTimeLine(props: Props): ReactElement {
           axisTicks: {
             show: false,
           },
+
           axisBorder: {
             show: false,
             color: "#008FFB",
@@ -303,7 +298,92 @@ function DuoTimeLine(props: Props): ReactElement {
 
       responsive: [
         {
-          breakpoint: 375,
+          breakpoint: 800,
+
+          options: {
+            title: {
+              text: "Average 15 Minutes CS Exp & Total Gold",
+              style: {
+                color: "#FFF",
+                fontSize: "16px",
+                fontFamily: "Noto Sans Kr",
+                fontWeight: "200",
+              },
+            },
+            chart: {
+              width: "500px",
+              height: "250px",
+              type: "bar",
+            },
+            grid: {
+              show: false,
+              offsetX: -25,
+              offsetY: -5,
+            },
+            yaxis: [
+              { show: true, max: 110, tickAmount: 5, labels: { show: false } },
+              {
+                show: true,
+                max: 8000,
+                opposite: true,
+                labels: { show: false },
+              },
+            ],
+
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                barHeight: "50px",
+              },
+            },
+            legend: {
+              show: false,
+            },
+          },
+        },
+        {
+          breakpoint: 450,
+
+          options: {
+            title: {
+              text: "Average 15 Minutes CS Exp & Total Gold",
+              style: {
+                color: "#FFF",
+                fontSize: "12px",
+                fontFamily: "Noto Sans Kr",
+                fontWeight: "200",
+              },
+            },
+            chart: {
+              width: "300px",
+              height: "250px",
+              type: "bar",
+            },
+            grid: {
+              show: false,
+              offsetX: -25,
+              offsetY: -5,
+            },
+            yaxis: [
+              { show: true, max: 110, tickAmount: 5, labels: { show: false } },
+              {
+                show: true,
+                max: 8000,
+                opposite: true,
+                labels: { show: false },
+              },
+            ],
+
+            plotOptions: {
+              bar: {
+                horizontal: false,
+                barHeight: "50px",
+              },
+            },
+            legend: {
+              show: false,
+            },
+          },
         },
       ],
     },
