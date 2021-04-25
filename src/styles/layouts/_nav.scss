@@ -40,15 +40,14 @@
   }
 
   .btn-wrapper {
-    width: 230px;
+    width: 220px;
     font-weight: lighter;
     font-size: 0.9rem;
-    display: flex;
     color: $jade;
+    position: relative;
 
     .page {
       transition: 0.7s;
-      margin-right: 2rem;
 
       &:hover {
         transition: 1s;
@@ -97,6 +96,7 @@
 
     &.logout span {
       padding: 6.2px 14px;
+      letter-spacing: 0.5px;
     }
   }
 }
