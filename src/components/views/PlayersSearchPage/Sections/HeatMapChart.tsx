@@ -206,6 +206,9 @@ function HeatMapChart(props: Props): ReactElement {
     ],
 
     options: {
+      xaxis: {
+        axisTicks: { show: false },
+      },
       tooltip: {
         enabled: false,
         theme: "dark",
@@ -224,18 +227,45 @@ function HeatMapChart(props: Props): ReactElement {
       colors: ["#f86d7d", "#e2e4e9"],
 
       legend: {
+        show: true,
         labels: {
           colors: "#f7f8fa",
           useSeriesColors: false,
-          style: {
-            align: "bottom",
-          },
         },
       },
       responsive: [
         {
-          breakpoint: 375,
-          options: {},
+          breakpoint: 1200,
+          options: {
+            chart: {
+              width: "300px",
+              height: "300px",
+              type: "heatmap",
+            },
+          },
+        },
+        {
+          breakpoint: 700,
+          options: {
+            chart: {
+              width: "250px",
+              height: "250px",
+              type: "heatmap",
+            },
+            legend: {
+              show: false,
+            },
+          },
+        },
+        {
+          breakpoint: 500,
+          options: {
+            chart: {
+              width: "180px",
+              height: "180px",
+              type: "heatmap",
+            },
+          },
         },
       ],
 
