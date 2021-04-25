@@ -329,10 +329,6 @@
               top: 50%;
               left: 50%;
               transform: translate((-50%, -50%));
-
-              // .LaneInfo-chart {
-              //   height: 100%;
-              // }
             }
 
             .img-laneInfo {
@@ -717,9 +713,7 @@
               height: 260px;
               margin: 3rem 0;
               .div-laneInfo {
-                display: inline-block;
                 position: absolute;
-                width: 90%;
                 height: max-content;
                 top: 50%;
                 left: 50%;
