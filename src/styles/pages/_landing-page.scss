@@ -334,12 +334,19 @@
 
       .second-img {
         position: relative;
+
         .write-img {
           top: 105% !important;
           left: 37% !important;
           width: calc(90vw / 3);
           border: 1px solid rgba($border, $alpha: 0.5);
+          transition: all 1s;
+
+          &:hover {
+            transform: translate(-50%, -50%) scale(1.085);
+          }
         }
+
         .board-img {
           border-right: 1px solid $border;
           border-top: 1px solid $border;
