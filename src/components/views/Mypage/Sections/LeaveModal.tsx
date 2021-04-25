@@ -11,10 +11,11 @@ import { TokenVar } from "../../../../graphql";
 
 interface Props extends RouteComponentProps {
   closeModal: Dispatch<SetStateAction<boolean>>;
+  AccountType: string;
 }
 
 function LeaveModal(props: Props): ReactElement {
-  const { closeModal } = props;
+  const { closeModal, AccountType } = props;
   const basicModalRef = useRef<HTMLDivElement>(null);
   const password = useRef<HTMLInputElement>(null);
 
@@ -56,6 +57,7 @@ function LeaveModal(props: Props): ReactElement {
         console.log("error : ", err);
       });
   };
+  console.log(AccountType);
 
   return (
     <>
@@ -71,26 +73,44 @@ function LeaveModal(props: Props): ReactElement {
             <i className="icon-cross"></i>
           </button>
           <div className="text">Are you really leaving?</div>
-          <input
-            ref={password}
-            placeholder="Inter your paassword"
-            className="password"
-            type="password"
-          ></input>
 
-          <div className="btn-wrapper">
-            <button onClick={clickLeave} className="font-red" type="button">
-              Leave
-            </button>
-            <button
-              onClick={() => {
-                closeModal(false);
-              }}
-              type="button"
-            >
-              Cancel
-            </button>
-          </div>
+          {AccountType === "local" ? (
+            <>
+              <input
+                ref={password}
+                placeholder="Inter your paassword"
+                className="password"
+                type="text"
+              ></input>
+              <div className="btn-wrapper">
+                <button onClick={clickLeave} className="font-red" type="button">
+                  Leave
+                </button>
+                <button
+                  onClick={() => {
+                    closeModal(false);
+                  }}
+                  type="button"
+                >
+                  Cancel
+                </button>
+              </div>
+            </>
+          ) : (
+            <div className="btn-wrapper auth-btn-wrapper">
+              <button onClick={clickLeave} className="font-red" type="button">
+                Leave
+              </button>
+              <button
+                onClick={() => {
+                  closeModal(false);
+                }}
+                type="button"
+              >
+                Cancel
+              </button>
+            </div>
+          )}
         </div>
       </div>
     </>

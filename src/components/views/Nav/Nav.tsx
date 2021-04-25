@@ -29,9 +29,10 @@ function Nav(props: any): ReactElement {
 
   useEffect(() => {
     const url = new URL(window.location.href);
-    const token = url.searchParams.get("token");
+    const token: any = url.searchParams.get("token");
 
     if (token && !localStorage.getItem("token")) {
+      TokenVar(token);
       localStorage.setItem("token", token);
       setIsLogin(true);
       setToastMessage({
