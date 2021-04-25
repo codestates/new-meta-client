@@ -66,7 +66,7 @@ function Nav(props: any): ReactElement {
     <>
       <div className="nav">
         <div className="logo">
-          <Hamburger IsLogin={IsLogin} />
+          <Hamburger />
           <img
             onClick={() => {
               props.history.push("/");
