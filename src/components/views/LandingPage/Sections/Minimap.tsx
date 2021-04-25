@@ -202,7 +202,7 @@ function Minimap(): ReactElement {
           <h1>MIDDLE</h1>
           <div className="text q">
             {" "}
-            &#34;나의 야스오 승률, 증명할 수 있어! &#34;
+            &#34;나의 야스오 승률, 증명할 수 있어!&#34;
           </div>
           <div className="text a">
             {" "}
@@ -223,7 +223,7 @@ function Minimap(): ReactElement {
           <h1>BOTTOM</h1>
           <div className="text q">
             {" "}
-            &#34;우리 팀 정글러, 용을 잘 챙길까? &#34;
+            &#34;우리 팀 정글러, 용을 잘 챙길까?&#34;
           </div>
           <div className="text a">
             {" "}
@@ -243,7 +243,7 @@ function Minimap(): ReactElement {
           <h1>SUPPORT</h1>
           <div className="text q">
             {" "}
-            &#34;우리 팀 원딜러의 숙련도를 알고 싶어! &#34;
+            &#34;우리 팀 원딜러의 숙련도를 알고 싶어!&#34;
           </div>
           <div className="text a">
             {" "}
