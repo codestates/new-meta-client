@@ -71,22 +71,24 @@ function Footer(): ReactElement {
         <div className="label">Team</div>
         <div className="members">
           <a href="https://github.com/osunguk" className="member">
-            Oh Sung kook
+            Oh Sungkook
           </a>
           <a href="https://github.com/jess-yon" className="member">
-            Lee Yeon ju
+            Lee Yeonju
           </a>
           <a href="https://github.com/nahsooyeon" className="member">
-            Na Su yeon
+            Nah Sooyeon
           </a>
           <a href="https://github.com/chachagogogo" className="member">
-            Yang Hae seung
+            Yang Haeseung
           </a>
         </div>
       </div>
       <div className="connect">
         <div className="label connect">Connect</div>
         <div className="icons">
+          <i className="icon-google"></i>
+          <i className="icon-facebook"></i>
           <i
             onClick={() => {
               // eslint-disable-next-line no-restricted-globals
@@ -96,8 +98,6 @@ function Footer(): ReactElement {
             aria-hidden
             className="icon-github"
           ></i>
-          <i className="icon-facebook"></i>
-          <i className="icon-google"></i>
         </div>
       </div>
     </div>
