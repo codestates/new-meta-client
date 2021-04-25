@@ -15,7 +15,10 @@ export default (SpecificComponent: ComponentType, option: boolean) => {
     };
 
     useEffect(() => {
-      if (!currentUser.data.token && option) {
+      if (
+        !(currentUser.data.token || localStorage.getItem("token")) &&
+        option
+      ) {
         setIsPopupOpen(true);
       }
     }, [IsPopupOpen, currentUser, props]);
