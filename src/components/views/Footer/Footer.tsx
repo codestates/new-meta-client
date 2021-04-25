@@ -27,6 +27,13 @@ function Footer(): ReactElement {
         <a href="/Privacy_Policy.html" className="privacy-policy">
           개인정보처리방침
         </a>
+        <a
+          href="/AccountDeletionNotice.html"
+          className="account-deletion-notice"
+        >
+          계정 삭제 안내
+        </a>
+
         {/* <div className="copyright">2021 Copyright @ CHALLENGERS Team.</div> */}
       </div>
       <div className="info">

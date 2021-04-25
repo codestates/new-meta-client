@@ -76,10 +76,18 @@
 
     .privacy-policy {
       color: $primary;
-      opacity: 0.8;
-      font-size: 12px;
+      opacity: 0.5;
+      font-size: 11px;
       padding-bottom: 12px;
-      margin-left: 48px;
+      margin-left: 20px;
+    }
+
+    .account-deletion-notice {
+      color: $primary;
+      opacity: 0.5;
+      font-size: 11px;
+      padding-bottom: 12px;
+      margin-left: 18px;
     }
   }
 
@@ -236,6 +244,22 @@
         position: absolute;
         left: 50%;
         transform: translateX(-50%);
+      }
+    }
+
+    .logo {
+      .policy-ko {
+        font-size: 10.5px;
+      }
+
+      .privacy-policy {
+        margin-left: 12px;
+        font-size: 10.5px;
+      }
+
+      .account-deletion-notice {
+        margin-left: 12px;
+        font-size: 10.5px;
       }
     }
   }
