@@ -24,6 +24,9 @@ function Footer(): ReactElement {
         >
           라이엇 게임즈 공식 규정 준수
         </a>
+        <a href="/Privacy_Policy.html" className="privacy-policy">
+          개인정보처리방침
+        </a>
         {/* <div className="copyright">2021 Copyright @ CHALLENGERS Team.</div> */}
       </div>
       <div className="info">
