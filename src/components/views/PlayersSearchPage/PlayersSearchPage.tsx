@@ -35,8 +35,8 @@ function PlayersSearchPage(): ReactElement {
   const [User2data, setUser2data] = useState<SummonerAllData>({});
 
   useEffect(() => {
-    setUser1data(LanerData);
-    setUser2data(JunglerData);
+    setUser1data({});
+    setUser2data({});
     setUserName1("");
     setUserName2("");
   }, []);
