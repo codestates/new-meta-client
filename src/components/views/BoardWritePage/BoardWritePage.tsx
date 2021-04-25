@@ -11,8 +11,7 @@ import axios from "axios";
 import { gql, useMutation } from "@apollo/client";
 import rift from "../../../assets/image/summonersrift.jpg";
 import API from "../../../api";
-
-// interface Props {}
+import Toast from "../../utils/Toast";
 
 const patchVersion = "11.7.1";
 
@@ -34,6 +33,8 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
   const playTag = useRef<HTMLTextAreaElement>(null);
   const enemyTag = useRef<HTMLTextAreaElement>(null);
   const etcTag = useRef<HTMLTextAreaElement>(null);
+
+  const [ToastMessage, setToastMessage] = useState({ success: "", fail: "" });
 
   const POST = gql`
     mutation CreatePost($data: CreatePostInputType!) {
@@ -126,7 +127,7 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
         props.history.push(location);
       });
     } else {
-      alert("공략을 모두 작성해주세요");
+      setToastMessage({ success: "", fail: "공략을 모두 작성해주세요" });
     }
   };
 
@@ -418,6 +419,13 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           </button>
         </div>
       </div>
+      {ToastMessage.fail ? (
+        <Toast
+          ToastMessage={ToastMessage}
+          setToastMessage={setToastMessage}
+          closeModal={() => null}
+        />
+      ) : null}
     </div>
   );
 }
