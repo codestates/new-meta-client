@@ -145,13 +145,9 @@ function BoardDetail(props: any): ReactElement {
       variables: {
         postId: data.id,
       },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log("error : ", err);
-      });
+    }).catch((err) => {
+      console.log("error : ", err);
+    });
   };
 
   const clickUnstar = () => {
@@ -159,13 +155,9 @@ function BoardDetail(props: any): ReactElement {
       variables: {
         postId: data.id,
       },
-    })
-      .then((res) => {
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log("error : ", err);
-      });
+    }).catch((err) => {
+      console.log("error : ", err);
+    });
   };
 
   const MY_ID = gql`

@@ -117,7 +117,6 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           data: postData,
         },
       }).then((res) => {
-        // console.log("res", res);
         const location = {
           pathname: "/board/",
           state: {
@@ -132,7 +131,6 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
   };
 
   const clickIndex = (index: number, e: MouseEvent): void => {
-    // console.log("test");
     e.currentTarget.parentElement?.children[CurrentIndex].classList.remove(
       "selected"
     );
@@ -156,7 +154,6 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
   };
 
   if (!CurrentChampion) {
-    // console.log("챔피언 미선택");
     indexBox.current?.children[1].classList.add("display-none");
     indexBox.current?.children[2].classList.add("display-none");
     indexBox.current?.children[3].classList.add("display-none");

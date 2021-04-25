@@ -57,7 +57,6 @@ function LeaveModal(props: Props): ReactElement {
         console.log("error : ", err);
       });
   };
-  console.log(AccountType);
 
   return (
     <>

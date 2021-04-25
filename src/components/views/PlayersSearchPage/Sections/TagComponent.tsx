@@ -59,7 +59,6 @@ function TagComponent(props: Props): ReactElement {
   ) {
     carryMachine.current.classList.add("active");
     carryMachine.current.textContent = "캐.리.머.신";
-    console.log("active");
   }
 
   /*  matchKillForLevel2 + matchAssistForLevel2 가 1이상인 경기가 10경기 이상인 경우  */
@@ -74,7 +73,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev2Strong.current.classList.add("active");
       lev2Strong.current.textContent = "2렙 싸움꾼";
-      console.log("active");
     }
   }
 
@@ -89,7 +87,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev3Strong.current.classList.add("active");
       lev3Strong.current.textContent = "3렙 싸움꾼";
-      console.log("active");
     }
   }
 
@@ -105,7 +102,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       heraldLover.current.classList.add("active");
       heraldLover.current.textContent = "전령은 잘 챙기는 편이야";
-      console.log("active");
     }
   }
 
@@ -119,7 +115,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       dragonKiller.current.classList.add("active");
       dragonKiller.current.textContent = "용은 잘 챙기는 편이야";
-      console.log("active");
     }
   }
 
@@ -133,7 +128,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev2Weak.current.classList.add("active");
       lev2Weak.current.textContent = "2렙에 약해요";
-      console.log("active");
     }
   }
 
@@ -147,7 +141,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       lev3Weak.current.classList.add("active");
       lev3Weak.current.textContent = "2렙에 약해요";
-      console.log("active");
     }
   }
 
@@ -167,7 +160,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 9) {
       earlyStrong.current.classList.add("active");
       earlyStrong.current.textContent = "초반에 강해요";
-      console.log("active");
     }
   }
 
@@ -181,7 +173,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 8) {
       earlyWeak.current.classList.add("active");
       earlyWeak.current.textContent = "초반에 약해요";
-      console.log("active");
     }
   }
 
@@ -195,7 +186,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       linePhaseStrong.current.classList.add("active");
       linePhaseStrong.current.textContent = "라인전 강해요";
-      console.log("active");
     }
   }
 
@@ -209,7 +199,6 @@ function TagComponent(props: Props): ReactElement {
     if (count > 5) {
       linePhaseWeak.current.classList.add("active");
       linePhaseWeak.current.textContent = "라인전 약해요";
-      console.log("active");
     }
   }
 
