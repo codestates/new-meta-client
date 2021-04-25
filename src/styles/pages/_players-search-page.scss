@@ -82,7 +82,7 @@
     }
 
     & > .solo-wrap {
-      .search-bar.players-input {
+      .search-bar-container.players-input {
         display: flex;
 
         height: 30px;
@@ -93,6 +93,11 @@
         color: $jade;
         border: none;
         justify-content: flex-end;
+        @media screen and (max-width: 700px) {
+          input {
+            width: 80px;
+          }
+        }
 
         & > input {
           background-color: $block;
@@ -111,8 +116,14 @@
     & > .duo-wrap {
       display: flex;
       justify-content: space-evenly;
+      flex-wrap: wrap;
+      @media screen and (max-width: 400px) {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+      }
 
-      .search-bar.players-input {
+      .search-bar-container.players-input {
         display: flex;
         align-self: center;
         background-color: $block;
@@ -121,6 +132,12 @@
         padding: 8px;
         color: $jade;
         justify-content: flex-end;
+        @media screen and (max-width: 700px) {
+          input {
+            width: 100px;
+          }
+        }
+
         & > input {
           background-color: $block;
           border-style: none;
@@ -444,6 +461,7 @@
             font-size: $font-size-18;
             line-height: $line-height-24;
             font-weight: 300;
+
             .match-success-points {
               display: flex;
               flex-direction: column;
@@ -645,6 +663,9 @@
         .left,
         .right {
           flex: 1 1 auto;
+          @media screen and (max-width: 1170px) {
+            width: 40%;
+          }
           & > .summoner-graph {
             width: 100%;
             display: flex;
@@ -679,6 +700,9 @@
                   .champ-win-lose {
                     font-size: $font-size-18;
                     line-height: 24px;
+                    @media screen and (max-width: 1170px) {
+                      font-size: $font-size-12;
+                    }
 
                     & > .all {
                       color: $secondary;
@@ -698,6 +722,9 @@
                     font-weight: 600;
                     display: inline-block;
                     font-size: $font-size-24;
+                    @media screen and (max-width: 1170px) {
+                      font-size: $font-size-12;
+                    }
                     .champ-rate-num {
                       color: $purple;
                     }
@@ -748,6 +775,13 @@
         width: 100%;
         justify-content: center;
       }
+    }
+  }
+}
+
+@media screen and (max-width: 1170px) {
+  .duo-search-result {
+    .duo-match-thumbnail {
     }
   }
 }
