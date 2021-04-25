@@ -34,6 +34,7 @@ const MyINFO = gql`
       user {
         nickname
         email
+        accountType
       }
       likes {
         post {
@@ -101,6 +102,7 @@ function MyPage(props: any): ReactElement {
   // eslint-disable-next-line @typescript-eslint/ban-types
   const [MyData, setMyData] = useState<myInfo | null>(null);
   const [MyPosts, setMyPosts] = useState([]);
+  const [AccountType, setAccountType] = useState("");
   const [FollowingList, setFollowingList] = useState([]);
   const [FollowerList, setFollowerList] = useState([]);
   const [PModal, SetPostModal] = useState(false);
@@ -112,6 +114,7 @@ function MyPage(props: any): ReactElement {
   const [LModal, SetLeaveModal] = useState(false);
   const userInfoQuery = useQuery(MyINFO);
   const userPostQuery = useQuery(MyPost);
+  const [SearchList, SetsearchList] = useState([]);
 
   const clickMyPost = (data: any) => {
     SetPostModal(true);
@@ -149,6 +152,7 @@ function MyPage(props: any): ReactElement {
     // todo 팔로우, 좋아요 부분 다 하기
 
     if (userInfoQuery.data) {
+      setAccountType(userInfoQuery.data.myInfo.user.accountType);
       setMyData(userInfoQuery.data.myInfo);
       setFollowerList(userInfoQuery.data.myInfo.followers); // 나를
       setFollowingList(userInfoQuery.data.myInfo.followings); // 내가
@@ -166,6 +170,11 @@ function MyPage(props: any): ReactElement {
   }, [userInfoQuery, userInfoQuery.data, userPostQuery.data]);
 
   useEffect(() => {
+    const search = localStorage.getItem("search");
+    if (search) {
+      const list = JSON.parse(search);
+      SetsearchList(list);
+    }
     userInfoQuery.refetch();
     userPostQuery.refetch();
 
@@ -183,7 +192,9 @@ function MyPage(props: any): ReactElement {
       {PModal && <PostModal closeModal={SetPostModal} data={PModalData} />}
       {CNModal && <ChangeNicknameModal closeModal={SetChangeNicknameModal} />}
       {NPModal && <NewPasswordModal closeModal={SetNewPasswordModal} />}
-      {LModal && <LeaveModal closeModal={SetLeaveModal} />}
+      {LModal && (
+        <LeaveModal closeModal={SetLeaveModal} AccountType={AccountType} />
+      )}
       {LPModal && (
         <LikePostModal closeModal={SetLPostModal} data={LPModalData} />
       )}
@@ -199,7 +210,9 @@ function MyPage(props: any): ReactElement {
         </section>
         <section className="user-info">
           <div className="box-label">Info</div>
-          <div className="user-email">Email : {MyData?.user.email}</div>
+          {AccountType === "local" && (
+            <div className="user-email">Email : {MyData?.user.email}</div>
+          )}
           <div className="numbers">
             <div className="post-num">
               <div className="">Post</div>
@@ -338,17 +351,26 @@ function MyPage(props: any): ReactElement {
           <div className="box-label">Search</div>
           <div className="label">
             <div className="left">Recent search</div>
-            <div className="right">reset</div>
+            <div
+              aria-hidden
+              onClick={() => {
+                localStorage.removeItem("search");
+                SetsearchList([]);
+              }}
+              className="right"
+            >
+              reset
+            </div>
           </div>
           <div className="search-list">
-            {tempData.user.followerIds.length > 0 ? (
-              tempData.user.followerIds.map((el: any) => {
+            {SearchList.length > 0 ? (
+              SearchList.map((el: any) => {
                 return (
-                  <div className="follow-item">
-                    <div className="nickname">osunguk</div>
-                    <div className="email">osunguk@gmail.com</div>
-                    <div className="unfollow">Unfollow</div>
-                  </div>
+                  <>
+                    <div className="search-item">
+                      <div className="nickname">{el}&#44;</div>
+                    </div>
+                  </>
                 );
               })
             ) : (
@@ -361,15 +383,25 @@ function MyPage(props: any): ReactElement {
         <section className="user-etc">
           <div className="box-label">etc.</div>
           <div className="button-group">
-            <button onClick={clickChangeNick} type="button">
-              Change Nick name
-            </button>
-            <button onClick={clickNewPassword} type="button">
-              New Password
-            </button>
-            <button onClick={clickLeave} className="leave" type="button">
-              Leave
-            </button>
+            {AccountType === "local" ? (
+              <>
+                <button onClick={clickChangeNick} type="button">
+                  Change Nick name
+                </button>
+                <button onClick={clickNewPassword} type="button">
+                  New Password
+                </button>
+                <button onClick={clickLeave} className="leave" type="button">
+                  Leave
+                </button>
+              </>
+            ) : (
+              <>
+                <button onClick={clickLeave} className="leave" type="button">
+                  Leave
+                </button>
+              </>
+            )}
           </div>
         </section>
       </div>
