@@ -167,7 +167,7 @@ function Minimap(): ReactElement {
           <h1>TOP</h1>
           <div className="text q">&#34;우리 팀 정글러, 갱 잘 와줄까?&#34;</div>
           <div className="text a">
-            &#10132;&nbsp;&nbsp;&nbsp;라인전 단계의{" "}
+            &#10174;&nbsp;&nbsp;&nbsp;라인전 단계의{" "}
             <span className="highlight">킬 관여율</span>과{" "}
             <span className="highlight">갱킹 선호도</span>를 확인해봐!
           </div>
@@ -186,7 +186,7 @@ function Minimap(): ReactElement {
             &#34;우리 팀 라이너들, CS는 얼마나 잘 챙길까?&#34;
           </div>
           <div className="text a">
-            &#10132;&nbsp;&nbsp;&nbsp;15분까지 라이너들의{" "}
+            &#10174;&nbsp;&nbsp;&nbsp;15분까지 라이너들의{" "}
             <span className="highlight">CS 경험치</span>를 비교해봐!
           </div>
         </div>
@@ -206,7 +206,7 @@ function Minimap(): ReactElement {
           </div>
           <div className="text a">
             {" "}
-            &#10132;&nbsp;&nbsp;&nbsp; 최근 챔피언의{" "}
+            &#10174;&nbsp;&nbsp;&nbsp; 최근 챔피언의{" "}
             <span className="highlight">전적</span>과{" "}
             <span className="highlight">승률</span>로 보여줄게!
           </div>
@@ -227,7 +227,7 @@ function Minimap(): ReactElement {
           </div>
           <div className="text a">
             {" "}
-            &#10132;&nbsp;&nbsp;&nbsp;정글러의
+            &#10174;&nbsp;&nbsp;&nbsp;정글러의
             <span className="highlight"> 오브젝트 획득률</span>을 확인해보자!
           </div>
         </div>
@@ -247,7 +247,7 @@ function Minimap(): ReactElement {
           </div>
           <div className="text a">
             {" "}
-            &#10132;&nbsp;&nbsp;&nbsp;
+            &#10174;&nbsp;&nbsp;&nbsp;
             <span className="highlight">메인 포지션</span>과 최근 전적의{" "}
             <span className="highlight">KDA</span>로 검증해봐!
           </div>
