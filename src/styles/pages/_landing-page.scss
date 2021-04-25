@@ -133,16 +133,17 @@
       }
 
       .text {
-        font-weight: lighter;
         font-size: 1rem;
 
         &.q {
           font-size: 0.9rem;
+          opacity: 0.7;
         }
 
         &.a {
           color: $jade;
           margin-top: 2.5rem;
+          font-weight: lighter;
 
           .highlight {
             color: $jade-light;
@@ -317,11 +318,15 @@
       display: flex;
       flex-flow: row wrap;
       height: 70vh;
+
       .first-img {
         box-shadow: 16px 16px #7044ed;
         border-top: 1px solid #5a5b62;
         border-left: 1px solid #5a5b62;
       }
+
+
+
       .last-img {
         .champ-list-image {
           border-top: 1px solid $border;
@@ -336,9 +341,9 @@
           object-position: top;
           overflow: hidden;
           height: calc(100vw / 3);
-          width: 30%;
-          left: 80% !important;
-          right: 20% !important;
+          width: 28%;
+          left: 81% !important;
+          right: 20%;
           transition: 3s;
 
           &:hover {
@@ -526,6 +531,19 @@
     .side-section {
       height: 70vh !important;
 
+      .side-img-wrapper.right.last-img {
+        position: relative !important;
+
+        .image-down {
+          position: absolute !important;
+          top: 63% !important;
+          left: 70.5% !important;
+          width: 40% !important;
+          height: 177%;
+          transform: translate(-50%, -50%);
+        }
+      }
+
       .clip-1 {
         height: 50% !important;
         top: 10% !important;
@@ -574,8 +592,18 @@
     margin-bottom: 20px;
   }
 
-  .services .side-section .text-wrapper {
-    top: 20% !important;
+  .services .side-section {
+    .text-wrapper {
+      top: 25% !important;
+    }
+
+    .side-img-wrapper.right.last-img {
+      .image-down {
+        top: 64% !important;
+        left: 71% !important;
+        height: 148%;
+      }
+    }
   }
 }
 
@@ -595,7 +623,16 @@
     }
   }
 
-  .services .side-section .text-wrapper {
-    top: 15% !important;
+  .services .side-section {
+    .text-wrapper {
+      top: 20% !important;
+    }
+    .side-img-wrapper.right.last-img {
+      .image-down {
+        top: 58% !important;
+        left: 72% !important;
+        height: 118%;
+      }
+    }
   }
 }

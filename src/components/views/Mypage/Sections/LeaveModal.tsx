@@ -77,7 +77,7 @@ function LeaveModal(props: Props): ReactElement {
             <>
               <input
                 ref={password}
-                placeholder="Inter your paassword"
+                placeholder="Enter your paassword"
                 className="password"
                 type="text"
               ></input>

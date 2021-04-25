@@ -129,24 +129,29 @@ function PlayersSearchPage(): ReactElement {
 
   const clickSearch = () => {
     const searchData = localStorage.getItem("search");
-    if (userName1) {
-      if (searchData) {
-        const list = JSON.parse(searchData);
-        list.push(userName1);
-        localStorage.setItem("search", list);
-      } else {
-        localStorage.setItem("search", JSON.stringify([userName1]));
+    try {
+      if (userName1) {
+        if (searchData) {
+          const list = JSON.parse(searchData);
+          list.push(userName1);
+          localStorage.setItem("search", JSON.stringify(list));
+        } else {
+          localStorage.setItem("search", JSON.stringify([userName1]));
+        }
       }
-    }
-    if (userName2) {
-      if (searchData) {
-        const list = JSON.parse(searchData);
-        list.push(userName2);
-        localStorage.setItem("search", list);
-      } else {
-        localStorage.setItem("search", JSON.stringify([userName2]));
+      if (userName2) {
+        if (searchData) {
+          const list = JSON.parse(searchData);
+          list.push(userName2);
+          localStorage.setItem("search", JSON.stringify(list));
+        } else {
+          localStorage.setItem("search", JSON.stringify([userName2]));
+        }
       }
+    } catch (error) {
+      console.log(error);
     }
+
     if (SearchType === "solo" && !userName1) {
       setToastMessage({
         success: "",
