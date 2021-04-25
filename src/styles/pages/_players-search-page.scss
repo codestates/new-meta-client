@@ -780,8 +780,116 @@
 }
 
 @media screen and (max-width: 1170px) {
-  .duo-search-result {
-    .duo-match-thumbnail {
+  .players-search-page {
+    .user-data-view {
+      .duo-search-result {
+        .duo-match-thumbnail {
+          height: 200px;
+          .summonerInfo {
+            .summoner-name {
+              div {
+                font-size: 1rem;
+                text-align: center;
+              }
+            }
+            .summoner-rank-info {
+              div {
+                font-size: 0.5rem;
+              }
+              .summoner-tier {
+                & > img {
+                  width: 40%;
+                  margin-top: 10px;
+                }
+              }
+            }
+          }
+          .match-success-result {
+            .match-success-points-container {
+              .match-success-name {
+                display: none;
+              }
+              .match-success-points {
+                .match-success-points {
+                  display: flex;
+                  font-size: 1rem;
+                  line-height: $line-height-12;
+                  align-items: center;
+                  justify-content: center;
+                  .result {
+                    font-size: 1rem;
+                    width: max-content;
+                    line-height: $line-height-12;
+                    .div {
+                      text-align: center;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        .both {
+          .left {
+            .summoner-graph {
+              .summoner-most-champion {
+                .mostChamp {
+                  div.mostChamp {
+                    img {
+                      width: 36px;
+                      height: 36px;
+                    }
+                    .rate-detail {
+                      .champ-rate {
+                        margin-left: 15px;
+                      }
+                    }
+                  }
+                }
+              }
+              .laneInfo {
+              }
+              .heatmapInfo {
+                .most,
+                .lane,
+                .heatmap {
+                }
+              }
+            }
+          }
+          .middle {
+          }
+          .right {
+            .summoner-graph {
+              .summoner-most-champion {
+                .mostChamp {
+                  div.mostChamp {
+                    img {
+                      width: 36px;
+                      height: 36px;
+                    }
+                    .rate-detail {
+                      .champ-rate {
+                        margin-left: 15px;
+                      }
+                    }
+                  }
+                }
+              }
+              .laneInfo {
+              }
+              .heatmapInfo {
+                .most,
+                .lane,
+                .heatmap {
+                }
+              }
+            }
+          }
+        }
+        .common-graph {
+        }
+      }
     }
   }
 }
