@@ -33,7 +33,11 @@ function App(): ReactElement {
           <Route exact path="/userpage" component={UserPage} />
           <Route exact path="/board" component={BoardPage} />
           <Route exact path="/board/read" component={BoardReadPage} />
-          <Route exact path="/board/write" component={BoardWritePage} />
+          <Route
+            exact
+            path="/board/write"
+            component={Auth(BoardWritePage, true)}
+          />
           <Route path="*" component={NotFoundPage} />
         </Switch>
       </div>

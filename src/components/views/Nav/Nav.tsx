@@ -38,8 +38,9 @@ function Nav(props: any): ReactElement {
         success: "New-Meta에 오신 것을 환영합니다!",
         fail: "",
       });
+      props.history.push("/");
     }
-  }, []);
+  }, [props]);
 
   useEffect(() => {
     setIsLogin(!!currentUser.data.token);
