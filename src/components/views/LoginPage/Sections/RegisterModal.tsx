@@ -142,11 +142,9 @@ function RegisterModal(props: Props): ReactElement {
         },
       })
         .then((res) => {
-          // console.log("success:", res);
           setIsPopupOpen(true);
         })
         .catch((err) => {
-          // console.log("error:", err);
           setToastMessage({
             success: "",
             fail: "모든 항목을 조건에 맞게 입력해주세요",
