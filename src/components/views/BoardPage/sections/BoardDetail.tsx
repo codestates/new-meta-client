@@ -172,7 +172,7 @@ function BoardDetail(props: any): ReactElement {
   const idQuery = useQuery(MY_ID);
 
   const clickAuthor = (userId: string) => {
-    if (idQuery.data.myInfo.user.id === userId) {
+    if (idQuery.data && idQuery.data.myInfo.user.id === userId) {
       props.history.push("/mypage");
     } else {
       const location = {

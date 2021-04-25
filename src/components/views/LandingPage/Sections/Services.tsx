@@ -5,6 +5,8 @@ import freljord from "../../../../assets/image/freljord.jpeg";
 import searchPage from "../../../../assets/image/searchpage-resized.gif";
 import champList from "../../../../assets/image/champList.png";
 import champDetail from "../../../../assets/image/champDetail.png";
+import writePageImg from "../../../../assets/image/boardWrite.png";
+import boardPageImg from "../../../../assets/image/boardPage.png";
 import CanvasBottom from "./CanvasBottom";
 
 const sideTotalNum = 3;
@@ -97,8 +99,21 @@ function Services(props: any): ReactElement {
 
       <div className="side-section">
         <div className="clip-2" />
-        <div className="side-img-wrapper">
-          <img className="landing-img left" src={freljord} alt="" />
+        <div className="side-img-wrapper second-img">
+          {/* 
+            writePageImg
+            boardPageImg 
+          */}
+          <img
+            className="landing-img left board-img"
+            src={boardPageImg}
+            alt=""
+          />
+          <img
+            className="landing-img left write-img"
+            src={writePageImg}
+            alt=""
+          />
         </div>
         <div className="text-wrapper second">
           <div className="title">Create Your New Meta</div>
