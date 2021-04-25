@@ -26,14 +26,14 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
 
   const titleTag = useRef<HTMLInputElement>(null);
   const descriptionTag = useRef<HTMLInputElement>(null);
-  const skillTagQ = useRef<HTMLTextAreaElement>(null);
-  const skillTagW = useRef<HTMLTextAreaElement>(null);
-  const skillTagE = useRef<HTMLTextAreaElement>(null);
-  const skillTagR = useRef<HTMLTextAreaElement>(null);
+  const skillTagQ = useRef<HTMLInputElement>(null);
+  const skillTagW = useRef<HTMLInputElement>(null);
+  const skillTagE = useRef<HTMLInputElement>(null);
+  const skillTagR = useRef<HTMLInputElement>(null);
 
-  const playTag = useRef<HTMLTextAreaElement>(null);
-  const enemyTag = useRef<HTMLTextAreaElement>(null);
-  const etcTag = useRef<HTMLTextAreaElement>(null);
+  const playTag = useRef<HTMLInputElement>(null);
+  const enemyTag = useRef<HTMLInputElement>(null);
+  const etcTag = useRef<HTMLInputElement>(null);
 
   const POST = gql`
     mutation CreatePost($data: CreatePostInputType!) {
@@ -321,11 +321,11 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
                 </div>
               </>
             )}
-            <textarea
+            <input
               maxLength={50}
               ref={skillTagQ}
               placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
-            ></textarea>
+            ></input>
           </div>
           <div className="skill-w">
             {SkillImages.length > 0 && (
@@ -339,10 +339,11 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
                 </div>
               </>
             )}
-            <textarea
+            <input
+              className="input-long"
               ref={skillTagW}
               placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
-            ></textarea>
+            ></input>
           </div>
           <div className="skill-e">
             {SkillImages.length > 0 && (
@@ -356,10 +357,10 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
                 </div>
               </>
             )}
-            <textarea
+            <input
               ref={skillTagE}
               placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
-            ></textarea>
+            ></input>
           </div>
           <div className="skill-r">
             {SkillImages.length > 0 && (
@@ -373,10 +374,10 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
                 </div>
               </>
             )}
-            <textarea
+            <input
               ref={skillTagR}
               placeholder=" 소환사님만의 스킬 사용법을 알려주세요!"
-            ></textarea>
+            ></input>
           </div>
         </div>
         <div className="write-page page-3">
@@ -394,25 +395,25 @@ function BoardWritePage(props: RouteComponentProps): ReactElement {
           </button>
           <div className="title">Tip`s</div>
           <div className="label">플레이할 때</div>
-          <textarea
+          <input
             ref={playTag}
             className="play-tips"
             placeholder=" 챔피언의 플레이 스타일을 작성해주세요!"
-          ></textarea>
+          ></input>
           <div className="label">상대 할 때</div>
-          <textarea
+          <input
             ref={enemyTag}
             className="enemy-tips"
             placeholder=" 챔피언의 챔피언 상대법을 알려주세요!"
-          ></textarea>
+          ></input>
         </div>
         <div className="write-page page-4">
           <div className="title">.etc</div>
-          <textarea
+          <input
             ref={etcTag}
             className="another-tips"
             placeholder=" 그 외에 독특한 챔피언 팁이 있다면 알려주세요!"
-          ></textarea>
+          ></input>
           <button onClick={clickPost} className="post-btn" type="button">
             Post
           </button>
