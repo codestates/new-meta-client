@@ -386,7 +386,7 @@ function MyPage(props: any): ReactElement {
             {AccountType === "local" ? (
               <>
                 <button onClick={clickChangeNick} type="button">
-                  Change Nick name
+                  Change Nickname
                 </button>
                 <button onClick={clickNewPassword} type="button">
                   New Password
