@@ -126,28 +126,35 @@
       padding-top: 3.5rem;
 
       h1 {
-        font-size: 1.5rem;
-        font-weight: 600;
-        margin-bottom: 1rem;
-        opacity: 0.9;
+        font-size: 1.7rem;
+        font-weight: 500;
+        margin-bottom: 0.8rem;
       }
 
       .text {
         font-size: 1rem;
+        font-weight: 200;
 
         &.q {
           font-size: 0.9rem;
-          opacity: 0.7;
+          opacity: 0.6;
+          padding-left: 0.5rem;
         }
 
         &.a {
-          color: $jade;
+          color: $primary;
           margin-top: 2.5rem;
-          font-weight: lighter;
+          font-weight: 300;
 
           .highlight {
             color: $jade-light;
             font-weight: 500;
+          }
+
+          .arrow {
+            color: $jade-light;
+            opacity: 0.6;
+            font-size: 1.3rem !important;
           }
         }
       }
@@ -160,7 +167,7 @@
     padding: 30px 30px 30px 70px;
     width: 50%;
     top: 35%;
-    left: 6.5%;
+    left: 6%;
     z-index: 5;
     visibility: visible;
     opacity: 1;
@@ -376,7 +383,7 @@
 
         .left {
           position: absolute;
-          left: 30%;
+          left: 29.5%;
           top: 85%;
           transform: translate(-50%, -50%);
         }
@@ -398,7 +405,7 @@
 
         .title {
           font-weight: 400;
-          font-size: 1.8rem;
+          font-size: 1.7rem;
         }
 
         .description {
@@ -544,16 +551,24 @@
     .side-section {
       height: 70vh !important;
 
-      .side-img-wrapper.right.last-img {
-        position: relative !important;
+      .side-img-wrapper {
+        &.second-img .landing-img.left.write-img {
+          width: 48% !important;
+          top: 81% !important;
+          left: 62% !important;
+        }
 
-        .image-down {
-          position: absolute !important;
-          top: 63% !important;
-          left: 70.5% !important;
-          width: 40% !important;
-          height: 177%;
-          transform: translate(-50%, -50%);
+        &.right.last-img {
+          position: relative !important;
+
+          .image-down {
+            position: absolute !important;
+            top: 63% !important;
+            left: 70.5% !important;
+            width: 40% !important;
+            height: 177%;
+            transform: translate(-50%, -50%);
+          }
         }
       }
 
@@ -578,7 +593,7 @@
 
       .text-wrapper {
         position: relative !important;
-        top: 30% !important;
+        top: 28% !important;
         left: 50% !important;
         transform: translate(-50%, -50%);
         text-align: center;
@@ -607,7 +622,7 @@
 
   .services .side-section {
     .text-wrapper {
-      top: 25% !important;
+      top: 23% !important;
     }
 
     .side-img-wrapper.right.last-img {
@@ -638,13 +653,13 @@
 
   .services .side-section {
     .text-wrapper {
-      top: 20% !important;
+      top: 18% !important;
     }
     .side-img-wrapper.right.last-img {
       .image-down {
-        top: 58% !important;
+        top: 62% !important;
         left: 72% !important;
-        height: 118%;
+        height: 115%;
       }
     }
   }
