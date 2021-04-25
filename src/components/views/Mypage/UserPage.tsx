@@ -167,13 +167,9 @@ function UserPage(props: RouteComponentProps): ReactElement {
         variables: {
           targetId: state.userId,
         },
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   };
 
@@ -184,13 +180,9 @@ function UserPage(props: RouteComponentProps): ReactElement {
         variables: {
           targetId: state.userId,
         },
-      })
-        .then((res) => {
-          console.log(res);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   };
 

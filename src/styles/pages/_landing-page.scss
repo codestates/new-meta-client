@@ -318,6 +318,30 @@
       display: flex;
       flex-flow: row wrap;
       height: 70vh;
+      .last-img {
+        .champ-list-image {
+          border-top: 1px solid $border;
+          border-left: 1px solid $border;
+          box-shadow: 16px 16px $purple;
+        }
+
+        .image-down {
+          top: 98% !important;
+          border: 1px solid rgba($border, $alpha: 0.5);
+          object-fit: cover;
+          object-position: top;
+          overflow: hidden;
+          height: calc(100vw / 3);
+          width: 30%;
+          left: 80% !important;
+          right: 20% !important;
+          transition: 3s;
+
+          &:hover {
+            object-position: bottom;
+          }
+        }
+      }
 
       .side-img-wrapper {
         width: 100%;

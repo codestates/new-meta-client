@@ -56,7 +56,6 @@ function NewPasswordModal(props: Props): ReactElement {
         },
       })
         .then((res) => {
-          // console.log(res);
           closeModal(false);
         })
         .catch((err) => {

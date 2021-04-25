@@ -170,7 +170,6 @@ function PostModal(props: Props): ReactElement {
         postId: data.id,
       },
     }).then((res) => {
-      console.log(res);
       closeModal(false);
     });
   };
