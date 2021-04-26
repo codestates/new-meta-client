@@ -502,6 +502,9 @@
           .summoner-name {
             font-size: $font-size-24;
             margin: 15px;
+            height: 40px;
+            display: flex;
+            align-items: center;
           }
 
           .summoner-rank-info {

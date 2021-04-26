@@ -36,7 +36,7 @@ function PlayersSearchPage(): ReactElement {
 
   useEffect(() => {
     setUser1data(LanerData);
-    setUser2data(JunglerData);
+    setUser2data({});
     setUserName1("");
     setUserName2("");
   }, []);

@@ -13,7 +13,7 @@ import React, {
 import axios from "axios";
 import Chart from "react-apexcharts";
 import API from "../../../../api";
-import { LeagueInfo, PlayerMatchInfo } from "../interface";
+import { PlayerMatchInfo } from "../interface";
 
 interface Props {
   userData: PlayerMatchInfo[];
