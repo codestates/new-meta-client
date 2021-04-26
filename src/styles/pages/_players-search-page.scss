@@ -74,10 +74,6 @@
         bottom: 0px;
         overflow: hidden;
         color: $secondary;
-
-        // @media screen and (max-width: 512px) {
-        //   height: 40px;
-        // }
       }
     }
 
@@ -93,11 +89,6 @@
         color: $jade;
         border: none;
         justify-content: flex-end;
-        // @media screen and (max-width: 700px) {
-        //   input {
-        //     width: 80px;
-        //   }
-        // }
 
         & > input {
           background-color: $block;
@@ -116,12 +107,6 @@
     & > .duo-wrap {
       display: flex;
       justify-content: space-evenly;
-      // flex-wrap: wrap;
-      // @media screen and (max-width: 400px) {
-      //   display: flex;
-      //   justify-content: center;
-      //   flex-direction: column;
-      // }
 
       .search-bar-container.players-input {
         display: flex;
@@ -132,11 +117,6 @@
         padding: 8px;
         color: $jade;
         justify-content: flex-end;
-        // @media screen and (max-width: 700px) {
-        //   input {
-        //     width: 100px;
-        //   }
-        // }
 
         & > input {
           background-color: $block;
@@ -361,7 +341,7 @@
           }
 
           .graph {
-            flex: 0 0 300px;
+            flex: 0 0 270px;
             position: relative;
             margin: 20px;
             padding: 20px;
@@ -370,7 +350,7 @@
           }
           .summoner-most-champion {
             height: 260px;
-            width: 300px;
+            width: 280px;
 
             .most-champ-wrap {
               justify-content: space-evenly;
@@ -427,20 +407,16 @@
           }
 
           .win-rate {
-            // flex: 0 0 0px;
             margin: 20px;
             padding: 20px;
             height: 260px;
-            // width: 300px;
-            // position: relative !important;
             display: flex;
 
             .winRate-Chart {
-              position: absolute !important;
-              justify-content: center;
-              align-items: center;
-              // width: 300px;
-              // left: 0;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
             }
           }
           .timeline-chart {
@@ -448,6 +424,11 @@
           }
           .heatmap {
             padding-top: 1rem;
+            position: relative;
+            width: 100%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
           }
         }
       }
@@ -637,9 +618,6 @@
         .middle {
           z-index: 2;
           position: absolute;
-          // transform: translate(-50%, -50%);
-          // top: 50%;
-          // left: 50%;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -648,7 +626,7 @@
 
           .text {
             height: max-content;
-            padding: 3rem 0;
+            padding: 3rem 0.3rem;
             background-color: $background;
           }
 
@@ -683,9 +661,7 @@
         .left,
         .right {
           flex: 1 1 auto;
-          // @media screen and (max-width: 1170px) {
-          //   width: 40%;
-          // }
+
           & > .summoner-graph {
             width: 100%;
             display: flex;
@@ -720,9 +696,6 @@
                   .champ-win-lose {
                     font-size: $font-size-18;
                     line-height: 24px;
-                    // @media screen and (max-width: 1170px) {
-                    //   font-size: $font-size-12;
-                    // }
 
                     & > .all {
                       color: $secondary;
@@ -801,49 +774,27 @@
 
 @media screen and (max-width: 1200px) {
   .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section {
-    // height: 230px;
     position: relative;
 
     .graph {
-      // flex: 0 0 25%;
-      // margin: 20px 10px;
-      // height: 100%;
+      flex: 0 0 250px;
     }
 
     .graph-laneInfo {
       position: relative !important;
 
       .div-laneInfo {
-        // width: 100% !important;
         position: absolute !important;
         transform: translate(-50%, -50%) !important;
         left: 50%;
         top: 50%;
 
         .LaneInfo-chart {
-          // width: 0 !important;
-          // transform: translate(-50%, -50%);
-          // left: 50%;
-          // top: 50%;
-          // position: absolute;
-
           display: flex;
           justify-content: center !important;
           align-items: center !important;
-          // padding-left: 2rem;
         }
       }
-    }
-  }
-
-  .win-rate {
-    // width: 200px;
-    height: auto;
-
-    .winRate-Chart {
-      left: 50% !important;
-      top: 50%;
-      transform: translate(-50%, -50%);
     }
   }
 }
@@ -862,22 +813,23 @@
     }
 
     .user-data-view {
+      .solo-search-result > .summoner-graph .graph-section {
+        .graph {
+          flex: 0 0 240px;
+        }
+      }
+
       .duo-search-result {
         position: relative;
 
         .duo-match-thumbnail {
-          // height: 250px;
           .summonerInfo {
             .summoner-name {
               div {
-                // font-size: 1rem;
                 text-align: center;
               }
             }
             .summoner-rank-info {
-              div {
-                // font-size: 0.5rem;
-              }
               .summoner-tier {
                 & > img {
                   width: 22% !important;
@@ -889,7 +841,6 @@
                 .tag {
                   padding: 8px 10px;
                   position: absolute;
-                  // flex-wrap:;
                 }
               }
             }
@@ -897,8 +848,6 @@
           .match-success-result {
             .match-success-points-container {
               .match-success-name {
-                // display: none;
-                // width: 100% !important;
                 word-break: keep-all;
                 padding-bottom: 1rem;
               }
@@ -912,10 +861,12 @@
                   line-height: $line-height-12;
                   align-items: center;
                   justify-content: center;
+
                   .result {
                     font-size: 1rem;
                     width: max-content;
                     line-height: $line-height-12;
+
                     .div {
                       text-align: center;
                     }
@@ -926,10 +877,6 @@
           }
         }
         .both {
-          // position: absolute;
-          // top: 330%;
-          // left: 50%;
-          // transform: translate(-50%, -50%);
           .left {
             .summoner-graph {
               .summoner-most-champion {
@@ -947,18 +894,7 @@
                   }
                 }
               }
-              .laneInfo {
-              }
-              .heatmapInfo {
-                .most,
-                .lane,
-                .heatmap {
-                }
-              }
             }
-          }
-          .middle {
-            // top: 53%;
           }
           .right {
             .summoner-graph {
@@ -977,20 +913,8 @@
                   }
                 }
               }
-              .laneInfo {
-              }
-              .heatmapInfo {
-                .most,
-                .lane,
-                .heatmap {
-                }
-              }
             }
           }
-        }
-        .common-graph {
-          // position: absolute;
-          // top: 550%;
         }
       }
     }
@@ -999,6 +923,21 @@
 @media screen and (max-width: $md-breakpoint) {
   .user-data-view {
     margin: 10px !important;
+
+    .solo-search-result > .summoner-graph .graph-section {
+      .graph {
+        &.exp-timeline {
+          padding: 20px 0 !important;
+        }
+
+        .timeline-chart,
+        .heatmap {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
 
     .duo-search-result {
       .duo-match-thumbnail {
@@ -1032,7 +971,6 @@
 
   .players-search-bar {
     .search-bar-container.players-input {
-      // height: 20px !important;
       width: 32% !important;
 
       input {
@@ -1054,24 +992,23 @@
   }
 
   .middle {
-    // top: 41% !important;
-    // top: 46% !important;
     position: absolute;
     font-size: 1rem !important;
 
-    .text {
-      // padding: 3rem 0 !important;
-    }
-
-    .lane.text {
-      top: 20% !important;
+    .heatmap {
+      height: 280px !important;
     }
   }
 }
 
 @media screen and (max-width: 600px) {
+  .players-search-page .user-data-view .solo-search-result > .summoner-graph .graph-section {
+    .graph {
+      flex: 0 0 280px !important;
+    }
+  }
+
   .duo-match-thumbnail {
-    // height: 250px;
     .summonerInfo {
       .summoner-name {
         div {
@@ -1086,11 +1023,6 @@
     }
   }
   .duo-search-result > .both .middle {
-    // // top: 41% !important;
-    // // top: 46% !important;
-    // position: absolute;
-    // font-size: 1rem !important;
-
     .most {
       align-items: flex-start !important;
 
@@ -1141,10 +1073,8 @@
         }
 
         .match-success-result {
-          // justify-content: center !important;
-          // margin-top: 3rem !important;
           margin: 3rem 0.5rem 0 0.5rem !important;
-          // align-items: center !important;
+
           .match-success-points-container {
             .match-success-name {
               font-size: 0.9rem;
@@ -1172,7 +1102,6 @@
     flex-direction: column !important;
     margin-top: 1rem;
     margin-right: 9rem;
-    // position: absolute;
 
     .search-bar-container.players-input {
       margin: 5px 5px 0px 40px;
@@ -1192,15 +1121,10 @@
 
   .match-search-bar.duo-wrap {
     flex-direction: column !important;
-    // align-items: flex-start !important;
-    // align-self: none !important;
-    // justify-content: flex-start !important;
     margin-top: 0.5rem;
     margin-right: 9rem;
-    // position: absolute;
 
     .search-bar-container.players-input {
-      // align-self: none;
       margin: 5px 5px 0px 40px;
       width: 40% !important;
       height: 22px !important;
@@ -1213,8 +1137,6 @@
     .summoner-search-btn {
       position: absolute;
       right: 10%;
-      // margin: 10px 10px 10px 5px !important;
-      // padding: 18px 23px !important;
     }
   }
 }
