@@ -138,7 +138,33 @@ function TimelineChart(props: Props): ReactElement {
 
   const data = {
     series: timelineData,
+
     options: {
+      responsive: [
+        {
+          breakpoint: 400,
+          options: {
+            chart: {
+              width: "300px",
+              height: "200px",
+              type: "bar",
+            },
+            grid: {
+              show: false,
+              offsetX: -25,
+              offsetY: -5,
+            },
+            yaxis: [
+              { show: true, labels: { show: false } },
+              {
+                show: true,
+                opposite: true,
+                labels: { show: false },
+              },
+            ],
+          },
+        },
+      ],
       colors: ["#815de6", "#00b6a4"],
       tooltip: {
         theme: "dark",
