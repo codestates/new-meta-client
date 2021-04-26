@@ -33,7 +33,10 @@ function ChampionCardList(props: Props): ReactElement {
 
   const inreaseCounter = () => {
     setCounter(Counter + 1);
-    if (Counter + 1 > 40) {
+    const rendingCardCount =
+      Math.floor(window.innerWidth / 150) * Math.ceil(window.innerHeight / 272);
+
+    if (Counter + 1 > rendingCardCount) {
       setLoad(false);
     }
   };
