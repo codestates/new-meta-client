@@ -189,6 +189,13 @@
   }
 }
 
+@media screen and (max-width: 767px) {
+  .logout,
+  .login {
+    transform: translate(-65%, -50%) !important;
+  }
+}
+
 // .nav-btn {
 //   font-size: 17px;
 //   padding: 6px 19px;

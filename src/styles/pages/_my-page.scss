@@ -481,3 +481,18 @@
   top: 50% !important;
   left: 27% !important;
 }
+
+@media screen and (max-width: 400px) {
+  .change-modal {
+    .btn-wrapper {
+      top: 45% !important;
+    }
+  }
+
+  .new-password-modal {
+    height: 50%;
+    .btn-wrapper {
+      top: 68% !important;
+    }
+  }
+}

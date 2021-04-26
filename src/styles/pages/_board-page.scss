@@ -862,3 +862,14 @@
     }
   }
 }
+
+@media screen and (max-width: 767px) {
+  .simple-text {
+    flex: 1 0 100px !important;
+  }
+
+  .simple-text3,
+  .simple-text4 {
+    display: none !important;
+  }
+}

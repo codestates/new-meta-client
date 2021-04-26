@@ -336,6 +336,7 @@
         position: relative;
 
         .write-img {
+          z-index: 2;
           top: 105% !important;
           left: 37% !important;
           width: calc(90vw / 3);
