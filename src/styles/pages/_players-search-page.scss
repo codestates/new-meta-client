@@ -75,9 +75,9 @@
         overflow: hidden;
         color: $secondary;
 
-        @media screen and (max-width: 512px) {
-          height: 40px;
-        }
+        // @media screen and (max-width: 512px) {
+        //   height: 40px;
+        // }
       }
     }
 
@@ -93,11 +93,11 @@
         color: $jade;
         border: none;
         justify-content: flex-end;
-        @media screen and (max-width: 700px) {
-          input {
-            width: 80px;
-          }
-        }
+        // @media screen and (max-width: 700px) {
+        //   input {
+        //     width: 80px;
+        //   }
+        // }
 
         & > input {
           background-color: $block;
@@ -116,12 +116,12 @@
     & > .duo-wrap {
       display: flex;
       justify-content: space-evenly;
-      flex-wrap: wrap;
-      @media screen and (max-width: 400px) {
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-      }
+      // flex-wrap: wrap;
+      // @media screen and (max-width: 400px) {
+      //   display: flex;
+      //   justify-content: center;
+      //   flex-direction: column;
+      // }
 
       .search-bar-container.players-input {
         display: flex;
@@ -132,11 +132,11 @@
         padding: 8px;
         color: $jade;
         justify-content: flex-end;
-        @media screen and (max-width: 700px) {
-          input {
-            width: 100px;
-          }
-        }
+        // @media screen and (max-width: 700px) {
+        //   input {
+        //     width: 100px;
+        //   }
+        // }
 
         & > input {
           background-color: $block;
@@ -158,6 +158,7 @@
       align-self: center;
       flex-direction: row;
       justify-content: center;
+      width: 100%;
 
       & > .summoner-search-btn {
         display: inline-block;
@@ -226,9 +227,11 @@
           $tooltip-height: max-content;
           $tooltip-width: 130px;
           display: flex;
-          justify-content: space-evenly;
+          justify-content: center;
+          align-items: center;
           height: 50px;
           width: 100%;
+          flex-wrap: nowrap;
 
           .tag {
             display: none;
@@ -424,10 +427,21 @@
           }
 
           .win-rate {
-            flex: 0 0 0px;
+            // flex: 0 0 0px;
             margin: 20px;
             padding: 20px;
             height: 260px;
+            // width: 300px;
+            // position: relative !important;
+            display: flex;
+
+            .winRate-Chart {
+              position: absolute !important;
+              justify-content: center;
+              align-items: center;
+              // width: 300px;
+              // left: 0;
+            }
           }
           .timeline-chart {
             padding-top: 1rem;
@@ -522,8 +536,10 @@
               $tooltip-height: max-content;
               $tooltip-width: 130px;
               display: flex;
-              flex-wrap: wrap;
-              justify-content: space-evenly;
+              // flex-wrap: wrap;
+              word-break: keep-word;
+              justify-content: center;
+              align-items: center;
               width: 100%;
               height: 100px;
 
@@ -611,20 +627,21 @@
 
       & > .both {
         display: flex;
-        justify-content: space-between;
+        justify-content: center;
         position: relative;
         z-index: 1;
 
         .middle {
           z-index: 2;
           position: absolute;
-          transform: translate(-50%, -50%);
-          top: 50%;
-          left: 50%;
+          // transform: translate(-50%, -50%);
+          // top: 50%;
+          // left: 50%;
           display: flex;
           flex-direction: column;
           align-items: center;
           font-size: 1.1rem;
+          flex: 0 0 180px;
 
           .text {
             height: max-content;
@@ -663,9 +680,9 @@
         .left,
         .right {
           flex: 1 1 auto;
-          @media screen and (max-width: 1170px) {
-            width: 40%;
-          }
+          // @media screen and (max-width: 1170px) {
+          //   width: 40%;
+          // }
           & > .summoner-graph {
             width: 100%;
             display: flex;
@@ -700,9 +717,9 @@
                   .champ-win-lose {
                     font-size: $font-size-18;
                     line-height: 24px;
-                    @media screen and (max-width: 1170px) {
-                      font-size: $font-size-12;
-                    }
+                    // @media screen and (max-width: 1170px) {
+                    //   font-size: $font-size-12;
+                    // }
 
                     & > .all {
                       color: $secondary;
@@ -779,27 +796,97 @@
   }
 }
 
+@media screen and (max-width: 1200px) {
+  .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section {
+    // height: 230px;
+    position: relative;
+
+    .graph {
+      // flex: 0 0 25%;
+      // margin: 20px 10px;
+      // height: 100%;
+    }
+
+    .graph-laneInfo {
+      position: relative !important;
+
+      .div-laneInfo {
+        // width: 100% !important;
+        position: absolute !important;
+        transform: translate(-50%, -50%) !important;
+        left: 50%;
+        top: 50%;
+
+        .LaneInfo-chart {
+          // width: 0 !important;
+          // transform: translate(-50%, -50%);
+          // left: 50%;
+          // top: 50%;
+          // position: absolute;
+
+          display: flex;
+          justify-content: center !important;
+          align-items: center !important;
+          // padding-left: 2rem;
+        }
+      }
+    }
+  }
+
+  .win-rate {
+    // width: 200px;
+    height: auto;
+
+    .winRate-Chart {
+      left: 50% !important;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+
 @media screen and (max-width: 1170px) {
   .players-search-page {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    top: 57%;
+    left: 50%;
+
+    .players-search-bar {
+      .search-bar-container.players-input {
+        height: 25px !important;
+      }
+    }
+
     .user-data-view {
       .duo-search-result {
+        position: relative;
+
         .duo-match-thumbnail {
-          height: 200px;
+          // height: 250px;
           .summonerInfo {
             .summoner-name {
               div {
-                font-size: 1rem;
+                // font-size: 1rem;
                 text-align: center;
               }
             }
             .summoner-rank-info {
               div {
-                font-size: 0.5rem;
+                // font-size: 0.5rem;
               }
               .summoner-tier {
                 & > img {
-                  width: 40%;
-                  margin-top: 10px;
+                  width: 22% !important;
+                  margin-top: 20px;
+                }
+              }
+              .summoner-tags {
+                position: relative;
+                .tag {
+                  padding: 8px 10px;
+                  position: absolute;
+                  // flex-wrap:;
                 }
               }
             }
@@ -807,9 +894,15 @@
           .match-success-result {
             .match-success-points-container {
               .match-success-name {
-                display: none;
+                // display: none;
+                // width: 100% !important;
+                word-break: keep-all;
+                padding-bottom: 1rem;
               }
               .match-success-points {
+                line-height: 1.7 !important;
+                padding-bottom: 1.5rem;
+
                 .match-success-points {
                   display: flex;
                   font-size: 1rem;
@@ -830,6 +923,10 @@
           }
         }
         .both {
+          // position: absolute;
+          // top: 330%;
+          // left: 50%;
+          // transform: translate(-50%, -50%);
           .left {
             .summoner-graph {
               .summoner-most-champion {
@@ -858,6 +955,7 @@
             }
           }
           .middle {
+            // top: 53%;
           }
           .right {
             .summoner-graph {
@@ -888,8 +986,232 @@
           }
         }
         .common-graph {
+          // position: absolute;
+          // top: 550%;
         }
       }
+    }
+  }
+}
+@media screen and (max-width: $md-breakpoint) {
+  .user-data-view {
+    margin: 10px !important;
+
+    .duo-search-result {
+      .duo-match-thumbnail {
+        .match-success-result {
+          margin: 0 !important;
+
+          .match-success-points-container {
+            .match-success-name {
+              font-size: 1rem;
+              line-height: 25px;
+            }
+            .match-success-points.match-success-points {
+              font-size: 0.9rem !important;
+              line-height: 50px !important;
+              .result {
+                font-size: 0.9rem !important;
+                .number {
+                  font-size: 1.2rem !important;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      .both {
+        margin: 10px !important;
+      }
+    }
+  }
+
+  .players-search-bar {
+    .search-bar-container.players-input {
+      // height: 20px !important;
+      width: 32% !important;
+
+      input {
+        width: 70%;
+      }
+    }
+  }
+
+  .summoner-tags {
+    margin: 20px;
+    display: flex;
+    flex-flow: column wrap;
+    height: 120px !important;
+
+    .tag {
+      padding: 6px 12px !important;
+      margin-bottom: 5px;
+    }
+  }
+
+  .middle {
+    // top: 41% !important;
+    // top: 46% !important;
+    position: absolute;
+    font-size: 1rem !important;
+
+    .text {
+      // padding: 3rem 0 !important;
+    }
+
+    .lane.text {
+      top: 20% !important;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .duo-match-thumbnail {
+    // height: 250px;
+    .summonerInfo {
+      .summoner-name {
+        div {
+          font-size: 1.2rem;
+        }
+      }
+      .summoner-rank-info {
+        div {
+          font-size: 0.7rem;
+        }
+      }
+    }
+  }
+  .duo-search-result > .both .middle {
+    // // top: 41% !important;
+    // // top: 46% !important;
+    // position: absolute;
+    // font-size: 1rem !important;
+
+    .most {
+      align-items: flex-start !important;
+
+      .text {
+        padding: 0 1.5rem 0.8rem 1.5rem !important;
+      }
+    }
+
+    .lane {
+      align-items: flex-start !important;
+
+      .text {
+        padding: 0 1.5rem 0.8rem 1.5rem !important;
+      }
+    }
+
+    .heatmap {
+      align-items: flex-start !important;
+
+      .text {
+        padding: 0 1.5rem 0.8rem 1.5rem !important;
+      }
+    }
+
+    .lane.text {
+      padding: 1rem 0rem !important;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .user-data-view {
+    .duo-search-result {
+      margin-top: 1rem;
+
+      .duo-match-thumbnail {
+        align-items: flex-start !important;
+
+        .summonerInfo {
+          .summoner-rank-info {
+            .summoner-tags {
+              .tag {
+                margin-right: 0 !important;
+                padding: 6px 8px !important;
+              }
+            }
+          }
+        }
+
+        .match-success-result {
+          // justify-content: center !important;
+          // margin-top: 3rem !important;
+          margin: 3rem 0.5rem 0 0.5rem !important;
+          // align-items: center !important;
+          .match-success-points-container {
+            .match-success-name {
+              font-size: 0.9rem;
+            }
+          }
+        }
+      }
+
+      .both {
+        .left {
+          margin-right: 0 !important;
+        }
+        .right {
+          margin-left: 0 !important;
+
+          .summoner-graph .graph.summoner-most-champion {
+            border-left: 0px !important;
+          }
+        }
+      }
+    }
+  }
+
+  .match-search-bar.solo-wrap {
+    flex-direction: column !important;
+    margin-top: 1rem;
+    margin-right: 9rem;
+    // position: absolute;
+
+    .search-bar-container.players-input {
+      margin: 5px 5px 0px 40px;
+      width: 40% !important;
+      height: 22px !important;
+
+      i {
+        font-size: 20px !important;
+      }
+    }
+
+    .summoner-search-btn {
+      position: absolute;
+      right: 10%;
+    }
+  }
+
+  .match-search-bar.duo-wrap {
+    flex-direction: column !important;
+    // align-items: flex-start !important;
+    // align-self: none !important;
+    // justify-content: flex-start !important;
+    margin-top: 0.5rem;
+    margin-right: 9rem;
+    // position: absolute;
+
+    .search-bar-container.players-input {
+      // align-self: none;
+      margin: 5px 5px 0px 40px;
+      width: 40% !important;
+      height: 22px !important;
+
+      i {
+        font-size: 20px !important;
+      }
+    }
+
+    .summoner-search-btn {
+      position: absolute;
+      right: 10%;
+      // margin: 10px 10px 10px 5px !important;
+      // padding: 18px 23px !important;
     }
   }
 }

@@ -311,7 +311,7 @@ function DuoTimeLine(props: Props): ReactElement {
               },
             },
             chart: {
-              width: "500px",
+              width: "480px",
               height: "250px",
               type: "bar",
             },
@@ -355,7 +355,7 @@ function DuoTimeLine(props: Props): ReactElement {
               },
             },
             chart: {
-              width: "300px",
+              width: "360px",
               height: "250px",
               type: "bar",
             },
