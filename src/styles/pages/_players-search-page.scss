@@ -335,6 +335,26 @@
           justify-content: center;
           flex-wrap: wrap;
 
+          .win-rate {
+            // width: 200px;
+            // height: auto;
+            // position: absolute;
+            // display: flex;
+            // justify-content: center;
+            // align-items: center;
+
+            .winRate-Chart {
+              // display: flex;
+              // justify-content: center;
+              // align-items: center;
+              // width: 100% !important;
+              // position: absolute;
+              // left: 50%;
+              // top: 50%;
+              // transform: translate(-50%, -50%);
+            }
+          }
+
           .graph-laneInfo {
             flex: 0 0 250px;
             position: relative;
@@ -361,7 +381,7 @@
           }
 
           .graph {
-            flex: 0 0 300px;
+            flex: 0 0 270px;
             position: relative;
             margin: 20px;
             padding: 20px;
@@ -370,7 +390,7 @@
           }
           .summoner-most-champion {
             height: 260px;
-            width: 300px;
+            width: 280px;
 
             .most-champ-wrap {
               justify-content: space-evenly;
@@ -436,9 +456,13 @@
             display: flex;
 
             .winRate-Chart {
-              position: absolute !important;
-              justify-content: center;
-              align-items: center;
+              // position: absolute !important;
+              // justify-content: center;
+              // align-items: center;
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
               // width: 300px;
               // left: 0;
             }
@@ -448,6 +472,11 @@
           }
           .heatmap {
             padding-top: 1rem;
+            position: relative;
+            width: 100%;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
           }
         }
       }
@@ -648,7 +677,7 @@
 
           .text {
             height: max-content;
-            padding: 3rem 0;
+            padding: 3rem 0.3rem;
             background-color: $background;
           }
 
@@ -805,7 +834,7 @@
     position: relative;
 
     .graph {
-      // flex: 0 0 25%;
+      flex: 0 0 250px;
       // margin: 20px 10px;
       // height: 100%;
     }
@@ -835,17 +864,6 @@
       }
     }
   }
-
-  .win-rate {
-    // width: 200px;
-    height: auto;
-
-    .winRate-Chart {
-      left: 50% !important;
-      top: 50%;
-      transform: translate(-50%, -50%);
-    }
-  }
 }
 
 @media screen and (max-width: 1170px) {
@@ -862,6 +880,14 @@
     }
 
     .user-data-view {
+      .solo-search-result > .summoner-graph .graph-section {
+        .graph {
+          flex: 0 0 240px;
+          // margin: 20px 10px;
+          // height: 100%;
+        }
+      }
+
       .duo-search-result {
         position: relative;
 
@@ -1000,6 +1026,25 @@
   .user-data-view {
     margin: 10px !important;
 
+    .solo-search-result > .summoner-graph .graph-section {
+      .graph {
+        // flex: 0 0 180px !important;
+        // margin: 20px 10px;
+        // height: 100%;
+
+        &.exp-timeline {
+          padding: 20px 0 !important;
+        }
+
+        .timeline-chart,
+        .heatmap {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+        }
+      }
+    }
+
     .duo-search-result {
       .duo-match-thumbnail {
         .match-success-result {
@@ -1063,13 +1108,21 @@
       // padding: 3rem 0 !important;
     }
 
-    .lane.text {
-      top: 20% !important;
+    .heatmap {
+      height: 280px !important;
     }
   }
 }
 
 @media screen and (max-width: 600px) {
+  .players-search-page .user-data-view .solo-search-result > .summoner-graph .graph-section {
+    .graph {
+      flex: 0 0 280px !important;
+      // margin: 20px 10px;
+      // height: 100%;
+    }
+  }
+
   .duo-match-thumbnail {
     // height: 250px;
     .summonerInfo {

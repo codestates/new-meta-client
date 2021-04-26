@@ -142,7 +142,7 @@ function TimelineChart(props: Props): ReactElement {
     options: {
       responsive: [
         {
-          breakpoint: 400,
+          breakpoint: 550,
           options: {
             chart: {
               width: "300px",
@@ -170,7 +170,7 @@ function TimelineChart(props: Props): ReactElement {
         theme: "dark",
       },
       chart: {
-        height: 350,
+        height: 300,
         // type: "line",
         toolbar: {
           show: false,
