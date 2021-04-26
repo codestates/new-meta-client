@@ -427,10 +427,21 @@
           }
 
           .win-rate {
-            flex: 0 0 0px;
+            // flex: 0 0 0px;
             margin: 20px;
             padding: 20px;
             height: 260px;
+            // width: 300px;
+            // position: relative !important;
+            display: flex;
+
+            .winRate-Chart {
+              position: absolute !important;
+              justify-content: center;
+              align-items: center;
+              // width: 300px;
+              // left: 0;
+            }
           }
           .timeline-chart {
             padding-top: 1rem;
@@ -785,7 +796,53 @@
   }
 }
 
-@media screen and (max-width: 1290px) {
+@media screen and (max-width: 1200px) {
+  .players-search-page > .user-data-view > .solo-search-result > .summoner-graph .graph-section {
+    // height: 230px;
+    position: relative;
+
+    .graph {
+      // flex: 0 0 25%;
+      // margin: 20px 10px;
+      // height: 100%;
+    }
+
+    .graph-laneInfo {
+      position: relative !important;
+
+      .div-laneInfo {
+        // width: 100% !important;
+        position: absolute !important;
+        transform: translate(-50%, -50%) !important;
+        left: 50%;
+        top: 50%;
+
+        .LaneInfo-chart {
+          // width: 0 !important;
+          // transform: translate(-50%, -50%);
+          // left: 50%;
+          // top: 50%;
+          // position: absolute;
+
+          display: flex;
+          justify-content: center !important;
+          align-items: center !important;
+          // padding-left: 2rem;
+        }
+      }
+    }
+  }
+
+  .win-rate {
+    // width: 200px;
+    height: auto;
+
+    .winRate-Chart {
+      left: 50% !important;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
 
 @media screen and (max-width: 1170px) {

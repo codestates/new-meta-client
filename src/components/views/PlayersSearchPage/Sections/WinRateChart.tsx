@@ -62,6 +62,18 @@ function WinRateChart(props: Props): ReactElement {
           },
         },
       },
+      responsive: [
+        {
+          breakpoint: 1200,
+          options: {
+            chart: {
+              width: "260px",
+              height: "260px",
+              type: "radialBar",
+            },
+          },
+        },
+      ],
     },
   };
 
