@@ -1,3 +1,4 @@
+/* eslint-disable no-lonely-if */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable @typescript-eslint/no-empty-function */
@@ -134,18 +135,19 @@ function PlayersSearchPage(): ReactElement {
         if (searchData) {
           const list = JSON.parse(searchData);
           list.push(userName1);
+          if (userName2) {
+            list.push(userName2);
+          }
           localStorage.setItem("search", JSON.stringify(list));
         } else {
-          localStorage.setItem("search", JSON.stringify([userName1]));
-        }
-      }
-      if (userName2) {
-        if (searchData) {
-          const list = JSON.parse(searchData);
-          list.push(userName2);
-          localStorage.setItem("search", JSON.stringify(list));
-        } else {
-          localStorage.setItem("search", JSON.stringify([userName2]));
+          if (userName2) {
+            localStorage.setItem(
+              "search",
+              JSON.stringify([userName1, userName2])
+            );
+          } else {
+            localStorage.setItem("search", JSON.stringify([userName1]));
+          }
         }
       }
     } catch (error) {
