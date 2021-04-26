@@ -160,6 +160,40 @@ function PostModal(props: Props): ReactElement {
           }
         `,
       },
+      {
+        query: gql`
+          {
+            fetchAllPostsOrderByCreatedAt {
+              id
+              champion
+              title
+              description
+              skills
+              play
+              etc
+              createdAt
+              updatedAt
+            }
+          }
+        `,
+      },
+      {
+        query: gql`
+          {
+            fetchAllPostsOrderByLikes {
+              id
+              champion
+              title
+              description
+              skills
+              play
+              etc
+              createdAt
+              updatedAt
+            }
+          }
+        `,
+      },
     ],
   });
 
