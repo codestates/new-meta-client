@@ -288,16 +288,24 @@ function BoardDetail(props: any): ReactElement {
           <i className="icon-cross"></i>
         </button>
         <div className="icon-box">
-          <i
-            onClick={clickLeftIcon}
-            aria-hidden
-            className="icon-arrow-left-circle view-left"
-          ></i>
-          <i
-            onClick={clickRightIcon}
-            aria-hidden
-            className="icon-arrow-right-circle view-right"
-          ></i>
+          {CurrentIndex > 0 ? (
+            <i
+              onClick={clickLeftIcon}
+              aria-hidden
+              className="icon-arrow-left-circle view-left"
+            ></i>
+          ) : (
+            <i />
+          )}
+          {CurrentIndex < 3 ? (
+            <i
+              onClick={clickRightIcon}
+              aria-hidden
+              className="icon-arrow-right-circle view-right"
+            ></i>
+          ) : (
+            <i />
+          )}
         </div>
         <div ref={textTag} className="text-box">
           <div ref={partTag} className="part part1 is-active">
