@@ -79,7 +79,7 @@ function LeaveModal(props: Props): ReactElement {
                 ref={password}
                 placeholder="Enter your paassword"
                 className="password"
-                type="text"
+                type="password"
               ></input>
               <div className="btn-wrapper">
                 <button onClick={clickLeave} className="font-red" type="button">

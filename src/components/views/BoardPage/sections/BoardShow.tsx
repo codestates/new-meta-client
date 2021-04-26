@@ -81,7 +81,7 @@ function BoardShow(props: any): ReactElement {
           play: JSON.parse(el.play),
         };
       });
-      setBoardListOrdered(result);
+      setBoardListOrdered(result.slice(0, 10));
     }
   }, [getAllPostQuery, getAllPostQueryOrderStar]);
 

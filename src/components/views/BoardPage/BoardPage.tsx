@@ -7,17 +7,6 @@ import ChampionCardList from "./sections/ChampionCardList";
 import BoardShow from "./sections/BoardShow";
 import API from "../../../api";
 
-// interface Props {}
-
-/*
-0: "Fighter"
-1: "Tank"
-2: "Mage"
-3: "Assassin"
-4: "Support"
-5: "Marksman"
-*/
-
 function BoardPage(props: RouteComponentProps): ReactElement {
   const { location } = props;
   const { state }: any = location;
@@ -77,15 +66,3 @@ function BoardPage(props: RouteComponentProps): ReactElement {
 }
 
 export default withRouter(BoardPage);
-
-/*
-<div className="title">
-        사용자 추천 메타
-        <Link to="/board/write">
-          <button className="btn-primary" type="button">
-            작성하기
-          </button>
-        </Link>
-      </div>
-      <div className="recommend"></div>
-*/

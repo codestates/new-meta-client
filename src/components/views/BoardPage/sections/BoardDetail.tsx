@@ -39,7 +39,23 @@ function BoardDetail(props: any): ReactElement {
     }
   `;
 
+  const CHECK_LOGIN = gql`
+    {
+      myInfo {
+        user {
+          nickname
+          email
+        }
+      }
+    }
+  `;
+
   const userLikeList = useQuery(MY_LIKE_POST);
+  const currentUser = useQuery(CHECK_LOGIN);
+
+  useEffect(() => {
+    userLikeList.refetch();
+  }, [currentUser]);
 
   useEffect(() => {
     setIsLogin(userLogin.data.token);
@@ -130,6 +146,24 @@ function BoardDetail(props: any): ReactElement {
       {
         query: MY_LIKE_POST,
       },
+      {
+        query: gql`
+          {
+            fetchAllPostsOrderByCreatedAt {
+              title
+            }
+          }
+        `,
+      },
+      {
+        query: gql`
+          {
+            fetchAllPostsOrderByLikes {
+              title
+            }
+          }
+        `,
+      },
     ],
   });
 
@@ -137,6 +171,24 @@ function BoardDetail(props: any): ReactElement {
     refetchQueries: [
       {
         query: MY_LIKE_POST,
+      },
+      {
+        query: gql`
+          {
+            fetchAllPostsOrderByCreatedAt {
+              title
+            }
+          }
+        `,
+      },
+      {
+        query: gql`
+          {
+            fetchAllPostsOrderByLikes {
+              title
+            }
+          }
+        `,
       },
     ],
   });
