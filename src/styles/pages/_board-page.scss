@@ -15,7 +15,6 @@
     transform: rotateY(0deg);
   }
 }
-
 .board-page {
   display: flex;
   flex-direction: column;
@@ -507,6 +506,10 @@
         // }
       }
 
+      .recent > *:last-child {
+        padding-bottom: 1rem;
+      }
+
       @keyframes fade-in {
         0% {
           opacity: 0;
@@ -598,6 +601,33 @@
           flex: 1;
           .like-num {
             padding-left: 4px;
+          }
+        }
+      }
+      .more {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 3rem;
+        .more-btn {
+          cursor: pointer;
+          display: flex;
+          align-items: center;
+          i {
+            color: $jade;
+            font-size: 0.6rem;
+            padding-right: 8px;
+          }
+
+          border-radius: 12px;
+          padding: 4px 1.5rem;
+          border: 1px solid $jade;
+          color: $jade;
+          font-size: 1.2rem;
+          transition: 0.7s;
+
+          &:hover {
+            background-color: rgba($jade, 0.3);
           }
         }
       }

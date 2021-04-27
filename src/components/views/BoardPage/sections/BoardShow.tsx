@@ -1,5 +1,5 @@
 /* eslint-disable react/no-array-index-key */
-import React, { ReactElement, useEffect, useState } from "react";
+import React, { ReactElement, useEffect, useRef, useState } from "react";
 import { withRouter } from "react-router-dom";
 import { gql, useQuery } from "@apollo/client";
 import BoardDetail from "./BoardDetail";
@@ -48,6 +48,9 @@ const GET_ALL_POST_ORDER_STAR = gql`
     }
   }
 `;
+
+const STEP = 2;
+
 function BoardShow(props: any): ReactElement {
   const [CurrentBoard, setCurrentBoard] = useState({});
   const [BoardList, setBoardList] = useState([]);
@@ -57,6 +60,9 @@ function BoardShow(props: any): ReactElement {
 
   const [IsLoginOpen, setIsLoginOpen] = useState(false);
   const closeModal = () => setIsLoginOpen(false);
+  const [MaxContentCount, setMaxContentCount] = useState(0);
+
+  const moreBtn = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const dataList = getAllPostQuery?.data?.fetchAllPostsOrderByCreatedAt;
@@ -71,7 +77,14 @@ function BoardShow(props: any): ReactElement {
           play: JSON.parse(el.play),
         };
       });
-      setBoardList(result);
+      const contentCount = 5 + MaxContentCount;
+      if (result.length < contentCount) {
+        if (moreBtn.current) {
+          moreBtn.current.style.display = "none";
+        }
+      }
+
+      setBoardList(result.slice(0, contentCount));
     }
     if (dataListOrdered) {
       const result = dataListOrdered.map((el: any) => {
@@ -83,7 +96,7 @@ function BoardShow(props: any): ReactElement {
       });
       setBoardListOrdered(result.slice(0, 10));
     }
-  }, [getAllPostQuery, getAllPostQueryOrderStar]);
+  }, [getAllPostQuery, getAllPostQueryOrderStar, MaxContentCount]);
 
   const clickWriteBtn = () => {
     const token = localStorage.getItem("token");
@@ -139,6 +152,28 @@ function BoardShow(props: any): ReactElement {
               />
             );
           })}
+        </div>
+        <div ref={moreBtn} className="more">
+          <div
+            aria-hidden
+            onClick={() => {
+              // eslint-disable-next-line no-restricted-globals
+              setMaxContentCount(MaxContentCount + STEP);
+              setTimeout(() => {
+                window.scrollTo({
+                  top:
+                    document.documentElement.scrollHeight -
+                    document.documentElement.clientHeight,
+                  left: 0,
+                  behavior: "smooth",
+                });
+              }, 1);
+            }}
+            className="more-btn"
+          >
+            <i className="icon-plus"></i>
+            more
+          </div>
         </div>
       </div>
     </div>
