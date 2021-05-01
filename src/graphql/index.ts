@@ -26,7 +26,7 @@ if (process.env.NODE_ENV === "development") {
   domain = process.env.REACT_APP_EC2_SERVER_DOMAIN;
 }
 
-// https://server.new-meta.ga:4000
+// https://server.new-meta.club:4000
 const link = createHttpLink({
   uri: `${domain}/graphql`,
   credentials: "same-origin",
