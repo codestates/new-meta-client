@@ -23,7 +23,7 @@
     "web-vitals": "^1.0.1"
   },
   "config": {
-    "BUCKETNAME": "new-meta.ga"
+    "BUCKETNAME": "new-meta.club"
   },
   "scripts": {
     "sass": "node-sass -wr --source-map true src/styles/main.scss src/style.css",
