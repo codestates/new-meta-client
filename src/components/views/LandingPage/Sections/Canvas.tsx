@@ -11,12 +11,8 @@ interface P {
   ang: number;
   v: number;
 }
-interface Mouse {
-  x: number;
-  y: number;
-}
 
-function Canvas(props: any): ReactElement {
+function Canvas(): ReactElement {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
@@ -88,18 +84,6 @@ function Canvas(props: any): ReactElement {
       }
     };
 
-    const mouse: Mouse = { x: 0, y: 0 };
-    const lastMouse: Mouse = { x: 0, y: 0 };
-
-    const onMouseHandlaer = (e: MouseEvent) => {
-      lastMouse.x = mouse.x;
-      lastMouse.y = mouse.y;
-      if (canvas) {
-        mouse.x = e.pageX - canvas.offsetLeft;
-        mouse.y = e.pageY - canvas.offsetTop;
-      }
-    };
-
     const onRequestFrame = (): any => {
       return (
         window.requestAnimationFrame ||
@@ -118,19 +102,17 @@ function Canvas(props: any): ReactElement {
       }
     };
 
-    canvas?.addEventListener("mousemove", onMouseHandlaer);
     window.requestAnimationFrame = onRequestFrame;
 
     loop();
     setInterval(loop, 1000 / 60);
 
     return () => {
-      canvas?.removeEventListener("mousemove", onMouseHandlaer);
       window.cancelAnimationFrame = onRequestFrame;
     };
   }, []);
 
-  return <canvas className="canvas-top" ref={canvasRef} {...props} />;
+  return <canvas className="canvas-top" ref={canvasRef} />;
 }
 
 export default Canvas;
