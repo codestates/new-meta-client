@@ -1,7 +1,6 @@
 /* eslint-disable no-undef */
 import React, { ReactElement, useEffect } from "react";
-import { Link, withRouter } from "react-router-dom";
-import freljord from "../../../../assets/image/freljord.jpeg";
+import { Link, RouteComponentProps, withRouter } from "react-router-dom";
 import searchPage from "../../../../assets/image/searchpage-resized.gif";
 import champList from "../../../../assets/image/champList.png";
 import champDetail from "../../../../assets/image/champDetail.png";
@@ -16,7 +15,7 @@ let sections: NodeListOf<HTMLElement>;
 let pageHeight: number;
 let prevHeight: number;
 
-function Services(props: any): ReactElement {
+function Services(props: RouteComponentProps): ReactElement {
   useEffect(() => {
     sectionSide = document.querySelectorAll("div.side-section");
     sections = document.querySelectorAll(".sections");
@@ -100,10 +99,6 @@ function Services(props: any): ReactElement {
       <div className="side-section">
         <div className="clip-2" />
         <div className="side-img-wrapper second-img">
-          {/* 
-            writePageImg
-            boardPageImg 
-          */}
           <img
             className="landing-img left board-img"
             src={boardPageImg}
