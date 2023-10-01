@@ -5,7 +5,7 @@ import { gql, useMutation, useQuery } from "@apollo/client";
 import React, { ReactElement, useEffect, useState } from "react";
 import { withRouter, RouteComponentProps } from "react-router-dom";
 import { GET_CURRENT_USER } from "../../../graphql";
-import LikePostModal from "./Sections/LikePostModal";
+import LikePostModal from "../Mypage/Sections/LikePostModal";
 import API from "../../../api";
 
 interface myInfo {

@@ -1,7 +1,3 @@
-import dotenv from "dotenv";
-
-dotenv.config();
-
 let domain: string | undefined;
 if (process.env.NODE_ENV === "development") {
   domain = process.env.REACT_APP_LOCAL_SERVER_DOMAIN;

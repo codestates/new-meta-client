@@ -1,12 +1,12 @@
-import React, { ReactElement } from "react";
+import { ReactElement } from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import { TokenVar } from "../graphql";
 
 import Nav from "./views/Nav/Nav";
 import LandingPage from "./views/LandingPage/LandingPage";
 import PlayersSearchPage from "./views/PlayersSearchPage/PlayersSearchPage";
-import MyPage from "./views/MyPage/MyPage";
-import UserPage from "./views/MyPage/UserPage";
+import MyPage from "./views/Mypage";
+import UserPage from "./views/UserPage";
 import BoardPage from "./views/BoardPage/BoardPage";
 import BoardReadPage from "./views/BoardReadPage/BoardReadPage";
 import BoardWritePage from "./views/BoardWritePage/BoardWritePage";
@@ -22,27 +22,29 @@ function App(): ReactElement {
   }
 
   return (
-    <Router>
-      <ScrollToTop />
-      <Nav />
-      <div className="contents">
-        <Switch>
-          <Route exact path="/" component={LandingPage} />
-          <Route exact path="/players" component={PlayersSearchPage} />
-          <Route exact path="/mypage" component={Auth(MyPage, true)} />
-          <Route exact path="/userpage" component={UserPage} />
-          <Route exact path="/board" component={BoardPage} />
-          <Route exact path="/board/read" component={BoardReadPage} />
-          <Route
-            exact
-            path="/board/write"
-            component={Auth(BoardWritePage, true)}
-          />
-          <Route path="*" component={NotFoundPage} />
-        </Switch>
-      </div>
-      <Footer />
-    </Router>
+    <>
+      <Router>
+        <ScrollToTop />
+        <Nav />
+        <div className="contents">
+          <Switch>
+            <Route exact path="/" component={LandingPage} />
+            <Route exact path="/players" component={PlayersSearchPage} />
+            <Route exact path="/mypage" component={Auth(MyPage, true)} />
+            <Route exact path="/userpage" component={UserPage} />
+            <Route exact path="/board" component={BoardPage} />
+            <Route exact path="/board/read" component={BoardReadPage} />
+            <Route
+              exact
+              path="/board/write"
+              component={Auth(BoardWritePage, true)}
+            />
+            <Route path="*" component={NotFoundPage} />
+          </Switch>
+        </div>
+        <Footer />
+      </Router>
+    </>
   );
 }
 
