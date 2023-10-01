@@ -1,5 +1,5 @@
 import React, { ReactElement } from "react";
-import { withRouter } from "react-router";
+import { withRouter } from "react-router-dom";
 
 function Popup(props: any): ReactElement {
   const { popupMessage, btnMessage, IsPopupOpen, closePopupHandler } = props;

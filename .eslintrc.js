@@ -38,23 +38,21 @@ module.exports = {
     "linebreak-style": ["error", "unix"],
     "no-return-await": 0,
     "class-methods-use-this": 0,
-    "import/extensions": [
-      "error",
-      "ignorePackages",
-      {
-        js: "never",
-        jsx: "never",
-        ts: "never",
-        tsx: "never",
-      },
-    ],
+  
     "prettier/prettier": 0,
     "no-unused-vars": "off",
+    "import/prefer-default-export": "off",
     "no-console": "off",
+    "import/no-unresolved": "off",
     "click-events-have-key-events": "off",
     "max-classes-per-file": "off",
     "no-use-before-define": "off",
     "react-hooks/rules-of-hooks": "warn",
+    "import/extensions": ["off"],
+    "react/destructuring-assignment": "off",
+    "react/react-in-jsx-scope": "off",
+
+
     // "@typescript-eslint/no-use-before-define": ["error"],
   },
 };

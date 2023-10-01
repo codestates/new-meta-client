@@ -7,7 +7,10 @@
       "esnext",
       "DOM"
     ],
-    "baseUrl": "src",
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"],
+    },
     "downlevelIteration": true,
     "allowJs": true,
     "skipLibCheck": true,
